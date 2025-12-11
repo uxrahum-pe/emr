@@ -74,7 +74,13 @@
 }
 .T010 {
     font-size: var(--font-14);
-    display: flex;
-    align-items: center;
-    position: absolute;
+    width: 100%;
+    line-height: var(--size-40);
+    padding: 0 var(--size-20);
+    color: var(--color-black-50);
+    pointer-events: none;
+}
+.T010:first-of-type {
+    text-align: right;
+    color: var(--color-green);
 }

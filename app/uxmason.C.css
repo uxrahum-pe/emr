@@ -1,5 +1,5 @@
 .C000 {
-    position: absolute;
+    position: fixed;
     width: var(--size-120);
     height: 100vh;
     background: #fff;
@@ -107,7 +107,7 @@
     width: var(--size-500);
     height: 100vh;
     background-color: var(--background-green);
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 0;
 }
@@ -177,17 +177,13 @@
 }
 .C020 {
     margin-top: var(--size-15);
-    display: flex;
     align-items: center;
     width: calc(100vw - var(--size-700));
     background-color: var(--color-white);
     border-radius: var(--size-25);
 }
 .C021 {
-    padding: var(--size-15) var(--size-30);
-    display: flex;
-    align-items: center;
-    gap: var(--size-10);
+    
 }
 .C022 {
     height: var(--size-60);
@@ -220,12 +216,63 @@
 .C024 {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
+    margin-left: auto;
 }
 .C025 {
     width: var(--size-120);
     height: var(--size-40);
+    margin-left: var(--size-10);
     border-radius: var(--size-20);
     background-color: var(--color-green-15);
+    box-shadow: inset 0 var(--size-2) var(--size-4) var(--color-black-7);
+    overflow: hidden;
+    cursor: pointer;
+    transition: .3s;
+    position: relative;
+}
+.C025:hover {
+    opacity: .5;
+}
+.C025.isOff {
+    background-color: var(--color-black-7);
+}
+.C026 {
+    position: absolute;
+    width: var(--size-30);
+    height: var(--size-30);
+    margin: var(--size-5);
+    border-radius: var(--size-20);
+    background-color: var(--color-white);
+    box-shadow: 0 var(--size-2) var(--size-4) var(--color-black-7);
+    transition: .3s;
+    left:0;
+    pointer-events: none;
+}
+.C027 {
+    width: 200%;
     display: flex;
+    position: absolute;
+    transition: .3s;
+    left:0;
+    pointer-events: none;
+}
+.C025.isOff .C027 {
+    left: -100%;
+}
+.C025.isOff .C026 {
+    left: calc(100% - var(--size-40));
+}
+.C028 {
+    padding: var(--size-15) var(--size-30);
+    display: flex;
+    align-items: center;
+    gap: var(--size-10);
+}
+.C029 {
+    height: var(--size-900);
+    border-top: var(--size-2) solid var(--color-black-7);
+}
+.C029.isSmall {
+    height: var(--size-640);
 }

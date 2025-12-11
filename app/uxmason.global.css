@@ -1,7 +1,37 @@
 /* app/uxmason.global.css */
 
-/* 나눔스퀘어네오 웹폰트 */
-@import url('https://cdn.jsdelivr.net/gh/fonts-archive/NanumSquareNeo/NanumSquareNeo.css');
+/* 나눔스퀘어네오 웹폰트 - 자체 서버 호스팅 */
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('/fonts/NanumSquareNeo-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('/fonts/NanumSquareNeo-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('/fonts/NanumSquareNeo-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('/fonts/NanumSquareNeo-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Tailwind CSS */
 @import "tailwindcss";
@@ -98,6 +128,7 @@
 
   --size-2: calc(100vw * 2 / var(--breakpoint));
   --size-3: calc(100vw * 3 / var(--breakpoint));
+  --size-4: calc(100vw * 4 / var(--breakpoint));
   --size-5: calc(100vw * 5 / var(--breakpoint));
   --size-10: calc(100vw * 10 / var(--breakpoint));
   --size-15: calc(100vw * 15 / var(--breakpoint));
@@ -134,6 +165,7 @@
   --size-700: calc(100vw * 700 / var(--breakpoint));
   --size-760: calc(100vw * 760 / var(--breakpoint));
   --size-800: calc(100vw * 800 / var(--breakpoint));
+  --size-900: calc(100vw * 900 / var(--breakpoint));
   --size-1500: calc(100vw * 1500 / var(--breakpoint));
 
 }
@@ -153,6 +185,7 @@
 
     --size-2: 2px;
     --size-3: 3px;
+    --size-4: 4px;
     --size-5: 5px;
     --size-10: 10px;
     --size-15: 15px;
@@ -189,6 +222,7 @@
     --size-700: 700px;
     --size-760: 760px;
     --size-800: 800px;
+    --size-900: 900px;
     --size-1500: 1500px;
   }
 }
@@ -221,7 +255,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 div, main, section {
