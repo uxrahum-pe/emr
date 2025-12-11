@@ -81,3 +81,13 @@ export interface ListItemProps {
   onClick?: () => void
 }
 
+// DraggableScrollContainer 컴포넌트 props
+export interface DraggableScrollContainerProps {
+  children?: React.ReactNode
+  className?: string
+  scrollSpeed?: number
+  scrollToEnd?: boolean
+  onDragStart?: (e: MouseEvent) => void
+  onDragEnd?: () => void
+}
+

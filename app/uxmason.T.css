@@ -12,17 +12,6 @@
     font-size: var(--font-15);
     margin-top: var(--size-5);
 }
-.T002 {
-    position: absolute;
-    padding: var(--size-5) var(--size-10);
-    border-radius: var(--size-10);
-    background-color: var(--color-black);
-    color: var(--color-white);
-    left: var(--size-70);
-    top: var(--size-15);
-    width: max-content;
-    display: none;
-}
 .T003 {
     font-size: var(--font-14);
 }
@@ -98,15 +87,18 @@
 .T012 .isValue {
     font-size: var(--font-21);
 }
+.C031.isFolded .T012 {
+    display: none;
+}
 .T013 {
     font-size: var(--font-19);
     margin-right: 3px;
 }
 .T014 {
     font-size: var(--font-14);
-    padding: var(--size-3) var(--size-5);
+    padding: var(--size-2) var(--size-5);
     color: var(--color-white);
-    border-radius: var(--size-10);
+    border-radius: var(--size-8);
     background-color: var(--color-black-25);
 }
 .T014.isRed {
@@ -125,8 +117,17 @@
 }
 .T017 {
     font-size: var(--font-14);
-    margin-right: 0 var(--size-5);
+    margin-right: var(--size-5);
     background-color: var(--color-black-7);
+}
+.T017.isRed {
+    background-color: var(--color-magenta-15);
+}
+.T017.isGreen {
+    background-color: var(--color-green-15);
+}
+.T017.isBlue {
+    background-color: var(--color-blue-15);
 }
 .T018 {
     font-size: var(--font-14);
@@ -136,4 +137,42 @@
 .T019 {
     font-size: var(--font-12);
     color: var(--color-black-25);
+    margin-right: var(--size-5);
+}
+.T019.isGreen {
+    color: var(--color-green);
+}
+.T019.isYellow {
+    color: var(--color-yellow);
+}
+.T019.isRed {
+    color: var(--color-red);
+}
+.T020 {
+    font-size: var(--font-14);
+    color: var(--color-black-25);
+    justify-self: flex-end;
+    margin-left: auto;
+    display: none;
+}
+.T020 .isValue {
+    font-size: var(--font-21);
+}
+.T020 .isBlack {
+    color: var(--color-black);
+}
+.T020 .isRed {
+    color: var(--color-red);
+}
+.C031.isFolded .T020 {
+    display: flow-root;
+}
+.T021 {
+    font-size: var(--font-12);
+    color: var(--color-black-50);
+    font-weight: 800;
+}
+.T022 {
+    font-size: var(--font-14);
+    color: var(--color-black);
 }

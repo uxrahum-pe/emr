@@ -1,10 +1,13 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Tooltip from '@/components/Tooltip'
 
 export default function Sidebar() {
   const pathname = usePathname()
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const menuItems = [
     { href: '/dashboard', icon: 'isDashboard', label: '대시보드' },
@@ -18,6 +21,35 @@ export default function Sidebar() {
     { href: '/statistics', icon: 'isStatistics', label: '통계' },
   ]
 
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (scrollContainerRef.current) {
+        const element = scrollContainerRef.current
+        const hasOverflow = element.scrollHeight > element.clientHeight
+        
+        if (hasOverflow) {
+          element.classList.add('isOverflowed')
+        } else {
+          element.classList.remove('isOverflowed')
+        }
+      }
+    }
+
+    checkOverflow()
+
+    const resizeObserver = new ResizeObserver(checkOverflow)
+    if (scrollContainerRef.current) {
+      resizeObserver.observe(scrollContainerRef.current)
+    }
+
+    window.addEventListener('resize', checkOverflow)
+
+    return () => {
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', checkOverflow)
+    }
+  }, [])
+
   return (
     <nav className='C000'>
       <div className='C001'>
@@ -25,23 +57,24 @@ export default function Sidebar() {
         <p className='T000'>홍성훈</p>
         <p className='T001'>부산병원</p>
       </div>
-      <div className='C003'>
+      <div ref={scrollContainerRef} className='C003'>
         {menuItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`C004 ${pathname === item.href ? 'isSelected' : ''}`}
-          >
-            <div className={`C005 styleSheet isIcon ${item.icon} isBig`}></div>
-            <p className='T002'>{item.label}</p>
-          </Link>
+          <Tooltip key={item.href} text={item.label}>
+            <Link
+              href={item.href}
+              className={`C004 ${pathname === item.href ? 'isSelected' : ''}`}
+            >
+              <div className={`C005 styleSheet isIcon ${item.icon} isBig`}></div>
+            </Link>
+          </Tooltip>
         ))}
       </div>
       <div className='C006'>
-        <Link href='/settings' className='C004'>
-          <div className='C005 styleSheet isIcon isSettings isBig'></div>
-          <p className='T002'>설정</p>
-        </Link>
+        <Tooltip text='설정'>
+          <Link href='/settings' className='C004'>
+            <div className='C005 styleSheet isIcon isSettings isBig'></div>
+          </Link>
+        </Tooltip>
       </div>
     </nav>
   )
