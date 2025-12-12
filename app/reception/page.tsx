@@ -10,6 +10,7 @@ import ListItem from '@/components/ListItem'
 import DraggableScrollContainer from '@/components/DraggableScrollContainer'
 import TabSelector from '@/components/TabSelector'
 import WeeklyCalendar from '@/components/WeeklyCalendar'
+import ExpandableText from '@/components/ExpandableText'
 
 export default function ReceptionPage() {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
@@ -38,11 +39,11 @@ export default function ReceptionPage() {
             <div className='C075'>
               <div className='C076'>
                 <div className='C077'>
-                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <p className='T036'><span className='isUnit'>AM</span> 10:15</p>
                   <Tooltip text='업무 일지 보기'>
                     <div className='C088'>
-                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
-                      <p className='T038'>(akh001)</p>
+                      <p className='T037'>김민수<span className='isUnit'>과장</span></p>
+                      <p className='T038'>(kms002)</p>
                     </div>
                   </Tooltip>
                 </div>
@@ -50,7 +51,7 @@ export default function ReceptionPage() {
                   <div className='C080'>
                     <div className='C081 styleSheet isIcon isMini isChecked'></div>
                   </div>
-                  <div className='C082 isFemale'></div>
+                  <div className='C082 isMale'></div>
                 </div>
                 <Tooltip text='고객 상세 정보'>
                   <div className='C079'>
@@ -60,7 +61,7 @@ export default function ReceptionPage() {
                       </div>
                       <div className="C083">
                         <p className="T039"><span className="isBold">파트이동</span> </p>
-                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        <div className="C086"><p className="T041">박지영</p><p className="T042 isRed">여성</p><p className="T042">32<span className="isUnit">세</span></p><p className="T042">1<span className="isUnit">기</span></p><p className="T016 isGrey">210048921</p>
                         </div>
                       </div>
                     </div>
@@ -68,18 +69,18 @@ export default function ReceptionPage() {
                       <div className="C036"><div className="C033 isIcon styleSheet isReception"></div></div>
                       <div className="C080 isFitted"><div className="C081 styleSheet isIcon isMini isArrow"></div></div>
                       <div className="C036"><div className="C033 isIcon styleSheet isSurgery "></div></div>
-                      <p className="T040"><span className="isBold">수술파트</span><span className="isGrey">로 고객 이관</span></p>
+                      <p className="T043"><span className="isBold">수술파트</span><span className="isGrey">로 고객 이관</span></p>
                     </div>
                   </div>
                 </Tooltip>
               </div>
               <div className='C076'>
                 <div className='C077'>
-                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <p className='T036'><span className='isUnit'>AM</span> 11:32</p>
                   <Tooltip text='업무 일지 보기'>
                     <div className='C088'>
-                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
-                      <p className='T038'>(akh001)</p>
+                      <p className='T037'>이수진<span className='isUnit'>대리</span></p>
+                      <p className='T038'>(lsj003)</p>
                     </div>
                   </Tooltip>
                 </div>
@@ -89,23 +90,55 @@ export default function ReceptionPage() {
                   </div>
                   <div className='C082 isFemale'></div>
                 </div>
-                <Tooltip text='전달사항 상세보기'>
-                  <div className='C079 isMine isComment'>
+                <div className='C079 isMine isComment'>
+                  <div className="C087">
+                    <div className="C084">
+                      <div className="C033 isIcon styleSheet isReception"></div>
+                    </div>
+                    <div className="C083">
+                      <p className="T039"><span className="isBold">원무파트</span> <span className="isGrey">- 전체 전달사항</span></p>
+                      <ExpandableText text="오늘 오후 2시부터 시스템 점검이 예정되어 있습니다. 업무에 참고 부탁드립니다. 점검 시간 동안 일시적으로 접속이 불가능할 수 있으며, 긴급한 업무는 사전에 처리해 주시기 바랍니다. 점검이 완료되면 자동으로 알림이 발송될 예정입니다. 추가 문의사항이 있으시면 원무팀으로 연락 부탁드립니다." maxLines={4} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='C076'>
+                <div className='C077'>
+                  <p className='T036'><span className='isUnit'>PM</span> 02:18</p>
+                  <Tooltip text='업무 일지 보기'>
+                    <div className='C088'>
+                      <p className='T037'>정태영<span className='isUnit'>주임</span></p>
+                      <p className='T038'>(jty004)</p>
+                    </div>
+                  </Tooltip>
+                </div>
+                <div className='C078'>
+                  <div className='C080'>
+                    <div className='C081 styleSheet isIcon isMini isChecked'></div>
+                  </div>
+                  <div className='C082 isMale'></div>
+                </div>
+                <Tooltip text='고객 상세 정보'>
+                  <div className='C079'>
                     <div className="C087">
                       <div className="C084">
-                        <div className="C033 isIcon styleSheet isReception"></div>
+                        <div className="C033 isIcon styleSheet isExit"></div>
                       </div>
                       <div className="C083">
-                        <p className="T039"><span className="isBold">원무파트</span> <span className="isGrey">- 전체 전달사항</span></p>
-                        <p className="T040">“원무 파트 전체에 안내 드립니다. 주절주절"</p>
+                        <p className="T039"><span className="isBold">귀가 처리 완료</span></p>
+                        <div className="C086"><p className="T041">최민호</p><p className="T042 isBlue">남성</p><p className="T042">45<span className="isUnit">세</span></p><p className="T042 isOldbie">3<span className="isUnit">기</span></p><p className="T016 isGrey">210046587</p>
+                        </div>
                       </div>
+                    </div>
+                    <div className="C085">
+                    <p className="T016"><span className="isUnit">수납액:</span></p><p className="T016 isBold isBlue">3,200,000<span className="isUnit">원</span></p><p className="T016"><span className="isUnit">/ 미수금:</span></p><p className="T016 isBold isMint">800,000<span className="isUnit">원</span></p><p className="T016"><span className="isUnit">/ 계약금 총액:</span></p><p className="T016 isBold">4,000,000<span className="isUnit">원</span></p>
                     </div>
                   </div>
                 </Tooltip>
               </div>
               <div className='C076'>
                 <div className='C077'>
-                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <p className='T036'><span className='isUnit'>PM</span> 01:45</p>
                   <Tooltip text='업무 일지 보기'>
                     <div className='C088'>
                       <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
@@ -127,7 +160,7 @@ export default function ReceptionPage() {
                       </div>
                       <div className="C083">
                         <p className="T039"><span className="isBold">접수완료</span> <span className="isGrey">- Vital 입력완료</span></p>
-                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        <div className="C086"><p className="T041">한소영</p><p className="T042 isRed">여성</p><p className="T042">33<span className="isUnit">세</span></p><p className="T042">1<span className="isUnit">기</span></p><p className="T016 isGrey">210048901</p>
                         </div>
                       </div>
                     </div>
@@ -136,11 +169,11 @@ export default function ReceptionPage() {
               </div>
               <div className='C076'>
                 <div className='C077'>
-                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <p className='T036'><span className='isUnit'>PM</span> 12:28</p>
                   <Tooltip text='업무 일지 보기'>
                     <div className='C088'>
-                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
-                      <p className='T038'>(akh001)</p>
+                      <p className='T037'>홍성훈<span className='isUnit'>원장</span></p>
+                      <p className='T038'>(hsh000)</p>
                     </div>
                   </Tooltip>
                 </div>
@@ -148,7 +181,7 @@ export default function ReceptionPage() {
                   <div className='C080'>
                     <div className='C081 styleSheet isIcon isMini isChecked'></div>
                   </div>
-                  <div className='C082 isFemale'></div>
+                  <div className='C082 isMale'></div>
                 </div>
                 <Tooltip text='고객 상세 정보'>
                   <div className='C079'>
@@ -158,7 +191,7 @@ export default function ReceptionPage() {
                       </div>
                       <div className="C083">
                         <p className="T039"><span className="isBold">파트이동</span> </p>
-                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        <div className="C086"><p className="T041">조예린</p><p className="T042 isRed">여성</p><p className="T042">25<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051567</p>
                         </div>
                       </div>
                     </div>
@@ -166,18 +199,18 @@ export default function ReceptionPage() {
                       <div className="C036"><div className="C033 isIcon styleSheet isClinic"></div></div>
                       <div className="C080 isFitted"><div className="C081 styleSheet isIcon isMini isArrow"></div></div>
                       <div className="C036"><div className="C033 isIcon styleSheet isReception"></div></div>
-                      <p className="T040"><span className="isBold">진료파트</span><span className="isGrey">에서 이관받음</span></p>
+                      <p className="T043"><span className="isBold">진료파트</span><span className="isGrey">에서 이관받음</span></p>
                     </div>
                   </div>
                 </Tooltip>
               </div>
               <div className='C076'>
                 <div className='C077'>
-                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <p className='T036'><span className='isUnit'>PM</span> 03:55</p>
                   <Tooltip text='업무 일지 보기'>
                     <div className='C088'>
-                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
-                      <p className='T038'>(akh001)</p>
+                      <p className='T037'>박미영<span className='isUnit'>과장</span></p>
+                      <p className='T038'>(pmy005)</p>
                     </div>
                   </Tooltip>
                 </div>
@@ -187,27 +220,25 @@ export default function ReceptionPage() {
                   </div>
                   <div className='C082 isFemale'></div>
                 </div>
-                <Tooltip text='전달사항 상세보기'>
-                  <div className='C079 isComment'>
-                    <div className="C087">
-                        <div className="C084">
-                          <div className="C033 isIcon styleSheet isReception"></div>
-                        </div>
-                        <div className="C083">
-                        <p className="T039"><span className="isBold">원무파트</span> <span className="isGrey">- 전체 전달사항</span></p>
-                        <p className="T040">“원무 파트 전체에 안내 드립니다. 주절주절"</p>
-                      </div>
+                <div className='C079 isComment'>
+                  <div className="C087">
+                    <div className="C084">
+                      <div className="C033 isIcon styleSheet isReception"></div>
+                    </div>
+                    <div className="C083">
+                      <p className="T039"><span className="isBold">원무파트</span> <span className="isGrey">- 전체 전달사항</span></p>
+                      <ExpandableText text="내일 오전 9시 전체 파트 미팅이 예정되어 있습니다. 필참 부탁드립니다. 미팅에서는 이번 달 업무 현황과 다음 달 계획에 대해 논의할 예정입니다. 각 파트별 발표 자료는 오늘 오후 5시까지 제출해 주시기 바랍니다. 미팅 장소는 본관 3층 대회의실이며, 회의록은 미팅 후 공유될 예정입니다." maxLines={4} />
                     </div>
                   </div>
-                </Tooltip>
+                </div>
               </div>
               <div className='C076'>
                 <div className='C077'>
-                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <p className='T036'><span className='isUnit'>PM</span> 04:12</p>
                   <Tooltip text='업무 일지 보기'>
                     <div className='C088'>
-                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
-                      <p className='T038'>(akh001)</p>
+                      <p className='T037'>김유정<span className='isUnit'>대리</span></p>
+                      <p className='T038'>(kyj006)</p>
                     </div>
                   </Tooltip>
                 </div>
@@ -225,20 +256,23 @@ export default function ReceptionPage() {
                       </div>
                       <div className="C083">
                         <p className="T039"><span className="isBold">수납완료</span></p>
-                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        <div className="C086"><p className="T041">윤서아</p><p className="T042 isRed">여성</p><p className="T042">26<span className="isUnit">세</span></p><p className="T042">1<span className="isUnit">기</span></p><p className="T016 isGrey">210053210</p>
                         </div>
                       </div>
+                    </div>
+                    <div className="C085">
+                    <p className="T016"><span className="isUnit">수납액:</span></p><p className="T016 isBold isBlue">2,500,000<span className="isUnit">원</span></p><p className="T016"><span className="isUnit">/ 미수금:</span></p><p className="T016 isBold isMint">500,000<span className="isUnit">원</span></p><p className="T016"><span className="isUnit">/ 계약금 총액:</span></p><p className="T016 isBold">3,000,000<span className="isUnit">원</span></p>
                     </div>
                   </div>
                 </Tooltip>
               </div>
               <div className='C076'>
                 <div className='C077'>
-                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <p className='T036'><span className='isUnit'>AM</span> 09:52</p>
                   <Tooltip text='업무 일지 보기'>
                     <div className='C088'>
-                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
-                      <p className='T038'>(akh001)</p>
+                      <p className='T037'>이서연<span className='isUnit'>주임</span></p>
+                      <p className='T038'>(lsy007)</p>
                     </div>
                   </Tooltip>
                 </div>
@@ -256,7 +290,7 @@ export default function ReceptionPage() {
                       </div>
                       <div className="C083">
                         <p className="T039"><span className="isBold">보류상태</span><span className="isGrey">로 전환</span></p>
-                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        <div className="C086"><p className="T041">송예준</p><p className="T042 isBlue">남성</p><p className="T042">38<span className="isUnit">세</span></p><p className="T042">1<span className="isUnit">기</span></p><p className="T016 isGrey">210046789</p>
                         </div>
                       </div>
                     </div>
@@ -264,7 +298,7 @@ export default function ReceptionPage() {
                       <div className="C036"><div className="C033 isIcon styleSheet isCounseling"></div></div>
                       <div className="C080 isFitted"><div className="C081 styleSheet isIcon isMini isArrow"></div></div>
                       <div className="C036"><div className="C033 isIcon styleSheet isReception"></div></div>
-                      <p className="T040"><span className="isBold">상담파트</span><span className="isGrey">에서 이관받음</span></p>
+                      <p className="T043"><span className="isBold">상담파트</span><span className="isGrey">에서 이관받음</span></p>
                     </div>
                   </div>
                 </Tooltip>

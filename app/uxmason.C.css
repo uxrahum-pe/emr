@@ -852,7 +852,7 @@
     background-color: var(--color-black);
 }
 .C080.isFitted {
-    margin: calc(-1 * var(--size-10));
+    margin: calc(-1 * var(--size-5));
     z-index: 1;
 }
 .C081 {
@@ -884,9 +884,9 @@
 }
 .C085 {
     display: flex;
-    gap: var(--size-5);
     align-items: center;
     margin-top: var(--size-10);
+    flex-wrap: wrap;
 }
 .C086 {
     display: flex;

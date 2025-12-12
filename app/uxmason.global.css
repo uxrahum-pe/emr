@@ -180,6 +180,7 @@
   --size-460: calc(100vw * 460 / var(--breakpoint));
   --size-480: calc(100vw * 480 / var(--breakpoint));
   --size-500: calc(100vw * 500 / var(--breakpoint));
+  --size-520: calc(100vw * 520 / var(--breakpoint));
   --size-600: calc(100vw * 600 / var(--breakpoint));
   --size-640: calc(100vw * 640 / var(--breakpoint));
   --size-680: calc(100vw * 680 / var(--breakpoint));
@@ -250,6 +251,7 @@
     --size-460: 460px;
     --size-480: 480px;
     --size-500: 500px;
+    --size-520: 520px;
     --size-600: 600px;
     --size-640: 640px;
     --size-680: 680px;
@@ -456,6 +458,10 @@ h1 {
 }
 .isIcon.isArrow.isLeft {
   transform: rotate(180deg);
+}
+.isIcon.isExit {
+  background-position-x: calc(-1 * var(--size-240));
+  background-position-y: calc(-1 * var(--size-520));
 }
 
 .isIcon.isBig {
