@@ -1,6 +1,14 @@
 'use client'
 
-import { ListItemProps } from '@/types/ui'
+import { ReactNode } from 'react'
+
+interface ListItemProps {
+  children?: ReactNode
+  leftContent?: ReactNode
+  rightContent?: ReactNode
+  className?: string
+  onClick?: () => void
+}
 
 export default function ListItem({
   children,

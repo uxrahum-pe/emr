@@ -1,7 +1,13 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { ScrollableContainerProps } from '@/types/ui'
+import { useEffect, useRef, ReactNode } from 'react'
+
+interface ScrollableContainerProps {
+  children: ReactNode
+  className?: string
+  height?: string
+  onOverflowChange?: (hasOverflow: boolean) => void
+}
 
 export default function ScrollableContainer({
   children,

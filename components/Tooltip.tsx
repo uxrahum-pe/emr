@@ -36,7 +36,7 @@ export default function Tooltip(props: TooltipProps) {
           style: { ...existingStyle, ...(style || {}) },
         } as any)}
         {tip.visible && (
-          <div className='tooltip-follow' style={{ left: tip.x, top: tip.y }}>
+          <div className='C061' style={{ left: tip.x, top: tip.y }}>
             {tip.text}
           </div>
         )}

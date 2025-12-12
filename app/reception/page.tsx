@@ -8,10 +8,15 @@ import Tooltip from '@/components/Tooltip'
 import ScrollableContainer from '@/components/ScrollableContainer'
 import ListItem from '@/components/ListItem'
 import DraggableScrollContainer from '@/components/DraggableScrollContainer'
+import TabSelector from '@/components/TabSelector'
+import WeeklyCalendar from '@/components/WeeklyCalendar'
 
 export default function ReceptionPage() {
   const [isSmallScreen, setIsSmallScreen] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [selectedTabs, setSelectedTabs] = useState<number[]>([0, 1, 2]) // 예약 탭 (multiple)
+  const [selectedPendingTabs, setSelectedPendingTabs] = useState<number[]>([0, 1]) // 대기 탭 (multiple)
+  const [selectedSortTab, setSelectedSortTab] = useState<number>(0) // 정렬 탭 (single)
 
   const handleC032Click = (index: number, e: React.MouseEvent) => {
     e.stopPropagation()
@@ -22,7 +27,12 @@ export default function ReceptionPage() {
     <>
       <main className='C007'>
         <PageHeader title='원무' />
-        <aside className='C013'></aside>
+        <aside className='C013'>
+          <WeeklyCalendar />
+          <div className='C070'>
+            <p className='T035'>오늘의 고객 현황</p>
+          </div>
+        </aside>
         <article className='C020'>
           <section className='C021'>
             <div className='C028'>
@@ -59,6 +69,20 @@ export default function ReceptionPage() {
                       <div className='C033 isIcon styleSheet isAlarmClock'></div>
                     </div>
                     <p className='T011'>예약</p>
+                    <TabSelector
+                      items={[
+                        { title: '수술상담' },
+                        { title: '시술상담' },
+                        { title: '일반시술' }
+                      ]}
+                      multiple={true}
+                      value={selectedTabs}
+                      onChange={(selected) => setSelectedTabs(selected as number[])}
+                    />
+                    <div className='C051'>
+                      <div className='C052 styleSheet isIcon isMini isPin'></div>
+                      <p className='T026'>고정</p>
+                    </div>
                     <p className='T012'>대기: <span className='isValue isBlack'>5</span>명 / 지연: <span className='isValue isRed'>2</span>명</p>
                     <p className='T020'><span className='isBlack'>5</span> / <span className='isRed'>2</span></p>
                   </div>
@@ -204,7 +228,20 @@ export default function ReceptionPage() {
                       <div className='C033 isIcon styleSheet isHourglass'></div>
                     </div>
                     <p className='T011'>대기</p>
-                    <p className='T012'>접수.: <span className='isValue isBlack'>2</span>명 / 보류: <span className='isValue isYellow'>1</span>명</p>
+                    <TabSelector
+                      items={[
+                        { title: '접수고객' },
+                        { title: '보류고객' }
+                      ]}
+                      multiple={true}
+                      value={selectedPendingTabs}
+                      onChange={(selected) => setSelectedPendingTabs(selected as number[])}
+                    />
+                    <div className='C051'>
+                      <div className='C052 styleSheet isIcon isMini isPin'></div>
+                      <p className='T026'>고정</p>
+                    </div>
+                    <p className='T012'>접수: <span className='isValue isBlack'>2</span>명 / 보류: <span className='isValue isYellow'>1</span>명</p>
                   <p className='T020'><span className='isBlack'>2</span> / <span className='isYellow'>1</span></p>
                   </div>
                   <ScrollableContainer>
@@ -228,7 +265,7 @@ export default function ReceptionPage() {
                         <div className='C045'>
                           <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
                           <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
-                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 임시대기</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
                         </div>
                       </DraggableScrollContainer>
                     </ListItem>
@@ -251,7 +288,7 @@ export default function ReceptionPage() {
                         <div className='C045'>
                           <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
                           <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
-                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 임시대기</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
                         </div>
                       </DraggableScrollContainer>
                     </ListItem>
@@ -275,20 +312,33 @@ export default function ReceptionPage() {
                         <div className='C045'>
                           <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
                           <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
-                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 임시대기</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
                         </div>
                       </DraggableScrollContainer>
                     </ListItem>
                   </ScrollableContainer>
                 </div>
-                <div className={`C031 ${activeIndex === 2 ? 'isActived' : activeIndex !== null ? 'isFolded' : ''}`}>
+                <div className={`C031 isClinic ${activeIndex === 2 ? 'isActived' : activeIndex !== null ? 'isFolded' : ''}`}>
                   <div className='C032' onClick={(e) => handleC032Click(2, e)}>
                     <div className='C036'>
                       <div className='C033 isIcon styleSheet isClinic'></div>
                     </div>
                     <p className='T011'>진료</p>
-                    <p className='T012'>대기: <span className='isValue isBlack'>4</span>명 / 진행중: <span className='isValue isGreen'>2</span>명</p>
-                  <p className='T020'><span className='isBlack'>4</span> / <span className='isGreen'>2</span></p>
+                    <TabSelector
+                      items={[
+                        { title: '시간순' },
+                        { title: '상태순' }
+                      ]}
+                      multiple={false}
+                      value={selectedSortTab}
+                      onChange={(selected) => setSelectedSortTab(selected as number)}
+                    />
+                    <div className='C051'>
+                      <div className='C052 styleSheet isIcon isMini isPin'></div>
+                      <p className='T026'>고정</p>
+                    </div>
+                    <p className='T012'>대기: <span className='isValue isBlack'>4</span>명 / 호출: <span className='isValue isYellow'>2</span>명 / 진행: <span className='isValue isGreen'>2</span>명</p>
+                  <p className='T020'><span className='isBlack'>4</span> / <span className='isYellow'>2</span> / <span className='isGreen'>2</span></p>
                   </div>
                   <ScrollableContainer>
                     <ListItem>
@@ -311,7 +361,7 @@ export default function ReceptionPage() {
                         <div className='C045'>
                           <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
                           <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
-                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 임시대기</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
                         </div>
                       </DraggableScrollContainer>
                     </ListItem>
@@ -336,7 +386,7 @@ export default function ReceptionPage() {
                         <div className='C045'>
                           <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
                           <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
-                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 임시대기</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
                         </div>
                       </DraggableScrollContainer>
                     </ListItem>
@@ -361,7 +411,7 @@ export default function ReceptionPage() {
                         <div className='C045'>
                           <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
                           <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
-                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 임시대기</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
                         </div>
                       </DraggableScrollContainer>
                     </ListItem>
@@ -385,7 +435,7 @@ export default function ReceptionPage() {
                         <div className='C045'>
                           <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
                           <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
-                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 임시대기</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
                         </div>
                       </DraggableScrollContainer>
                     </ListItem>
@@ -410,7 +460,7 @@ export default function ReceptionPage() {
                         <div className='C045'>
                           <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
                           <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
-                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 임시대기</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
                         </div>
                       </DraggableScrollContainer>
                     </ListItem>
@@ -435,20 +485,33 @@ export default function ReceptionPage() {
                         <div className='C045'>
                           <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
                           <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
-                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 임시대기</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
                         </div>
                       </DraggableScrollContainer>
                     </ListItem>
                   </ScrollableContainer>
                 </div>
-                <div className={`C031 ${activeIndex === 3 ? 'isActived' : activeIndex !== null ? 'isFolded' : ''}`}>
+                <div className={`C031 isPayment ${activeIndex === 3 ? 'isActived' : activeIndex !== null ? 'isFolded' : ''}`}>
                   <div className='C032' onClick={(e) => handleC032Click(3, e)}>
                     <div className='C036'>
                       <div className='C033 isIcon styleSheet isCoin'></div>
                     </div>
-                    <p className='T011'>수납.</p>
-                    <p className='T012'>대기: <span className='isValue isBlack'>1</span>명 / 완료: <span className='isValue isBlue'>5</span>명</p>
-                  <p className='T020'><span className='isBlack'>1</span> / <span className='isBlue'>5</span></p>
+                    <p className='T011'>수납</p>
+                    <TabSelector
+                      items={[
+                        { title: '시간순' },
+                        { title: '상태순' }
+                      ]}
+                      multiple={false}
+                      value={selectedSortTab}
+                      onChange={(selected) => setSelectedSortTab(selected as number)}
+                    />
+                    <div className='C051'>
+                      <div className='C052 styleSheet isIcon isMini isPin'></div>
+                      <p className='T026'>고정</p>
+                    </div>
+                    <p className='T012'>대기: <span className='isValue isBlack'>2</span>명 / 완료: <span className='isValue isBlue'>5</span>명</p>
+                  <p className='T020'><span className='isBlack'>2</span> / <span className='isBlue'>5</span></p>
                   </div>
                   <ScrollableContainer>
                     <ListItem>
@@ -463,10 +526,17 @@ export default function ReceptionPage() {
                       </Tooltip>
                       <div className='C037'>
                         <p className='T016'><span className='isUnit'>AM</span> 10:20 이관.</p>
-                        <p className='T017'>수납. 대기</p>
-                        <p className='T016 isGreen'><span className='isBold'>11분</span> 대기</p>
-                        <p className='T019'>-합계:<span className='isBold isRed'>41분</span></p>
+                        <p className='T017'>수납 대기</p>
+                        <p className='T016 isGreen'><span className='isBold'>18분</span> 대기</p>
+                        <p className='T019'>-합계:<span className='isBold isRed'>52분</span></p>
                       </div>
+                      <DraggableScrollContainer className='C041' scrollToEnd={activeIndex === 3}>
+                        <div className='C045'>
+                          <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                        </div>
+                      </DraggableScrollContainer>
                     </ListItem>
                     <ListItem>
                       <Tooltip text='고객 상세 정보'>
@@ -480,9 +550,16 @@ export default function ReceptionPage() {
                       </Tooltip>
                       <div className='C037'>
                         <p className='T016'><span className='isUnit'>AM</span> 10:45 수납.</p>
-                        <p className='T016 isBlue'>180,000<span className='isUnit'>원</span></p>
-                        <p className='T019'>미수:<span className='isBold isMint'>320,000</span>원</p>
+                        <p className='T016 isBlue'>1,250,000<span className='isUnit'>원</span></p>
+                        <p className='T019'>미수:<span className='isBold isMint'>750,000</span>원</p>
                       </div>
+                      <DraggableScrollContainer className='C041' scrollToEnd={activeIndex === 3}>
+                        <div className='C045'>
+                          <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                        </div>
+                      </DraggableScrollContainer>
                     </ListItem>
                     <ListItem>
                       <Tooltip text='고객 상세 정보'>
@@ -496,9 +573,16 @@ export default function ReceptionPage() {
                       </Tooltip>
                       <div className='C037'>
                         <p className='T016'><span className='isUnit'>AM</span> 10:50 수납.</p>
-                        <p className='T016 isBlue'>350,000<span className='isUnit'>원</span></p>
-                        <p className='T019'>미수:<span className='isBold isMint'>500,000</span>원</p>
+                        <p className='T016 isBlue'>2,800,000<span className='isUnit'>원</span></p>
+                        <p className='T019'>미수:<span className='isBold isMint'>1,200,000</span>원</p>
                       </div>
+                      <DraggableScrollContainer className='C041' scrollToEnd={activeIndex === 3}>
+                        <div className='C045'>
+                          <div className='C042'><div className='C043 styleSheet isIcon isRibbon'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>상태변경:</span> 시술시작.</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isSyringe'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>시술완료:</span> O2 고압산소</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isChecked'></div></div></div>
+                          <div className='C042'><div className='C043 styleSheet isIcon isPaperPlane'></div><div className='C044'><p className='T021'><span className='isUnit'>AM</span> 10:22</p><p className='T022'><span className='isUnit'>파트이동:</span> 보류</p></div><div className='C046'><div className='C047 styleSheet isIcon isMini isMyLocation'></div></div></div>
+                        </div>
+                      </DraggableScrollContainer>
                     </ListItem>
                     <ListItem>
                       <Tooltip text='고객 상세 정보'>
@@ -512,8 +596,17 @@ export default function ReceptionPage() {
                       </Tooltip>
                       <div className='C037'>
                         <p className='T016'><span className='isUnit'>AM</span> 11:10 귀가.</p>
-                        <p className='T016 isBlue'>420,000<span className='isUnit'>원</span></p>
+                        <p className='T016 isBlue'>8,500,000<span className='isUnit'>원</span></p>
                         <p className='T019'>미수:<span className='isBold isMint'>0</span>원</p>
+                      </div>
+                      <div className='C048'>
+                        <p className='T016'><span className='isUnit'>계약금 총액:</span></p>
+                        <p className='T016 isBold'>8,500,000<span className='isUnit'>원</span></p>
+                        <p className='T016'><span className='isUnit'>/ 예약금:</span></p>
+                        <p className='T016'>1,500,000<span className='isUnit'>원</span></p>
+                        <p className='T016'><span className='isUnit'>/ 할인:</span></p>
+                        <p className='T016 isRed'>300,000<span className='isUnit'>원</span></p>
+                        <p className='T017'><span className='isUnit'>수납구분:</span> 지방흡입</p>
                       </div>
                     </ListItem>
                     <ListItem>
@@ -528,8 +621,17 @@ export default function ReceptionPage() {
                       </Tooltip>
                       <div className='C037'>
                         <p className='T016'><span className='isUnit'>AM</span> 11:20 귀가.</p>
-                        <p className='T016 isBlue'>285,000<span className='isUnit'>원</span></p>
-                        <p className='T019'>미수:<span className='isBold isMint'>150,000</span>원</p>
+                        <p className='T016 isBlue'>3,200,000<span className='isUnit'>원</span></p>
+                        <p className='T019'>미수:<span className='isBold isMint'>800,000</span>원</p>
+                      </div>
+                      <div className='C048'>
+                        <p className='T016'><span className='isUnit'>계약금 총액:</span></p>
+                        <p className='T016 isBold'>4,000,000<span className='isUnit'>원</span></p>
+                        <p className='T016'><span className='isUnit'>/ 예약금:</span></p>
+                        <p className='T016'>800,000<span className='isUnit'>원</span></p>
+                        <p className='T016'><span className='isUnit'>/ 할인:</span></p>
+                        <p className='T016 isRed'>150,000<span className='isUnit'>원</span></p>
+                        <p className='T017'><span className='isUnit'>수납구분:</span> 리프팅 시술</p>
                       </div>
                     </ListItem>
                     <ListItem>
@@ -544,8 +646,17 @@ export default function ReceptionPage() {
                       </Tooltip>
                       <div className='C037'>
                         <p className='T016'><span className='isUnit'>AM</span> 11:25 귀가.</p>
-                        <p className='T016 isBlue'>198,000<span className='isUnit'>원</span></p>
+                        <p className='T016 isBlue'>1,850,000<span className='isUnit'>원</span></p>
                         <p className='T019'>미수:<span className='isBold isMint'>0</span>원</p>
+                      </div>
+                      <div className='C048'>
+                        <p className='T016'><span className='isUnit'>계약금 총액:</span></p>
+                        <p className='T016 isBold'>1,850,000<span className='isUnit'>원</span></p>
+                        <p className='T016'><span className='isUnit'>/ 예약금:</span></p>
+                        <p className='T016'>300,000<span className='isUnit'>원</span></p>
+                        <p className='T016'><span className='isUnit'>/ 할인:</span></p>
+                        <p className='T016 isRed'>80,000<span className='isUnit'>원</span></p>
+                        <p className='T017'><span className='isUnit'>수납구분:</span> 보톡스/필러</p>
                       </div>
                     </ListItem>
                   </ScrollableContainer>

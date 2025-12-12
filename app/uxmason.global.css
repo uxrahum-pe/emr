@@ -170,14 +170,17 @@
   --size-360: calc(100vw * 360 / var(--breakpoint));
   --size-380: calc(100vw * 380 / var(--breakpoint));
   --size-400: calc(100vw * 400 / var(--breakpoint));
+  --size-410: calc(100vw * 410 / var(--breakpoint));
   --size-440: calc(100vw * 440 / var(--breakpoint));
   --size-450: calc(100vw * 450 / var(--breakpoint));
+  --size-460: calc(100vw * 460 / var(--breakpoint));
   --size-480: calc(100vw * 480 / var(--breakpoint));
   --size-500: calc(100vw * 500 / var(--breakpoint));
   --size-600: calc(100vw * 600 / var(--breakpoint));
   --size-640: calc(100vw * 640 / var(--breakpoint));
   --size-680: calc(100vw * 680 / var(--breakpoint));
   --size-700: calc(100vw * 700 / var(--breakpoint));
+  --size-720: calc(100vw * 720 / var(--breakpoint));
   --size-750: calc(100vw * 750 / var(--breakpoint));
   --size-760: calc(100vw * 760 / var(--breakpoint));
   --size-800: calc(100vw * 800 / var(--breakpoint));
@@ -234,14 +237,17 @@
     --size-360: 360px;
     --size-380: 380px;
     --size-400: 400px;
+    --size-410: 410px;
     --size-440: 440px;
     --size-450: 450px;
+    --size-460: 460px;
     --size-480: 480px;
     --size-500: 500px;
     --size-600: 600px;
     --size-640: 640px;
     --size-680: 680px;
     --size-700: 700px;
+    --size-720: 720px;
     --size-750: 750px;
     --size-760: 760px;
     --size-800: 800px;
@@ -305,8 +311,9 @@ div, main, section {
   display: flow-root
 }
 
-p {
+p, h1, h2, h3, h4, h5, h6 {
   display: block;
+  padding-top: 0.08em;
 }
 
 h1 {
@@ -377,6 +384,14 @@ h1 {
   background-position-x: calc(-1 * var(--size-240));
   background-position-y: calc(-1 * var(--size-480));
 }
+.isIcon.isPin {
+  background-position-x: calc(-1 * var(--size-280));
+  background-position-y: 0;
+}
+.isIcon.isCalendar {
+  background-position-x: calc(-1 * var(--size-280));
+  background-position-y: calc(-1 * var(--size-80));
+}
 .isIcon.isNote {
   background-position-x: calc(-1 * var(--size-280));
   background-position-y: calc(-1 * var(--size-680));
@@ -400,6 +415,13 @@ h1 {
 .isIcon.isMagnifier {
   background-position-x: calc(-1 * var(--size-440));
   background-position-y: calc(-1 * var(--size-760));
+}
+.isIcon.isArrow {
+  background-position-x: calc(-1 * var(--size-360));
+  background-position-y: calc(-1 * var(--size-720));
+}
+.isIcon.isArrow.isLeft {
+  transform: rotate(180deg);
 }
 
 .isIcon.isBig {
@@ -442,15 +464,7 @@ h1 {
 .isIcon.isChecked.isMini {
   background-position-y: calc(-1 * var(--size-60));
 }
-
-.tooltip-follow {
-    position: fixed;
-    padding: var(--size-5) var(--size-10);
-    border-radius: var(--size-10);
-    background: var(--color-black-50);
-    color: var(--color-white);
-    pointer-events: none;
-    z-index: 9;
-    white-space: nowrap;
-    backdrop-filter: blur(10px);
+.isIcon.isPin.isMini {
+  background-position-x: calc(-1 * var(--size-750));
+  background-position-y: calc(-1 * var(--size-160));
 }

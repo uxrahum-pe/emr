@@ -90,6 +90,12 @@
 .C031.isFolded .T012 {
     display: none;
 }
+.C031.isClinic .T012 {
+    display: none;
+}
+.C031.isClinic.isActived .T012 {
+    display: flow-root;
+}
 .T013 {
     font-size: var(--font-19);
     margin-right: 3px;
@@ -175,6 +181,12 @@
 .C031.isFolded .T020 {
     display: flow-root;
 }
+.C031.isClinic .T020 {
+    display: flow-root;
+}
+.C031.isClinic.isActived .T020 {
+    display: none;
+}
 .T021 {
     font-size: var(--font-12);
     color: var(--color-black-50);
@@ -201,4 +213,176 @@
 }
 .C031.isActived .T024 {
     display: block;
+}
+.T025 {
+    font-size: var(--font-14);
+}
+.T026 {
+    font-size: var(--font-14);
+    font-weight: 800;
+}
+.T027 {
+    font-size: var(--font-14);
+    text-align: center;
+    font-weight: 800;
+    color: var(--color-black-50);
+}
+.T028 {
+    font-size: var(--font-24);
+    text-align: center;
+    line-height: var(--size-60);
+    border-radius: var(--size-30);
+    margin: var(--size-15) 0;
+    transition: .3s;
+}
+.C055.isSelected .T028 {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    box-shadow: var(--size-5) var(--size-15) var(--size-30) var(--color-black-7);
+}
+.C055.isToday .T028 {
+    background-color: var(--color-red);
+    color: var(--color-white);
+    box-shadow: var(--size-5) var(--size-15) var(--size-30) var(--color-red-25);
+}
+.C055.isSelected.isToday .T028  {
+    background: repeating-linear-gradient(
+        45deg,
+        var(--color-red),
+        var(--color-red) var(--size-5),
+        var(--color-black) var(--size-5),
+        var(--color-black) var(--size-10)
+    );
+    background-size: calc(var(--size-10) * 1.414) calc(var(--size-10) * 1.414);
+    animation: diagonalFlow 2s linear infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.C055.isSelected.isToday .T028::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.08) var(--size-8),
+        transparent var(--size-8),
+        transparent var(--size-16)
+    );
+    background-size: calc(var(--size-16) * 1.414) calc(var(--size-16) * 1.414);
+    animation: diagonalFlowLight 1.5s linear infinite;
+    pointer-events: none;
+}
+.T029 {
+    margin: 0 auto;
+    width: fit-content;
+    padding: var(--size-5) var(--size-10);
+    text-align: center;
+    color: var(--color-white);
+    background-color: var(--color-black);
+    border-radius: 0 0 var(--size-10) var(--size-15);
+    border: var(--size-2) solid var(--color-white);
+    border-top: none;
+    box-shadow: 0 var(--size-4) var(--size-16) var(--color-black-15);
+    transition: .3s;
+    opacity: 0.15;
+}
+.C057:hover .T029 {
+    opacity: .75;
+}
+.T030 {
+    padding-right: var(--size-10);
+    border-right: var(--size-2) solid var(--color-black-7);
+    font-size: var(--font-19);
+}
+.T031 {
+    color: var(--color-black-50);
+}
+.T032 {
+    color: var(--color-black-50);
+    width: calc(100% / 7);
+    line-height: var(--size-40);
+    text-align: center;
+}
+.T033 {
+    font-size: var(--font-19);
+    text-align: center;
+    margin-top: var(--size-15);
+}
+.T034 {
+    color: var(--color-black-50);
+    width: calc(100% / 7);
+    line-height: var(--size-50);
+    text-align: center;
+    border-radius: var(--size-25);
+    cursor: pointer;
+    transition: .3s;
+}
+.T034.isSelected {
+    color: var(--color-white);
+    background-color: var(--color-black);
+}
+.T034.isToday {
+    background-color: var(--color-red);
+    color: var(--color-white);
+}
+.T034:hover {
+    background-color: var(--color-blue-15);
+}
+.T034.isOtherMonth {
+    opacity: 0;
+}
+.T034.isSelected.isToday  {
+    background: repeating-linear-gradient(
+        45deg,
+        var(--color-red),
+        var(--color-red) var(--size-5),
+        var(--color-black) var(--size-5),
+        var(--color-black) var(--size-10)
+    );
+    background-size: calc(var(--size-10) * 1.414) calc(var(--size-10) * 1.414);
+    animation: diagonalFlow 2s linear infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.T034.isSelected.isToday::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.08) var(--size-8),
+        transparent var(--size-8),
+        transparent var(--size-16)
+    );
+    background-size: calc(var(--size-16) * 1.414) calc(var(--size-16) * 1.414);
+    animation: diagonalFlowLight 1.5s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes diagonalFlow {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: calc(var(--size-10) * 1.414) 0;
+    }
+}
+
+@keyframes diagonalFlowLight {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: calc(var(--size-16) * 1.414) 0;
+    }
 }
