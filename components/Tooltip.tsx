@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, ReactElement, cloneElement, isValidElement, HTMLAttributes } from 'react'
+import { useState, useRef, ReactElement, cloneElement, isValidElement, HTMLAttributes } from 'react'
 import { TipState, TooltipProps } from '@/types/ui'
 
 export default function Tooltip(props: TooltipProps) {
@@ -9,16 +9,38 @@ export default function Tooltip(props: TooltipProps) {
   const finalOffsetX = hasOffset ? props.offsetX : 16
   const finalOffsetY = hasOffset ? props.offsetY : 16
   const [tip, setTip] = useState<TipState>({ visible: false, text: '', x: 0, y: 0 })
+  const rafIdRef = useRef<number | null>(null)
+  const lastMoveTimeRef = useRef<number>(0)
+  const throttleDelay = 16 // ~60fps
 
   const showTip = () => setTip((prev) => ({ ...prev, visible: true, text }))
-  const moveTip = (e: React.MouseEvent) =>
+  
+  const moveTip = (e: React.MouseEvent) => {
+    const now = Date.now()
+    if (now - lastMoveTimeRef.current < throttleDelay) {
+      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current)
+      rafIdRef.current = requestAnimationFrame(() => {
+        moveTip(e)
+      })
+      return
+    }
+    lastMoveTimeRef.current = now
+    
     setTip((prev) => ({
       ...prev,
       visible: true,
       x: e.clientX + finalOffsetX,
       y: e.clientY + finalOffsetY,
     }))
-  const hideTip = () => setTip((prev) => ({ ...prev, visible: false }))
+  }
+  
+  const hideTip = () => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current)
+      rafIdRef.current = null
+    }
+    setTip((prev) => ({ ...prev, visible: false }))
+  }
 
   // children이 React 요소인 경우 직접 이벤트 핸들러를 추가
   if (isValidElement(children)) {

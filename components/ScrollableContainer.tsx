@@ -18,6 +18,8 @@ export default function ScrollableContainer({
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    let resizeTimeoutId: ReturnType<typeof setTimeout> | null = null
+    
     const checkOverflow = () => {
       if (scrollContainerRef.current) {
         const element = scrollContainerRef.current
@@ -33,18 +35,28 @@ export default function ScrollableContainer({
       }
     }
 
+    const debouncedCheckOverflow = () => {
+      if (resizeTimeoutId) {
+        clearTimeout(resizeTimeoutId)
+      }
+      resizeTimeoutId = setTimeout(() => {
+        checkOverflow()
+      }, 150)
+    }
+
     checkOverflow()
 
-    const resizeObserver = new ResizeObserver(checkOverflow)
+    const resizeObserver = new ResizeObserver(debouncedCheckOverflow)
     if (scrollContainerRef.current) {
       resizeObserver.observe(scrollContainerRef.current)
     }
 
-    window.addEventListener('resize', checkOverflow)
+    window.addEventListener('resize', debouncedCheckOverflow)
 
     return () => {
+      if (resizeTimeoutId) clearTimeout(resizeTimeoutId)
       resizeObserver.disconnect()
-      window.removeEventListener('resize', checkOverflow)
+      window.removeEventListener('resize', debouncedCheckOverflow)
     }
   }, [onOverflowChange, height])
 

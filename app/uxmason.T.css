@@ -297,7 +297,7 @@
 .T030 {
     padding-right: var(--size-10);
     border-right: var(--size-2) solid var(--color-black-7);
-    font-size: var(--font-19);
+    font-size: var(--font-17);
 }
 .T031 {
     color: var(--color-black-50);
@@ -385,4 +385,52 @@
     100% {
         background-position: calc(var(--size-16) * 1.414) 0;
     }
+}
+
+.T035 {
+    font-size: var(--font-19);
+}
+.T036 {
+    font-size: var(--font-14);
+    text-align: right;
+    margin-top: var(--size-3);
+}
+.T037 {
+    font-size: var(--font-14);
+    text-align: right;
+    margin-top: var(--size-10);
+    text-decoration: underline;
+}
+.T038 {
+    font-size: var(--font-12);
+    color: var(--color-black-25);
+    text-align: right;
+}
+.T039 {
+    font-size: var(--font-14);
+}
+.T040 {
+    font-size: var(--font-15);
+}
+.T042 {
+    font-size: var(--font-14);
+    background-color: var(--color-black-7);
+    padding: .1em var(--size-3) 0 var(--size-3);
+}
+.T042.isGreen {
+    color: var(--color-green);
+    background-color: var(--color-green-15);
+}
+.T042.isOldbie {
+    color: var(--color-green);
+    background-color: var(--color-green-15);
+    font-weight: 800;
+}
+.T042.isRed {
+    color: var(--color-red);
+    background-color: var(--color-red-15);
+}
+.T042 .isBlue {
+    color: var(--color-blue);
+    background-color: var(--color-blue-15);
 }

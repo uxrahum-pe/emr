@@ -68,18 +68,16 @@ export default function Popup({ children, popupContent, className, style, offset
   useEffect(() => {
     if (!visible || !popupRef.current || !clickPositionRef.current) return
 
-    const updatePosition = () => {
-      const popup = popupRef.current
-      if (!popup || !clickPositionRef.current) return
-
-      // 실제 DOM 요소의 크기를 측정 (CSS 변수 시스템 반영)
-      // getBoundingClientRect를 사용하면 CSS 변수가 적용된 실제 크기를 가져올 수 있음
-      const popupRect = popup.getBoundingClientRect()
-      const popupWidth = popupRect.width
-      const popupHeight = popupRect.height
-      
+    let resizeTimeoutId: ReturnType<typeof setTimeout> | null = null
+    let rafId: number | null = null
+    let scrollRafId: number | null = null
+    let lastScrollUpdate = 0
+    const scrollThrottleDelay = 16 // ~60fps
+    
+    // 마진 값을 한 번만 계산하고 캐시
+    const getMarginValue = () => {
       // CSS 변수 --size-20을 사용 (마진)
-      // 실제 계산된 값을 가져오기 위해 임시 요소 사용
+      // 실제 계산된 값을 가져오기 위해 임시 요소 사용 (캐시 가능)
       const marginElement = document.createElement('div')
       marginElement.style.width = 'var(--size-20)'
       marginElement.style.position = 'absolute'
@@ -87,6 +85,24 @@ export default function Popup({ children, popupContent, className, style, offset
       document.body.appendChild(marginElement)
       const marginNum = marginElement.offsetWidth || 20
       document.body.removeChild(marginElement)
+      return marginNum
+    }
+    
+    let cachedMargin: number | null = null
+
+    const updatePosition = () => {
+      const popup = popupRef.current
+      if (!popup || !clickPositionRef.current) return
+
+      // 마진 값 캐시 사용 (리사이즈 시에는 재계산)
+      if (cachedMargin === null) {
+        cachedMargin = getMarginValue()
+      }
+
+      // 실제 DOM 요소의 크기를 측정 (CSS 변수 시스템 반영)
+      const popupRect = popup.getBoundingClientRect()
+      const popupWidth = popupRect.width
+      const popupHeight = popupRect.height
       
       const viewportWidth = window.innerWidth
       const viewportHeight = window.innerHeight
@@ -96,44 +112,69 @@ export default function Popup({ children, popupContent, className, style, offset
       let top = clickPositionRef.current.y
 
       // 화면을 벗어나면 마진을 주고 안으로 들어오게
-      if (left + popupWidth + marginNum > viewportWidth) {
-        left = viewportWidth - popupWidth - marginNum
+      if (left + popupWidth + cachedMargin > viewportWidth) {
+        left = viewportWidth - popupWidth - cachedMargin
       }
-      if (left < marginNum) {
-        left = marginNum
+      if (left < cachedMargin) {
+        left = cachedMargin
       }
 
-      if (top + popupHeight + marginNum > viewportHeight) {
-        top = viewportHeight - popupHeight - marginNum
+      if (top + popupHeight + cachedMargin > viewportHeight) {
+        top = viewportHeight - popupHeight - cachedMargin
       }
-      if (top < marginNum) {
-        top = marginNum
+      if (top < cachedMargin) {
+        top = cachedMargin
       }
 
       setPopupState((prev) => ({ ...prev, x: left, y: top }))
     }
 
+    const debouncedUpdatePosition = () => {
+      if (resizeTimeoutId) {
+        clearTimeout(resizeTimeoutId)
+      }
+      // 리사이즈 시 마진 재계산
+      cachedMargin = null
+      resizeTimeoutId = setTimeout(() => {
+        if (rafId) cancelAnimationFrame(rafId)
+        rafId = requestAnimationFrame(updatePosition)
+      }, 100)
+    }
+
+    const throttledScrollUpdate = () => {
+      const now = Date.now()
+      if (now - lastScrollUpdate < scrollThrottleDelay) {
+        if (scrollRafId) cancelAnimationFrame(scrollRafId)
+        scrollRafId = requestAnimationFrame(() => {
+          throttledScrollUpdate()
+        })
+        return
+      }
+      lastScrollUpdate = now
+      updatePosition()
+    }
+
     // 초기 위치 설정을 위해 약간의 지연 (CSS 변수 적용 및 레이아웃 완료 대기)
     const timeoutId = setTimeout(updatePosition, 0)
-    const rafId = requestAnimationFrame(() => {
+    rafId = requestAnimationFrame(() => {
       requestAnimationFrame(updatePosition)
     })
     
     // ResizeObserver로 팝업 크기 변경 감지 (CSS 변수 변경, 뷰포트 리사이즈 모두 포함)
-    const resizeObserver = new ResizeObserver(() => {
-      updatePosition()
-    })
+    const resizeObserver = new ResizeObserver(debouncedUpdatePosition)
     resizeObserver.observe(popupRef.current)
 
-    window.addEventListener('resize', updatePosition)
-    window.addEventListener('scroll', updatePosition, true)
+    window.addEventListener('resize', debouncedUpdatePosition)
+    window.addEventListener('scroll', throttledScrollUpdate, true)
 
     return () => {
+      if (resizeTimeoutId) clearTimeout(resizeTimeoutId)
+      if (rafId) cancelAnimationFrame(rafId)
+      if (scrollRafId) cancelAnimationFrame(scrollRafId)
       clearTimeout(timeoutId)
-      cancelAnimationFrame(rafId)
       resizeObserver.disconnect()
-      window.removeEventListener('resize', updatePosition)
-      window.removeEventListener('scroll', updatePosition, true)
+      window.removeEventListener('resize', debouncedUpdatePosition)
+      window.removeEventListener('scroll', throttledScrollUpdate, true)
     }
   }, [visible])
 

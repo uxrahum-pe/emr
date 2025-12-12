@@ -30,7 +30,246 @@ export default function ReceptionPage() {
         <aside className='C013'>
           <WeeklyCalendar />
           <div className='C070'>
-            <p className='T035'>오늘의 고객 현황</p>
+            <p className='T035'>원무파트 <span className='isUnit'>전체 전달사항 입력</span></p>
+            <div className='C071'><div className='C072 styleSheet isIcon isWrite'></div></div>
+          </div>
+          <div className='C073'>
+            <div className='C074'></div>
+            <div className='C075'>
+              <div className='C076'>
+                <div className='C077'>
+                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <Tooltip text='업무 일지 보기'>
+                    <div className='C088'>
+                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
+                      <p className='T038'>(akh001)</p>
+                    </div>
+                  </Tooltip>
+                </div>
+                <div className='C078'>
+                  <div className='C080'>
+                    <div className='C081 styleSheet isIcon isMini isChecked'></div>
+                  </div>
+                  <div className='C082 isFemale'></div>
+                </div>
+                <Tooltip text='고객 상세 정보'>
+                  <div className='C079'>
+                    <div className="C087">
+                      <div className="C084">
+                        <div className="C033 isIcon styleSheet isPaperPlane"></div>
+                      </div>
+                      <div className="C083">
+                        <p className="T039"><span className="isBold">파트이동</span> </p>
+                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="C085">
+                      <div className="C036"><div className="C033 isIcon styleSheet isReception"></div></div>
+                      <div className="C080 isFitted"><div className="C081 styleSheet isIcon isMini isArrow"></div></div>
+                      <div className="C036"><div className="C033 isIcon styleSheet isSurgery "></div></div>
+                      <p className="T040"><span className="isBold">수술파트</span><span className="isGrey">로 고객 이관</span></p>
+                    </div>
+                  </div>
+                </Tooltip>
+              </div>
+              <div className='C076'>
+                <div className='C077'>
+                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <Tooltip text='업무 일지 보기'>
+                    <div className='C088'>
+                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
+                      <p className='T038'>(akh001)</p>
+                    </div>
+                  </Tooltip>
+                </div>
+                <div className='C078'>
+                  <div className='C080'>
+                    <div className='C081 styleSheet isIcon isMini isMegaphone'></div>
+                  </div>
+                  <div className='C082 isFemale'></div>
+                </div>
+                <Tooltip text='전달사항 상세보기'>
+                  <div className='C079 isMine isComment'>
+                    <div className="C087">
+                      <div className="C084">
+                        <div className="C033 isIcon styleSheet isReception"></div>
+                      </div>
+                      <div className="C083">
+                        <p className="T039"><span className="isBold">원무파트</span> <span className="isGrey">- 전체 전달사항</span></p>
+                        <p className="T040">“원무 파트 전체에 안내 드립니다. 주절주절"</p>
+                      </div>
+                    </div>
+                  </div>
+                </Tooltip>
+              </div>
+              <div className='C076'>
+                <div className='C077'>
+                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <Tooltip text='업무 일지 보기'>
+                    <div className='C088'>
+                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
+                      <p className='T038'>(akh001)</p>
+                    </div>
+                  </Tooltip>
+                </div>
+                <div className='C078'>
+                  <div className='C080'>
+                    <div className='C081 styleSheet isIcon isMini isChecked'></div>
+                  </div>
+                  <div className='C082 isFemale'></div>
+                </div>
+                <Tooltip text='고객 상세 정보'>
+                  <div className='C079'>
+                    <div className="C087">
+                      <div className="C084">
+                        <div className="C033 isIcon styleSheet isCheckIn"></div>
+                      </div>
+                      <div className="C083">
+                        <p className="T039"><span className="isBold">접수완료</span> <span className="isGrey">- Vital 입력완료</span></p>
+                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Tooltip>
+              </div>
+              <div className='C076'>
+                <div className='C077'>
+                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <Tooltip text='업무 일지 보기'>
+                    <div className='C088'>
+                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
+                      <p className='T038'>(akh001)</p>
+                    </div>
+                  </Tooltip>
+                </div>
+                <div className='C078'>
+                  <div className='C080'>
+                    <div className='C081 styleSheet isIcon isMini isChecked'></div>
+                  </div>
+                  <div className='C082 isFemale'></div>
+                </div>
+                <Tooltip text='고객 상세 정보'>
+                  <div className='C079'>
+                    <div className="C087">
+                      <div className="C084">
+                        <div className="C033 isIcon styleSheet isPaperPlane"></div>
+                      </div>
+                      <div className="C083">
+                        <p className="T039"><span className="isBold">파트이동</span> </p>
+                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="C085">
+                      <div className="C036"><div className="C033 isIcon styleSheet isClinic"></div></div>
+                      <div className="C080 isFitted"><div className="C081 styleSheet isIcon isMini isArrow"></div></div>
+                      <div className="C036"><div className="C033 isIcon styleSheet isReception"></div></div>
+                      <p className="T040"><span className="isBold">진료파트</span><span className="isGrey">에서 이관받음</span></p>
+                    </div>
+                  </div>
+                </Tooltip>
+              </div>
+              <div className='C076'>
+                <div className='C077'>
+                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <Tooltip text='업무 일지 보기'>
+                    <div className='C088'>
+                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
+                      <p className='T038'>(akh001)</p>
+                    </div>
+                  </Tooltip>
+                </div>
+                <div className='C078'>
+                  <div className='C080'>
+                    <div className='C081 styleSheet isIcon isMini isMegaphone'></div>
+                  </div>
+                  <div className='C082 isFemale'></div>
+                </div>
+                <Tooltip text='전달사항 상세보기'>
+                  <div className='C079 isComment'>
+                    <div className="C087">
+                        <div className="C084">
+                          <div className="C033 isIcon styleSheet isReception"></div>
+                        </div>
+                        <div className="C083">
+                        <p className="T039"><span className="isBold">원무파트</span> <span className="isGrey">- 전체 전달사항</span></p>
+                        <p className="T040">“원무 파트 전체에 안내 드립니다. 주절주절"</p>
+                      </div>
+                    </div>
+                  </div>
+                </Tooltip>
+              </div>
+              <div className='C076'>
+                <div className='C077'>
+                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <Tooltip text='업무 일지 보기'>
+                    <div className='C088'>
+                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
+                      <p className='T038'>(akh001)</p>
+                    </div>
+                  </Tooltip>
+                </div>
+                <div className='C078'>
+                  <div className='C080'>
+                    <div className='C081 styleSheet isIcon isMini isChecked'></div>
+                  </div>
+                  <div className='C082 isFemale'></div>
+                </div>
+                <Tooltip text='고객 상세 정보'>
+                  <div className='C079'>
+                    <div className="C087">
+                      <div className="C084">
+                        <div className="C033 isIcon styleSheet isCoin"></div>
+                      </div>
+                      <div className="C083">
+                        <p className="T039"><span className="isBold">수납완료</span></p>
+                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Tooltip>
+              </div>
+              <div className='C076'>
+                <div className='C077'>
+                  <p className='T036'><span className='isUnit'>PM</span> 03:41</p>
+                  <Tooltip text='업무 일지 보기'>
+                    <div className='C088'>
+                      <p className='T037'>안경희<span className='isUnit'>팀장</span></p>
+                      <p className='T038'>(akh001)</p>
+                    </div>
+                  </Tooltip>
+                </div>
+                <div className='C078'>
+                  <div className='C080'>
+                    <div className='C081 styleSheet isIcon isMini isChecked'></div>
+                  </div>
+                  <div className='C082 isFemale'></div>
+                </div>
+                <Tooltip text='고객 상세 정보'>
+                  <div className='C079'>
+                    <div className="C087">
+                      <div className="C084">
+                        <div className="C033 isIcon styleSheet isHourglass"></div>
+                      </div>
+                      <div className="C083">
+                        <p className="T039"><span className="isBold">보류상태</span><span className="isGrey">로 전환</span></p>
+                        <div className="C086"><p className="T041">이서연</p><p className="T042 isRed">여성</p><p className="T042">28<span className="isUnit">세</span></p><p className="T042 isOldbie">2<span className="isUnit">기</span></p><p className="T016 isGrey">210051234</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="C085">
+                      <div className="C036"><div className="C033 isIcon styleSheet isCounseling"></div></div>
+                      <div className="C080 isFitted"><div className="C081 styleSheet isIcon isMini isArrow"></div></div>
+                      <div className="C036"><div className="C033 isIcon styleSheet isReception"></div></div>
+                      <p className="T040"><span className="isBold">상담파트</span><span className="isGrey">에서 이관받음</span></p>
+                    </div>
+                  </div>
+                </Tooltip>
+              </div>
+            </div>
           </div>
         </aside>
         <article className='C020'>
@@ -304,7 +543,7 @@ export default function ReceptionPage() {
                       </Tooltip>
                       <div className='C037'>
                         <p className='T016'><span className='isUnit'>AM</span> 10:50 접수.</p>
-                        <p className='T017 isBlue'>Vital 검사완료</p>
+                        <p className='T017 isBlue'>Vital 입력완료</p>
                         <p className='T016 isGreen'><span className='isBold'>11분</span> 대기</p>
                         <p className='T019'>-합계:<span className='isBold isGreen'>11분</span></p>
                       </div>

@@ -40,6 +40,7 @@
 :root {
   --background-yellow: #FCFBF7;
   --background-green: #EEF2E3;
+  --background-white: #FFF;
 
   --color-white: #fff;
   --color-white-0: #ffffff00;
@@ -139,12 +140,15 @@
   --size-3: calc(100vw * 3 / var(--breakpoint));
   --size-4: calc(100vw * 4 / var(--breakpoint));
   --size-5: calc(100vw * 5 / var(--breakpoint));
+  --size-6: calc(100vw * 6 / var(--breakpoint));
   --size-8: calc(100vw * 8 / var(--breakpoint));
   --size-10: calc(100vw * 10 / var(--breakpoint));
   --size-15: calc(100vw * 15 / var(--breakpoint));
   --size-16: calc(100vw * 16 / var(--breakpoint));
   --size-20: calc(100vw * 20 / var(--breakpoint));
   --size-25: calc(100vw * 25 / var(--breakpoint));
+  --size-26: calc(100vw * 26 / var(--breakpoint));
+  --size-28: calc(100vw * 28 / var(--breakpoint));
   --size-30: calc(100vw * 30 / var(--breakpoint));
   --size-35: calc(100vw * 35 / var(--breakpoint));
   --size-40: calc(100vw * 40 / var(--breakpoint));
@@ -206,12 +210,15 @@
     --size-3: 3px;
     --size-4: 4px;
     --size-5: 5px;
+    --size-6: 6px;
     --size-8: 8px;
     --size-10: 10px;
     --size-15: 15px;
     --size-16: 16px;
     --size-20: 20px;
     --size-25: 25px;
+    --size-26: 26px;
+    --size-28: 28px;
     --size-30: 30px;
     --size-35: 35px;
     --size-40: 40px;
@@ -313,7 +320,7 @@ div, main, section {
 
 p, h1, h2, h3, h4, h5, h6 {
   display: block;
-  padding-top: 0.08em;
+  padding-top: 0.1em;
 }
 
 h1 {
@@ -327,6 +334,9 @@ h1 {
 
 .isBlack {
   color: var(--color-black);
+}
+.isGrey {
+  color: var(--color-black-50);
 }
 .isGreen {
   color: var(--color-green);
@@ -352,6 +362,14 @@ h1 {
 .isUnit {
   opacity: 0.25;
 }
+.isIcon.isReception {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-40));
+}
+.isIcon.isCounseling {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-80));
+}
 .isIcon.isCheck {
   background-position-x: calc(-1 * var(--size-200));
   background-position-y: calc(-1 * var(--size-120));
@@ -359,6 +377,10 @@ h1 {
 .isIcon.isClinic {
   background-position-x: calc(-1 * var(--size-200));
   background-position-y: calc(-1 * var(--size-160));
+}
+.isIcon.isSurgery {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-200));
 }
 .isIcon.isSyringe {
   background-position-x: calc(-1 * var(--size-200));
@@ -371,6 +393,10 @@ h1 {
 .isIcon.isCoin {
   background-position-x: calc(-1 * var(--size-240));
   background-position-y: calc(-1 * var(--size-160));
+}
+.isIcon.isCheckIn {
+  background-position-x: calc(-1 * var(--size-240));
+  background-position-y: calc(-1 * var(--size-360));
 }
 .isIcon.isPaperPlane {
   background-position-x: calc(-1 * var(--size-240));
@@ -391,6 +417,14 @@ h1 {
 .isIcon.isCalendar {
   background-position-x: calc(-1 * var(--size-280));
   background-position-y: calc(-1 * var(--size-80));
+}
+.isIcon.isPencil {
+  background-position-x: calc(-1 * var(--size-280));
+  background-position-y: calc(-1 * var(--size-120));
+}
+.isIcon.isWrite {
+  background-position-x: calc(-1 * var(--size-280));
+  background-position-y: calc(-1 * var(--size-160));
 }
 .isIcon.isNote {
   background-position-x: calc(-1 * var(--size-280));
@@ -464,7 +498,12 @@ h1 {
 .isIcon.isChecked.isMini {
   background-position-y: calc(-1 * var(--size-60));
 }
+.isIcon.isMegaphone.isMini {
+  background-position-y: calc(-1 * var(--size-120));
+}
 .isIcon.isPin.isMini {
-  background-position-x: calc(-1 * var(--size-750));
   background-position-y: calc(-1 * var(--size-160));
+}
+.isIcon.isArrow.isMini {
+  background-position-y: 0;
 }

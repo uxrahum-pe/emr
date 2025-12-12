@@ -345,7 +345,7 @@
 .C034 {
     border-bottom: var(--size-2) solid var(--color-black-3);
     padding: var(--size-10);
-    gap: var(--size-20);
+    gap: var(--size-15);
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -418,8 +418,8 @@
     background-color: var(--color-blue-25);
 }
 .C040 {
-    width: var(--size-25);
-    height: var(--size-25);
+    width: var(--size-26);
+    height: var(--size-26);
     background: url(/images/female-64.jpg) no-repeat center center / cover;
     border-radius: var(--size-15);
     border: var(--size-2) solid var(--color-white);
@@ -767,5 +767,140 @@
 }
 .C070 {
     width: 100%;
+    padding: var(--size-15) var(--size-30);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: .3s;
+    cursor: pointer;
+}
+.C070:hover {
+    opacity: .5;
+    background-color: var(--color-blue-7);
+}
+.C071 {
+    width: fit-content;
+    border-radius: var(--size-15);
+    background: linear-gradient(to right, var(--color-black), var(--color-black-75)), var(--color-mint);
+    box-shadow: var(--size-5) var(--size-5) var(--size-20) var(--color-black-50), calc(-1 * var(--size-5)) calc(-1 * var(--size-5)) var(--size-20) var(--color-mint-15);
+    border: var(--size-4) solid var(--color-white-25);
+    border-left: var(--size-4) solid var(--color-white-50);
+    border-right: var(--size-4) solid var(--color-white-50);
+    justify-items: flex-end;
+    margin-left: auto;
+}
+.C072 {
+    width: var(--size-40);
+    height: var(--size-40);
+    filter: brightness(0) invert(1);
+}
+.C073 {   
+    background: linear-gradient(to bottom, var(--color-black-3), var(--color-black-0) 10%);
+    height: 100%;
+}
+.C074 {
+    position: absolute;
+    width: var(--size-120);
+    height: 100%;
+    border-right: var(--size-3) solid var(--color-black-3);
+}
+.C075 {
+    width: var(--size-500);
+    height: calc(100vh - var(--size-300));
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.C075::-webkit-scrollbar {
+    display: none;
+}
+.C076 {
+    display: flex;
+    flex-direction: row;
+    margin: var(--size-10) 0;
+}
+.C077 {
+    margin-left: var(--size-20);
+    margin-top: var(--size-5);
+    flex: 0 0 var(--size-80);
+}
+.C078 {
+    flex: 0 0 var(--size-40);
+    margin-top: var(--size-5);
+}
+.C079 {
+    width: fit-content;
+    background-color: var(--color-white-50);
     padding: var(--size-15);
+    border-radius: var(--size-25);
+    min-width: var(--size-60);
+    margin-right: var(--size-15);
+    transition: .3s;
+    cursor: pointer;
+}
+.C079.isMine {
+    background-color: var(--background-white);
+}
+.C079:hover {
+    opacity: .5;
+}
+.C080 {
+    border: var(--size-4) solid var(--color-white);
+    border-radius: var(--size-15);
+    margin: 0 var(--size-6);
+    box-shadow: 0 var(--size-4) var(--size-10) var(--color-black-15);
+    background-color: var(--color-black);
+}
+.C080.isFitted {
+    margin: calc(-1 * var(--size-10));
+    z-index: 1;
+}
+.C081 {
+    width: var(--size-20);
+    height: var(--size-20);
+    filter: brightness(0) invert(1);
+}
+.C080:has(.C081.isMegaphone) {
+    background-color: var(--color-red);
+}
+.C080:has(.C081.isChecked), .C080:has(.C081.isArrow) {
+    background-color: var(--color-green);
+}
+.C082 {
+    width: var(--size-26);
+    height: var(--size-26);
+    margin: var(--size-6) 0 0 var(--size-6);
+    box-shadow: 0 var(--size-4) var(--size-10) var(--color-black-15);
+    border: var(--size-2) solid var(--color-white);
+    border-radius: var(--size-15);
+    background: url(/images/female-128.jpg) no-repeat center center / cover;
+}
+.C083 {
+    padding-right: var(--size-10);
+}
+.C084 {
+    width: var(--size-50);
+    height: var(--size-50);
+}
+.C085 {
+    display: flex;
+    gap: var(--size-5);
+    align-items: center;
+    margin-top: var(--size-10);
+}
+.C086 {
+    display: flex;
+    gap: var(--size-3);
+}
+.C087 {
+    display: flex;
+    gap: var(--size-5);
+    align-items: center;
+}
+.C088 {
+    transition: .3s;
+    cursor: pointer;
+}
+.C088:hover {
+    opacity: .5;
 }

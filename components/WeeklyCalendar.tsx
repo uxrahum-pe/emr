@@ -218,11 +218,26 @@ export default function WeeklyCalendar() {
     let resizeTimeoutId: ReturnType<typeof setTimeout> | null = null
     let lastUpdateTime = 0
     const throttleDelay = 16 // ~60fps
+    
+    // viewport 계산 결과 캐시
+    let cachedFourDaysDistance: number | null = null
+    const calculateFourDaysDistance = () => {
+      const viewportWidth = window.innerWidth
+      const breakpoint = 1980
+      const dayWidthVw = 60 / breakpoint
+      const gapVw = 3 / breakpoint
+      const dayWidth = viewportWidth * dayWidthVw
+      const gap = viewportWidth * gapVw
+      return (dayWidth + gap) * 4
+    }
 
     // 스크롤 위치를 기준으로 상대적으로 계산 (viewport 크기와 무관)
     const updateOpacities = (timestamp: number, skipDateUpdate = false) => {
-      // Throttle: 16ms마다 한 번만 업데이트
-      if (timestamp - lastUpdateTime < throttleDelay) {
+      // 리사이즈 중에는 throttle만 더 길게 적용 (완전히 건너뛰지 않음)
+      const currentThrottleDelay = isResizingRef.current ? throttleDelay * 2 : throttleDelay
+      
+      // Throttle: 리사이즈 중에는 더 긴 간격으로 업데이트
+      if (timestamp - lastUpdateTime < currentThrottleDelay) {
         rafId = requestAnimationFrame((t) => updateOpacities(t, skipDateUpdate))
         return
       }
@@ -230,31 +245,40 @@ export default function WeeklyCalendar() {
 
       const containerRect = container.getBoundingClientRect()
       const containerCenter = containerRect.left + containerRect.width / 2
+      const containerLeft = containerRect.left
+      const containerRight = containerRect.right
       
       const allElements = container.querySelectorAll('.C055')
       const newOpacities: number[] = new Array(allElements.length).fill(0)
       let closestElement: HTMLElement | null = null
       let closestDistance = Infinity
       
-      // 중앙에서 4일 떨어진 거리 계산 - CSS 변수 기반으로 계산
-      // var(--size-60) + var(--size-3) = viewport 기준 상대값
-      const viewportWidth = window.innerWidth
-      const breakpoint = 1980
-      const dayWidthVw = 60 / breakpoint
-      const gapVw = 3 / breakpoint
-      const dayWidth = viewportWidth * dayWidthVw
-      const gap = viewportWidth * gapVw
-      const fourDaysDistance = (dayWidth + gap) * 4
+      // 중앙에서 4일 떨어진 거리 계산 - CSS 변수 기반으로 계산 (캐시 사용)
+      if (cachedFourDaysDistance === null) {
+        cachedFourDaysDistance = calculateFourDaysDistance()
+      }
+      const fourDaysDistance = cachedFourDaysDistance
+      
+      // 가시 영역 밖 요소는 계산 생략 (성능 최적화)
+      const viewportMargin = fourDaysDistance * 1.5 // 여유 공간 추가
       
       allElements.forEach((element, index) => {
         const elementRect = element.getBoundingClientRect()
+        
+        // 가시 영역 밖 요소는 opacity 0으로 설정하고 건너뛰기
+        if (elementRect.right < containerLeft - viewportMargin || 
+            elementRect.left > containerRight + viewportMargin) {
+          newOpacities[index] = 0
+          return
+        }
+        
         const elementCenter = elementRect.left + elementRect.width / 2
         
         // 중앙에서의 거리 계산 (픽셀 단위)
         const distance = Math.abs(elementCenter - containerCenter)
         
-        // 가장 가까운 요소 찾기 (날짜 업데이트가 필요한 경우만)
-        if (!skipDateUpdate && distance < closestDistance) {
+        // 가장 가까운 요소 찾기 (날짜 업데이트가 필요한 경우만, 리사이즈 중에는 건너뛰기)
+        if (!skipDateUpdate && !isResizingRef.current && distance < closestDistance) {
           closestDistance = distance
           closestElement = element as HTMLElement
         }
@@ -267,8 +291,8 @@ export default function WeeklyCalendar() {
       setOpacities(newOpacities)
       setIsInitialized(true)
       
-      // 중앙에 가장 가까운 요소의 날짜 정보 추출 (스크롤 시에만)
-      if (!skipDateUpdate && closestElement) {
+      // 중앙에 가장 가까운 요소의 날짜 정보 추출 (스크롤 시에만, 리사이즈 중에는 건너뛰기)
+      if (!skipDateUpdate && !isResizingRef.current && closestElement) {
         // 요소의 인덱스를 직접 계산
         const elementIndex = Array.from(allElements).indexOf(closestElement as Element)
         if (elementIndex >= 0) {
@@ -288,11 +312,10 @@ export default function WeeklyCalendar() {
     }
 
     const handleScroll = () => {
-      // 리사이즈 중이 아닐 때만 스크롤 처리
-      if (isResizingRef.current) return
-      
       // 스크롤 시 저장된 비율 초기화 (사용자가 직접 스크롤한 경우)
-      savedScrollRatioRef.current = null
+      if (!isResizingRef.current) {
+        savedScrollRatioRef.current = null
+      }
       
       if (rafId) cancelAnimationFrame(rafId)
       rafId = requestAnimationFrame((t) => updateOpacities(t, false))
@@ -316,55 +339,30 @@ export default function WeeklyCalendar() {
         clearTimeout(resizeTimeoutId)
       }
       
-      if (rafId) cancelAnimationFrame(rafId)
-      
-      // 리사이즈 완료 후 처리 (debounce)
+      // 리사이즈 완료 후 처리 (debounce 시간 증가)
       resizeTimeoutId = setTimeout(() => {
-        rafId = requestAnimationFrame((t) => {
-          // 스크롤 위치를 즉시 복원 (레이아웃 변경 전)
-          if (savedScrollRatioRef.current !== null) {
-            const currentMaxScroll = container.scrollWidth - container.clientWidth
-            if (currentMaxScroll > 0) {
-              container.scrollLeft = savedScrollRatioRef.current * currentMaxScroll
-            } else {
-              container.scrollLeft = 0
-            }
+        // viewport 계산 캐시 초기화 (리사이즈 후 재계산 필요)
+        cachedFourDaysDistance = null
+        
+        // 스크롤 위치 복원
+        if (savedScrollRatioRef.current !== null) {
+          const maxScroll = container.scrollWidth - container.clientWidth
+          if (maxScroll > 0) {
+            container.scrollLeft = savedScrollRatioRef.current * maxScroll
+          } else {
+            container.scrollLeft = 0
           }
-          
-          // opacity 업데이트
+        }
+        
+        // 리사이즈 완료 플래그 해제 (opacity 업데이트 전에 해제하여 즉시 업데이트 가능하도록)
+        isResizingRef.current = false
+        
+        // 리사이즈 완료 후 opacity 업데이트 (한 번만)
+        requestAnimationFrame((t) => {
           updateOpacities(t, true)
-          
-          // 스크롤 위치를 다시 복원 (레이아웃 완료 후)
-          requestAnimationFrame(() => {
-            if (savedScrollRatioRef.current !== null) {
-              const newMaxScroll = container.scrollWidth - container.clientWidth
-              if (newMaxScroll > 0) {
-                container.scrollLeft = savedScrollRatioRef.current * newMaxScroll
-              } else {
-                container.scrollLeft = 0
-              }
-              
-              // 추가 복원 (레이아웃이 완전히 안정화될 때까지)
-              requestAnimationFrame(() => {
-                if (savedScrollRatioRef.current !== null) {
-                  const finalMaxScroll = container.scrollWidth - container.clientWidth
-                  if (finalMaxScroll > 0) {
-                    container.scrollLeft = savedScrollRatioRef.current * finalMaxScroll
-                  } else {
-                    container.scrollLeft = 0
-                  }
-                }
-                
-                // 리사이즈 완료
-                isResizingRef.current = false
-                savedScrollRatioRef.current = null
-              })
-            } else {
-              isResizingRef.current = false
-            }
-          })
+          savedScrollRatioRef.current = null
         })
-      }, 150) // 150ms debounce
+      }, 300) // 300ms debounce (150ms에서 증가)
     }
 
     // 초기 계산은 약간 지연
