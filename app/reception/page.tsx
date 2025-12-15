@@ -1113,12 +1113,26 @@ function CustomerStatusSection({
                   <div className='C108'><div className='C012 styleSheet isIcon isArrow isLeft'></div></div>
                 </div>
                 <div className='C109'>
-                  <div className='C110'></div>
+                  <div className='C110 isOpened'>
+                    <div className='C111'><p className='T048'>기본정보</p><p className='T049'><span className='isUnit'>등록일: 2024.</span>08.16</p><div className='C112'><div className='C113 styleSheet isIcon isMini isChevron'></div></div></div>
+                    <div className='C111'><p className='T050'>차트번호:</p><p className='T049'>070007777</p></div>
+                    <div className='C111'><p className='T050'>고객명:</p><p className='T049 isBold isLarge'>신수빈</p></div>
+                    <div className='C111'><p className='T050'>영문명:</p><p className='T049'>Shin SooBin</p></div>
+                    <div className='C111'><p className='T050'>휴대전화:</p><p className='T049'>010-7444-4118</p></div>
+                    <div className='C111'><p className='T050'>주민번호:</p><p className='T049'>800423-1*</p><p className="T042 isRed">여성</p><p className="T042">33<span className="isUnit">세</span></p></div>
+                    <div className='C114'>
+                      <p className='T050'>특수사항</p>
+                      <div className='C115'><p className="T042">찐서포터</p><p className="T042">EC</p><p className="T042">CC</p><p className="T042">마케팅거부</p><p className="T042">MATE</p><p className="T042">기증자</p><p className="T042">실천반갑</p><p className="T042">성공기 작성</p><p className="T042 isRed">혈액검사 대상자</p></div>
+                    </div>
+                  </div>
+                  <div className='C110 isFolded'>
+                    <div className='C111'><p className='T048'>패키지</p><p className='T049'><span className='isUnit'>등록일: 2024.</span>08.16</p><div className='C112'><div className='C113 styleSheet isIcon isMini isChevron'></div></div></div>
+                  </div>
                 </div>
               </div>
               <div className='C099'>
                 <div className='C104'>
-                  <p className='T047'>참조 사항</p>
+                  <p className='T047'>내원 일지</p>
                 </div>
                 <div className='C105'>
                   <div className='C106'></div>

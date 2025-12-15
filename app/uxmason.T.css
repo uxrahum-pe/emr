@@ -457,3 +457,17 @@
     font-size: var(--font-19);
     margin-left: var(--size-10);
 }
+.T048 {
+    font-weight: 800;
+}
+.T049 {
+    font-size: var(--font-14);
+}
+.T049.isLarge {
+    font-size: var(--font-19);
+}
+.T050 {
+    font-size: var(--font-14);
+    width: var(--size-70);
+    color: var(--color-black-50);
+}

@@ -512,6 +512,9 @@ h1 {
 .isIcon.isMyLocation.isMini {
   background-position-y: calc(-1 * var(--size-140));
 }
+.isIcon.isChevron.isMini {
+  background-position-y: calc(-1 * var(--size-40));
+}
 .isIcon.isChecked.isMini {
   background-position-y: calc(-1 * var(--size-60));
 }
