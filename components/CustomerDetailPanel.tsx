@@ -1,20 +1,41 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import CustomerInfoPanel from '@/components/CustomerInfoPanel'
+import VisitLogPanel from '@/components/VisitLogPanel'
+import QuickActionsPanel from '@/components/QuickActionsPanel'
 
 interface CustomerDetailPanelProps {
   isOpen: boolean
   onClose: () => void
-  children?: React.ReactNode
 }
 
 /**
  * 고객 통합 정보 모달 패널 컴포넌트
  * ListItem 클릭 시 나타나고, 블러 영역 클릭 시 닫힘
  */
-export default function CustomerDetailPanel({ isOpen, onClose, children }: CustomerDetailPanelProps) {
+export default function CustomerDetailPanel({ isOpen, onClose }: CustomerDetailPanelProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [isOpened, setIsOpened] = useState(false)
+  
+  // Section states
+  const [sectionStates, setSectionStates] = useState<Record<string, boolean>>({
+    basic: true,
+    foreign: false,
+    package: false,
+    visit: false,
+    treatment: false,
+    prescription: false,
+    additional: false
+  })
+  
+  // Section toggle handler
+  const handleSectionToggle = (sectionKey: string) => {
+    setSectionStates(prev => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey]
+    }))
+  }
 
   useEffect(() => {
     if (isOpen) {
@@ -38,22 +59,28 @@ export default function CustomerDetailPanel({ isOpen, onClose, children }: Custo
 
   if (!isVisible) return null
 
-        const handleBackdropClick = (e: React.MouseEvent) => {
-          // C097 영역이 아닌 블러 처리된 영역 클릭 시
-          if (e.target === e.currentTarget) {
-            onClose()
-          }
-        }
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    // C097 영역이 아닌 블러 처리된 영역 클릭 시
+    if (e.target === e.currentTarget) {
+      onClose()
+    }
+  }
 
-        return (
-          <div 
-            className={`C096 ${isOpened ? 'isOpened' : ''}`}
-            onClick={handleBackdropClick}
-          >
-            <div className='C097' onClick={(e) => e.stopPropagation()}>
-              {children}
-            </div>
-          </div>
-        )
+  return (
+    <div 
+      className={`C096 ${isOpened ? 'isOpened' : ''}`}
+      onClick={handleBackdropClick}
+    >
+      <div className='C097' onClick={(e) => e.stopPropagation()}>
+        <CustomerInfoPanel 
+          sectionStates={sectionStates}
+          onSectionToggle={handleSectionToggle}
+          onClose={onClose}
+        />
+        <VisitLogPanel />
+        <QuickActionsPanel />
+      </div>
+    </div>
+  )
 }
 

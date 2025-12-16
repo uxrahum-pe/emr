@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Sidebar from '@/components/Sidebar'
 import PageHeader from '@/components/PageHeader'
 import ToggleSwitch from '@/components/ToggleSwitch'
@@ -414,7 +414,160 @@ function CustomerStatusSection({
     prescription: false, // 처방
     additional: false // 추가 정보
   })
+  const [selectedDate, setSelectedDate] = useState<string>('2025-12-15') // 기본 선택 날짜
   const c109ScrollRef = useRef<ScrollableContainerRef>(null)
+  const c106ScrollRef = useRef<ScrollableContainerRef>(null)
+  const c107ScrollRef = useRef<ScrollableContainerRef>(null)
+
+  // C107 스크롤에 따라 현재 보이는 날짜 감지
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+    const rafIdRef = { current: null as number | null }
+    let scrollContainer: HTMLDivElement | null = null
+    let handleScroll: (() => void) | null = null
+
+    const checkVisibleDate = () => {
+      const currentScrollContainer = c107ScrollRef.current?.getElement()
+      if (!currentScrollContainer) return
+      
+      const containerRect = currentScrollContainer.getBoundingClientRect()
+      
+      // C138이 상단에 보이면 향후 일정 선택
+      const c138Element = currentScrollContainer.querySelector('.C138')
+      if (c138Element) {
+        const c138Rect = c138Element.getBoundingClientRect()
+        if (c138Rect.top <= containerRect.top + 100 && c138Rect.bottom > containerRect.top) {
+          setSelectedDate('')
+          return
+        }
+      }
+      
+      const t061Elements = currentScrollContainer.querySelectorAll('.T061')
+      
+      let visibleDate = ''
+      let minDistance = Infinity
+
+      t061Elements.forEach((element) => {
+        const rect = element.getBoundingClientRect()
+        const distance = Math.abs(rect.top - containerRect.top)
+        
+        // 상단에 가장 가까운 T061 찾기
+        if (rect.top <= containerRect.top + 100 && distance < minDistance) {
+          minDistance = distance
+          const dateText = element.textContent || ''
+          // "2025.12.15 (월)" 형식에서 날짜 추출
+          const dateMatch = dateText.match(/(\d{4})\.(\d{2})\.(\d{2})/)
+          if (dateMatch) {
+            visibleDate = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`
+          }
+        }
+      })
+
+      if (visibleDate) {
+        setSelectedDate(visibleDate)
+      }
+    }
+
+    // ref가 설정될 때까지 기다림
+    const setupScrollListener = () => {
+      scrollContainer = c107ScrollRef.current?.getElement() || null
+      if (!scrollContainer) {
+        // ref가 아직 설정되지 않았으면 다시 시도
+        timeoutId = setTimeout(setupScrollListener, 100)
+        return
+      }
+
+      handleScroll = () => {
+        // requestAnimationFrame으로 throttling
+        if (rafIdRef.current !== null) {
+          cancelAnimationFrame(rafIdRef.current)
+        }
+        
+        rafIdRef.current = requestAnimationFrame(() => {
+          checkVisibleDate()
+        })
+      }
+
+      scrollContainer.addEventListener('scroll', handleScroll, { passive: true })
+      
+      // 초기 실행
+      setTimeout(() => {
+        checkVisibleDate()
+      }, 100)
+    }
+
+    setupScrollListener()
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current)
+      }
+      if (scrollContainer && handleScroll) {
+        scrollContainer.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
+
+  const handleC129Click = (date: string, event: React.MouseEvent) => {
+    setSelectedDate(date)
+    const clickedElement = event.currentTarget as HTMLElement
+    
+    // 향후 일정 클릭 시 C107 scrollTop을 0으로
+    if (date === '') {
+      setTimeout(() => {
+        const scrollContainer = c107ScrollRef.current?.getElement()
+        if (scrollContainer) {
+          scrollContainer.scrollTo({ 
+            top: 0, 
+            behavior: 'smooth' 
+          })
+        }
+      }, 100)
+      return
+    }
+    
+    // C106 스크롤
+    setTimeout(() => {
+      const scrollContainer = c106ScrollRef.current?.getElement()
+      if (scrollContainer && clickedElement) {
+        const size5 = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--size-5')) || 5
+        // offsetTop을 사용하여 스크롤 컨테이너 내에서의 상대 위치 계산
+        const scrollTop = clickedElement.offsetTop - size5
+        scrollContainer.scrollTo({ 
+          top: Math.max(0, scrollTop), 
+          behavior: 'smooth' 
+        })
+      }
+    }, 100)
+
+    // C107에서 해당 날짜의 T061로 스크롤
+    setTimeout(() => {
+      const scrollContainer = c107ScrollRef.current?.getElement()
+      if (scrollContainer) {
+        const t061Elements = scrollContainer.querySelectorAll('.T061')
+        t061Elements.forEach((element) => {
+          const dateText = element.textContent || ''
+          const dateMatch = dateText.match(/(\d{4})\.(\d{2})\.(\d{2})/)
+          if (dateMatch) {
+            const elementDate = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`
+            if (elementDate === date) {
+              const containerRect = scrollContainer.getBoundingClientRect()
+              const elementRect = element.getBoundingClientRect()
+              const size5 = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--size-5')) || 5
+              const scrollTop = scrollContainer.scrollTop + (elementRect.top - containerRect.top) - size5
+              scrollContainer.scrollTo({ 
+                top: Math.max(0, scrollTop), 
+                behavior: 'smooth' 
+              })
+            }
+          }
+        })
+      }
+    }, 150)
+  }
 
   const handleSectionToggle = (sectionKey: string, event: React.MouseEvent) => {
     const wasOpened = sectionStates[sectionKey]
@@ -1145,310 +1298,7 @@ function CustomerStatusSection({
                 </div>
               </div>
             </div>
-            <CustomerDetailPanel isOpen={isCustomerDetailOpen} onClose={handleCustomerDetailClose}>
-              <div className='C098'>
-                <div className='C101'>
-                  <p className='T047'>고객 정보</p>
-                  <div className='C102'><div className='C103 styleSheet isIcon isBarcode'></div></div>
-                  <div className='C102'><div className='C103 styleSheet isIcon isSetting'></div></div>
-                  <div className='C108' onClick={handleCustomerDetailClose}><div className='C012 styleSheet isIcon isArrow isLeft'></div></div>
-                </div>
-                <ScrollableContainer ref={c109ScrollRef} className='C109'>
-                  <div className={`C110 ${sectionStates.basic ? 'isOpened' : 'isFolded'}`}>
-                    <div className='C111' onClick={(e) => handleSectionToggle('basic', e)}><p className='T048'>기본정보</p><p className='T051'><span className='isUnit'>최초등록: 2024.</span>08.16</p><div className='C112'><div className='C113 styleSheet isIcon isMini isChevron'></div></div></div>
-                    <div className='C116'>
-                      <p className="T013">신수빈</p><p className="T014 isRed">여성</p><p className="T014">28<span className="isUnit">세</span></p><p className="T014 isOldbie">2<span className="isUnit">기</span></p>
-                    </div>
-                    <div className='C111'><p className='T050'>차트번호:</p><p className='T049'>070007777</p></div>
-                    <div className='C111'><p className='T050'>고객명:</p><p className='T049 isBold isLarge'>신수빈</p></div>
-                    <div className='C111'><p className='T050'>영문명:</p><p className='T049'>Shin SooBin</p></div>
-                    <div className='C111'><p className='T050'>휴대전화:</p><p className='T049'>010-7444-4118</p></div>
-                    <div className='C111'><p className='T050'>주민번호:</p><p className='T049'>800423-1*</p><p className="T042 isRed">여성</p><p className="T042">33<span className="isUnit">세</span></p></div>
-                    <div className='C114'>
-                      <p className='T050'>특수사항</p>
-                      <div className='C115'><p className="T042">찐서포터</p><p className="T042">EC</p><p className="T042">CC</p><p className="T042">마케팅거부</p><p className="T042">MATE</p><p className="T042">기증자</p><p className="T042">실천반갑</p><p className="T042">성공기 작성</p><p className="T042 isRed">혈액검사 대상자</p></div>
-                    </div>
-                  </div>
-                  <div className={`C110 ${sectionStates.foreign ? 'isOpened' : 'isFolded'}`}>
-                    <div className='C111' onClick={(e) => handleSectionToggle('foreign', e)}><p className='T048'>외국인 정보</p><p className='T051'><span className='isUnit'>국적:</span> 필리핀</p><div className='C112'><div className='C113 styleSheet isIcon isMini isChevron'></div></div></div>
-                  </div>
-                  <div className={`C110 isPackage ${sectionStates.package ? 'isOpened' : 'isFolded'}`}>
-                    <div className='C111' onClick={(e) => handleSectionToggle('package', e)}><p className='T048'>패키지</p><p className="T042 isGreen">2<span className='isUnit'>기</span></p><p className='T051'><span className='isUnit'>등록: 2024.</span>08.16</p><div className='C112'><div className='C113 styleSheet isIcon isMini isChevron'></div></div></div>
-                    <div className='C116'>
-                      <p className="T019">계약금:<span className="isBold isBlue">3,500,000</span>원</p>
-                      <p className="T019">예약금:<span className="isBold isBlack">500,000</span>원</p>
-                      <p className="T019">할인:<span className="isBold isRed">1,200,000</span>원</p>
-                      <p className="T019">미수:<span className="isBold isMint">6,800,000</span>원</p>
-                    </div>
-                    <div className='C111'><p className='T049 isGreen'>부산365mc병원</p><p className='T051'><span className='isUnit'>패키지 수:</span> <span className='isBold'>6</span><span className='isUnit'>개</span></p></div>
-                    <div className='C117'>
-                      <div className='C118'>
-                        <div className='C119'><div className='C121 styleSheet isIcon isPart isFace'></div></div>
-                        <div className='C120'>
-                          <div className='C122'>
-                            <p className='T049 isRed'>수술</p>
-                            <p className='T049 isBold'>얼굴</p>
-                            <p className='T042'>진행</p>
-                            <p className='T051'><span className='isUnit'>횟수:</span> 3<span className='isUnit'>회</span></p>
-                          </div>
-                          <p className='T049 isGrey isEllipsis'>이중턱 지방흡입 + V라인 성형 + 얼굴 리프팅</p>
-                        </div>
-                      </div>
-                      <div className='C118'>
-                        <div className='C119'><div className='C121 styleSheet isIcon isPart isShoulder'></div></div>
-                        <div className='C120'>
-                          <div className='C122'>
-                            <p className='T049 isRed'>수술</p>
-                            <p className='T049 isBold'>가슴</p>
-                            <p className='T042'>진행</p>
-                            <p className='T051'><span className='isUnit'>횟수:</span> 1<span className='isUnit'>회</span></p>
-                          </div>
-                          <p className='T049 isGrey isEllipsis'>가슴 지방이식 + 리프팅 + 상승술</p>
-                        </div>
-                      </div>
-                      <div className='C118'>
-                        <div className='C119'><div className='C121 styleSheet isIcon isPart isArm'></div></div>
-                        <div className='C120'>
-                          <div className='C122'>
-                            <p className='T049 isRed'>수술</p>
-                            <p className='T049 isBold'>팔</p>
-                            <p className='T042'>진행</p>
-                            <p className='T051'><span className='isUnit'>횟수:</span> 2<span className='isUnit'>회</span></p>
-                          </div>
-                          <p className='T049 isGrey isEllipsis'>상완부 지방흡입 + 팔뚝 리프팅</p>
-                        </div>
-                      </div>
-                      <div className='C118'>
-                        <div className='C119'><div className='C121 styleSheet isIcon isPart isBelly'></div></div>
-                        <div className='C120'>
-                          <div className='C122'>
-                            <p className='T049 isRed'>수술</p>
-                            <p className='T049 isBold'>복부</p>
-                            <p className='T042'>진행</p>
-                            <p className='T051'><span className='isUnit'>횟수:</span> 2<span className='isUnit'>회</span></p>
-                          </div>
-                          <p className='T049 isGrey isEllipsis'>복부 지방흡입 + 복부성형술 + 옆구리 라인</p>
-                        </div>
-                      </div>
-                      <div className='C118'>
-                        <div className='C119'><div className='C121 styleSheet isIcon isPart isWaist'></div></div>
-                        <div className='C120'>
-                          <div className='C122'>
-                            <p className='T049 isRed'>수술</p>
-                            <p className='T049 isBold'>허리</p>
-                            <p className='T042'>완료</p>
-                            <p className='T051'><span className='isUnit'>횟수:</span> 1<span className='isUnit'>회</span></p>
-                          </div>
-                          <p className='T049 isGrey isEllipsis'>러브핸들 지방흡입 + 허리 라인 교정</p>
-                        </div>
-                      </div>
-                      <div className='C118'>
-                        <div className='C119'><div className='C121 styleSheet isIcon isPart isThigh'></div></div>
-                        <div className='C120'>
-                          <div className='C122'>
-                            <p className='T049 isRed'>수술</p>
-                            <p className='T049 isBold'>허벅지</p>
-                            <p className='T042'>진행</p>
-                            <p className='T051'><span className='isUnit'>횟수:</span> 3<span className='isUnit'>회</span></p>
-                          </div>
-                          <p className='T049 isGrey isEllipsis'>대퇴부 지방흡입 + 허벅지 안쪽 리프팅</p>
-                        </div>
-                      </div>
-                      <div className='C118'>
-                        <div className='C119'><div className='C121 styleSheet isIcon isPart isCalf'></div></div>
-                        <div className='C120'>
-                          <div className='C122'>
-                            <p className='T049 isRed'>수술</p>
-                            <p className='T049 isBold'>종아리</p>
-                            <p className='T042'>예정</p>
-                            <p className='T051'><span className='isUnit'>횟수:</span> 2<span className='isUnit'>회</span></p>
-                          </div>
-                          <p className='T049 isGrey isEllipsis'>종아리 지방흡입 + 종아리 라인 교정</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className='C111'><p className='T050'>총 계약금:</p><p className='T049 isBold isBlue isRight'>12,000,000<span className='isUnit'>원</span></p></div>
-                    <div className='C111'><p className='T050'>예약금:</p><p className='T049 isRight'>4,000,000<span className='isUnit'>원</span></p></div>
-                    <div className='C111'><p className='T050'>할인액:</p><p className='T049 isRed isRight'>1,200,000<span className='isUnit'>원 (</span>10.0<span className='isUnit'>%)</span></p></div>
-                    <div className='C111'><p className='T050'>잔액:</p><p className='T049 isMint isRight'>6,800,000<span className='isUnit'>원</span></p></div>
-                  </div>
-                  <div className={`C110 ${sectionStates.visit ? 'isOpened' : 'isFolded'}`}>
-                    <div className='C111' onClick={(e) => handleSectionToggle('visit', e)}><p className='T048'>내원</p><p className='T051'><span className='isUnit'>실천지수: </span><span className='isYellow'>74,000</span><span className='isUnit'>점</span></p><div className='C112'><div className='C113 styleSheet isIcon isMini isChevron'></div></div></div>
-                    <div className='C111'><p className='T050'>시술 시작일:</p><p className='T049 isRight'>2024.10.20</p></div>
-                    <div className='C111'><p className='T050'>주기적 내원일:</p><p className='T049 isRight'>2024.11.23</p></div>
-                    <div className='C111'><p className='T050'>다음 내원일:</p><p className='T049 isRight'>--</p></div>
-                    <div className='C111'><p className='T050'>시술 예정일:</p><p className='T049 isRight'>2024.09.23</p></div>
-                    <div className='C111'><p className='T050'>목표 체중:</p><p className='T049 isRight'>78.2<span className='isUnit'>kg</span></p></div>
-                    <div className='C111'><p className='T050'>달성 체중:</p><p className='T049 isRight'>76.2<span className='isUnit'>kg</span></p></div>
-                    <div className='C111'><p className='T050'>S/O:</p><p className='T049 isRight'>2024<span className='isUnit'>년</span> 12<span className='isUnit'>월경</span></p></div>
-                  </div>
-                  <div className={`C110 ${sectionStates.treatment ? 'isOpened' : 'isFolded'}`}>
-                    <div className='C111' onClick={(e) => handleSectionToggle('treatment', e)}><p className='T048'>진료</p><p className='T051 isMini'><span className='isUnit'>총일수: </span>37<span className='isUnit'>일 / 조정: </span>-22<span className='isUnit'>일</span></p><div className='C112'><div className='C113 styleSheet isIcon isMini isChevron'></div></div></div>
-                    <div className='C124'></div>
-                    <ScrollableContainer className='C123'>
-                      <div className='C125'>
-                        <div className="C046"><div className="C047 styleSheet isIcon isMini isClock"></div></div>
-                        <p className='T052'><span className='isGrey'>2025.</span>12.07 <span className='isUnit'> - </span><span className='isBold'>3</span><span className='isUnit'>차 진료</span><span className="isLabel isRed">예정</span></p>
-                        <div className='C126'>
-                          <p className='T053'><span className='isUnit'>일수:</span> 10 <span className='isUnit'> / 조정: </span>-2<span className='isUnit'>일</span></p>
-                          <div className="C039"><div className="C040 isMale"></div><p className="T018">홍성훈<span className="isUnit">원장</span></p></div>
-                        </div>
-                      </div>
-                      <div className='C125'>
-                        <div className="C046"><div className="C047 styleSheet isIcon isMini isClock"></div></div>
-                        <p className='T052'><span className='isGrey'>2025.</span>12.07 <span className='isUnit'> - </span><span className='isBold'>3</span><span className='isUnit'>차 진료</span><span className="isLabel isRed">예정</span></p>
-                        <div className='C126'>
-                          <p className='T053'><span className='isUnit'>일수:</span> 10 <span className='isUnit'> / 조정: </span>-2<span className='isUnit'>일</span></p>
-                          <div className="C039"><div className="C040 isMale"></div><p className="T018">홍성훈<span className="isUnit">원장</span></p></div>
-                        </div>
-                      </div>
-                      <div className='C125'>
-                        <div className="C046"><div className="C047 styleSheet isIcon isMini isClock"></div></div>
-                        <p className='T052'><span className='isGrey'>2025.</span>12.07 <span className='isUnit'> - </span><span className='isBold'>3</span><span className='isUnit'>차 진료</span><span className="isLabel isRed">예정</span></p>
-                        <div className='C126'>
-                          <p className='T053'><span className='isUnit'>일수:</span> 10 <span className='isUnit'> / 조정: </span>-2<span className='isUnit'>일</span></p>
-                          <div className="C039"><div className="C040 isMale"></div><p className="T018">홍성훈<span className="isUnit">원장</span></p></div>
-                        </div>
-                      </div>
-                      <div className='C125'>
-                        <div className="C046"><div className="C047 styleSheet isIcon isMini isClock"></div></div>
-                        <p className='T052'><span className='isGrey'>2025.</span>12.07 <span className='isUnit'> - </span><span className='isBold'>3</span><span className='isUnit'>차 진료</span><span className="isLabel isRed">예정</span></p>
-                        <div className='C126'>
-                          <p className='T053'><span className='isUnit'>일수:</span> 10 <span className='isUnit'> / 조정: </span>-2<span className='isUnit'>일</span></p>
-                          <div className="C039"><div className="C040 isMale"></div><p className="T018">홍성훈<span className="isUnit">원장</span></p></div>
-                        </div>
-                      </div>
-                      <div className='C125'>
-                        <div className="C046"><div className="C047 styleSheet isIcon isMini isClock"></div></div>
-                        <p className='T052'><span className='isGrey'>2025.</span>12.07 <span className='isUnit'> - </span><span className='isBold'>3</span><span className='isUnit'>차 진료</span><span className="isLabel isRed">예정</span></p>
-                        <div className='C126'>
-                          <p className='T053'><span className='isUnit'>일수:</span> 10 <span className='isUnit'> / 조정: </span>-2<span className='isUnit'>일</span></p>
-                          <div className="C039"><div className="C040 isMale"></div><p className="T018">홍성훈<span className="isUnit">원장</span></p></div>
-                        </div>
-                      </div>
-                      <div className='C125'>
-                        <div className="C046"><div className="C047 styleSheet isIcon isMini isClock"></div></div>
-                        <p className='T052'><span className='isGrey'>2025.</span>12.07 <span className='isUnit'> - </span><span className='isBold'>3</span><span className='isUnit'>차 진료</span><span className="isLabel isRed">예정</span></p>
-                        <div className='C126'>
-                          <p className='T053'><span className='isUnit'>일수:</span> 10 <span className='isUnit'> / 조정: </span>-2<span className='isUnit'>일</span></p>
-                          <div className="C039"><div className="C040 isMale"></div><p className="T018">홍성훈<span className="isUnit">원장</span></p></div>
-                        </div>
-                      </div>
-                      <div className='C125'>
-                        <div className="C046"><div className="C047 styleSheet isIcon isMini isClock"></div></div>
-                        <p className='T052'><span className='isGrey'>2025.</span>12.07 <span className='isUnit'> - </span><span className='isBold'>3</span><span className='isUnit'>차 진료</span><span className="isLabel isRed">예정</span></p>
-                        <div className='C126'>
-                          <p className='T053'><span className='isUnit'>일수:</span> 10 <span className='isUnit'> / 조정: </span>-2<span className='isUnit'>일</span></p>
-                          <div className="C039"><div className="C040 isMale"></div><p className="T018">홍성훈<span className="isUnit">원장</span></p></div>
-                        </div>
-                      </div>
-                    </ScrollableContainer>
-                  </div>
-                  <div className={`C110 ${sectionStates.prescription ? 'isOpened' : 'isFolded'}`}>
-                    <div className='C111' onClick={(e) => handleSectionToggle('prescription', e)}><p className='T048'>처방</p><p className='T051 isMini'><span className='isUnit'>무료처방: </span>37<span className='isUnit'>일 / 총처방: </span>22<span className='isUnit'>일</span></p><div className='C112'><div className='C113 styleSheet isIcon isMini isChevron'></div></div></div>
-                    <div className='C111'><p className='T050'>무료 처방일:</p><p className='T049 isRight'>2024.10.20</p></div>
-                    <div className='C111'><p className='T050'>전 기수:</p><p className='T049 isRight'>--</p></div>
-                    <div className='C111'><p className='T050'>최종 처방일:</p><p className='T049 isRight'>--</p></div>
-                    <div className='C111'><p className='T050'>처방일수 합:</p><p className='T049 isRight'>--</p></div>
-                    <div className='C111'><p className='T050'>일수 조정:</p><p className='T049 isRight'>15<span className='isUnit'>일</span></p></div>
-                  </div>
-                  <div className={`C110 ${sectionStates.additional ? 'isOpened' : 'isFolded'}`}>
-                    <div className='C111' onClick={(e) => handleSectionToggle('additional', e)}><p className='T048'>추가 정보</p><div className='C112'><div className='C113 styleSheet isIcon isMini isChevron'></div></div></div>
-                    <div className='C111'><p className='T050'>긴급 연락처::</p><p className='T049 isRight'>010-1234-5678</p></div>
-                    <div className='C111'><p className='T050'>보호자 성명:</p><p className='T049 isRight'>박철수</p></div>
-                    <div className='C111'><p className='T050'>고객과 관계:</p><p className='T049 isRight'>아버지</p></div>
-                    <div className='C111'><p className='T050'>직업:</p><p className='T049 isRight'>무직</p></div>
-                    <div className='C111'><p className='T050'>결혼 여부:</p><p className='T049 isRight'>기혼</p></div>
-                    <div className='C111'><p className='T050'>흡연:</p><p className='T049 isRight'>하루 1갑갑</p></div>
-                    <div className='C111'><p className='T050'>음주:</p><p className='T049 isRight'>하루 반병</p></div>
-                    <div className='C111'><p className='T050'>종교:</p><p className='T049 isRight'>무교</p></div>
-                  </div>
-                </ScrollableContainer>
-              </div>
-              <div className='C099'>
-                <div className='C104'>
-                  <p className='T047'>내원 일지</p>
-                </div>
-                <div className='C105'>
-                  <div className='C106'></div>
-                  <div className='C107'></div>
-                </div>
-              </div>
-              <div className='C100'>
-                <div className='C127 isSelected'>
-                  <div className='C128 styleSheet isIcon isReport'></div>
-                  <p className='T054'>내원일지</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isPackage'></div>
-                  <p className='T054'>패키지</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isReservation'></div>
-                  <p className='T054'>예약</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isCounseling'></div>
-                  <p className='T054'>상담</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isSurgery'></div>
-                  <p className='T054'>수술</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isSyringe'></div>
-                  <p className='T054'>시술</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isClinic'></div>
-                  <p className='T054'>진료</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isDrug'></div>
-                  <p className='T054'>약처방</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isCoin'></div>
-                  <p className='T054'>수납</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isGold'></div>
-                  <p className='T054'>실천지수</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isRuler'></div>
-                  <p className='T054'>사이즈</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isProtect'></div>
-                  <p className='T054'>동의서&설문</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isClip'></div>
-                  <p className='T054'>기록지</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isBlood'></div>
-                  <p className='T054'>혈액검사</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isSpeed'></div>
-                  <p className='T054'>TAT</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isPants'></div>
-                  <p className='T054'>가멘트</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isCamera'></div>
-                  <p className='T054'>사진</p>
-                </div>
-                <div className='C127'>
-                  <div className='C128 styleSheet isIcon isMyLocation'></div>
-                  <p className='T054'>상세로그</p>
-                </div>
-              </div>
-            </CustomerDetailPanel>
+            <CustomerDetailPanel isOpen={isCustomerDetailOpen} onClose={handleCustomerDetailClose}></CustomerDetailPanel>
           </section>
         </article>
   )

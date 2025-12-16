@@ -170,6 +170,7 @@
   --size-250: calc(100vw * 250 / var(--breakpoint));
   --size-280: calc(100vw * 280 / var(--breakpoint));
   --size-300: calc(100vw * 300 / var(--breakpoint));
+  --size-310: calc(100vw * 310 / var(--breakpoint));
   --size-320: calc(100vw * 320 / var(--breakpoint));
   --size-330: calc(100vw * 330 / var(--breakpoint));
   --size-350: calc(100vw * 350 / var(--breakpoint));
@@ -244,6 +245,7 @@
     --size-250: 250px;
     --size-280: 280px;
     --size-300: 300px;
+    --size-310: 310px;
     --size-320: 320px;
     --size-330: 330px;
     --size-350: 350px;
@@ -386,6 +388,17 @@ h1 {
 .isUnit {
   opacity: 0.25;
 }
+
+.isIMaskBlueMint {
+    background-image: linear-gradient( var(--color-blue) 0%, var(--color-mint) 100%) !important;
+    mask-image: url(/images/styleSheet.png);
+    mask-size: var(--size-1500) var(--size-800);
+    mask-repeat: no-repeat;
+}
+.isIMaskBlueMint.isCheck {
+  mask-position: calc(-1 * var(--size-200)) calc(-1 * var(--size-120));
+}
+
 .isIcon.isReception {
   background-position-x: calc(-1 * var(--size-200));
   background-position-y: calc(-1 * var(--size-40));
@@ -501,6 +514,10 @@ h1 {
 .isIcon.isHourglass {
   background-position-x: calc(-1 * var(--size-320));
   background-position-y: calc(-1 * var(--size-80));
+}
+.isIcon.isLeaf {
+  background-position-x: calc(-1 * var(--size-320));
+  background-position-y: calc(-1 * var(--size-200));
 }
 .isIcon.isPants {
   background-position-x: calc(-1 * var(--size-320));

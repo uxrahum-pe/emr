@@ -507,3 +507,40 @@
 .T053 {
     margin-bottom: var(--size-5);
 }
+.T056 {
+    font-size: var(--font-24);
+    font-weight: 200;
+}
+.T056 .isMini {
+    font-size: var(--font-15);
+}
+.T057 .isLabel {
+    background-color: var(--color-black-15);
+    padding: .1em var(--size-3) 0 var(--size-3);
+}
+.T057 .isLabel.isGreen {
+    background-color: var(--color-green-25);
+}
+.T058 {
+    font-size: var(--font-12);
+    color: var(--color-green);
+    margin-left: var(--size-2);
+}
+.T059 {
+    font-size: var(--font-14);
+    margin-right: var(--size-10);
+}
+.T060 {
+    font-size: var(--font-14);
+    margin: 0 var(--size-10);
+}
+.T061 {
+    font-size: var(--font-12);
+    background-color: var(--color-black-15);
+    color: var(--color-white);
+    width: fit-content;
+    padding: var(--size-2) var(--size-10);
+    border-radius: var(--size-10);
+    margin: var(--size-20) auto 0;
+    font-weight: 800;
+}
