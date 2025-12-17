@@ -8,6 +8,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Patient {
@@ -17,4 +18,24 @@ model Patient {
   
   @@map("patients")
 }
+
+// ============================================
+// 사용자 이벤트 로깅 (마우스 이동, 클릭 등)
+// TODO: DB 준비 후 주석 해제
+// ============================================
+
+// model UserEventBatch {
+//   id          String   @id @default(uuid())
+//   sessionId   String
+//   userId      String?
+//   pagePath    String
+//   events      Json     // 이벤트 배열 [{type, data, timestamp}, ...]
+//   eventCount  Int      // 배치 내 이벤트 수
+//   createdAt   DateTime @default(now())
+//   
+//   @@index([sessionId, createdAt])
+//   @@index([userId, createdAt])
+//   @@index([pagePath, createdAt])
+//   @@map("user_event_batches")
+// }
 

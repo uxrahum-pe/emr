@@ -1,0 +1,148 @@
+// ============================================
+// PostgreSQL 예시 스키마
+// ============================================
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Patient {
+  id           String   @id @default(uuid())
+  name         String
+  registerDate DateTime @default(now())
+  metadata     Json?    // 유연한 데이터 (NoSQL처럼)
+  
+  visitLogs    VisitLog[]
+  packages     Package[]
+  schedules    FutureSchedule[]
+  
+  @@map("patients")
+}
+
+model VisitLog {
+  id          String   @id @default(uuid())
+  visitDate   DateTime
+  patientId   String
+  hospitalId  String?
+  period      String?
+  customData  Json?    // 유연한 데이터 저장 (NoSQL처럼 사용 가능)
+  metadata    Json?    // 추가 메타데이터
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  patient     Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  entries     VisitLogEntry[]
+  
+  @@index([patientId, visitDate])
+  @@map("visit_logs")
+}
+
+model VisitLogEntry {
+  id          String   @id @default(uuid())
+  visitLogId  String
+  entryTime   DateTime
+  staffId     String
+  staffName   String
+  staffRole   String
+  content     String
+  status      String   @default("completed")
+  extraData   Json?    // 추가 데이터 (NoSQL처럼 사용 가능)
+  createdAt   DateTime @default(now())
+  
+  visitLog    VisitLog @relation(fields: [visitLogId], references: [id], onDelete: Cascade)
+  
+  @@index([visitLogId])
+  @@map("visit_log_entries")
+}
+
+model Package {
+  id          String   @id @default(uuid())
+  patientId   String
+  period      Int
+  startDate   DateTime
+  endDate     DateTime?
+  status      String   @default("ongoing")
+  hospitalId  String?
+  duration    Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  patient     Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  
+  @@index([patientId])
+  @@map("packages")
+}
+
+model FutureSchedule {
+  id            String   @id @default(uuid())
+  patientId     String
+  scheduledDate DateTime
+  scheduleType  String
+  description   String
+  status        String   @default("scheduled")
+  createdAt     DateTime @default(now())
+  
+  patient       Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  
+  @@index([patientId, scheduledDate])
+  @@map("future_schedules")
+}
+
+// ============================================
+// 사용자 이벤트 로깅 (마우스 이동, 클릭 등)
+// ============================================
+
+model UserEvent {
+  id          String   @id @default(uuid())
+  userId      String?  // 사용자 ID (로그인 시)
+  sessionId   String   // 세션 ID
+  eventType   String   // 'mousemove' | 'click' | 'scroll' | 'keydown' 등
+  pagePath     String   // 현재 페이지 경로
+  timestamp   DateTime @default(now())
+  
+  // 이벤트 데이터 (JSON으로 유연하게 저장)
+  eventData   Json     // { x, y, target, button, etc. }
+  
+  // 인덱스: 빠른 조회를 위해
+  @@index([sessionId, timestamp])
+  @@index([userId, timestamp])
+  @@index([pagePath, timestamp])
+  @@index([eventType, timestamp])
+  @@map("user_events")
+}
+
+// ============================================
+// 이벤트 배치 저장 (성능 최적화)
+// ============================================
+
+model UserEventBatch {
+  id          String   @id @default(uuid())
+  sessionId   String
+  userId      String?
+  pagePath    String
+  events      Json     // 이벤트 배열 [{type, data, timestamp}, ...]
+  eventCount  Int      // 배치 내 이벤트 수
+  createdAt   DateTime @default(now())
+  
+  @@index([sessionId, createdAt])
+  @@index([userId, createdAt])
+  @@map("user_event_batches")
+}
+
+// ============================================
+// MySQL 예시 (NCP에서 MySQL 사용 시)
+// ============================================
+
+// datasource db {
+//   provider = "mysql"
+//   url      = env("DATABASE_URL")
+// }
+// 
+// // MySQL은 대소문자 구분이 다르므로 주의
+// // @@map을 사용하여 테이블명 명시

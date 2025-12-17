@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./uxmason.global.css";
 import "./uxmason.C.css";
 import "./uxmason.T.css";
+// TODO: DB 준비 후 주석 해제
+// import EventLoggerProvider from "@/components/EventLoggerProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +31,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased isHighEnd isMidRange userIsMale`}
       >
+        {/* TODO: DB 준비 후 주석 해제 */}
+        {/* <EventLoggerProvider>{children}</EventLoggerProvider> */}
         {children}
       </body>
     </html>

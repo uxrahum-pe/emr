@@ -393,6 +393,7 @@
 
 .T035 {
     font-size: var(--font-19);
+    margin-left: var(--size-15);
 }
 .T036 {
     font-size: var(--font-14);
@@ -510,6 +511,14 @@
 .T056 {
     font-size: var(--font-24);
     font-weight: 200;
+    width: fit-content;
+}
+.T056.isLabel {
+    background-color: var(--color-black-7);
+    padding: .1em var(--size-3) 0 var(--size-3);
+}
+.T056.isLabel.isGreen {
+    background-color: var(--color-green-15);
 }
 .T056 .isMini {
     font-size: var(--font-15);
@@ -539,8 +548,89 @@
     background-color: var(--color-black-15);
     color: var(--color-white);
     width: fit-content;
-    padding: var(--size-2) var(--size-10);
+    padding: var(--size-2) var(--size-15);
     border-radius: var(--size-10);
     margin: var(--size-20) auto 0;
     font-weight: 800;
+}
+.T061 .isBox {
+    background-color: var(--color-black-75);
+    border-radius: var(--size-10);
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--size-30));
+    padding: var(--size-2) var(--size-10);
+    backdrop-filter: blur(var(--size-5));
+}
+.T061 .isBox.isGreen {
+    background-color: var(--color-green-75);
+    color: var(--color-white);
+}
+.T062 {
+    font-size: var(--font-19);
+    font-weight: 200;
+    font-style: italic;
+    opacity: .5;
+}
+.T063 {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--font-17);
+}
+.T064 {
+    font-size: var(--font-12);
+    font-weight: 800;
+    color: var(--color-black-50);
+    justify-items: flex-end;
+    font-style: italic;
+}
+.T065 {
+    font-size: var(--font-19);
+    line-height: var(--size-30);
+    height: var(--size-30);
+    padding:0;
+}
+.T065 .isMini {
+    font-size: var(--font-14);
+}
+.T066 {
+    font-size: var(--font-14);
+    color: var(--color-black-25);
+}
+.T067 {
+    color: var(--color-black-25);
+    width: 50%;
+    line-height: var(--size-30);
+}
+.T067 .isValue {
+    color: var(--color-black);
+}
+.T067 .isValue.isRed {
+    font-weight: 800;
+    color: var(--color-red);
+}
+.T067 .isValue.isBlue {
+    font-weight: 800;
+    color: var(--color-blue);
+}
+.T068 {
+    font-size: var(--font-14);
+    font-weight: 800;
+    color: var(--color-white);
+    width: fit-content;
+    white-space: nowrap;
+    line-height: 1;
+}
+.C152.isFolded .T068 {
+    display: none;
+}
+.T069 {
+    font-size: var(--font-12);
+    padding: var(--size-2) var(--size-10) 0;
+    background-color: var(--color-white-50);
+    border-radius: var(--size-8);
+    margin-bottom: var(--size-2);
+}
+.T070 {
+    font-weight:400;
 }

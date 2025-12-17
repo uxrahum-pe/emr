@@ -12,10 +12,12 @@ export default function ActionContentPanel({ actionId, actionLabel }: ActionCont
         <p className='T047'>{actionLabel}</p>
       </div>
       <div className='C105'>
-        <div style={{ padding: 'var(--size-40)', textAlign: 'center', color: 'var(--color-black-50)' }}>
-          <p>{actionLabel} 페이지</p>
-          <p style={{ marginTop: 'var(--size-10)', fontSize: 'var(--font-14)' }}>콘텐츠 준비 중...</p>
+        <div className='C106'>
+          <div className="C129 isSelected"><p className="T056 isLabel isGreen">3<span className="isMini">기</span></p><p className="T057"><span className="isGrey">2025.</span>09.23<span className="isGrey"> ~ </span><span className="isRed isBold">진행중</span></p><p className="T057"><span className="isUnit"> (경과: </span>365<span className="isUnit">일)</span></p><p className="T058">부산병원</p></div>
+          <div className="C129"><p className="T056 isLabel isGreen">2<span className="isMini">기</span></p><p className="T057"><span className="isGrey">2024.</span>09.23<span className="isGrey"> ~ 2025.</span>09.23</p><p className="T057"><span className="isUnit"> (경과: </span>365<span className="isUnit">일)</span></p><p className="T058">부산병원</p></div>
+          <div className="C129"><p className="T056 isLabel">1<span className="isMini">기</span></p><p className="T057"><span className="isGrey">2023.</span>09.23<span className="isGrey"> ~ 2024.</span>09.23</p><p className="T057"><span className="isUnit"> (기간: </span>365<span className="isUnit">일)</span></p><p className="T058">부산병원</p></div>
         </div>
+        <div className='C107'></div>
       </div>
     </div>
   )

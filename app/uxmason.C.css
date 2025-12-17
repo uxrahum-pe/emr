@@ -64,6 +64,17 @@
     height: var(--size-50);
     margin: var(--size-5) auto;
 }
+.C061 {
+    position: fixed;
+    padding: var(--size-5) var(--size-10);
+    background-color: var(--color-black-75);
+    color: var(--color-white);
+    border-radius: var(--size-8);
+    font-size: var(--font-12);
+    pointer-events: none;
+    z-index: 9999;
+    white-space: nowrap;
+}
 .C004.isSelected .C005 {
     filter: brightness(0) invert(1);
 }
@@ -781,7 +792,7 @@
 }
 .C070 {
     width: 100%;
-    padding: var(--size-15) var(--size-30);
+    padding: var(--size-15) var(--size-20);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -817,12 +828,6 @@
     left: 0;
     transition: transform 0.3s ease-in-out;
     background-color: var(--background-green);
-}
-.C073.isDoctor {
-    /* 원장용 추가 스타일 */
-}
-.C073.isEmployee {
-    /* 일반직원용 추가 스타일 */
 }
 .C074 {
     position: absolute;
@@ -1051,15 +1056,16 @@
     border-radius: var(--size-25);
     box-shadow: calc(-1 * var(--size-10)) 0 var(--size-60) var(--color-black-3);
     transition: .3s;
-    flex-wrap: wrap;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-content: flex-start;
     align-items: flex-start;
+    gap: 0;
     z-index: 1;
 }
 .C100:hover {
-    width: var(--size-350);
+    width: var(--size-520);
 }
 .C101 {
     display: flex;
@@ -1085,7 +1091,7 @@
     width: var(--size-40);
     height: var(--size-40);
     margin: 0 auto;
-    opacity: .5;
+    opacity: .25;
 }
 .C104 {
     height: var(--size-80);
@@ -1354,7 +1360,7 @@
 .C129 {
     width: 100%;
     height: fit-content;
-    padding: var(--size-10) var(--size-20);
+    padding: var(--size-15) var(--size-20);
     border-bottom: var(--size-2) solid var(--color-black-7);
     cursor: pointer;
     transition: .3s;
@@ -1380,25 +1386,39 @@
 }
 .C132 {
     padding: var(--size-10) var(--size-15);
-    background-color: var(--color-white-50);
+    background-color: var(--color-white-75);
     margin: var(--size-10) var(--size-20) var(--size-10) var(--size-40);
     border-radius: var(--size-20);
     box-shadow: 0 var(--size-10) var(--size-30) var(--color-black-3);
     width: fit-content;
 }
+.C132.isFull {
+    width: calc(100% - var(--size-60));
+}
+.C132.isFolded {
+    /* 접힌 상태 스타일 (필요시 추가) */
+}
+.C132.isOpened {
+    border: var(--size-2) solid var(--color-black-7);
+    box-shadow: none;
+}
+.C132.isOpened .C113 {
+    transform: rotate(180deg);
+}
 .C133 {
     display: flex;
     align-items: center;
+}
+.C132.isFull .C133 {
+    width: 100%;
 }
 .C134 {
     width: var(--size-40);
     height: var(--size-40);
     border-radius: var(--size-20);
     position: relative;
-    background-color: transparent;
-}
-.C135 {
-    
+    flex: 0 0 var(--size-40);
+    min-width: var(--size-40);
 }
 .C136 {
     padding: var(--size-10) var(--size-15);
@@ -1411,4 +1431,217 @@
 .C137 {
     margin: var(--size-10) 0;
     display: flex;
+}
+.C139 {
+    width: 100%;
+    border-top: var(--size-2) solid var(--color-black-3);
+    margin: var(--size-10) var(--size-20) 0;
+    padding-top: var(--size-10);
+    display: none;
+}
+.C100:hover .C139 {
+    display: block;
+}
+.C140 {
+    padding: var(--size-20) 0 0 0;
+}
+.C141:has(.C134.isIMaskMagenta.isSyringe) {
+    width: var(--size-40);
+    height: var(--size-40);
+    border-radius: var(--size-20);
+    position: relative;
+    flex: 0 0 var(--size-40);
+    background-color: var(--color-magenta-15);
+}
+.C142 {
+    margin-top:calc(-1 * var(--size-10));
+    backdrop-filter: blur(var(--size-10));
+    border-radius: var(--size-15);
+}
+.C143 {
+    margin: 0 0 var(--size-10) var(--size-10);
+    flex: 1 1 100%;
+    min-width: 0;
+}
+.C144 {
+    border-radius: var(--size-20);
+    margin-left: var(--size-5);
+    display: flex;
+    align-items: center;
+    gap: var(--size-4);
+    width: calc(100% - var(--size-10));
+    min-width: 0;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    display: flex;
+}
+.C144:first-of-type {
+    cursor: pointer;
+    transition: .3s;
+}
+.C144:first-of-type:hover {
+    opacity: .5;
+}
+.C145 {
+    position: absolute;
+    width: var(--size-30);
+    height: var(--size-30);
+    border-radius: var(--size-12);
+    background-color: var(--color-white-7);
+    backdrop-filter: blur(var(--size-5));
+    border: var(--size-2) solid var(--color-white-0);
+    box-shadow: 0 var(--size-5) var(--size-15) var(--color-black-15);
+    top: 0;
+}
+.C145 {
+    cursor: pointer;
+    transition: 0.3s;
+    display: none;
+}
+.C140:has(.C145) .C145 {
+    display: flow-root;
+}
+.C145:hover:not(.isDisabled) {
+    opacity: 0.8;
+}
+.C145.isChecked {
+    background: var(--color-blue);
+    box-shadow: 0 var(--size-5) var(--size-25) var(--color-mint-50);
+    border: var(--size-2) solid var(--color-white);
+}
+.C145.isChecked .C146 {
+    display: flow-root;
+    filter: brightness(0) invert(1);
+}
+.C145.isDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.C146 {
+    width: var(--size-20);
+    height: var(--size-20);
+    margin: var(--size-4) auto;
+    display:none;
+}
+.C147 {
+    border-top: var(--size-2) solid var(--color-black-3);
+    margin-top: var(--size-10);
+    display: none;
+    padding-left: var(--size-55);
+}
+.C132.isOpened .C147 {
+    display: flex;
+}
+.C148 {
+    width: 25%;
+    padding: var(--size-10) 0;
+}
+.C149 {
+    width: var(--size-65);
+    height: var(--size-30);
+    display: flex;
+    align-items: center;
+    margin-left: calc(-1 * var(--size-5));
+}
+.C150 {
+    width: var(--size-65);
+    height: var(--size-25);
+}
+.C151 {
+    border-top: var(--size-2) solid var(--color-black-3);
+    margin-left: var(--size-55);
+    padding: var(--size-10) 0;
+    display: none;
+    flex-wrap: wrap;
+}
+.C132.isOpened .C151 {
+    display: flex;
+}
+.C152 {
+    position: absolute;
+    background: linear-gradient(to right, var(--color-black-50), var(--color-black-75));
+    backdrop-filter: blur(var(--size-5));
+    right: calc(-1 * var(--size-65));
+    bottom: var(--size-20);
+    width: var(--size-180);
+    height: var(--size-60);
+    border-radius: var(--size-20);
+    box-shadow: 0 var(--size-10) var(--size-35) var(--color-black-50);
+    transform: translateX(var(--size-40));
+    opacity: 0;
+    transition: .3s;
+    z-index: 1;
+}
+.C152.isOpened {
+    transform: translateX(0);
+    opacity: 1;
+}
+.C152.isFolded {
+    width: var(--size-60);
+    right: calc(-1 * var(--size-40));
+}
+.C153 {
+    display: flex;
+    align-items: center;
+    gap: var(--size-10);
+    padding: var(--size-10);
+    height: 100%;
+    transition: .3s;
+    cursor: pointer;
+}
+.C153:hover {
+    opacity: 0.5;
+}
+.C154 {
+    width: var(--size-40);
+    height: var(--size-40);
+    filter: brightness(0) invert(1);
+}
+.C155 {
+    overflow: hidden;
+}
+.C156 {
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-green);
+    background: linear-gradient(to bottom, var(--color-black-3), var(--color-black-0) 10%);
+}
+.C157 {
+    border-radius: var(--size-15);
+    background-color: var(--color-white-50);
+    width: fit-content;
+    box-shadow: 0 var(--size-5) var(--size-20) var(--color-black-7);
+    justify-items: flex-end;
+    padding: var(--size-4) var(--size-15) var(--size-4) var(--size-10);
+    display: flex;
+    align-items: center;
+    gap: var(--size-4);
+    margin-right: var(--size-15);
+}
+.C158 {
+    width: var(--size-40);
+    height: var(--size-40);
+}
+.C159 {
+    padding: var(--size-20);
+}
+.C160 {
+    display: flex;
+}
+.C161 {
+    margin: var(--size-10) 0;
+    padding: var(--size-15) var(--size-20);
+    background-color: var(--color-white-50);
+    border-radius: var(--size-15);
+    box-shadow: 0 var(--size-5) var(--size-20) var(--color-black-7);
+    width: 75%;
+}
+.C162 {
+    margin-left: var(--size-10);
+}
+.C163 {
+    display: flex;
+    align-items: center;
+    gap: var(--size-4);
 }
