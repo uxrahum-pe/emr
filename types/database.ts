@@ -3,8 +3,13 @@
  * Prisma 스키마와 동기화하여 관리
  * 
  * 주의: 이 파일은 Prisma 스키마 변경 시 함께 업데이트해야 함
+ *
+ * TODO: DB 준비 후 주석 해제
  */
 
+// @ts-nocheck
+// DB 준비 후 아래 코드의 주석을 해제하세요
+/*
 import { Prisma } from '@prisma/client'
 
 // ============================================
@@ -42,6 +47,7 @@ export type FutureScheduleWithDetails = Prisma.FutureScheduleGetPayload<{
     patient: true
   }
 }>
+*/
 
 // ============================================
 // DB 스키마 정의 (참고용 - 실제는 Prisma 스키마 참조)
