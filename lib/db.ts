@@ -18,6 +18,8 @@ import { PrismaClient } from "@prisma/client";
  * Prisma 클라이언트 인스턴스
  * 개발: Vercel Postgres / Supabase
  * 프로덕션: NCP Cloud DB for PostgreSQL
+ *
+ * TODO: DB 연결 준비 후 실제 사용
  */
 export const prisma = new PrismaClient({
   log:
