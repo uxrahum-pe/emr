@@ -4,6 +4,7 @@ import { useState } from "react";
 import Tooltip from "@/components/Tooltip";
 import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
+import ScrollableContainer from "@/components/ScrollableContainer";
 import { PageHeaderProps } from "@/types/ui";
 
 export default function PageHeader({ title }: PageHeaderProps) {
@@ -68,39 +69,95 @@ export default function PageHeader({ title }: PageHeaderProps) {
           </div>
         </PopupSectionBox>
         <PopupSectionBox x={290} y={180} width={320} height={960}>
-          <div className="C180">
-            <p className="T076">지점 방문 고객 현황</p>
+          <div className="C186">
+            <div className="C184">
+              <div className="C185 styleSheet isIcon isCounseling"></div>
+            </div>
+            <p className="T077">상담</p>
+            <p className="T078">
+              진행중:<span className="isBig isGreen">5</span>명 / 대기:
+              <span className="isBig isWhite">1</span>명
+            </p>
           </div>
+          <ScrollableContainer></ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={630} y={180} width={320} height={470}>
-          <div className="C180">
-            <p className="T076">지점 방문 고객 현황</p>
+          <div className="C186">
+            <div className="C184">
+              <div className="C185 styleSheet isIcon isCounseling"></div>
+            </div>
+            <p className="T077">상담</p>
+            <p className="T078">
+              진행중:<span className="isBig isGreen">5</span>명 / 대기:
+              <span className="isBig isWhite">1</span>명
+            </p>
           </div>
+          <ScrollableContainer></ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={970} y={180} width={320} height={470}>
-          <div className="C180">
-            <p className="T076">지점 방문 고객 현황</p>
+          <div className="C186">
+            <div className="C184">
+              <div className="C185 styleSheet isIcon isCounseling"></div>
+            </div>
+            <p className="T077">상담</p>
+            <p className="T078">
+              진행중:<span className="isBig isGreen">5</span>명 / 대기:
+              <span className="isBig isWhite">1</span>명
+            </p>
           </div>
+          <ScrollableContainer></ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={1310} y={180} width={320} height={470}>
-          <div className="C180">
-            <p className="T076">지점 방문 고객 현황</p>
+          <div className="C186">
+            <div className="C184">
+              <div className="C185 styleSheet isIcon isCounseling"></div>
+            </div>
+            <p className="T077">상담</p>
+            <p className="T078">
+              진행중:<span className="isBig isGreen">5</span>명 / 대기:
+              <span className="isBig isWhite">1</span>명
+            </p>
           </div>
+          <ScrollableContainer></ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={630} y={670} width={320} height={470}>
-          <div className="C180">
-            <p className="T076">지점 방문 고객 현황</p>
+          <div className="C186">
+            <div className="C184">
+              <div className="C185 styleSheet isIcon isCounseling"></div>
+            </div>
+            <p className="T077">상담</p>
+            <p className="T078">
+              진행중:<span className="isBig isGreen">5</span>명 / 대기:
+              <span className="isBig isWhite">1</span>명
+            </p>
           </div>
+          <ScrollableContainer></ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={970} y={670} width={320} height={470}>
-          <div className="C180">
-            <p className="T076">지점 방문 고객 현황</p>
+          <div className="C186">
+            <div className="C184">
+              <div className="C185 styleSheet isIcon isCounseling"></div>
+            </div>
+            <p className="T077">상담</p>
+            <p className="T078">
+              진행중:<span className="isBig isGreen">5</span>명 / 대기:
+              <span className="isBig isWhite">1</span>명
+            </p>
           </div>
+          <ScrollableContainer></ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={1310} y={670} width={320} height={470}>
-          <div className="C180">
-            <p className="T076">지점 방문 고객 현황</p>
+          <div className="C186">
+            <div className="C184">
+              <div className="C185 styleSheet isIcon isCounseling"></div>
+            </div>
+            <p className="T077">상담</p>
+            <p className="T078">
+              진행중:<span className="isBig isGreen">5</span>명 / 대기:
+              <span className="isBig isWhite">1</span>명
+            </p>
           </div>
+          <ScrollableContainer></ScrollableContainer>
         </PopupSectionBox>
       </Popup>
     </>

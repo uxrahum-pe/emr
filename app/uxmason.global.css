@@ -753,6 +753,9 @@ span.isLink {
   background-size: var(--size-1500) var(--size-800);
 }
 
+.isWhite {
+  color: var(--color-white);
+}
 .isBlack {
   color: var(--color-black);
 }

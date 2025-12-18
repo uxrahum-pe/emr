@@ -672,5 +672,15 @@
 }
 .T076 {
     font-size: var(--font-27);
-    color: var(--color-white);
+}
+.T077 {
+    font-size: var(--font-21);
+    margin-left: var(--size-10);
+}
+p.T078 {
+    margin-left: auto;
+    color: var(--color-white-25);
+}
+.T078 .isBig {
+    font-size: var(--font-21);
 }
