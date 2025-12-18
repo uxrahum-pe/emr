@@ -568,22 +568,17 @@ export default function WeeklyCalendar({
       </div>
       <div className="C058">
         <Popup
-          width={410}
-          height={550}
-          offsetX={15}
-          offsetY={15}
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
-          popupContent={
-            <MonthlyCalendar
+        >
+          <MonthlyCalendar
             selectedDate={selectedDate} 
             onDateSelect={(date) => {
                 setSelectedDate(date);
             }}
             onClose={() => setIsPopupOpen(false)}
-            />
-          }
-        >
+          />
+        </Popup>
           <div className="C059" onClick={() => setIsPopupOpen(true)}>
             <p className="T030">
               <span className="isUnit">선택 날짜:</span>{" "}
