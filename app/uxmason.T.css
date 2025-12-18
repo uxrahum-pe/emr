@@ -584,6 +584,11 @@
     justify-items: flex-end;
     font-style: italic;
 }
+@container (max-width: var(--size-400)) {
+    .C132 .T064:nth-of-type(3) {
+        display: none;
+    }
+}
 .T065 {
     font-size: var(--font-19);
     line-height: var(--size-30);
@@ -654,4 +659,18 @@
 }
 .T073 {
     font-size: var(--font-14);
+}
+.T074 {
+    font-size: var(--font-14);
+    line-height: var(--size-30);
+    height: var(--size-30);
+    width: var(--size-100);
+    margin-left: var(--size-20);
+}
+.T075 {
+    width: 100%;
+}
+.T076 {
+    font-size: var(--font-27);
+    color: var(--color-white);
 }

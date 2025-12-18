@@ -28,7 +28,7 @@ export default function Aside({
   const navigateToPage = (pageId: string, content: ReactNode) => {
     if (isAnimating) return;
     setIsAnimating(true);
-
+    
     // 동일 분류의 페이지가 이미 열려있는지 확인
     // pageId 형식: "employee-kms002" -> 실제 id: "employee-kms002-1234567890"
     // pageId로 시작하는 페이지를 찾음
@@ -36,13 +36,13 @@ export default function Aside({
       // page.id가 pageId로 시작하는지 확인 (타임스탬프 제외)
       return page.id.startsWith(`${pageId}-`);
     });
-
+    
     if (existingPageIndex !== -1) {
       // 동일 분류의 페이지가 이미 열려있으면 해당 페이지로 이동하고 내용만 업데이트
       setPages((prev) => {
         const newPages = [...prev];
-        newPages[existingPageIndex] = {
-          id: newPages[existingPageIndex].id,
+        newPages[existingPageIndex] = { 
+          id: newPages[existingPageIndex].id, 
           content,
         };
         return newPages;
@@ -103,17 +103,17 @@ export default function Aside({
   );
 }
 
-function AsideInner({
-  mainContent,
-  pages,
-  setPages,
-  currentIndex,
-  setCurrentIndex,
-  isAnimating,
-  setIsAnimating,
+function AsideInner({ 
+  mainContent, 
+  pages, 
+  setPages, 
+  currentIndex, 
+  setCurrentIndex, 
+  isAnimating, 
+  setIsAnimating, 
   goBack,
   resetToMain,
-}: {
+}: { 
   mainContent?: ReactNode | (() => ReactNode);
   pages: AsidePage[];
   setPages: React.Dispatch<React.SetStateAction<AsidePage[]>>;
@@ -137,7 +137,7 @@ function AsideInner({
           </p>
           <div className="C071">
             <div className="C072 styleSheet isIcon isWrite"></div>
-          </div>
+        </div>
         </div>
         <div className="C074"></div>
         <div className="C075">{content}</div>
@@ -165,35 +165,35 @@ function AsideInner({
           // page.content가 React 요소인지 확인하고, SlidePage 계열 컴포넌트인지 체크
           const isSlidePageComponent =
             React.isValidElement(page.content) &&
-            (page.content.type === SlidePage ||
+            (page.content.type === SlidePage || 
               (typeof page.content.type === "function" &&
                 (page.content.type.name === "DoctorSlidePage" ||
                   page.content.type.name === "EmployeeSlidePage" ||
                   page.content.type.name === "CounselorSlidePage")));
-
+          
           if (isSlidePageComponent) {
             // SlidePage 계열 컴포넌트면 props를 전달하여 clone
             return React.cloneElement(
               page.content as React.ReactElement<any>,
               {
-                key: page.id,
-                transform: `translateX(${offset * 100}%)`,
-                zIndex: pages.length - index,
-                onGoBack: goBack,
+              key: page.id,
+              transform: `translateX(${offset * 100}%)`,
+              zIndex: pages.length - index,
+              onGoBack: goBack,
                 showBackButton: index > 0,
               } as any
             );
           } else {
             // 일반 content면 SlidePage로 감싸기
-            return (
+          return (
               <SlidePage
-                key={page.id}
+              key={page.id}
                 transform={`translateX(${offset * 100}%)`}
                 zIndex={pages.length - index}
                 onGoBack={goBack}
                 showBackButton={index > 0}
-              >
-                {page.content}
+            >
+              {page.content}
               </SlidePage>
             );
           }

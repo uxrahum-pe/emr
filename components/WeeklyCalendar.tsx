@@ -43,7 +43,7 @@ export default function WeeklyCalendar({
 
     const weekDays = [];
     const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
-
+    
     for (let i = 0; i < 7; i++) {
       const date = new Date(startDate);
       date.setDate(startDate.getDate() + i);
@@ -55,7 +55,7 @@ export default function WeeklyCalendar({
         isSelected: false, // 선택 로직은 필요시 추가
       });
     }
-
+    
     return weekDays;
   }, []);
 
@@ -67,34 +67,34 @@ export default function WeeklyCalendar({
 
       const allElements = container.querySelectorAll(".C055");
       const targetDateStr = date.toDateString();
-
-      // 해당 날짜를 포함하는 요소 찾기
+    
+    // 해당 날짜를 포함하는 요소 찾기
       let targetElementIndex = -1;
-      allElements.forEach((element, index) => {
+    allElements.forEach((element, index) => {
         const weekIndex = Math.floor(index / 7);
         const dayIndex = index % 7;
         const weekDays = generateWeekDays(weekIndex - 25 + weekOffset);
         const dayData = weekDays[dayIndex];
-
-        if (dayData && dayData.date.toDateString() === targetDateStr) {
+      
+      if (dayData && dayData.date.toDateString() === targetDateStr) {
           targetElementIndex = index;
-        }
+      }
       });
-
-      if (targetElementIndex >= 0) {
+    
+    if (targetElementIndex >= 0) {
         const element = allElements[targetElementIndex] as HTMLElement;
         const containerRect = container.getBoundingClientRect();
         const elementRect = element.getBoundingClientRect();
         const elementCenter = elementRect.left + elementRect.width / 2;
         const containerCenter = containerRect.left + containerRect.width / 2;
         const scrollOffset = elementCenter - containerCenter;
-
-        if (smooth) {
-          container.scrollTo({
-            left: container.scrollLeft + scrollOffset,
+      
+      if (smooth) {
+        container.scrollTo({
+          left: container.scrollLeft + scrollOffset,
             behavior: "smooth",
           });
-        } else {
+      } else {
           container.scrollLeft = container.scrollLeft + scrollOffset;
         }
       }
@@ -139,7 +139,7 @@ export default function WeeklyCalendar({
     const elementIndex = weekIndex * 7 + dayIndex;
     const weekDays = generateWeekDays(weekIndex - 25 + weekOffset);
     const day = weekDays[dayIndex];
-
+    
     if (selectedDayIndex === elementIndex) {
       // 같은 날짜 클릭 시 선택 해제
       setSelectedDayIndex(null);
@@ -150,7 +150,7 @@ export default function WeeklyCalendar({
       if (day) {
         setSelectedDate(day.date);
       }
-
+      
       // 선택된 날짜를 가운데로 스크롤 (애니메이션 적용)
       if (day) {
         setTimeout(() => {
@@ -182,13 +182,13 @@ export default function WeeklyCalendar({
   useEffect(() => {
     const container = calendarScrollRef.current;
     if (!container) return;
-
+    
     const centerOnToday = () => {
       const allElements = container.querySelectorAll(".C055");
       if (allElements.length === 0) return; // 요소가 없으면 나중에 다시 시도
 
       const today = new Date();
-
+      
       // 오늘 날짜를 포함하는 요소 찾기
       let todayElementIndex = -1;
       allElements.forEach((element, index) => {
@@ -196,12 +196,12 @@ export default function WeeklyCalendar({
         const dayIndex = index % 7;
         const weekDays = generateWeekDays(weekIndex - 25 + weekOffset);
         const dayData = weekDays[dayIndex];
-
+        
         if (dayData && dayData.date.toDateString() === today.toDateString()) {
           todayElementIndex = index;
         }
       });
-
+      
       if (todayElementIndex >= 0) {
         const element = allElements[todayElementIndex] as HTMLElement;
         const containerRect = container.getBoundingClientRect();
@@ -210,7 +210,7 @@ export default function WeeklyCalendar({
         const containerCenter = containerRect.left + containerRect.width / 2;
         const scrollOffset = elementCenter - containerCenter;
         container.scrollLeft = container.scrollLeft + scrollOffset;
-
+        
         // 오늘 날짜 선택
         setSelectedDayIndex(todayElementIndex);
         setSelectedDate(
@@ -223,11 +223,11 @@ export default function WeeklyCalendar({
         const clientWidth = container.clientWidth;
         if (scrollWidth > clientWidth) {
           container.scrollLeft = (scrollWidth - clientWidth) / 2;
-        }
+      }
         return false; // 실패
       }
     };
-
+    
     // DOM이 완전히 렌더링된 후 실행 (여러 번 시도)
     const timeouts: NodeJS.Timeout[] = [];
     timeouts.push(
@@ -259,7 +259,7 @@ export default function WeeklyCalendar({
     let resizeTimeoutId: ReturnType<typeof setTimeout> | null = null;
     let lastUpdateTime = 0;
     const throttleDelay = 16; // ~60fps
-
+    
     // viewport 계산 결과 캐시
     let cachedFourDaysDistance: number | null = null;
     const calculateFourDaysDistance = () => {
@@ -278,7 +278,7 @@ export default function WeeklyCalendar({
       const currentThrottleDelay = isResizingRef.current
         ? throttleDelay * 2
         : throttleDelay;
-
+      
       // Throttle: 리사이즈 중에는 더 긴 간격으로 업데이트
       if (timestamp - lastUpdateTime < currentThrottleDelay) {
         rafId = requestAnimationFrame((t) =>
@@ -292,24 +292,24 @@ export default function WeeklyCalendar({
       const containerCenter = containerRect.left + containerRect.width / 2;
       const containerLeft = containerRect.left;
       const containerRight = containerRect.right;
-
+      
       const allElements = container.querySelectorAll(".C055");
       const newOpacities: number[] = new Array(allElements.length).fill(0);
       let closestElement: HTMLElement | null = null;
       let closestDistance = Infinity;
-
+      
       // 중앙에서 4일 떨어진 거리 계산 - CSS 변수 기반으로 계산 (캐시 사용)
       if (cachedFourDaysDistance === null) {
         cachedFourDaysDistance = calculateFourDaysDistance();
       }
       const fourDaysDistance = cachedFourDaysDistance;
-
+      
       // 가시 영역 밖 요소는 계산 생략 (성능 최적화)
       const viewportMargin = fourDaysDistance * 1.5; // 여유 공간 추가
-
+      
       allElements.forEach((element, index) => {
         const elementRect = element.getBoundingClientRect();
-
+        
         // 가시 영역 밖 요소는 opacity 0으로 설정하고 건너뛰기
         if (
           elementRect.right < containerLeft - viewportMargin ||
@@ -318,12 +318,12 @@ export default function WeeklyCalendar({
           newOpacities[index] = 0;
           return;
         }
-
+        
         const elementCenter = elementRect.left + elementRect.width / 2;
-
+        
         // 중앙에서의 거리 계산 (픽셀 단위)
         const distance = Math.abs(elementCenter - containerCenter);
-
+        
         // 가장 가까운 요소 찾기 (날짜 업데이트가 필요한 경우만, 리사이즈 중에는 건너뛰기)
         if (
           !skipDateUpdate &&
@@ -333,15 +333,15 @@ export default function WeeklyCalendar({
           closestDistance = distance;
           closestElement = element as HTMLElement;
         }
-
+        
         // 거리에 따라 opacity 계산 (0 ~ 1)
         const opacity = Math.max(0, 1 - distance / fourDaysDistance);
         newOpacities[index] = opacity;
       });
-
+      
       setOpacities(newOpacities);
       setIsInitialized(true);
-
+      
       // 중앙에 가장 가까운 요소의 날짜 정보 추출 (스크롤 시에만, 리사이즈 중에는 건너뛰기)
       if (!skipDateUpdate && !isResizingRef.current && closestElement) {
         // 요소의 인덱스를 직접 계산
@@ -369,7 +369,7 @@ export default function WeeklyCalendar({
       if (!isResizingRef.current) {
         savedScrollRatioRef.current = null;
       }
-
+      
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame((t) => updateOpacities(t, false));
     };
@@ -386,17 +386,17 @@ export default function WeeklyCalendar({
           savedScrollRatioRef.current = 0;
         }
       }
-
+      
       // 기존 타이머 취소
       if (resizeTimeoutId) {
         clearTimeout(resizeTimeoutId);
       }
-
+      
       // 리사이즈 완료 후 처리 (debounce 시간 증가)
       resizeTimeoutId = setTimeout(() => {
         // viewport 계산 캐시 초기화 (리사이즈 후 재계산 필요)
         cachedFourDaysDistance = null;
-
+        
         // 스크롤 위치 복원
         if (savedScrollRatioRef.current !== null) {
           const maxScroll = container.scrollWidth - container.clientWidth;
@@ -406,10 +406,10 @@ export default function WeeklyCalendar({
             container.scrollLeft = 0;
           }
         }
-
+        
         // 리사이즈 완료 플래그 해제 (opacity 업데이트 전에 해제하여 즉시 업데이트 가능하도록)
         isResizingRef.current = false;
-
+        
         // 리사이즈 완료 후 opacity 업데이트 (한 번만)
         requestAnimationFrame((t) => {
           updateOpacities(t, true);
@@ -502,7 +502,7 @@ export default function WeeklyCalendar({
           if (scrollLeft + clientWidth >= scrollWidth - threshold) {
             setWeekOffset((prev) => prev + 5);
           }
-
+          
           // 왼쪽 끝에 가까우면 이전 주 추가
           if (scrollLeft <= threshold) {
             const prevScrollWidth = container.scrollWidth;
@@ -576,11 +576,11 @@ export default function WeeklyCalendar({
           onClose={() => setIsPopupOpen(false)}
           popupContent={
             <MonthlyCalendar
-              selectedDate={selectedDate}
-              onDateSelect={(date) => {
+            selectedDate={selectedDate} 
+            onDateSelect={(date) => {
                 setSelectedDate(date);
-              }}
-              onClose={() => setIsPopupOpen(false)}
+            }}
+            onClose={() => setIsPopupOpen(false)}
             />
           }
         >

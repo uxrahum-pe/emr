@@ -48,6 +48,7 @@ function PackageItem({
   stats,
   payment,
   className = "",
+  isAsideMode = false,
 }: PackageItemProps) {
   const [isFolded, setIsFolded] = useState(defaultFolded);
 

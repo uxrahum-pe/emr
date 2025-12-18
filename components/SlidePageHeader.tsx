@@ -54,7 +54,7 @@ export default function SlidePageHeader({
         </div>
       </div>
       <div className="C094">
-        {showToggleSwitch && (
+      {showToggleSwitch && (
           <ToggleSwitch
             onLabel="기록지 보기"
             offLabel="기록지 닫음"
@@ -68,8 +68,8 @@ export default function SlidePageHeader({
         {!customerName && (
           <div className="C091 isFitted isMessage">
             <div className="C092 styleSheet isIcon isRelay"></div>
-          </div>
-        )}
+        </div>
+      )}
       </div>
     </div>
   );

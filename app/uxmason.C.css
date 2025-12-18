@@ -824,7 +824,7 @@
     height: var(--size-40);
     filter: brightness(0) invert(1);
 }
-.C073 {
+.C073 {   
     background: linear-gradient(to bottom, var(--color-black-3), var(--color-black-0) 10%);
     width: 100%;
     height: 100%;
@@ -1403,7 +1403,11 @@
     margin: var(--size-10) var(--size-20) var(--size-10) var(--size-40);
     border-radius: var(--size-20);
     box-shadow: 0 var(--size-10) var(--size-30) var(--color-black-3);
-    width: fit-content;
+    backdrop-filter: blur(var(--size-5));
+    container-type: inline-size;
+}
+.C132.isAsideMode {
+    margin: 0 var(--size-20) 0 var(--size-110);
 }
 .C132.isFull {
     width: calc(100% - var(--size-60));
@@ -1457,6 +1461,9 @@
 }
 .C140 {
     padding: var(--size-20) 0 0 0;
+}
+.C140.isFitted {
+    padding: 0;
 }
 .C141:has(.C134.isIMaskMagenta.isSyringe) {
     width: var(--size-40);
@@ -1543,6 +1550,11 @@
     display: none;
     padding-left: var(--size-55);
 }
+.C175 .C147 {
+    display: flex;
+    padding: var(--size-10) 0 var(--size-10) var(--size-55);
+    margin-top: 0;
+}
 .C132.isOpened .C147 {
     display: flex;
 }
@@ -1569,6 +1581,9 @@
     flex-wrap: wrap;
 }
 .C132.isOpened .C151 {
+    display: flex;
+}
+.C175 .C151 {
     display: flex;
 }
 .C152 {
@@ -1749,4 +1764,156 @@
 .C171 {
     display: flex;
     align-items: center;
+}
+.C172 {
+    width: 100%;
+    height: fit-content;
+    padding-bottom: var(--size-50);
+    left: 0;
+}
+.C173 {
+    display: flex;
+    align-items: center;
+}
+.C174 {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-black-3);
+}
+.C175 {
+    padding: var(--size-15);
+    background-color: var(--color-white-50);
+    margin: 0;
+    border-radius: var(--size-20);
+    box-shadow: 0 calc(-1 * var(--size-10)) var(--size-30) var(--color-black-7);
+    width: calc(100% - var(--size-110) - var(--size-20));
+    backdrop-filter: blur(var(--size-5));
+    position: absolute;
+    left: var(--size-110);
+    min-width: 0;
+    min-height: var(--size-70);
+}
+.C175:hover {
+    z-index: 1;
+}
+.C175 .C144:first-of-type {
+    cursor: auto;
+}
+.C175 .C144:first-of-type:hover {
+    opacity: 1;
+}
+
+.C175.isDuration1h .C143 {
+    margin: 0 0 0 var(--size-10);
+}
+.C175.isDuration1h .C142 {
+    margin-top: 0;
+}
+.C175.isDuration1h .C141,
+.C175.isDuration1h .T042,
+.C175.isDuration1h .T065,
+.C175.isDuration1h .C151 {
+    display: none;
+}
+
+.C175.isDuration1h30m .C151,
+.C175.isDuration2h .C151,
+.C175.isDuration2h30m .C151 {
+    display: none;
+}
+
+.C175.isDuration3h .T075:nth-of-type(3) {
+    display: none;
+}
+
+.C175.isDuration1h30m .C147,
+.C175.isDuration1h .C147 {
+    display: none;
+}
+.C176 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-black-75);
+    opacity: 0;
+    z-index: 1;
+}
+.C176.isOpened {
+    opacity: 1;
+}
+.isMidRange .C176 {
+    backdrop-filter: blur(var(--size-20));
+}
+.isHighEnd .C176 {
+    transition: .3s;
+}
+.C177 {
+    width: 100%;
+    height: var(--size-1200);
+    position: fixed;
+    top: var(--size-150);
+    left: 0;
+    opacity: 0;
+    transition: .3s;
+}
+.C176.isOpened .C177 {
+    opacity: 1;
+    top:0;
+}
+.isHighEnd .C177 {
+    transition: .3s;
+}
+.C178 {
+    position: relative;
+    border-radius: var(--size-30);
+    background: var(--color-white-3);
+    box-shadow: 0 var(--size-10) var(--size-40) 0 var(--color-black-25);
+    width: fit-content;
+}
+.C179 {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--size-30);
+    background: linear-gradient(45deg, var(--color-white-25) 0%, var(--color-white-7) 25%, var(--color-white-25) 50%, var(--color-white-7) 75%, var(--color-white-25) 100%);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    padding: var(--size-2);
+}
+.C179.isDepth1 {
+    border-radius: var(--size-20);
+}
+.C180 {
+    display: flex;
+    padding: var(--size-20);
+    align-items: center;
+    margin-left: var(--size-20);
+}
+.C181 {
+    width: var(--size-60);
+    height: var(--size-60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    border-radius: var(--size-20);
+    background: var(--color-white-3);
+    box-shadow: 0 var(--size-10) var(--size-40) 0 var(--color-black-25);
+    cursor: pointer;
+    transition: .3s;
+}
+.C181:hover {
+    opacity: .5;
+}
+.C182 {
+    width: var(--size-50);
+    height: var(--size-50);
+    filter: brightness(0) invert(1);
 }

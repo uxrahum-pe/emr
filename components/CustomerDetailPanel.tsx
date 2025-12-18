@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import CustomerInfoPanel from "@/components/CustomerInfoPanel";
 import VisitLogPanel from "@/components/VisitLogPanel";
 import QuickActionsPanel from "@/components/QuickActionsPanel";
 import ActionContentPanel from "@/components/ActionContentPanel";
+import { modalStack } from "@/lib/modal-stack";
 
 interface CustomerDetailPanelProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ export default function CustomerDetailPanel({
 }: CustomerDetailPanelProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
+  const closeHandlerRef = useRef<(() => void) | null>(null);
 
   // Selected action state
   const [selectedAction, setSelectedAction] = useState<string>("report");
@@ -75,20 +77,35 @@ export default function CustomerDetailPanel({
     if (isOpen) {
       // 컴포넌트가 나타나면 바로 렌더링
       setIsVisible(true);
+      // 모달 스택에 추가
+      closeHandlerRef.current = onClose;
+      modalStack.push(onClose);
       // 브라우저가 초기 상태를 인식한 후 애니메이션 트리거
       const timer = setTimeout(() => {
         setIsOpened(true);
       }, 10);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        // 모달 스택에서 제거
+        if (closeHandlerRef.current) {
+          modalStack.remove(closeHandlerRef.current);
+          closeHandlerRef.current = null;
+        }
+      };
     } else {
       // 닫을 때: isOpened 제거 후 0.3초 뒤 컴포넌트 제거
       setIsOpened(false);
+      // 모달 스택에서 제거
+      if (closeHandlerRef.current) {
+        modalStack.remove(closeHandlerRef.current);
+        closeHandlerRef.current = null;
+      }
       const timer = setTimeout(() => {
         setIsVisible(false);
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   // 모달을 열 때마다 기본 액션을 '내원일지'로 리셋
   useEffect(() => {
