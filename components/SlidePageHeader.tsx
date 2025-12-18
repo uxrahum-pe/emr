@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import ToggleSwitch from './ToggleSwitch'
+import { useState } from "react";
+import ToggleSwitch from "./ToggleSwitch";
 
 interface SlidePageHeaderProps {
-  onGoBack: () => void
-  title: string
-  employeeName?: string
-  employeeRole?: string
-  customerName?: string
-  customerId?: string
-  showToggleSwitch?: boolean
+  onGoBack: () => void;
+  title: string;
+  employeeName?: string;
+  employeeRole?: string;
+  customerName?: string;
+  customerId?: string;
+  showToggleSwitch?: boolean;
 }
 
 /**
@@ -20,51 +20,57 @@ interface SlidePageHeaderProps {
 export default function SlidePageHeader({
   onGoBack,
   title,
-  employeeName = '',
-  employeeRole = '',
-  customerName = '',
-  customerId = '',
-  showToggleSwitch = true
+  employeeName = "",
+  employeeRole = "",
+  customerName = "",
+  customerId = "",
+  showToggleSwitch = true,
 }: SlidePageHeaderProps) {
-  const [showRecord, setShowRecord] = useState(false)
+  const [showRecord, setShowRecord] = useState(false);
 
   return (
-    <div className='C090'>
-      <div className='C091' onClick={onGoBack} style={{ cursor: 'pointer' }}>
-        <div className='C092 styleSheet isIcon isArrow isLeft'></div>
-        <p className='T044'>뒤로</p>
+    <div className="C090">
+      <div className="C091" onClick={onGoBack}>
+        <div className="C092 styleSheet isIcon isArrow isLeft"></div>
+        <p className="T044">뒤로</p>
       </div>
-      <div className='C093'>
-        <p className='T045'>{title}</p>
-        <div className='C095'>
-          {employeeName && <div className='C040'></div>}
-          <p className='T046'>
+      <div className="C093">
+        <p className="T045">{title}</p>
+        <div className="C095">
+          {employeeName && <div className="C040"></div>}
+          <p className="T046">
             {customerName ? (
               <>
-                {customerName} {customerId && <span className='isUnit'>{customerId}</span>}
+                {customerName}{" "}
+                {customerId && <span className="isUnit">{customerId}</span>}
               </>
             ) : (
               <>
-                {employeeName} {employeeRole && <span className='isUnit'>{employeeRole}</span>}
+                {employeeName}{" "}
+                {employeeRole && <span className="isUnit">{employeeRole}</span>}
               </>
             )}
           </p>
         </div>
       </div>
-      {showToggleSwitch && (
-        <div className='C094'>
+      <div className="C094">
+        {showToggleSwitch && (
           <ToggleSwitch
-            onLabel='기록지 보기'
-            offLabel='기록지 닫음'
+            onLabel="기록지 보기"
+            offLabel="기록지 닫음"
             value={showRecord}
-            textSize='mini'
+            textSize="mini"
             onChange={(isOn) => {
-              setShowRecord(isOn)
+              setShowRecord(isOn);
             }}
           />
-        </div>
-      )}
+        )}
+        {!customerName && (
+          <div className="C091 isFitted isMessage">
+            <div className="C092 styleSheet isIcon isRelay"></div>
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 }
-

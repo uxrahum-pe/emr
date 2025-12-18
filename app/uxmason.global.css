@@ -517,6 +517,10 @@ span.isLink {
   background-position-x: calc(-1 * var(--size-240));
   background-position-y: calc(-1 * var(--size-560));
 }
+.isIcon.isMegaphone {
+  background-position-x: calc(-1 * var(--size-240));
+  background-position-y: calc(-1 * var(--size-640));
+}
 .isIcon.isBarcode {
   background-position-x: calc(-1 * var(--size-240));
   background-position-y: calc(-1 * var(--size-680));
@@ -540,6 +544,10 @@ span.isLink {
 .isIcon.isNote {
   background-position-x: calc(-1 * var(--size-280));
   background-position-y: calc(-1 * var(--size-680));
+}
+.isIcon.isRelay {
+  background-position-x: calc(-1 * var(--size-280));
+  background-position-y: calc(-1 * var(--size-720));
 }
 .isIcon.isHourglass {
   background-position-x: calc(-1 * var(--size-320));

@@ -447,7 +447,7 @@
     font-size: var(--font-14);
 }
 .T045 {
-    font-size: var(--font-21);
+    font-size: var(--font-19);
     text-align: center;
 }
 .T046 {
@@ -633,4 +633,25 @@
 }
 .T070 {
     font-weight:400;
+}
+.T071 {
+    font-size: var(--font-12);
+    color: var(--color-black-50);
+    font-weight: 800;
+    margin-bottom: var(--size-10);
+    margin-left: var(--size-10);
+}
+.C159.isMine .T070 {
+    font-weight: 700;
+}
+.C159.isMine .T071 {
+    margin-left: 0;
+    margin-right: var(--size-10);
+}
+.T072 {
+    font-weight: 800;
+    padding-right: var(--size-10);
+}
+.T073 {
+    font-size: var(--font-14);
 }
