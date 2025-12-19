@@ -34,7 +34,6 @@ export function useFormWithValidation<TSchema extends z.ZodType<any, any, any>>(
   schema: TSchema,
   options?: Omit<UseFormProps<z.infer<TSchema>>, "resolver">
 ) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return useForm<z.infer<TSchema>>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(schema as any) as any,
