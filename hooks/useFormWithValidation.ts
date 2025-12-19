@@ -31,10 +31,7 @@ import { z } from "zod";
  */
 export function useFormWithValidation<
   TSchema extends z.ZodType<unknown, unknown, unknown>
->(
-  schema: TSchema,
-  options?: Omit<UseFormProps<z.infer<TSchema>>, "resolver">
-) {
+>(schema: TSchema, options?: Omit<UseFormProps<z.infer<TSchema>>, "resolver">) {
   return useForm({
     resolver: zodResolver(schema),
     mode: "onChange", // 기본값: onChange 모드
