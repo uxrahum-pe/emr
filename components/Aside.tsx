@@ -55,19 +55,26 @@ function Aside({ mainContent, onNavigate, children }: AsideProps) {
 
   // onNavigate 콜백을 Zustand 스토어의 currentPageId와 동기화 (선택적)
   useEffect(() => {
-    if (onNavigate) {
-      const unsubscribe = useAsideStore.subscribe(
-        (state) => state.currentPageId,
-        (currentPageId) => {
-          if (currentPageId) {
-            onNavigate(currentPageId);
-          } else {
-            onNavigate("main");
-          }
+    if (!onNavigate) return;
+
+    let prevPageId: string | null = null;
+
+    // Zustand의 subscribe는 전체 상태 변경을 감지
+    // currentPageId만 변경되었을 때만 호출하도록 최적화
+    const unsubscribe = useAsideStore.subscribe((state) => {
+      const currentPageId = state.currentPageId;
+      // 이전 값과 다를 때만 호출
+      if (currentPageId !== prevPageId) {
+        prevPageId = currentPageId;
+        if (currentPageId) {
+          onNavigate(currentPageId);
+        } else {
+          onNavigate("main");
         }
-      );
-      return unsubscribe;
-    }
+      }
+    });
+
+    return unsubscribe;
   }, [onNavigate]);
 
   return (
