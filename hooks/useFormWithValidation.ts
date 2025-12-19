@@ -29,11 +29,15 @@ import { z } from "zod";
  * });
  * ```
  */
-export function useFormWithValidation<
-  TSchema extends z.ZodType<unknown, unknown, unknown>
->(schema: TSchema, options?: Omit<UseFormProps<z.infer<TSchema>>, "resolver">) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function useFormWithValidation<TSchema extends z.ZodType<any, any, any>>(
+  schema: TSchema,
+  options?: Omit<UseFormProps<z.infer<TSchema>>, "resolver">
+) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return useForm<z.infer<TSchema>>({
-    resolver: zodResolver(schema as z.ZodType<z.infer<TSchema>>) as any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(schema as any) as any,
     mode: "onChange", // 기본값: onChange 모드
     ...options,
   });
