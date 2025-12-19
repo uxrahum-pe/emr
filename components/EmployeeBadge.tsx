@@ -2,9 +2,7 @@
 
 import Tooltip from "@/components/Tooltip";
 import { useAside } from "@/components/AsideContext";
-import DoctorSlidePage from "@/components/DoctorSlidePage";
-import EmployeeSlidePage from "@/components/EmployeeSlidePage";
-import CounselorSlidePage from "@/components/CounselorSlidePage";
+import { getRoleInfo } from "@/lib/utils/role";
 
 interface EmployeeBadgeProps {
   /** 직원 이름 */
@@ -57,35 +55,15 @@ export default function EmployeeBadge({
     e.preventDefault();
     e.stopPropagation();
 
-    // 역할에 따라 적절한 컴포넌트 선택
-    let SlidePageComponent = EmployeeSlidePage;
-    if (role.includes("원장")) {
-      SlidePageComponent = DoctorSlidePage;
-    } else if (role.includes("상담사")) {
-      SlidePageComponent = CounselorSlidePage;
-    }
-
-    // 역할 카테고리 결정
-    let roleCategory = "employee";
-    if (role.includes("원장")) {
-      roleCategory = "doctor";
-    } else if (role.includes("상담사")) {
-      roleCategory = "counselor";
-    }
-
-    // 역할에 따라 title 결정
-    let pageTitle = "업무 일정 보기";
-    if (role.includes("원장")) {
-      pageTitle = "원장 일정 보기";
-    } else if (role.includes("상담사")) {
-      pageTitle = "상담 일정 보기";
-    }
+    // 역할 정보 가져오기 (유틸리티 함수 사용)
+    const roleInfo = getRoleInfo(role);
+    const SlidePageComponent = roleInfo.component;
 
     // 동일 역할 카테고리는 같은 pageId 사용 (employeeId 무시)
     navigateToPage(
-      roleCategory,
+      roleInfo.category,
       <SlidePageComponent
-        title={pageTitle}
+        title={roleInfo.title}
         employeeName={name}
         employeeRole={role}
         employeeId={employeeId}

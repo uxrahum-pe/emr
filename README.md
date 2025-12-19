@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EMR - 의료진 관리 시스템
 
-## Getting Started
+의료진 관리 시스템(EMR)은 Next.js 16 App Router 기반의 풀스택 애플리케이션입니다.
 
-First, run the development server:
+## 🚀 빠른 시작
 
+### 설치
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 개발 서버 실행
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 빌드
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📚 주요 문서
 
-To learn more about Next.js, take a look at the following resources:
+- **[아키텍처 가이드](./docs/ARCHITECTURE.md)**: 프로젝트 구조 및 아키텍처 상세 설명
+- **[타입 시스템 가이드](./TYPESYSTEM.md)**: 타입 시스템 및 데이터 흐름
+- **[데이터베이스 전략](./docs/DATABASE_STRATEGY.md)**: DB 설계 전략
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ 기술 스택
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Core
+- **Next.js 16** (App Router)
+- **React 19**
+- **TypeScript 5**
 
-## Deploy on Vercel
+### 상태 관리
+- **Zustand**: 클라이언트 전역 상태
+- **TanStack Query**: 서버 상태 관리
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 폼 & 검증
+- **React Hook Form**: 폼 상태 관리
+- **Zod**: 스키마 검증
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 날짜 처리
+- **date-fns**: 날짜 포맷팅 및 계산
+
+### 데이터베이스
+- **Prisma**: ORM
+- **PostgreSQL**: 데이터베이스
+
+### GraphQL
+- **Apollo Server**: GraphQL 서버
+
+## 📁 프로젝트 구조
+
+```
+emr/
+├── app/              # Next.js 페이지 (App Router)
+├── components/       # React 컴포넌트
+├── stores/          # Zustand 스토어
+├── hooks/           # 커스텀 훅
+├── lib/             # 유틸리티 및 헬퍼
+├── types/           # TypeScript 타입 정의
+├── graphql/         # GraphQL 스키마 및 리졸버
+└── prisma/          # Prisma 스키마
+```
+
+자세한 구조는 [아키텍처 가이드](./docs/ARCHITECTURE.md)를 참조하세요.
+
+## 🎯 주요 기능
+
+- **대시보드**: 전체 현황 조회
+- **원무**: 고객 상태 관리, 직원 일정 조회
+- **상담/진료/수술/시술**: 각 파트별 업무 관리
+- **통계**: 데이터 분석 및 리포트
+
+## 📝 스크립트
+
+```bash
+# 개발 서버 실행
+npm run dev
+
+# 프로덕션 빌드
+npm run build
+
+# 타입 체크
+npm run type:check
+
+# Prisma 생성 + 타입 체크
+npm run type:sync
+```
+
+## 🔧 개발 가이드
+
+### 새 페이지 추가
+1. `app/{page-name}/page.tsx` 생성
+2. 필요한 컴포넌트는 `components/{page-name}/`에 분리
+3. 타입 정의는 `types/{page-name}.ts`에 추가
+
+### 새 컴포넌트 추가
+1. `components/ComponentName.tsx` 생성
+2. 타입 정의 추가 (`types/ui.ts` 또는 별도 파일)
+3. 스타일 추가 (필요시)
+
+### API 연동
+1. GraphQL 스키마에 타입 추가
+2. 리졸버에 로직 추가 (Zod 검증 포함)
+3. TanStack Query 훅 생성 (필요시)
+
+## 🤖 AI를 위한 컨텍스트
+
+이 프로젝트는 AI가 코드를 이해하고 생성하기 쉽도록 구조화되어 있습니다:
+
+1. **명확한 타입 정의**: 모든 데이터 구조가 타입으로 정의됨
+2. **중앙화된 상태 관리**: Zustand 스토어로 전역 상태 관리
+3. **일관된 컴포넌트 구조**: 재사용 가능한 컴포넌트 패턴
+4. **상세한 문서화**: 각 파일에 JSDoc 주석 포함
+
+자세한 내용은 [아키텍처 가이드](./docs/ARCHITECTURE.md)를 참조하세요.
+
+## 📄 라이선스
+
+이 프로젝트는 비공개 프로젝트입니다.

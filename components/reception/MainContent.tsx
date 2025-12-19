@@ -25,7 +25,7 @@ import SlidePage from "@/components/SlidePage";
 import Tooltip from "@/components/Tooltip";
 import ReferenceMessage from "@/components/ReferenceMessage";
 import ExpandableText from "@/components/ExpandableText";
-import { getRoleInfo } from "@/utils/role-utils";
+import { getRoleInfo } from "@/lib/utils/role";
 import type { MainContentProps } from "@/types/reception";
 
 /**
