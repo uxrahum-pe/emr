@@ -29,6 +29,7 @@ import ReferenceMessage from "@/components/ReferenceMessage";
 import ToggleSwitch from "@/components/ToggleSwitch";
 import Tooltip from "@/components/Tooltip";
 import DraggableScrollContainer from "@/components/DraggableScrollContainer";
+import ScrollableContainer from "@/components/ScrollableContainer";
 import TabSelector from "@/components/TabSelector";
 import EmployeeBadge from "@/components/EmployeeBadge";
 import CustomerDetailPanel from "@/components/CustomerDetailPanel";
@@ -289,7 +290,7 @@ export default function CustomerStatusSection({
                   <span className="isRed">2</span>
                 </p>
               </div>
-              <div className="C038">
+              <ScrollableContainer>
                 <div
                   className="C034"
                   onClick={() => handleCustomerClick("김지영", "210051234")}
@@ -555,7 +556,7 @@ export default function CustomerStatusSection({
                     </p>
                   </div>
                 </div>
-              </div>
+              </ScrollableContainer>
             </div>
             <div
               className={`C031 isPending ${
@@ -592,7 +593,7 @@ export default function CustomerStatusSection({
                   <span className="isYellow">1</span>
                 </p>
               </div>
-              <div className="C038">
+              <ScrollableContainer>
                 <div
                   className="C034"
                   onClick={() => handleCustomerClick("정미영", "210051239")}
@@ -834,7 +835,7 @@ export default function CustomerStatusSection({
                     </div>
                   </DraggableScrollContainer>
                 </div>
-              </div>
+              </ScrollableContainer>
             </div>
             <div
               className={`C031 isClinic ${
@@ -873,7 +874,7 @@ export default function CustomerStatusSection({
                   <span className="isGreen">2</span>
                 </p>
               </div>
-              <div className="C038">
+              <ScrollableContainer>
                 <div
                   className="C034"
                   onClick={() => handleCustomerClick("박수진", "210048901")}
@@ -1416,7 +1417,7 @@ export default function CustomerStatusSection({
                     </div>
                   </DraggableScrollContainer>
                 </div>
-              </div>
+              </ScrollableContainer>
             </div>
             <div
               className={`C031 isPayment ${
@@ -1453,7 +1454,7 @@ export default function CustomerStatusSection({
                   <span className="isBlue">5</span>
                 </p>
               </div>
-              <div className="C038">
+              <ScrollableContainer>
                 <div
                   className="C034"
                   onClick={() => handleCustomerClick("한미영", "210048234")}
@@ -1796,59 +1797,7 @@ export default function CustomerStatusSection({
                     </p>
                   </div>
                 </div>
-                <div
-                  className="C034"
-                  onClick={() => handleCustomerClick("김지우", "210047567")}
-                >
-                  <Tooltip text="고객 상세 정보">
-                    <div className="C035">
-                      <p className="T013">김지우</p>
-                      <p className="T014 isRed">여성</p>
-                      <p className="T014">
-                        31<span className="isUnit">세</span>
-                      </p>
-                      <p className="T014 isOldbie">
-                        2<span className="isUnit">기</span>
-                      </p>
-                      <p className="T015">210047567</p>
-                    </div>
-                  </Tooltip>
-                  <div className="C037">
-                    <p className="T016">
-                      <span className="isUnit">AM</span> 11:15 수납.
-                    </p>
-                    <p className="T016 isBlue">
-                      950,000<span className="isUnit">원</span>
-                    </p>
-                    <p className="T019">
-                      할인:<span className="isBold isMint">200,000</span>원
-                    </p>
-                  </div>
-                  <div className="C048">
-                    <p className="T016">
-                      <span className="isUnit">계약금 총액:</span>
-                    </p>
-                    <p className="T016 isBold">
-                      8,500,000<span className="isUnit">원</span>
-                    </p>
-                    <p className="T016">
-                      <span className="isUnit">/ 예약금:</span>
-                    </p>
-                    <p className="T016">
-                      1,500,000<span className="isUnit">원</span>
-                    </p>
-                    <p className="T016">
-                      <span className="isUnit">/ 할인:</span>
-                    </p>
-                    <p className="T016 isRed">
-                      300,000<span className="isUnit">원</span>
-                    </p>
-                    <p className="T017">
-                      <span className="isUnit">수납구분:</span> 지방흡입
-                    </p>
-                  </div>
-                </div>
-              </div>
+              </ScrollableContainer>
             </div>
           </div>
         </div>
