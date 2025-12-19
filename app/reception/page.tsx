@@ -15,7 +15,7 @@
 
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useCallback } from "react";
 import Sidebar from "@/components/Sidebar";
 import PageHeader from "@/components/PageHeader";
 import Aside from "@/components/Aside";
@@ -38,49 +38,47 @@ import EmployeeSlidePage from "@/components/EmployeeSlidePage";
 import DoctorSlidePage from "@/components/DoctorSlidePage";
 import CounselorSlidePage from "@/components/CounselorSlidePage";
 import type { CustomerStatusSectionProps } from "@/types/reception";
+import { useAsideStore } from "@/stores/useAsideStore";
+import { useReceptionStore } from "@/stores/useReceptionStore";
+import { usePageHeaderHandlers } from "@/hooks/usePageHeaderHandlers";
 
 export default function ReceptionPage() {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [selectedTabs, setSelectedTabs] = useState<number[]>([0, 1, 2]); // 예약 탭 (multiple)
-  const [selectedPendingTabs, setSelectedPendingTabs] = useState<number[]>([
-    0, 1,
-  ]); // 대기 탭 (multiple)
-  const [selectedSortTab, setSelectedSortTab] = useState<number>(0); // 정렬 탭 (single)
-  const [isQuickActionsHovered, setIsQuickActionsHovered] = useState(false);
-  const [isCustomerDetailOpen, setIsCustomerDetailOpen] = useState(false);
-  const [currentPageId, setCurrentPageId] = useState<string | null>(null);
-  const [noteClickHandler, setNoteClickHandler] = useState<
-    (() => void) | undefined
-  >(undefined);
-  const [alarmClickHandler, setAlarmClickHandler] = useState<
-    (() => void) | undefined
-  >(undefined);
+  // Zustand 스토어에서 상태 가져오기
+  const currentPageId = useAsideStore((state) => state.currentPageId);
 
-  // 핸들러를 ref로 저장하여 리렌더링 방지
-  const noteClickHandlerRef = useRef<(() => void) | undefined>(undefined);
-  const alarmClickHandlerRef = useRef<(() => void) | undefined>(undefined);
+  // PageHeader 핸들러 관리 훅 사용
+  const {
+    noteClickHandler,
+    alarmClickHandler,
+    handleNoteHandlerReady,
+    handleAlarmHandlerReady,
+  } = usePageHeaderHandlers();
 
-  // setNoteClickHandler를 useCallback으로 감싸서 안정적인 참조 유지
-  const handleNoteHandlerReady = useCallback((handler: () => void) => {
-    // 핸들러를 ref에 저장하고, PageHeader 리렌더링을 위해 state도 업데이트
-    noteClickHandlerRef.current = handler;
-    // 즉시 state 업데이트하여 PageHeader 리렌더링
-    setNoteClickHandler(() => handler);
-  }, []);
+  // Reception 스토어 상태
+  const {
+    isSmallScreen,
+    activeIndex,
+    selectedTabs,
+    selectedPendingTabs,
+    selectedSortTab,
+    isQuickActionsHovered,
+    isCustomerDetailOpen,
+    setIsSmallScreen,
+    setActiveIndex,
+    setSelectedTabs,
+    setSelectedPendingTabs,
+    setSelectedSortTab,
+    setIsQuickActionsHovered,
+    setIsCustomerDetailOpen,
+  } = useReceptionStore();
 
-  // setAlarmClickHandler를 useCallback으로 감싸서 안정적인 참조 유지
-  const handleAlarmHandlerReady = useCallback((handler: () => void) => {
-    // 핸들러를 ref에 저장하고, PageHeader 리렌더링을 위해 state도 업데이트
-    alarmClickHandlerRef.current = handler;
-    // 즉시 state 업데이트하여 PageHeader 리렌더링
-    setAlarmClickHandler(() => handler);
-  }, []);
-
-  const handleC032Click = useCallback((index: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setActiveIndex((prev) => (prev === index ? null : index));
-  }, []);
+  const handleC032Click = useCallback(
+    (index: number, e: React.MouseEvent) => {
+      e.stopPropagation();
+      setActiveIndex(activeIndex === index ? null : index);
+    },
+    [activeIndex, setActiveIndex]
+  );
 
   return (
     <>
@@ -98,9 +96,6 @@ export default function ReceptionPage() {
               onCustomerClick={() => setIsCustomerDetailOpen(true)}
             />
           )}
-          onNavigate={(pageId) => {
-            setCurrentPageId(pageId === "main" ? null : pageId);
-          }}
         >
           <NoteClickHandler onHandlerReady={handleNoteHandlerReady} />
           <AlarmClickHandler onHandlerReady={handleAlarmHandlerReady} />

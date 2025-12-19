@@ -14,7 +14,6 @@
 
 "use client";
 
-import { useState, useCallback, useRef } from "react";
 import Sidebar from "@/components/Sidebar";
 import PageHeader from "@/components/PageHeader";
 import Aside from "@/components/Aside";
@@ -22,49 +21,22 @@ import PersonalSchedule from "@/components/dashboard/PersonalSchedule";
 import NoteClickHandler from "@/components/reception/NoteClickHandler";
 import AlarmClickHandler from "@/components/reception/AlarmClickHandler";
 import ReservationClickHandler from "@/components/dashboard/ReservationClickHandler";
+import { useAsideStore } from "@/stores/useAsideStore";
+import { usePageHeaderHandlers } from "@/hooks/usePageHeaderHandlers";
 
 export default function DashboardPage() {
-  const [currentPageId, setCurrentPageId] = useState<string | null>(null);
-  const [noteClickHandler, setNoteClickHandler] = useState<
-    (() => void) | undefined
-  >(undefined);
-  const [alarmClickHandler, setAlarmClickHandler] = useState<
-    (() => void) | undefined
-  >(undefined);
-  const [reservationClickHandler, setReservationClickHandler] = useState<
-    (() => void) | undefined
-  >(undefined);
+  // Zustand 스토어에서 상태 가져오기
+  const currentPageId = useAsideStore((state) => state.currentPageId);
 
-  // 핸들러를 ref로 저장하여 리렌더링 방지
-  const noteClickHandlerRef = useRef<(() => void) | undefined>(undefined);
-  const alarmClickHandlerRef = useRef<(() => void) | undefined>(undefined);
-  const reservationClickHandlerRef = useRef<(() => void) | undefined>(
-    undefined
-  );
-
-  // setNoteClickHandler를 useCallback으로 감싸서 안정적인 참조 유지
-  const handleNoteHandlerReady = useCallback((handler: () => void) => {
-    // 핸들러를 ref에 저장하고, PageHeader 리렌더링을 위해 state도 업데이트
-    noteClickHandlerRef.current = handler;
-    // 즉시 state 업데이트하여 PageHeader 리렌더링
-    setNoteClickHandler(() => handler);
-  }, []);
-
-  // setAlarmClickHandler를 useCallback으로 감싸서 안정적인 참조 유지
-  const handleAlarmHandlerReady = useCallback((handler: () => void) => {
-    // 핸들러를 ref에 저장하고, PageHeader 리렌더링을 위해 state도 업데이트
-    alarmClickHandlerRef.current = handler;
-    // 즉시 state 업데이트하여 PageHeader 리렌더링
-    setAlarmClickHandler(() => handler);
-  }, []);
-
-  // setReservationClickHandler를 useCallback으로 감싸서 안정적인 참조 유지
-  const handleReservationHandlerReady = useCallback((handler: () => void) => {
-    // 핸들러를 ref에 저장하고, PageHeader 리렌더링을 위해 state도 업데이트
-    reservationClickHandlerRef.current = handler;
-    // 즉시 state 업데이트하여 PageHeader 리렌더링
-    setReservationClickHandler(() => handler);
-  }, []);
+  // PageHeader 핸들러 관리 훅 사용
+  const {
+    noteClickHandler,
+    alarmClickHandler,
+    reservationClickHandler,
+    handleNoteHandlerReady,
+    handleAlarmHandlerReady,
+    handleReservationHandlerReady,
+  } = usePageHeaderHandlers();
 
   return (
     <>
@@ -77,12 +49,7 @@ export default function DashboardPage() {
           isAlarmSelected={currentPageId === "my-alarms"}
           onReservationClick={reservationClickHandler}
         />
-        <Aside
-          mainContent={() => <PersonalSchedule />}
-          onNavigate={(pageId) => {
-            setCurrentPageId(pageId === "main" ? null : pageId);
-          }}
-        >
+        <Aside mainContent={() => <PersonalSchedule />}>
           <NoteClickHandler onHandlerReady={handleNoteHandlerReady} />
           <AlarmClickHandler onHandlerReady={handleAlarmHandlerReady} />
           <ReservationClickHandler

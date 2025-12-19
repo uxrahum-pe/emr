@@ -7,6 +7,7 @@ import "./uxghks.C.css";
 import "./uxghks.T.css";
 import "./uxujung.C.css";
 import "./uxujung.T.css";
+import QueryProvider from "@/lib/query-client";
 // TODO: DB 준비 후 주석 해제
 // import EventLoggerProvider from "@/components/EventLoggerProvider";
 
@@ -35,9 +36,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased isHighEnd isMidRange userIsMale`}
       >
-        {/* TODO: DB 준비 후 주석 해제 */}
-        {/* <EventLoggerProvider>{children}</EventLoggerProvider> */}
-        {children}
+        <QueryProvider>
+          {/* TODO: DB 준비 후 주석 해제 */}
+          {/* <EventLoggerProvider>{children}</EventLoggerProvider> */}
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

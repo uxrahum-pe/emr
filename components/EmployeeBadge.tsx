@@ -1,8 +1,7 @@
 "use client";
 
 import Tooltip from "@/components/Tooltip";
-import { useContext } from "react";
-import { AsideContext } from "@/components/AsideContext";
+import { useAside } from "@/components/AsideContext";
 import DoctorSlidePage from "@/components/DoctorSlidePage";
 import EmployeeSlidePage from "@/components/EmployeeSlidePage";
 import CounselorSlidePage from "@/components/CounselorSlidePage";
@@ -37,9 +36,8 @@ export default function EmployeeBadge({
   onClick,
   className = "",
 }: EmployeeBadgeProps) {
-  // Aside Provider가 있으면 사용, 없으면 null (옵셔널)
-  const asideContext = useContext(AsideContext);
-  const navigateToPage = asideContext?.navigateToPage || null;
+  // useAside 훅을 사용하여 navigateToPage 가져오기
+  const { navigateToPage } = useAside();
 
   const defaultTooltipText = `${name} ${role}`;
   const finalTooltipText = tooltipText || defaultTooltipText;
