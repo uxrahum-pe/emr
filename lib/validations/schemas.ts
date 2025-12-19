@@ -17,7 +17,12 @@ export const patientSchema = z.object({
     .min(1, "이름을 입력해주세요")
     .max(100, "이름은 100자 이하여야 합니다"),
   registerDate: z.date({
-    required_error: "등록일을 선택해주세요",
+    error: (issue) => {
+      if (issue.code === "invalid_type") {
+        return "등록일을 선택해주세요";
+      }
+      return "올바른 날짜 형식이 아닙니다";
+    },
   }),
 });
 
@@ -30,7 +35,12 @@ export const reservationSchema = z.object({
   patientId: z.string().uuid("올바른 환자 ID를 입력해주세요"),
   employeeId: z.string().min(1, "담당 직원을 선택해주세요"),
   date: z.date({
-    required_error: "예약일을 선택해주세요",
+    error: (issue) => {
+      if (issue.code === "invalid_type") {
+        return "예약일을 선택해주세요";
+      }
+      return "올바른 날짜 형식이 아닙니다";
+    },
   }),
   time: z
     .string()
