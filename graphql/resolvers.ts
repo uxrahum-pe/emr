@@ -83,7 +83,7 @@ export const resolvers = {
         } catch (error) {
           if (error instanceof z.ZodError) {
             throw new GraphQLError("Validation error", {
-              extensions: { code: "VALIDATION_ERROR", errors: error.errors },
+              extensions: { code: "VALIDATION_ERROR", errors: error.issues },
             });
           }
           throw error;
