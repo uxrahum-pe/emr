@@ -3,6 +3,18 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import MiniPopup from "@/components/MiniPopup";
 import MonthlyCalendar from "@/components/MonthlyCalendar";
+import {
+  startOfWeek,
+  addDays,
+  addWeeks,
+  isToday,
+  isSameDay,
+  format,
+  getDay,
+  startOfDay,
+} from "date-fns";
+import { ko } from "date-fns/locale";
+import { formatDate as formatDateUtil } from "@/lib/utils/date";
 
 interface WeeklyCalendarProps {
   /** 그림자 제거 여부 (기본: false) */
@@ -21,8 +33,7 @@ export default function WeeklyCalendar({
   const [isInitialized, setIsInitialized] = useState(false);
   const [selectedDayIndex, setSelectedDayIndex] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(() => {
-    const today = new Date();
-    return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return startOfDay(new Date());
   });
   const savedScrollRatioRef = useRef<number | null>(null);
   const isResizingRef = useRef(false);
@@ -67,7 +78,6 @@ export default function WeeklyCalendar({
       if (!container) return;
 
       const allElements = container.querySelectorAll(".C055");
-      const targetDateStr = date.toDateString();
 
       // 해당 날짜를 포함하는 요소 찾기
       let targetElementIndex = -1;
@@ -77,7 +87,7 @@ export default function WeeklyCalendar({
         const weekDays = generateWeekDays(weekIndex - 25 + weekOffset);
         const dayData = weekDays[dayIndex];
 
-        if (dayData && dayData.date.toDateString() === targetDateStr) {
+        if (dayData && isSameDay(dayData.date, date)) {
           targetElementIndex = index;
         }
       });
@@ -111,12 +121,11 @@ export default function WeeklyCalendar({
     }
 
     // 주간 달력에서 선택된 날짜 찾기
-    const targetDateStr = selectedDate.toDateString();
     for (let weekIndex = 0; weekIndex < 50; weekIndex++) {
       const weekDays = generateWeekDays(weekIndex - 25 + weekOffset);
       for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
         const day = weekDays[dayIndex];
-        if (day && day.date.toDateString() === targetDateStr) {
+        if (day && isSameDay(day.date, selectedDate)) {
           const elementIndex = weekIndex * 7 + dayIndex;
           setSelectedDayIndex(elementIndex);
           // 월간 달력에서 선택한 경우 스크롤 애니메이션 적용
@@ -161,18 +170,15 @@ export default function WeeklyCalendar({
     }
   };
 
-  // 날짜 포맷팅 함수 (YYYY.MM.DD)
+  // 날짜 포맷팅 함수 (YYYY.MM.DD) - date-fns 사용
   const formatDate = (date: Date | null): string => {
     if (!date) return "";
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}.${month}.${day}`;
+    return formatDateUtil(date, "yyyy.MM.dd");
   };
 
   // 오늘로 이동 핸들러
   const handleGoToToday = () => {
-    const today = new Date();
+    const today = startOfDay(new Date());
     setSelectedDate(today);
     setTimeout(() => {
       scrollToDate(today, true);
@@ -193,7 +199,7 @@ export default function WeeklyCalendar({
       const allElements = container.querySelectorAll(".C055");
       if (allElements.length === 0) return; // 요소가 없으면 나중에 다시 시도
 
-      const today = new Date();
+      const today = startOfDay(new Date());
 
       // 오늘 날짜를 포함하는 요소 찾기
       let todayElementIndex = -1;
@@ -203,7 +209,7 @@ export default function WeeklyCalendar({
         const weekDays = generateWeekDays(weekIndex - 25 + weekOffset);
         const dayData = weekDays[dayIndex];
 
-        if (dayData && dayData.date.toDateString() === today.toDateString()) {
+        if (dayData && isSameDay(dayData.date, today)) {
           todayElementIndex = index;
         }
       });
@@ -219,9 +225,7 @@ export default function WeeklyCalendar({
 
         // 오늘 날짜 선택
         setSelectedDayIndex(todayElementIndex);
-        setSelectedDate(
-          new Date(today.getFullYear(), today.getMonth(), today.getDate())
-        );
+        setSelectedDate(today);
         return true; // 성공
       } else {
         // 오늘 날짜를 찾지 못한 경우 중앙으로

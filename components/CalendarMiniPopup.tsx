@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import MiniPopup from "./MiniPopup";
 import MonthlyCalendar from "./MonthlyCalendar";
+import { formatDate } from "@/lib/utils/date";
 
 export interface CalendarMiniPopupProps {
   /** 선택된 날짜 */
@@ -68,14 +69,7 @@ export default function CalendarMiniPopup({
       <div className="C059" ref={triggerRef} onClick={handleClick}>
         <p className="T030">
           <span className="isUnit">선택 날짜:</span>{" "}
-          {selectedDate
-            ? `${selectedDate.getFullYear()}.${String(
-                selectedDate.getMonth() + 1
-              ).padStart(2, "0")}.${String(selectedDate.getDate()).padStart(
-                2,
-                "0"
-              )}`
-            : "선택 안됨"}
+          {selectedDate ? formatDate(selectedDate, "yyyy.MM.dd") : "선택 안됨"}
         </p>
         <div className="C060 styleSheet isIcon isCalendar"></div>
       </div>

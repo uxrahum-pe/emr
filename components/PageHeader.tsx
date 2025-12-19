@@ -8,6 +8,7 @@ import ScrollableContainer from "@/components/ScrollableContainer";
 import { PageHeaderProps } from "@/types/ui";
 import TabSelector from "./TabSelector";
 import CalendarMiniPopup from "./CalendarMiniPopup";
+import { startOfDay } from "date-fns";
 export default function PageHeader({
   title,
   onNoteClick,
@@ -19,8 +20,7 @@ export default function PageHeader({
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedSortTab, setSelectedSortTab] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date | null>(() => {
-    const today = new Date();
-    return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return startOfDay(new Date());
   });
 
   const handleC009Click = (e: React.MouseEvent) => {
