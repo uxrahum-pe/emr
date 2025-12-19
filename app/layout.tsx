@@ -3,6 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./uxmason.global.css";
 import "./uxmason.C.css";
 import "./uxmason.T.css";
+import "./uxghks.C.css";
+import "./uxghks.T.css";
+import "./uxujung.C.css";
+import "./uxujung.T.css";
 // TODO: DB 준비 후 주석 해제
 // import EventLoggerProvider from "@/components/EventLoggerProvider";
 

@@ -194,6 +194,12 @@
 .C018:hover {
     opacity: .5;
 }
+.C018.isSelected {
+    background-color: var(--color-black);
+}
+.C018.isSelected .C019 {
+    filter: brightness(0) invert(1);
+}
 .C019 {
     width: var(--size-40);
     height: var(--size-40);
@@ -360,7 +366,7 @@
 .C034 {
     border-bottom: var(--size-2) solid var(--color-black-3);
     padding: var(--size-10);
-    gap: var(--size-15);
+    gap: var(--size-10);
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -420,6 +426,9 @@
 }
 .C038.isOverflowed { 
     background-image: linear-gradient(var(--color-black-3), var(--color-black-0) 10%, var(--color-black-0) 95%, var(--color-black-3) 100%);
+}
+.C176 .C038.isOverflowed {
+    background-image: linear-gradient(var(--color-black-15), var(--color-black-0) 10%, var(--color-black-0) 95%, var(--color-black-15) 100%);
 }
 .C039 {
     display: flex;
@@ -540,14 +549,16 @@
     display: none;
 }
 .C049 {
-    display: none;
     justify-content: flex-end;
     margin-left: auto;
+    display: flex;
+}
+.C031 .C049 {
+    display: none;
 }
 .C050 {
     padding: var(--size-10);
     background-color: var(--color-black-3);
-    color: var(--color-black-50);
     font-size: var(--font-14);
     border: var(--size-2) solid var(--color-black-3);
     margin-left: calc(-1 * var(--size-2));
@@ -559,12 +570,17 @@
     box-sizing: border-box;
     position: relative;
     z-index: 0;
+    transition: .3s;
 }
 .C050:first-of-type {
     border-radius: var(--size-15) 0 0 var(--size-15);
 }
 .C050:last-of-type {
     border-radius: 0 var(--size-15) var(--size-15) 0;
+}
+.C176 .C050 {
+    background-color: var(--color-white-7);
+    border: var(--size-2) solid var(--color-white-15);
 }
 .C050.isSelected {
     background-color: var(--color-green-15);
@@ -713,18 +729,18 @@
     top: 0;
     left: 0;
     background-color: var(--color-black-15);
-    z-index: 9;
+    z-index: 9999;
 }
 .C063 {
-    width: var(--size-600);
-    height: var(--size-600);
+    width: var(--size-410);
+    height: fit-content;
     background-color: var(--color-white-50);
     border-radius: var(--size-30);
     backdrop-filter: blur(var(--size-20));
     box-shadow: 0 var(--size-20) var(--size-80) var(--color-black-25);
     position: fixed;
     padding: var(--size-30);
-    z-index: 10;
+    z-index: 10000;
 }
 .C064 {
     display: flex;
@@ -943,6 +959,7 @@
 .C086 {
     display: flex;
     gap: var(--size-3);
+    align-items: center;
 }
 .C087 {
     display: flex;
@@ -1868,7 +1885,7 @@
 .isHighEnd .C177 {
     transition: .3s;
 }
-@media (max-height: calc(100vw * 1200 / 1980)) {
+@media (max-height: calc(100vw * 1200 / 1920)) {
     .C176 {
         overflow-y: auto;
         -ms-overflow-style: none;
@@ -1941,12 +1958,20 @@
 }
 .C183 {
     height:100%;
+    overflow: hidden;
+    border-radius: var(--size-30);
 }
 .C184 {
     width: var(--size-50);
     height: var(--size-50);
     border-radius: var(--size-15);
     background-color: var(--color-white-7);
+}
+.C184.isMagenta {
+    background-color: var(--color-magenta-7);
+}
+.C184.isMagenta .C185 {
+    filter: none;
 }
 .C185 {
     width: var(--size-40);
@@ -1958,4 +1983,128 @@
     display: flex;
     padding: var(--size-20) var(--size-20) var(--size-10);
     align-items: center;
+}
+.C187 {
+    padding: var(--size-10) var(--size-20);
+    border-bottom: var(--size-2) dashed var(--color-white-15);
+    background-color: var(--color-white-3);
+    cursor: pointer;
+    transition: .3s;
+}
+.C187:last-of-type {
+    border-bottom: none;
+}
+.C187:hover {
+    opacity: .5;
+}
+.C188 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.C189 {
+    width: var(--size-170);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+.C190 {
+    position: absolute;
+    top: calc(-1 * var(--size-100));
+    width: fit-content;
+    margin-left: var(--size-100);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(calc(-1 * var(--size-50)));
+    transition: opacity .3s, transform .3s, visibility .3s;
+    display: block;
+    pointer-events: none;
+}
+.C190.isOpened {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.C193 {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--size-50)));
+    transition: opacity .3s, transform .3s;
+    pointer-events: none;
+}
+.C190:hover .C193 {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.C191 {
+    width: var(--size-40);
+    height: var(--size-40);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--size-20);
+    background-color: var(--color-white);
+    box-shadow: 0 var(--size-10) var(--size-40) 0 var(--color-black-25);
+    backdrop-filter: blur(var(--size-10));
+    cursor: pointer;
+}
+.C193 {
+    padding: var(--size-10);
+    background-color: var(--color-white);
+    border-radius: var(--size-25);
+    box-shadow: 0 var(--size-10) var(--size-40) 0 var(--color-black-15);
+    display: flex;
+    gap: var(--size-10);
+    flex-direction: column;
+    position: absolute;
+    margin-left: var(--size-20);
+    top: 0;
+}
+.C194 {
+    display: flex;
+    align-items: center;
+    gap: var(--size-10);
+    border-radius: var(--size-15);
+    padding: var(--size-10);
+    transition: .3s;
+    cursor: pointer;
+}
+.C194:hover {
+    opacity: .5;
+    background-color: var(--color-blue-15);
+}
+.C195 {
+    width: var(--size-40);
+    height: var(--size-40);
+}
+.C196 {
+    width: var(--size-16);
+    height: var(--size-2);
+    background-color: var(--color-black);
+    position: absolute;
+    transition: .3s;
+}
+.C196:first-of-type {
+    width: var(--size-12);
+    margin-top: calc(-1 * var(--size-12));
+}
+.C196:last-of-type {
+    width: var(--size-12);
+    margin-top: var(--size-12);
+}
+.C191:hover .C196 {
+    width: 0;
+}
+.C191:hover .C196:first-of-type {
+    margin-top: 0;
+    width: var(--size-20);
+    transform: rotate(135deg);
+}
+.C191:hover .C196:last-of-type {
+    margin-top: 0;
+    width: var(--size-20);
+    transform: rotate(45deg);
 }

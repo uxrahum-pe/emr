@@ -123,7 +123,7 @@
   --color-mint-50: #8CEAC380;
   --color-mint-75: #8CEAC3bf;
   
-  --breakpoint: 1980;
+  --breakpoint: 1920;
   
   --font-12: calc(100vw * 12 / var(--breakpoint));
   --font-14: calc(100vw * 14 / var(--breakpoint));
@@ -390,7 +390,7 @@
 
 }
 
-@media (min-width: 1980px) {
+@media (min-width: 1920px) {
   :root {
     --font-12: 12px;
     --font-14: 14px;
@@ -762,6 +762,9 @@ span.isLink {
 .isGrey {
   color: var(--color-black-50);
 }
+.C176 .isGrey {
+  color: var(--color-white-50);
+}
 .isGreen {
   color: var(--color-green);
 }
@@ -804,6 +807,9 @@ span.isLink {
 }
 .isIMaskMagenta.isSyringe {
   mask-position: calc(-1 * var(--size-200)) calc(-1 * var(--size-240));
+}
+.isIMaskMagenta.isAlert {
+  mask-position: calc(-1 * var(--size-280)) calc(-1 * var(--size-440));
 }
 
 .isIcon.isReception {
@@ -917,6 +923,14 @@ span.isLink {
 .isIcon.isWrite {
   background-position-x: calc(-1 * var(--size-280));
   background-position-y: calc(-1 * var(--size-160));
+}
+.isIcon.isEarth {
+  background-position-x: calc(-1 * var(--size-280));
+  background-position-y: calc(-1 * var(--size-200));
+}
+.isIcon.isAlert {
+  background-position-x: calc(-1 * var(--size-280));
+  background-position-y: calc(-1 * var(--size-440));
 }
 .isIcon.isNote {
   background-position-x: calc(-1 * var(--size-280));

@@ -34,13 +34,23 @@ export default function Popup({
     setMounted(true);
   }, []);
 
+  const onCloseRef = useRef(onClose);
+
+  // onClose ref 업데이트 (항상 최신 값 유지)
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
   useEffect(() => {
     if (isOpen) {
       // 컴포넌트가 나타나면 바로 렌더링
       setIsVisible(true);
       // 모달 스택에 추가
-      closeHandlerRef.current = onClose;
-      modalStack.push(onClose);
+      const closeHandler = () => {
+        onCloseRef.current();
+      };
+      closeHandlerRef.current = closeHandler;
+      modalStack.push(closeHandler);
       // 브라우저가 초기 상태를 인식한 후 애니메이션 트리거
       const timer = setTimeout(() => {
         setIsOpened(true);
@@ -66,7 +76,7 @@ export default function Popup({
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [isOpen, onClose]);
+  }, [isOpen]); // onClose는 ref로 처리하므로 의존성에서 제거
 
   if (!mounted || !isVisible) return null;
 

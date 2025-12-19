@@ -6,9 +6,21 @@ import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
 import ScrollableContainer from "@/components/ScrollableContainer";
 import { PageHeaderProps } from "@/types/ui";
-
-export default function PageHeader({ title }: PageHeaderProps) {
+import TabSelector from "./TabSelector";
+import CalendarMiniPopup from "./CalendarMiniPopup";
+export default function PageHeader({
+  title,
+  onNoteClick,
+  isNoteSelected = false,
+  onAlarmClick,
+  isAlarmSelected = false,
+}: PageHeaderProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedSortTab, setSelectedSortTab] = useState(0);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(() => {
+    const today = new Date();
+    return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  });
 
   const handleC009Click = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -45,13 +57,35 @@ export default function PageHeader({ title }: PageHeaderProps) {
             <p className="T005">메뉴 및 기능 검색</p>
           </div>
           <Tooltip text="1:1 참조사항 전달">
-            <div className="C018">
+            <div
+              className={`C018 isNote${isNoteSelected ? " isSelected" : ""}`}
+              onClick={
+                onNoteClick && typeof onNoteClick === "function"
+                  ? (e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onNoteClick();
+                    }
+                  : undefined
+              }
+            >
               <div className="C019 styleSheet isIcon isNote"></div>
               <p className="T006">12</p>
             </div>
           </Tooltip>
           <Tooltip text="시스템 알림">
-            <div className="C018">
+            <div
+              className={`C018 isAlarm${isAlarmSelected ? " isSelected" : ""}`}
+              onClick={
+                onAlarmClick && typeof onAlarmClick === "function"
+                  ? (e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onAlarmClick();
+                    }
+                  : undefined
+              }
+            >
               <div className="C019 styleSheet isIcon isAlarm"></div>
               <p className="T006">3</p>
             </div>
@@ -62,6 +96,22 @@ export default function PageHeader({ title }: PageHeaderProps) {
         <PopupSectionBox x={290} y={60} width={1340}>
           <div className="C180">
             <p className="T076">지점 방문 고객 현황</p>
+            <div className="C189">
+              <p className="isGrey">정렬:</p>
+              <TabSelector
+                items={[{ title: "시간순" }, { title: "상태순" }]}
+                multiple={false}
+                value={selectedSortTab}
+                onChange={(selected) => setSelectedSortTab(selected as number)}
+              />
+            </div>
+            <p className="T082">
+              오늘 일시: <span className="isWhite">2025.09.23</span> AM{" "}
+              <span className="isWhite">10:23:45</span> / 방문 예정:{" "}
+              <span className="isWhite isBig">8</span>명 / 지점내 고객:{" "}
+              <span className="isGreen isBig">13</span>명 / 귀가 고객:{" "}
+              <span className="isBig isBlue">5</span>명
+            </p>
             <div className="C181 isCloseButton" onClick={handleClosePopup}>
               <div className="C179 isDepth1"></div>
               <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
@@ -75,89 +125,750 @@ export default function PageHeader({ title }: PageHeaderProps) {
             </div>
             <p className="T077">상담</p>
             <p className="T078">
-              진행중:<span className="isBig isGreen">5</span>명 / 대기:
-              <span className="isBig isWhite">1</span>명
+              진행중:<span className="isBig isGreen">2</span>명 / 대기:
+              <span className="isBig isWhite">2</span>명
             </p>
           </div>
-          <ScrollableContainer>{null}</ScrollableContainer>
+          <ScrollableContainer>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 이동.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담대기</p>
+                <p className="T080 isYellow">11분 지연.</p>
+                <p className="T080">
+                  (총 대기: <span className="isYellow">11분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 배정.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담 준비중</p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080 isMagenta">31분 대기.</p>
+                <p className="T080">
+                  (총 대기: <span className="isMagenta">41분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 시작.
+                </p>
+                <p className="T079">시술 재환 상담</p>
+                <p className="T079 isGreen">진행중</p>
+                <p className="T016">
+                  00:11:59.12 <span className="isUnit">경과.</span>
+                </p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080">- 예상: 1시간 30분</p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 11:30 종료.
+                </p>
+                <p className="T079">수술 신환 상담</p>
+                <p className="T079 isBlue">상담완료</p>
+                <p className="T016">
+                  1시간 30분 <span className="isUnit">소요.</span>
+                </p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={630} y={180} width={320} height={470}>
           <div className="C186">
             <div className="C184">
-              <div className="C185 styleSheet isIcon isCounseling"></div>
+              <div className="C185 styleSheet isIcon isSyringe"></div>
             </div>
-            <p className="T077">상담</p>
+            <p className="T077">시술</p>
             <p className="T078">
               진행중:<span className="isBig isGreen">5</span>명 / 대기:
               <span className="isBig isWhite">1</span>명
             </p>
           </div>
-          <ScrollableContainer>{null}</ScrollableContainer>
+          <ScrollableContainer>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 이동.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담대기</p>
+                <p className="T080 isYellow">11분 지연.</p>
+                <p className="T080">
+                  (총 대기: <span className="isYellow">11분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 배정.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담 준비중</p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080 isMagenta">31분 대기.</p>
+                <p className="T080">
+                  (총 대기: <span className="isMagenta">41분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 시작.
+                </p>
+                <p className="T079">시술 재환 상담</p>
+                <p className="T079 isGreen">진행중</p>
+                <p className="T016">
+                  00:11:59.12 <span className="isUnit">경과.</span>
+                </p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080">- 예상: 1시간 30분</p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 11:30 종료.
+                </p>
+                <p className="T079">수술 신환 상담</p>
+                <p className="T079 isBlue">상담완료</p>
+                <p className="T016">
+                  1시간 30분 <span className="isUnit">소요.</span>
+                </p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={970} y={180} width={320} height={470}>
           <div className="C186">
             <div className="C184">
-              <div className="C185 styleSheet isIcon isCounseling"></div>
+              <div className="C185 styleSheet isIcon isSurgery"></div>
             </div>
-            <p className="T077">상담</p>
+            <p className="T077">수술</p>
             <p className="T078">
-              진행중:<span className="isBig isGreen">5</span>명 / 대기:
-              <span className="isBig isWhite">1</span>명
+              진행중:<span className="isBig isGreen">5</span>명
             </p>
           </div>
-          <ScrollableContainer>{null}</ScrollableContainer>
+          <ScrollableContainer>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 이동.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담대기</p>
+                <p className="T080 isYellow">11분 지연.</p>
+                <p className="T080">
+                  (총 대기: <span className="isYellow">11분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 배정.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담 준비중</p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080 isMagenta">31분 대기.</p>
+                <p className="T080">
+                  (총 대기: <span className="isMagenta">41분</span>)
+                </p>
+              </div>
+            </div>
+          </ScrollableContainer>
         </PopupSectionBox>
-        <PopupSectionBox x={1310} y={180} width={320} height={470}>
+        <PopupSectionBox
+          x={1310}
+          y={180}
+          width={320}
+          height={470}
+          borderBackgroundColor="yellow-7"
+        >
           <div className="C186">
             <div className="C184">
-              <div className="C185 styleSheet isIcon isCounseling"></div>
+              <div className="C185 styleSheet isIcon isHourglass"></div>
             </div>
-            <p className="T077">상담</p>
+            <p className="T077">대기</p>
             <p className="T078">
-              진행중:<span className="isBig isGreen">5</span>명 / 대기:
-              <span className="isBig isWhite">1</span>명
+              접수:<span className="isBig isWhite">5</span>명 / 보류:
+              <span className="isBig isMagenta">1</span>명
             </p>
           </div>
-          <ScrollableContainer>{null}</ScrollableContainer>
+          <ScrollableContainer>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 이동.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담대기</p>
+                <p className="T080 isYellow">11분 지연.</p>
+                <p className="T080">
+                  (총 대기: <span className="isYellow">11분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 배정.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담 준비중</p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080 isMagenta">31분 대기.</p>
+                <p className="T080">
+                  (총 대기: <span className="isMagenta">41분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 시작.
+                </p>
+                <p className="T079">시술 재환 상담</p>
+                <p className="T079 isGreen">진행중</p>
+                <p className="T016">
+                  00:11:59.12 <span className="isUnit">경과.</span>
+                </p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080">- 예상: 1시간 30분</p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 11:30 종료.
+                </p>
+                <p className="T079">수술 신환 상담</p>
+                <p className="T079 isBlue">상담완료</p>
+                <p className="T016">
+                  1시간 30분 <span className="isUnit">소요.</span>
+                </p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={630} y={670} width={320} height={470}>
           <div className="C186">
             <div className="C184">
-              <div className="C185 styleSheet isIcon isCounseling"></div>
+              <div className="C185 styleSheet isIcon isClinic"></div>
             </div>
-            <p className="T077">상담</p>
+            <p className="T077">진료</p>
             <p className="T078">
-              진행중:<span className="isBig isGreen">5</span>명 / 대기:
+              대기:
               <span className="isBig isWhite">1</span>명
             </p>
           </div>
-          <ScrollableContainer>{null}</ScrollableContainer>
+          <ScrollableContainer>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 이동.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담대기</p>
+                <p className="T080 isYellow">11분 지연.</p>
+                <p className="T080">
+                  (총 대기: <span className="isYellow">11분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 배정.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담 준비중</p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080 isMagenta">31분 대기.</p>
+                <p className="T080">
+                  (총 대기: <span className="isMagenta">41분</span>)
+                </p>
+              </div>
+            </div>
+          </ScrollableContainer>
         </PopupSectionBox>
         <PopupSectionBox x={970} y={670} width={320} height={470}>
           <div className="C186">
             <div className="C184">
-              <div className="C185 styleSheet isIcon isCounseling"></div>
+              <div className="C185 styleSheet isIcon isCoin"></div>
             </div>
-            <p className="T077">상담</p>
+            <p className="T077">수납</p>
             <p className="T078">
-              진행중:<span className="isBig isGreen">5</span>명 / 대기:
+              완료:<span className="isBig isBlue">5</span>명 / 대기:
               <span className="isBig isWhite">1</span>명
             </p>
           </div>
-          <ScrollableContainer>{null}</ScrollableContainer>
+          <ScrollableContainer>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 이동.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담대기</p>
+                <p className="T080 isYellow">11분 지연.</p>
+                <p className="T080">
+                  (총 대기: <span className="isYellow">11분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 배정.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담 준비중</p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080 isMagenta">31분 대기.</p>
+                <p className="T080">
+                  (총 대기: <span className="isMagenta">41분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 시작.
+                </p>
+                <p className="T079">시술 재환 상담</p>
+                <p className="T079 isGreen">진행중</p>
+                <p className="T016">
+                  00:11:59.12 <span className="isUnit">경과.</span>
+                </p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080">- 예상: 1시간 30분</p>
+              </div>
+            </div>
+          </ScrollableContainer>
         </PopupSectionBox>
-        <PopupSectionBox x={1310} y={670} width={320} height={470}>
+        <PopupSectionBox
+          x={1310}
+          y={670}
+          width={320}
+          height={470}
+          borderBackgroundColor="magenta-7"
+        >
           <div className="C186">
-            <div className="C184">
-              <div className="C185 styleSheet isIcon isCounseling"></div>
+            <div className="C184 isMagenta">
+              <div className="C185 isIMaskMagenta isAlert"></div>
             </div>
-            <p className="T077">상담</p>
+            <p className="T077">장시간 대기 고객</p>
             <p className="T078">
-              진행중:<span className="isBig isGreen">5</span>명 / 대기:
-              <span className="isBig isWhite">1</span>명
+              <span className="isBig isMagenta">2</span>명
             </p>
           </div>
-          <ScrollableContainer>{null}</ScrollableContainer>
+          <ScrollableContainer>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 이동.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담대기</p>
+                <p className="T080 isYellow">11분 지연.</p>
+                <p className="T080">
+                  (총 대기: <span className="isYellow">11분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 배정.
+                </p>
+                <p className="T079">시술 신환 상담</p>
+                <p className="T079">상담 준비중</p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080 isMagenta">31분 대기.</p>
+                <p className="T080">
+                  (총 대기: <span className="isMagenta">41분</span>)
+                </p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 10:30 시작.
+                </p>
+                <p className="T079">시술 재환 상담</p>
+                <p className="T079 isGreen">진행중</p>
+                <p className="T016">
+                  00:11:59.12 <span className="isUnit">경과.</span>
+                </p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+                <p className="T080">- 예상: 1시간 30분</p>
+              </div>
+            </div>
+            <div className="C187">
+              <div className="C086">
+                <p className="T041">박지영</p>
+                <p className="T042 isMagenta">여성</p>
+                <p className="T042 isWhite">
+                  32<span className="isUnit">세</span>
+                </p>
+                <p className="T042 isWhite">
+                  1<span className="isUnit">기</span>
+                </p>
+                <p className="T016 isGrey">210048921</p>
+              </div>
+              <div className="C188">
+                <p className="T016">
+                  <span className="isUnit">AM</span> 11:30 종료.
+                </p>
+                <p className="T079">수술 신환 상담</p>
+                <p className="T079 isBlue">상담완료</p>
+                <p className="T016">
+                  1시간 30분 <span className="isUnit">소요.</span>
+                </p>
+                <div className="C039">
+                  <div className="C040"></div>
+                  <p className="T081">
+                    김유정<span className="isUnit">상담사</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ScrollableContainer>
         </PopupSectionBox>
       </Popup>
     </>

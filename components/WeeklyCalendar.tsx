@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import Popup from "@/components/Popup";
+import MiniPopup from "@/components/MiniPopup";
 import MonthlyCalendar from "@/components/MonthlyCalendar";
 
 interface WeeklyCalendarProps {
@@ -33,6 +33,7 @@ export default function WeeklyCalendar({
     }
   );
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [triggerEvent, setTriggerEvent] = useState<MouseEvent | null>(null);
 
   // 주간 달력 데이터 생성
   const generateWeekDays = useCallback((offset: number) => {
@@ -176,6 +177,11 @@ export default function WeeklyCalendar({
     setTimeout(() => {
       scrollToDate(today, true);
     }, 100);
+  };
+
+  const handleCloseMiniPopup = () => {
+    setIsPopupOpen(false);
+    setTriggerEvent(null);
   };
 
   // 초기 스크롤 위치를 오늘 날짜가 중앙에 오도록 설정
@@ -567,16 +573,29 @@ export default function WeeklyCalendar({
         </div>
       </div>
       <div className="C058">
-        <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
+        <MiniPopup
+          isOpen={isPopupOpen}
+          onClose={handleCloseMiniPopup}
+          triggerEvent={triggerEvent}
+        >
           <MonthlyCalendar
             selectedDate={selectedDate}
             onDateSelect={(date) => {
               setSelectedDate(date);
+              handleCloseMiniPopup();
             }}
-            onClose={() => setIsPopupOpen(false)}
+            onClose={handleCloseMiniPopup}
           />
-        </Popup>
-        <div className="C059" onClick={() => setIsPopupOpen(true)}>
+        </MiniPopup>
+        <div
+          className="C059"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setTriggerEvent(e.nativeEvent);
+            setIsPopupOpen(true);
+          }}
+        >
           <p className="T030">
             <span className="isUnit">선택 날짜:</span>{" "}
             {selectedDate ? formatDate(selectedDate) : "선택 안됨"}
