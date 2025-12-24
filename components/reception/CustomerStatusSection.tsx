@@ -66,6 +66,8 @@ export default function CustomerStatusSection({
     useState(false);
   const [isCustomerSearchPopupOpen, setIsCustomerSearchPopupOpen] =
     useState(false);
+  const [isSurveyBarcodeSearchPopupOpen, setIsSurveyBarcodeSearchPopupOpen] =
+    useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // 고객 통합 검색 팝업이 열릴 때 입력 필드에 자동 포커스
@@ -268,7 +270,14 @@ export default function CustomerStatusSection({
             <div className="C017 styleSheet isIcon isMagnifier"></div>
             <p className="T005">고객 통합 검색</p>
           </div>
-          <div className="C023">
+          <div
+            className="C023"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsSurveyBarcodeSearchPopupOpen(true);
+            }}
+          >
             <div className="C019 styleSheet isIcon isCheck"></div>
             <p className="T008">설문지 & 바코드 고객 검색</p>
           </div>
@@ -1863,107 +1872,87 @@ export default function CustomerStatusSection({
         <div>
           <PopupSectionBox x={290} y={70} width={660} height={1060}>
             <div className="C1003">
-            <div className="C200">
-              <div className="C1000">
-                <p className="T1000">
-                  주민번호 :      
-                </p>
-                <input
-                  className="T084"
-                  type="text"
-                  placeholder="000000-0******"
-                />
+              <div className="C200">
+                <div className="C1000">
+                  <p className="T1000">주민번호 :</p>
+                  <input
+                    className="T084"
+                    type="text"
+                    placeholder="000000-0******"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="C200">
-              <div className="C1000">
-                <p className="T1000">
-                  성명 : 
-                </p>
-                <input
-                  className="T084"
-                  type="text"
-                  placeholder="최대 16자까지"
-                />
-                <p className="T1000">
-                  가명 : 
-                </p>
-                <input
-                  className="T084"
-                  type="text"
-                  placeholder="최대 16자까지"
-                />
+              <div className="C200">
+                <div className="C1000">
+                  <p className="T1000">성명 :</p>
+                  <input
+                    className="T084"
+                    type="text"
+                    placeholder="최대 16자까지"
+                  />
+                  <p className="T1000">가명 :</p>
+                  <input
+                    className="T084"
+                    type="text"
+                    placeholder="최대 16자까지"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="C200">
-              <div className="C1000">
-                <p className="T1000">
-                  휴대폰번호 : 
-                </p>
-                <input
-                  className="T084"
-                  type="text"
-                  placeholder="000-0000-0000"
-                />
-                <input
-                  className="T084"
-                  type="text"
-                  placeholder="6자리"
-                />
+              <div className="C200">
+                <div className="C1000">
+                  <p className="T1000">휴대폰번호 :</p>
+                  <input
+                    className="T084"
+                    type="text"
+                    placeholder="000-0000-0000"
+                  />
+                  <input className="T084" type="text" placeholder="6자리" />
+                </div>
               </div>
-            </div>
-            <div className="C200">
-              <div className="C1000">
-                <p className="T1000">
-                  자택번호 : 
-                </p>
-                <input
-                  className="T084"
-                  type="text"
-                  placeholder="000-0000-0000"
-                />
-                <p className="T1000">
-                  이메일 주소 : 
-                </p>
-                <input
-                  className="T084"
-                  type="text"
-                  placeholder="최대32자까지"
-                />
+              <div className="C200">
+                <div className="C1000">
+                  <p className="T1000">자택번호 :</p>
+                  <input
+                    className="T084"
+                    type="text"
+                    placeholder="000-0000-0000"
+                  />
+                  <p className="T1000">이메일 주소 :</p>
+                  <input
+                    className="T084"
+                    type="text"
+                    placeholder="최대32자까지"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="C200">
-              <div className="C1000">
-                <p className="T1000">주소 :</p>
-                <div className="C1004">
-      <input
-        className="T1001"
-        type="text"
-        placeholder="주소를 입력하세요"
-      />
-      <button className="C1005">주소검색</button>
-    </div>
+              <div className="C200">
+                <div className="C1000">
+                  <p className="T1000">주소 :</p>
+                  <div className="C1004">
+                    <input
+                      className="T1001"
+                      type="text"
+                      placeholder="주소를 입력하세요"
+                    />
+                    <button className="C1005">주소검색</button>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="C200">
-              <div className="C201">
-                <p className="T1000">
-                  SMS 수신 : 
-                </p>
+              <div className="C200">
+                <div className="C201">
+                  <p className="T1000">SMS 수신 :</p>
+                </div>
               </div>
-            </div>
-            <div className="C200">
-              <div className="C1000">
-                <p className="T1000">
-                  거부사유 : 
-                </p>
-                <input
-                  className="T084"
-                  type="text"
-                  placeholder="최대32자까지"
-                />
+              <div className="C200">
+                <div className="C1000">
+                  <p className="T1000">거부사유 :</p>
+                  <input
+                    className="T084"
+                    type="text"
+                    placeholder="최대32자까지"
+                  />
+                </div>
               </div>
-            </div>
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={70} width={660}>
@@ -2766,6 +2755,25 @@ export default function CustomerStatusSection({
                 </div>
               </div>
             </ScrollableContainer>
+          </PopupSectionBox>
+        </>
+      </Popup>
+      <Popup
+        isOpen={isSurveyBarcodeSearchPopupOpen}
+        onClose={() => setIsSurveyBarcodeSearchPopupOpen(false)}
+      >
+        <>
+          <PopupSectionBox x={260} y={20} width={1400}>
+            <div className="C180">
+              <p className="T076">설문지 & 바코드 고객 검색</p>
+              <div
+                className="C181 isCloseButton"
+                onClick={() => setIsSurveyBarcodeSearchPopupOpen(false)}
+              >
+                <div className="C179 isDepth1"></div>
+                <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+              </div>
+            </div>
           </PopupSectionBox>
         </>
       </Popup>
