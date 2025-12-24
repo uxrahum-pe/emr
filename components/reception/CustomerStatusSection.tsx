@@ -1862,14 +1862,108 @@ export default function CustomerStatusSection({
       >
         <div>
           <PopupSectionBox x={290} y={70} width={660} height={1060}>
+            <div className="C1003">
             <div className="C200">
-              <div className="C201">
+              <div className="C1000">
+                <p className="T1000">
+                  주민번호 :      
+                </p>
                 <input
                   className="T084"
                   type="text"
                   placeholder="000000-0******"
                 />
               </div>
+            </div>
+            <div className="C200">
+              <div className="C1000">
+                <p className="T1000">
+                  성명 : 
+                </p>
+                <input
+                  className="T084"
+                  type="text"
+                  placeholder="최대 16자까지"
+                />
+                <p className="T1000">
+                  가명 : 
+                </p>
+                <input
+                  className="T084"
+                  type="text"
+                  placeholder="최대 16자까지"
+                />
+              </div>
+            </div>
+            <div className="C200">
+              <div className="C1000">
+                <p className="T1000">
+                  휴대폰번호 : 
+                </p>
+                <input
+                  className="T084"
+                  type="text"
+                  placeholder="000-0000-0000"
+                />
+                <input
+                  className="T084"
+                  type="text"
+                  placeholder="6자리"
+                />
+              </div>
+            </div>
+            <div className="C200">
+              <div className="C1000">
+                <p className="T1000">
+                  자택번호 : 
+                </p>
+                <input
+                  className="T084"
+                  type="text"
+                  placeholder="000-0000-0000"
+                />
+                <p className="T1000">
+                  이메일 주소 : 
+                </p>
+                <input
+                  className="T084"
+                  type="text"
+                  placeholder="최대32자까지"
+                />
+              </div>
+            </div>
+            <div className="C200">
+              <div className="C1000">
+                <p className="T1000">주소 :</p>
+                <div className="C1004">
+      <input
+        className="T1001"
+        type="text"
+        placeholder="주소를 입력하세요"
+      />
+      <button className="C1005">주소검색</button>
+    </div>
+              </div>
+            </div>
+            <div className="C200">
+              <div className="C201">
+                <p className="T1000">
+                  SMS 수신 : 
+                </p>
+              </div>
+            </div>
+            <div className="C200">
+              <div className="C1000">
+                <p className="T1000">
+                  거부사유 : 
+                </p>
+                <input
+                  className="T084"
+                  type="text"
+                  placeholder="최대32자까지"
+                />
+              </div>
+            </div>
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={70} width={660}>
@@ -1885,7 +1979,7 @@ export default function CustomerStatusSection({
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={190} width={660} height={820}>
-            <div className="C180"></div>
+            <div className="C200"></div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={1030} width={660} height={100}>
             <div className="C180"></div>

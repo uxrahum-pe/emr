@@ -1,1 +1,21 @@
 /* uxghks Text Styles */
+.T1000 {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    min-height: calc(var(--size-10) * 2 + var(--font-17) + var(--size-2) * 2);
+}
+.T1001 {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    min-height: calc(var(--size-10) * 2 + var(--font-17) + var(--size-2) * 2);
+    border: none;
+    outline: none;
+    background-color: #7a7a8d;
+    color: var(--color-white);
+    font-size: var(--font-17);
+    padding: var(--size-10) var(--size-20);
+    border-radius: var(--size-15);
+    width: var(--size-420);
+}

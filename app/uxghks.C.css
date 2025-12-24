@@ -1,1 +1,59 @@
 /* uxghks Component Styles */
+
+
+.C1000 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--size-30);
+}
+
+.C1001 {
+    position: absolute;
+    background: linear-gradient(to right, var(--color-black-50), var(--color-black-75));
+    backdrop-filter: blur(var(--size-5));
+    right: calc(-1 * var(--size-65));
+    bottom: var(--size-20);
+    width: var(--size-180);
+    height: var(--size-60);
+    border-radius: var(--size-20);
+    box-shadow: 0 var(--size-10) var(--size-35) var(--color-black-50);
+    transform: translateX(var(--size-40));
+    opacity: 0;
+    transition: .3s;
+    z-index: 1;
+}
+
+.C1002 {
+    width: 100%;
+    border-top: var(--size-2) solid var(--color-black-3);
+    margin: var(--size-10) var(--size-20) 0;
+    padding-top: var(--size-10);
+    display: none;
+}
+
+.C1003 {
+    display: 'flex';
+    flexDirection: 'column';
+    gap: 'var(--size-30)';
+}
+
+.C1004 {
+    display: flex;
+    align-items: center;
+    flex: 1;                   /* 부모 너비 전체 사용 */
+    background-color: #4a4a5a; /* 입력창과 같은 배경색 */
+    border-radius: var(--size-15);
+    padding-right: 5px;        /* 버튼과 끝부분 간격 */
+}
+
+.C1005 {
+    background: linear-gradient(to right, #ffb347, #ffcc33); /* 주황색 그라디언트 */
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 8px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+}
