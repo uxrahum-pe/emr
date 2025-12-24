@@ -1,1 +1,187 @@
 /* uxujung Component Styles */
+.C2000 {
+    display: flex;
+    align-items: center;
+    margin-left: var(--size-50);
+    gap: var(--size-10);
+}
+
+
+.C2001 {
+    display: flex;
+    align-items: center;
+    margin-left: var(--size-50);
+    padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
+    border-radius: var(--size-15);
+    background : linear-gradient(to right, var(--color-green), var(--color-blue));
+}
+
+
+.C2002 {
+    display: flex;
+    align-items: center;
+    padding: var(--size-5);
+    border-radius: var(--size-10);
+    background-color: var(--color-white);
+    width: var(--size-30);
+    height: var(--size-30);
+    margin-right: var(--size-15);
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+
+
+.C2003 {
+width: var(--size-20);
+height: var(--size-20);
+/* background-color: #AAC559; */
+}
+
+.C2004 {
+    display: flex;
+    /* background-color: rgb(255, 0, 0); */
+    height: var(--size-85); 
+}
+
+.C2005 {
+    display: flex;
+    align-items: center;
+    /* background-color: rgb(0, 0, 0); */
+    padding-left: var(--size-30);
+    padding-top: var(--size-20);
+}
+
+.C2006 {
+    display: flex;
+    /* background-color: rgb(255, 109, 109); */
+    height: var(--size-85);
+    align-items: flex-end;
+    padding-bottom: var(--size-25);
+}
+
+.C2007 {
+    display: flex;
+    align-items: center;
+    /* background-color: rgb(140, 0, 255); */
+    /* padding-left: var(--size-30); */
+    padding-left: var(--size-10);
+}
+
+.C2008 {
+    margin-left: var(--size-30);
+    /* background-color 대신 background 또는 background-image 사용 */
+    background: linear-gradient(to right, var(--color-yellow), var(--color-red)); 
+    padding: var(--size-10) var(--size-30);
+    border-radius: var(--size-15);
+   
+    color: var(--color-white);
+    font-size: var(--font-19);
+}
+
+.C2009 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* padding: var(--size-20); */
+    box-sizing: border-box;
+    overflow: hidden;
+   
+}
+
+.C2016 {
+    height: calc(var(--size-80) + var(--size-600));
+    overflow: hidden;
+}
+
+.C2010 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.C2017 {
+    display: flex;
+    flex-direction: column;
+}
+
+.C2018 {
+    display: flex;
+    flex-direction: column;
+}
+
+.C2011 {
+    display: flex;
+    background-color: var(--color-black-7);
+    width: 100%;
+}
+
+.C2012 {
+    display: flex;
+    border-bottom: var(--size-1) solid var(--color-black-15);
+    width: 100%;
+}
+
+.C2012:hover {
+    background-color: var(--color-black-3);
+}
+
+.C2013 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--size-10);
+    height: var(--size-120);
+    flex-shrink: 0;
+    border-top: var(--size-2) solid var(--color-white-15);
+}
+
+.C2014 {
+    width: var(--size-50);
+    height: var(--size-50);
+    border-radius: var(--size-15);
+    border: none;
+    background-color: var(--color-white-7);
+    color: var(--color-white);
+    font-size: var(--font-17);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.C2014:hover:not(:disabled) {
+    background-color: var(--color-white-15);
+}
+
+.C2014:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.C2015 {
+    width: var(--size-40);
+    height: var(--size-40);
+    border-radius: var(--size-15);
+    border: none;
+    background-color: transparent;
+    color: var(--color-white);
+    font-size: var(--font-17);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.C2015:hover {
+    background-color: var(--color-white-7);
+}
+
+.C2015.isActive {
+    width: var(--size-40);
+    height: var(--size-40);
+    border-radius: var(--size-15);
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
