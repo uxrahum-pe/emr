@@ -77,11 +77,15 @@
 }
 
 .C1007 {
-    /* display: flex; */
+    display: flex;
+    flex-wrap: wrap;
     margin-top: var(--size-30);
     padding: var(--size-5);
     margin-bottom: var(--size-10);
     margin-left: var(--size-30);
+    box-sizing: border-box;  /* 추가 */
+
+    max-width: 100%;
 }
 
 /* 드랍다운 */
@@ -120,7 +124,7 @@
 .C1011 {
     display: flex;
     align-items: center;
-    margin-left: var(--size-50);
+    margin-left: var(--size-60);
     padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
     border-radius: var(--size-15);
     background : linear-gradient(to right, var(--color-green), var(--color-blue));
@@ -149,10 +153,10 @@
 .C1014 {
     display: flex;
     align-items: center;
-    margin-left: var(--size-50);
+    margin-right: var(--size-10);
     padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
     border-radius: var(--size-15);
-    background : var(--color-black-25);
+    background : var(--color-white-25);
 }
 
 .C1015 {
@@ -165,4 +169,23 @@
     height: var(--size-30);
     margin-right: var(--size-15);
     box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+
+.C1016 {
+    display: flex;
+    align-items: center;
+    margin-right: var(--size-10);
+    padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
+    border-radius: var(--size-15);
+    background : linear-gradient(to right, var(--color-green), var(--color-blue));
+}
+
+/* C1017 */
+.C1017 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: var(--size-30);
+    padding: var(--size-5);
+    margin-bottom: var(--size-10);
+    margin-left: var(--size-30);
 }

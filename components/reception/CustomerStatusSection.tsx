@@ -1944,7 +1944,7 @@ export default function CustomerStatusSection({
                   </div>
                   <p className="T1003">수신 금지</p>
                 </div>
-                <div className="C1011">
+                <div className="C1016">
                   <div className="C1012">
                     <div className="C1013 styleSheet isIcon isMini isChecked"></div>
                   </div>
@@ -1979,7 +1979,18 @@ export default function CustomerStatusSection({
                 <p className="T1000">
                   본인인증: 
                 </p>
-                
+                <div className="C1016">
+                  <div className="C1012">
+                    <div className="C1013 styleSheet isIcon isMini isChecked"></div>
+                  </div>
+                  <p className="T1003">인증 고객</p>
+                </div>
+                <div className="C1014">
+                  <div className="C1015">
+                    <div className="C1013"></div>
+                  </div>
+                  <p className="T1003">미인증 고객</p>
+                </div>
               </div>
             </div>
             <div className="C1007">
@@ -1987,7 +1998,42 @@ export default function CustomerStatusSection({
                 <p className="T1000">
                   상태: 
                 </p>
-                
+                <div className="C1014">
+                  <div className="C1015">
+                    <div className="C1013"></div>
+                  </div>
+                  <p className="T1003">등록</p>
+                </div>
+                <div className="C1014">
+                  <div className="C1015">
+                    <div className="C1013"></div>
+                  </div>
+                  <p className="T1003">가등록</p>
+                </div>
+                <div className="C1014">
+                  <div className="C1015">
+                    <div className="C1013"></div>
+                  </div>
+                  <p className="T1003">보류</p>
+                </div>
+                <div className="C1014">
+                  <div className="C1015">
+                    <div className="C1013"></div>
+                  </div>
+                  <p className="T1003">삭제</p>
+                </div>
+                <div className="C1014">
+                  <div className="C1015">
+                    <div className="C1013"></div>
+                  </div>
+                  <p className="T1003">환불</p>
+                </div>
+                <div className="C1014">
+                  <div className="C1015">
+                    <div className="C1013"></div>
+                  </div>
+                  <p className="T1003">이동</p>
+                </div>
               </div>
             </div>
             </div>

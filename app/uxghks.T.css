@@ -44,4 +44,5 @@
     font-weight: 800;
     color: var(--color-black);
     margin: 0;
+    white-space: nowrap;
 }
