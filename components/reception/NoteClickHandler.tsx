@@ -46,7 +46,9 @@ export default function NoteClickHandler({
       }
       navigateToPageRef.current(
         "my-notes",
-        <SlidePage title="내 쪽지 보기" showToggleSwitch={false} />
+        <SlidePage title="내 쪽지 보기" showToggleSwitch={false}>
+          TEST
+        </SlidePage>
       );
     };
     // 다음 틱에 등록하여 무한 루프 방지 및 렌더링 완료 후 실행
