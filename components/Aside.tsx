@@ -129,8 +129,13 @@ const AsideInner = memo(function AsideInner({
     const content =
       typeof mainContent === "function" ? mainContent() : mainContent;
 
-    // 대시보드 경로이거나 content가 null이면 대시보드용 빈 C073 반환 (SlidePage로 감싸지 않음)
-    if (isDashboard || content === null) {
+    // 대시보드 경로일 때는 content를 C073으로 감싸서 반환 (SlidePage로 감싸지 않음)
+    if (isDashboard) {
+      return <div className="C073">{content}</div>;
+    }
+
+    // content가 null이면 빈 C073 반환
+    if (content === null) {
       return <div className="C073"></div>;
     }
 

@@ -21,6 +21,8 @@ interface ReceptionStoreState {
   selectedPendingTabs: number[];
   /** 선택된 정렬 탭 */
   selectedSortTab: number;
+  /** 정렬 방향 (true: 내림차순, false: 오름차순) */
+  sortOrder: "asc" | "desc";
   /** Quick Actions 호버 상태 */
   isQuickActionsHovered: boolean;
   /** 고객 상세 패널 열림 상태 */
@@ -41,6 +43,10 @@ interface ReceptionStoreActions {
   setSelectedPendingTabs: (tabs: number[]) => void;
   /** 선택된 정렬 탭 설정 */
   setSelectedSortTab: (tab: number) => void;
+  /** 정렬 방향 설정 */
+  setSortOrder: (order: "asc" | "desc") => void;
+  /** 정렬 방향 토글 */
+  toggleSortOrder: () => void;
   /** Quick Actions 호버 상태 설정 */
   setIsQuickActionsHovered: (value: boolean) => void;
   /** 고객 상세 패널 열림 상태 설정 */
@@ -63,6 +69,7 @@ const initialState: ReceptionStoreState = {
   selectedTabs: [0, 1, 2],
   selectedPendingTabs: [0, 1],
   selectedSortTab: 0,
+  sortOrder: "desc",
   isQuickActionsHovered: false,
   isCustomerDetailOpen: false,
 };
@@ -79,6 +86,11 @@ export const useReceptionStore = create<ReceptionStore>((set) => ({
   setSelectedTabs: (tabs) => set({ selectedTabs: tabs }),
   setSelectedPendingTabs: (tabs) => set({ selectedPendingTabs: tabs }),
   setSelectedSortTab: (tab) => set({ selectedSortTab: tab }),
+  setSortOrder: (order) => set({ sortOrder: order }),
+  toggleSortOrder: () =>
+    set((state) => ({
+      sortOrder: state.sortOrder === "asc" ? "desc" : "asc",
+    })),
   setIsQuickActionsHovered: (value) => set({ isQuickActionsHovered: value }),
   setIsCustomerDetailOpen: (value) => set({ isCustomerDetailOpen: value }),
   reset: () => set(initialState),

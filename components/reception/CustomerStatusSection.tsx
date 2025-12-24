@@ -23,7 +23,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAside } from "@/components/AsideContext";
 import SlidePage from "@/components/SlidePage";
 import ReferenceMessage from "@/components/ReferenceMessage";
@@ -39,7 +39,8 @@ import Popup from "@/components/Popup";
 import { getRoleInfo } from "@/lib/utils/role";
 import type { CustomerStatusSectionProps } from "@/types/reception";
 import PopupSectionBox from "../PopupSectionBox";
-import Checkbox from "../Checkbox";
+
+import { useReceptionStore } from "@/stores/useReceptionStore";
 
 /**
  * CustomerStatusSection 컴포넌트
@@ -60,9 +61,35 @@ export default function CustomerStatusSection({
   isCustomerDetailOpen,
   setIsCustomerDetailOpen,
 }: CustomerStatusSectionProps) {
+  const { sortOrder, toggleSortOrder } = useReceptionStore();
   const { navigateToPage, resetToMain } = useAside();
   const [isCustomerRegistrationPopupOpen, setIsCustomerRegistrationPopupOpen] =
     useState(false);
+  const [isCustomerSearchPopupOpen, setIsCustomerSearchPopupOpen] =
+    useState(false);
+  const [isSurveyBarcodeSearchPopupOpen, setIsSurveyBarcodeSearchPopupOpen] =
+    useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // 고객 통합 검색 팝업이 열릴 때 입력 필드에 자동 포커스
+  useEffect(() => {
+    if (isCustomerSearchPopupOpen) {
+      // 팝업이 완전히 렌더링되고 애니메이션이 시작된 후 포커스
+      // Popup 컴포넌트의 isOpened 상태 변경(10ms) + 애니메이션 시간을 고려
+      const timer1 = setTimeout(() => {
+        if (searchInputRef.current) {
+          // requestAnimationFrame을 사용하여 브라우저 렌더링 사이클에 맞춤
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              searchInputRef.current?.focus();
+            });
+          });
+        }
+      }, 150);
+
+      return () => clearTimeout(timer1);
+    }
+  }, [isCustomerSearchPopupOpen]);
 
   const handleCustomerClick = (
     customerName: string,
@@ -233,11 +260,25 @@ export default function CustomerStatusSection({
       <section className="C021">
         <div className="C028">
           <p className="T007">고객 현황</p>
-          <div className="C022">
+          <div
+            className="C022"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsCustomerSearchPopupOpen(true);
+            }}
+          >
             <div className="C017 styleSheet isIcon isMagnifier"></div>
             <p className="T005">고객 통합 검색</p>
           </div>
-          <div className="C023">
+          <div
+            className="C023"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsSurveyBarcodeSearchPopupOpen(true);
+            }}
+          >
             <div className="C019 styleSheet isIcon isCheck"></div>
             <p className="T008">설문지 & 바코드 고객 검색</p>
           </div>
@@ -2011,6 +2052,808 @@ export default function CustomerStatusSection({
             <div className="C180"></div>
           </PopupSectionBox>
         </div>
+      </Popup>
+      <Popup
+        isOpen={isCustomerSearchPopupOpen}
+        onClose={() => setIsCustomerSearchPopupOpen(false)}
+      >
+        <>
+          <PopupSectionBox x={260} y={20} width={1400}>
+            <div className="C180">
+              <p className="T076">고객 통합 검색</p>
+              <input
+                ref={searchInputRef}
+                className="T085"
+                type="text"
+                placeholder="이름, 고객번호, 주민번호, 전화번호 등."
+              />
+              <div className="C189">
+                <p className="isGrey">보기:</p>
+                <TabSelector
+                  items={[{ title: "우리 지점만" }, { title: "타지점 포함" }]}
+                  width="var(--size-200)"
+                  multiple={false}
+                  value={selectedSortTab}
+                  onChange={(selected) =>
+                    setSelectedSortTab(selected as number)
+                  }
+                />
+              </div>
+              <div className="C202">
+                <div className="C203">
+                  <div className="C204 styleSheet isIcon isMagnifier"></div>
+                  <p className="T086">
+                    검색결과:<span className="isWhite">8</span>명
+                  </p>
+                </div>
+                <div className="C203 isFilter">
+                  <div className="C204 styleSheet isIcon isFunnel"></div>
+                  <p className="T086">
+                    정렬: <span className="isWhite">주민번호</span>
+                  </p>
+                </div>
+                <div
+                  className="C203 isSort"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleSortOrder();
+                  }}
+                >
+                  <div
+                    className={`C205 ${sortOrder === "desc" ? "isBottom" : ""}`}
+                  >
+                    <div
+                      className={`C206 styleSheet isIcon isMini isArrow ${
+                        sortOrder === "desc" ? "isBottom" : "isTop"
+                      }`}
+                    ></div>
+                  </div>
+                  <p className="T086">
+                    정렬:{" "}
+                    <span className="isWhite">
+                      {sortOrder === "desc" ? "내림차순" : "오름차순"}
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div
+                className="C181 isCloseButton"
+                onClick={() => setIsCustomerSearchPopupOpen(false)}
+              >
+                <div className="C179 isDepth1"></div>
+                <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+              </div>
+            </div>
+          </PopupSectionBox>
+          <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+            <ScrollableContainer className="C207">
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+              <div className="C208">
+                <div className="C209">
+                  <div className="C210">
+                    <p className="T013">김지영</p>
+                    <p className="T014 isRed">여성</p>
+                    <p className="T014">
+                      27<span className="isUnit">세</span>
+                    </p>
+                    <p className="T014 isOldbie">
+                      2<span className="isUnit">기</span>
+                    </p>
+                  </div>
+                  <p className="T087">
+                    <span className="isUnit">고객번호:</span> 210051234
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">주민번호:</span> 800423-1******
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">전화번호:</span> 010-7444-4118
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">여권번호:</span> M1234567
+                  </p>
+                  <p className="T087">
+                    <span className="isUnit">최종내원:</span> 2025.12.23
+                    <span className="isGreen isBold"> 부산병원</span>
+                  </p>
+                </div>
+                <div className="C209">
+                  <p className="T087">
+                    <span className="isUnit">내원지점이력:</span> 서울병원,
+                    부산병원
+                  </p>
+                  <div className="C211">
+                    <p className="T042">찐서포터</p>
+                    <p className="T042">EC</p>
+                    <p className="T042">CC</p>
+                    <p className="T042">마케팅거부</p>
+                    <p className="T042">MATE</p>
+                    <p className="T042">기증자</p>
+                    <p className="T042">실천반갑</p>
+                    <p className="T042">성공기 작성</p>
+                    <p className="T042 isRed">혈액검사 대상자</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollableContainer>
+          </PopupSectionBox>
+        </>
+      </Popup>
+      <Popup
+        isOpen={isSurveyBarcodeSearchPopupOpen}
+        onClose={() => setIsSurveyBarcodeSearchPopupOpen(false)}
+      >
+        <>
+          <PopupSectionBox x={260} y={20} width={1400}>
+            <div className="C180">
+              <p className="T076">설문지 & 바코드 고객 검색</p>
+              <div
+                className="C181 isCloseButton"
+                onClick={() => setIsSurveyBarcodeSearchPopupOpen(false)}
+              >
+                <div className="C179 isDepth1"></div>
+                <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+              </div>
+            </div>
+          </PopupSectionBox>
+        </>
       </Popup>
     </article>
   );

@@ -51,16 +51,37 @@ export default function Popup({
       };
       closeHandlerRef.current = closeHandler;
       modalStack.push(closeHandler);
+
+      // body 스크롤 막기
+      const originalOverflow = document.body.style.overflow;
+      const originalPaddingRight = document.body.style.paddingRight;
+
+      // 스크롤바 너비 계산 (스크롤바가 사라져도 레이아웃 시프트 방지)
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+
+      document.body.style.overflow = "hidden";
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+
       // 브라우저가 초기 상태를 인식한 후 애니메이션 트리거
       const timer = setTimeout(() => {
         setIsOpened(true);
       }, 10);
+
       return () => {
         clearTimeout(timer);
         // 모달 스택에서 제거
         if (closeHandlerRef.current) {
           modalStack.remove(closeHandlerRef.current);
           closeHandlerRef.current = null;
+        }
+
+        // 다른 모달이 열려있지 않으면 스크롤 복원
+        if (modalStack.isEmpty()) {
+          document.body.style.overflow = originalOverflow;
+          document.body.style.paddingRight = originalPaddingRight;
         }
       };
     } else {
@@ -71,6 +92,13 @@ export default function Popup({
         modalStack.remove(closeHandlerRef.current);
         closeHandlerRef.current = null;
       }
+
+      // 다른 모달이 열려있지 않으면 스크롤 복원
+      if (modalStack.isEmpty()) {
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
+      }
+
       const timer = setTimeout(() => {
         setIsVisible(false);
       }, 300);

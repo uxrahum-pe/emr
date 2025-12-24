@@ -157,6 +157,15 @@ export default function MonthlyCalendar({
         <span className="isUnit">년</span>{" "}
         {format(currentMonth, "MM", { locale: ko })}
         <span className="isUnit">월</span>
+        {selectedDate &&
+          format(selectedDate, "yyyy-MM", { locale: ko }) ===
+            format(currentMonth, "yyyy-MM", { locale: ko }) && (
+            <>
+              {" "}
+              {format(selectedDate, "dd", { locale: ko })}
+              <span className="isUnit">일</span>
+            </>
+          )}
       </p>
       <div className="C067">
         <div className="C068">
