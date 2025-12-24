@@ -1,1 +1,118 @@
 /* uxujung Text Styles */
+.T2000 {
+    text-align: center;
+    font-style: normal;
+    line-height: normal;
+    font-size: var(--font-15);
+    margin-right: var(--size-10);
+  
+}
+
+.T2001 {
+    font-size: var(--font-14);
+    color: var(--color-black);
+    margin: 0;
+}
+
+.T2004 {
+    font-size: var(--font-17);
+    margin-right: var(--size-10);
+    color: var(--color-white);
+}
+
+.T2005 {
+    width: var(--size-200);
+    height: var(--size-50);
+    padding: var(--size-10) var(--size-20);
+   /* 패딩을 포함한 전체 너비 유지 */
+  
+    color: var(--color-white);
+    font-size: var(--font-17);
+  
+    border-radius: var(--size-15);
+    border: var(--size-2) solid var(--color-white-25);
+
+}
+
+.T2006 {
+    width: var(--size-170);
+    height: var(--size-50);
+    padding: var(--size-10) var(--size-20);
+    box-sizing: border-box; /* 패딩을 포함한 전체 너비 유지 */
+  
+    color: var(--color-white);
+    font-size: var(--font-17);
+  
+    border-radius: var(--size-15);
+    border: var(--size-2) solid var(--color-white-25);
+
+}
+
+.T2010 {
+    padding: 0 var(--size-10);
+    height: var(--size-80);
+    text-align: center;
+    font-size: var(--font-17);
+    font-weight: 700;
+    color: var(--color-white-50);
+    border-bottom: var(--size-2) solid var(--color-white-15);
+    border-right: var(--size-2) solid var(--color-white-7);
+    width: 10%;
+    flex: 0 0 10%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.T2010.is15p{
+    width: 15%;
+    flex: 0 0 15%;
+}
+
+
+.T2011 {
+    padding: 0 var(--size-10);
+    height: var(--size-60);
+    text-align: center;
+    font-size: var(--font-14);
+    color: var(--color-white);
+    width: 10%;
+    flex: 0 0 10%;
+    box-sizing: border-box;
+    background-color: var(--color-black-7);
+    border-right: var(--size-2) solid var(--color-white-7);
+    border-bottom: var(--size-2) solid var(--color-white-7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.T2011.is15p{
+    width: 15%;
+    flex: 0 0 15%;
+}
+
+.T2012 {
+    padding: 0 var(--size-10);
+    height: var(--size-60);
+    text-align: center;
+    font-size: var(--font-14);
+    font-weight: 500;
+    width: 10%;
+    flex: 0 0 10%;
+    box-sizing: border-box;
+    background-color: var(--color-black-7);
+    border-bottom: var(--size-2) solid var(--color-white-7);
+    border-right: var(--size-2) solid var(--color-white-7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.T2012.isRegistered {
+    color: var(--color-green);
+}
+
+.T2012.isDisconnected {
+    color: var(--color-magenta);
+}
