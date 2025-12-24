@@ -101,6 +101,7 @@ export default function PageHeader({
               <p className="isGrey">정렬:</p>
               <TabSelector
                 items={[{ title: "시간순" }, { title: "상태순" }]}
+                width="var(--size-140)"
                 multiple={false}
                 value={selectedSortTab}
                 onChange={(selected) => setSelectedSortTab(selected as number)}

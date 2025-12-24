@@ -125,6 +125,7 @@
   
   --breakpoint: 1920;
   
+  --font-8: calc(100vw * 8 / var(--breakpoint));
   --font-12: calc(100vw * 12 / var(--breakpoint));
   --font-14: calc(100vw * 14 / var(--breakpoint));
   --font-15: calc(100vw * 15 / var(--breakpoint));
@@ -388,6 +389,8 @@
   --size-1480: calc(100vw * 1480 / var(--breakpoint));
   --size-1490: calc(100vw * 1490 / var(--breakpoint));
   --size-1500: calc(100vw * 1500 / var(--breakpoint));
+  --size-1780: calc(100vw * 1780 / var(--breakpoint));
+  --size-1800: calc(100vw * 1800 / var(--breakpoint));
   /* Size Variables 끝 */
 
 }
@@ -657,6 +660,8 @@
     --size-1480: 1480px;
     --size-1490: 1490px;
     --size-1500: 1500px;
+    --size-1780: 1780px;
+    --size-1800: 1800px;
     /* Size Variables 끝 */
   }
 }
@@ -936,6 +941,10 @@ span.isLink {
   background-position-x: calc(-1 * var(--size-280));
   background-position-y: calc(-1 * var(--size-440));
 }
+.isIcon.isFunnel {
+  background-position-x: calc(-1 * var(--size-280));
+  background-position-y: calc(-1 * var(--size-600));
+}
 .isIcon.isNote {
   background-position-x: calc(-1 * var(--size-280));
   background-position-y: calc(-1 * var(--size-680));
@@ -968,6 +977,10 @@ span.isLink {
   background-position-x: calc(-1 * var(--size-360));
   background-position-y: calc(-1 * var(--size-120));
 }
+.isIcon.isComunication {
+  background-position-x: calc(-1 * var(--size-360));
+  background-position-y: calc(-1 * var(--size-200));
+}
 .isIcon.isBentoMenu {
   background-position-x: calc(-1 * var(--size-360));
   background-position-y: calc(-1 * var(--size-280));
@@ -975,6 +988,10 @@ span.isLink {
 .isIcon.isSpeed {
   background-position-x: calc(-1 * var(--size-360));
   background-position-y: calc(-1 * var(--size-320));
+}
+.isIcon.isMap {
+  background-position-x: calc(-1 * var(--size-360));
+  background-position-y: calc(-1 * var(--size-360));
 }
 .isIcon.isMyLocation {
   background-position-x: calc(-1 * var(--size-360));
@@ -995,7 +1012,12 @@ span.isLink {
 .isIcon.isArrow.isLeft {
   transform: rotate(180deg);
 }
-
+.isIcon.isArrow.isBottom {
+  transform: rotate(90deg);
+}
+.isIcon.isArrow.isTop {
+  transform: rotate(270deg);
+}
 
 .isIcon.isBig {
   background-position-x: 0;
@@ -1101,4 +1123,11 @@ span.isLink {
 }
 .isGage.isStar.isLv5 {
   background-position-y: calc(-1 * var(--size-130));
+}
+
+.isLabel {
+  background-position-x: calc(-1 * var(--size-750));
+  background-position-y: calc(-1 * var(--size-400));
+  width: var(--size-20);
+  height: var(--size-30);
 }

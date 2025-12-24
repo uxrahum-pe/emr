@@ -21,6 +21,7 @@ import { useEffect, useRef } from "react";
 import { useAside } from "@/components/AsideContext";
 import SlidePage from "@/components/SlidePage";
 import type { AlarmClickHandlerProps } from "@/types/reception";
+import ScrollableContainer from "../ScrollableContainer";
 
 export default function AlarmClickHandler({
   onHandlerReady,
@@ -46,7 +47,46 @@ export default function AlarmClickHandler({
       }
       navigateToPageRef.current(
         "my-alarms",
-        <SlidePage title="내 알림 보기" showToggleSwitch={false} />
+        <SlidePage title="내 알림 보기" showToggleSwitch={false}>
+          <ScrollableContainer className="C156">
+            <>
+              <div className="C220">
+                <div className="C087">
+                  <div className="C084">
+                    <div className="C033 isIcon styleSheet isExit"></div>
+                  </div>
+                  <div className="C083">
+                    <p className="T039">
+                      <span className="isBold">귀가 처리 완료</span>
+                    </p>
+                    <div className="C086">
+                      <p className="T041">최민호</p>
+                      <p className="T042 isBlue">남성</p>
+                      <p className="T042">
+                        45<span className="isUnit">세</span>
+                      </p>
+                      <p className="T042 isOldbie">
+                        3<span className="isUnit">기</span>
+                      </p>
+                      <p className="T016 isGrey">210046587</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="C214">
+                  <div className="C212"></div>
+                  <p className="T089">
+                    <span className="isUnit">처리자:</span> 이미영
+                    <span className="isUnit">간호사</span>
+                  </p>
+                  <p className="T090">
+                    <span className="isUnit">2025.</span>12.24
+                    <span className="isUnit"> AM</span> 10:00
+                  </p>
+                </div>
+              </div>
+            </>
+          </ScrollableContainer>
+        </SlidePage>
       );
     };
     // 다음 틱에 등록하여 무한 루프 방지 및 렌더링 완료 후 실행

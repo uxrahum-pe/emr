@@ -134,8 +134,6 @@ export default function MiniPopup({
         style={{
           top: `${position.top}px`,
           left: `${position.left}px`,
-          width: "var(--size-410)",
-          height: "fit-content",
         }}
       >
         {children}

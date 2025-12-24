@@ -17,16 +17,103 @@
 
 "use client";
 
-import { memo } from "react";
+import { memo, useState } from "react";
+import MonthlyCalendar from "@/components/MonthlyCalendar";
+import ScrollableContainer from "@/components/ScrollableContainer";
+import { startOfDay } from "date-fns";
 
 /**
  * 개인 일정 메인 콘텐츠 컴포넌트
  */
 const PersonalSchedule = memo(() => {
-  // Aside의 MainPageContent가 C075로 감싸므로,
-  // 여기서는 C073을 반환하지 않고 빈 fragment를 반환합니다.
-  // 실제 C073은 Aside 컴포넌트에서 직접 처리해야 합니다.
-  return null;
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    startOfDay(new Date())
+  );
+
+  const handleDateSelect = (date: Date) => {
+    setSelectedDate(date);
+  };
+
+  return (
+    <>
+      <div className="C221">
+        <div className="C212"></div>
+        <p className="T092">
+          홍성훈 <span className="isUnit">원장님</span>{" "}
+          <span className="isBold">월간 일정</span>
+        </p>
+      </div>
+      <div className="C222">
+        <MonthlyCalendar
+          selectedDate={selectedDate}
+          onDateSelect={handleDateSelect}
+        />
+      </div>
+      <ScrollableContainer className="C227">
+        <p className="T093">일별 기록</p>
+        <div className="C223">
+          <div className="C226">
+            <div className="C224 styleSheet isIcon isSpeed"></div>
+          </div>
+          <div className="C225">
+            <p className="T094">지점 업무 이력</p>
+            <p className="T095">
+              총 활동 수: <span className="isValue">15</span>건
+              <span className="isRed isMini"> (-1)</span>
+            </p>
+          </div>
+          <div className="C112">
+            <div className="C113 styleSheet isIcon isMini isChevron isRight"></div>
+          </div>
+        </div>
+        <div className="C223">
+          <div className="C226">
+            <div className="C224 styleSheet isIcon isWrite"></div>
+          </div>
+          <div className="C225">
+            <p className="T094">참조사항 입력 기록</p>
+            <p className="T095">
+              총 메세지 수: <span className="isValue">25</span>건
+              <span className="isRed isMini"> (-1)</span>
+            </p>
+          </div>
+          <div className="C112">
+            <div className="C113 styleSheet isIcon isMini isChevron isRight"></div>
+          </div>
+        </div>
+        <div className="C223">
+          <div className="C226">
+            <div className="C224 styleSheet isIcon isComunication"></div>
+          </div>
+          <div className="C225">
+            <p className="T094">상호작용 고객 기록</p>
+            <p className="T095">
+              총 인원: <span className="isValue">10</span>명
+              <span className="isRed isMini"> (-1)</span>
+            </p>
+          </div>
+          <div className="C112">
+            <div className="C113 styleSheet isIcon isMini isChevron isRight"></div>
+          </div>
+        </div>
+        <div className="C223">
+          <div className="C226">
+            <div className="C224 styleSheet isIcon isMap"></div>
+          </div>
+          <div className="C225">
+            <p className="T094">EMR 사용 로그</p>
+            <p className="T095">
+              총 활동 수: <span className="isValue">215</span>건
+              <span className="isBlue isMini"> (+1)</span>
+            </p>
+          </div>
+          <div className="C112">
+            <div className="C113 styleSheet isIcon isMini isChevron isRight"></div>
+          </div>
+        </div>
+      </ScrollableContainer>
+    </>
+  );
 });
 
 PersonalSchedule.displayName = "PersonalSchedule";
