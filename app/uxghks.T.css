@@ -1,21 +1,47 @@
 /* uxghks Text Styles */
 .T1000 {
-    display: flex;
+    /* min-height: calc(var(--size-10)  2 + var(--font-17) + var(--size-2)  2); */
     align-items: center;
     font-weight: 800;
-    min-height: calc(var(--size-10) * 2 + var(--font-17) + var(--size-2) * 2);
+    flex: 0 0 var(--size-80);
+    text-align: right;
+    margin-right: var(--size-20);
+
 }
 .T1001 {
-    display: flex;
+    /* margin-left: var(--size-20); */
     align-items: center;
     font-weight: 800;
-    min-height: calc(var(--size-10) * 2 + var(--font-17) + var(--size-2) * 2);
     border: none;
-    outline: none;
-    background-color: #7a7a8d;
+    background-color: var(--color-black-25);
     color: var(--color-white);
     font-size: var(--font-17);
-    padding: var(--size-10) var(--size-20);
+    padding: 0 var(--size-20);
     border-radius: var(--size-15);
     width: var(--size-420);
+    line-height: var(--size-50);
+}
+
+.T1002{
+    color: var(--color-white);
+    font-size: var(--font-17);
+    padding: 0 var(--size-20);
+    border-radius: var(--size-15);
+    border: var(--size-2) solid var(--color-white-25);
+    width: var(--size-200);
+    /* margin-left: var(--size-20); */
+    line-height: var(--size-46);
+}
+
+.T1002:focus {
+    outline: none;
+    border: var(--size-2) solid var(--color-blue-75);
+
+}
+
+.T1003{
+    font-size: var(--font-17);
+    font-weight: 800;
+    color: var(--color-black);
+    margin: 0;
 }

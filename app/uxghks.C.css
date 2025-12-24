@@ -1,12 +1,14 @@
 /* uxghks Component Styles */
 
-
+/* 신규고객 등록  */
 .C1000 {
+    /* gap: var(--size-30); */
+    /* flex-flow: wrap; */
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--size-30);
+    align-items: center;
+    font-size: var(--font-17);
 }
+
 
 .C1001 {
     position: absolute;
@@ -42,18 +44,125 @@
     display: flex;
     align-items: center;
     flex: 1;                   /* 부모 너비 전체 사용 */
-    background-color: #4a4a5a; /* 입력창과 같은 배경색 */
+    /* background-color: #4a4a5a; 입력창과 같은 배경색 */
     border-radius: var(--size-15);
     padding-right: 5px;        /* 버튼과 끝부분 간격 */
 }
 
+/* 주황색 버튼 */
 .C1005 {
-    background: linear-gradient(to right, #ffb347, #ffcc33); /* 주황색 그라디언트 */
+    background: linear-gradient(to right, var(--color-yellow), var(--color-red)); /* 주황색 그라디언트 */
     border: none;
     border-radius: 10px;
-    color: white;
-    padding: 8px 15px;
+    color: var(--color-white);
     font-weight: bold;
-    cursor: pointer;
     white-space: nowrap;
+    margin-left: calc(-1 * var(--size-20));
+    margin-right: var(--size-25);
+    padding: 0 var(--size-15);
+    font-size: var(--font-17);
+    text-align: center;
+    line-height: var(--size-50);
+}
+
+/* 왼쪽 컨테이너 */
+.C1006 {
+    height:100%;
+    overflow: hidden;
+    border-radius: var(--size-30);
+    padding-top: var(--size-10);
+    padding-left: var(--size-30);
+    padding-right: var(--size-30);
+
+}
+
+.C1007 {
+    /* display: flex; */
+    margin-top: var(--size-30);
+    padding: var(--size-5);
+    margin-bottom: var(--size-10);
+    margin-left: var(--size-30);
+}
+
+/* 드랍다운 */
+.C1008 {
+    display: flex;
+    gap: var(--size-3);
+    height: var(--size-50);
+    align-items: center;
+    padding: var(--size-10) var(--size-20);
+    /* border-bottom: var(--size-2) dashed var(--color-white-7); */
+}
+
+/* 점선 */
+.C1009 {
+    border-top: var(--size-2) dashed var(--color-white-25); /* 동글동글한 점선 */
+    margin-right: var(--size-25);
+}
+
+
+/* 검은색 버튼 */
+.C1010 {
+    background: var(--color-black); /* 주황색 그라디언트 */
+    border: none;
+    border-radius: 10px;
+    color: var(--color-white);
+    font-weight: bold;
+    white-space: nowrap;
+    margin-left: calc(-1 * var(--size-60));
+    padding: 0 var(--size-15);
+    font-size: var(--font-17);
+    text-align: center;
+    line-height: var(--size-50);
+}
+
+/* 그라디언트 체크박스 */
+.C1011 {
+    display: flex;
+    align-items: center;
+    margin-left: var(--size-50);
+    padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
+    border-radius: var(--size-15);
+    background : linear-gradient(to right, var(--color-green), var(--color-blue));
+}
+
+
+.C1012 {
+    display: flex;
+    align-items: center;
+    padding: var(--size-5);
+    border-radius: var(--size-10);
+    background-color: var(--color-white);
+    width: var(--size-30);
+    height: var(--size-30);
+    margin-right: var(--size-15);
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+
+
+.C1013 {
+    width: var(--size-20);
+    height: var(--size-20);
+}
+
+
+.C1014 {
+    display: flex;
+    align-items: center;
+    margin-left: var(--size-50);
+    padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
+    border-radius: var(--size-15);
+    background : var(--color-black-25);
+}
+
+.C1015 {
+    display: flex;
+    align-items: center;
+    padding: var(--size-5);
+    border-radius: var(--size-10);
+    background-color: var(--color-black-25);
+    width: var(--size-30);
+    height: var(--size-30);
+    margin-right: var(--size-15);
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
 }

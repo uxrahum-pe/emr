@@ -39,6 +39,7 @@ import Popup from "@/components/Popup";
 import { getRoleInfo } from "@/lib/utils/role";
 import type { CustomerStatusSectionProps } from "@/types/reception";
 import PopupSectionBox from "../PopupSectionBox";
+
 import { useReceptionStore } from "@/stores/useReceptionStore";
 
 /**
@@ -1872,87 +1873,164 @@ export default function CustomerStatusSection({
         <div>
           <PopupSectionBox x={290} y={70} width={660} height={1060}>
             <div className="C1003">
-              <div className="C200">
-                <div className="C1000">
-                  <p className="T1000">주민번호 :</p>
-                  <input
-                    className="T084"
-                    type="text"
-                    placeholder="000000-0******"
-                  />
-                </div>
-              </div>
-              <div className="C200">
-                <div className="C1000">
-                  <p className="T1000">성명 :</p>
-                  <input
-                    className="T084"
-                    type="text"
-                    placeholder="최대 16자까지"
-                  />
-                  <p className="T1000">가명 :</p>
-                  <input
-                    className="T084"
-                    type="text"
-                    placeholder="최대 16자까지"
-                  />
-                </div>
-              </div>
-              <div className="C200">
-                <div className="C1000">
-                  <p className="T1000">휴대폰번호 :</p>
-                  <input
-                    className="T084"
-                    type="text"
-                    placeholder="000-0000-0000"
-                  />
-                  <input className="T084" type="text" placeholder="6자리" />
-                </div>
-              </div>
-              <div className="C200">
-                <div className="C1000">
-                  <p className="T1000">자택번호 :</p>
-                  <input
-                    className="T084"
-                    type="text"
-                    placeholder="000-0000-0000"
-                  />
-                  <p className="T1000">이메일 주소 :</p>
-                  <input
-                    className="T084"
-                    type="text"
-                    placeholder="최대32자까지"
-                  />
-                </div>
-              </div>
-              <div className="C200">
-                <div className="C1000">
-                  <p className="T1000">주소 :</p>
-                  <div className="C1004">
-                    <input
-                      className="T1001"
-                      type="text"
-                      placeholder="주소를 입력하세요"
-                    />
-                    <button className="C1005">주소검색</button>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">
+                  주민번호:      
+                </p>
+                <input
+                  className="T1002"
+                  type="text"
+                  placeholder="000000-0******"
+                />
+                <button className="C1005">중복검사</button>
+                <div className="C1011">
+                  <div className="C1012">
+                    <div className="C1013 styleSheet isIcon isMini isChecked"></div>
                   </div>
+                  <p className="T1003">가명 사용</p>
                 </div>
               </div>
-              <div className="C200">
-                <div className="C201">
-                  <p className="T1000">SMS 수신 :</p>
-                </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">
+                  성명: 
+                </p>
+                <input
+                  className="T1002"
+                  type="text"
+                  placeholder="최대 16자까지"
+                />
+                <p className="T1000">
+                  가명: 
+                </p>
+                <input
+                  className="T1002"
+                  type="text"
+                  placeholder="최대 16자까지"
+                />
               </div>
-              <div className="C200">
-                <div className="C1000">
-                  <p className="T1000">거부사유 :</p>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">
+                  전화번호: 
+                </p>
+                <input
+                  className="T1002"
+                  type="text"
+                  placeholder="000-0000-0000"
+                />
+                <button className="C1005">인증요청</button>
+                
+                <input
+                  className="T1002"
+                  type="text"
+                  placeholder="6자리"
+                />
+                <button className="C1010">확인</button>
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">
+                  자택번호: 
+                </p>
+                <input
+                  className="T1002"
+                  type="text"
+                  placeholder="000-0000-0000"
+                />
+                <p className="T1000">
+                  이메일: 
+                </p>
+                <input
+                  className="T1002"
+                  type="text"
+                  placeholder="최대32자까지"
+                />
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">주소:</p>
+                <div className="C1004">
                   <input
-                    className="T084"
+                    className="T1001"
                     type="text"
-                    placeholder="최대32자까지"
+                    placeholder="주소를 입력하세요"
                   />
+                  <button className="C1005">주소검색</button>
                 </div>
               </div>
+            </div>
+            <div className="C1007">
+              <div className="C1009"></div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">
+                  SMS수신: 
+                </p>
+                <div className="C1014">
+                  <div className="C1015">
+                    <div className="C1013"></div>
+                  </div>
+                  <p className="T1003">고객 거부</p>
+                </div>
+                <div className="C1014">
+                  <div className="C1015">
+                    <div className="C1013"></div>
+                  </div>
+                  <p className="T1003">수신 금지</p>
+                </div>
+                <div className="C1011">
+                  <div className="C1012">
+                    <div className="C1013 styleSheet isIcon isMini isChecked"></div>
+                  </div>
+                  <p className="T1003">수신 받음</p>
+                </div>
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">
+                  거부사유: 
+                </p>
+                <input
+                  className="T1002"
+                  type="text"
+                  placeholder="최대32자까지"
+                />
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">
+                  할인구분: 
+                </p>
+                <p className="T1000">
+                  직업: 
+                </p>
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">
+                  본인인증: 
+                </p>
+                
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">
+                  상태: 
+                </p>
+                
+              </div>
+            </div>
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={70} width={660}>
