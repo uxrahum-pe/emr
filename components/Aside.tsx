@@ -479,16 +479,21 @@ const AsideInner = memo(function AsideInner({
           pages.map((page, index) => {
             const offset = index - currentIndex;
             // page.content가 React 요소인지 확인하고, SlidePage 계열 컴포넌트인지 체크
+            // Production 환경에서 Minification으로 인한 이름 변경을 방지하기 위해 displayName 사용
+            const contentType = page.content && (page.content as any).type;
+            const contentDisplayName =
+              contentType?.displayName || contentType?.name;
+
             const isSlidePageComponent =
               React.isValidElement(page.content) &&
-              (page.content.type === SlidePage ||
-                (typeof page.content.type === "function" &&
-                  (page.content.type.name === "DoctorSlidePage" ||
-                    page.content.type.name === "EmployeeSlidePage" ||
-                    page.content.type.name === "CounselorSlidePage" ||
-                    page.content.type.name === "CustomerReferenceSlide" ||
-                    page.content.type.name === "MyNotesSlide" ||
-                    page.content.type.name === "MyAlarmsSlide")));
+              (contentType === SlidePage ||
+                (typeof contentType === "function" &&
+                  (contentDisplayName === "DoctorSlidePage" ||
+                    contentDisplayName === "EmployeeSlidePage" ||
+                    contentDisplayName === "CounselorSlidePage" ||
+                    contentDisplayName === "CustomerReferenceSlide" ||
+                    contentDisplayName === "MyNotesSlide" ||
+                    contentDisplayName === "MyAlarmsSlide")));
 
             if (isSlidePageComponent) {
               // SlidePage 계열 컴포넌트면 props를 전달하여 clone

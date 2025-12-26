@@ -233,3 +233,5 @@ export default function MyNotesSlide({
     </SlidePage>
   );
 }
+
+MyNotesSlide.displayName = "MyNotesSlide";

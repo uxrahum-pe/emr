@@ -41,3 +41,5 @@ export default function CounselorSlidePage({
     </SlidePage>
   );
 }
+
+CounselorSlidePage.displayName = "CounselorSlidePage";

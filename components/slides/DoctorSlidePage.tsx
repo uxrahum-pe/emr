@@ -41,3 +41,5 @@ export default function DoctorSlidePage({
     </SlidePage>
   );
 }
+
+DoctorSlidePage.displayName = "DoctorSlidePage";

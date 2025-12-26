@@ -143,3 +143,5 @@ export default function CustomerReferenceSlide({
     </SlidePage>
   );
 }
+
+CustomerReferenceSlide.displayName = "CustomerReferenceSlide";

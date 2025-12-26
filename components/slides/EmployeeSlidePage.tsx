@@ -49,3 +49,5 @@ export default function EmployeeSlidePage({
     </SlidePage>
   );
 }
+
+EmployeeSlidePage.displayName = "EmployeeSlidePage";
