@@ -2092,15 +2092,6 @@ export default function CustomerStatusSection({
                 </div>
               </div>
             </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">SMS수신:</p>
-                <div className="C1014">
-                  <div className="C1015">
-                    <div className="C1013"></div>
-                  </div>
-                </div>
-              </div>
             <div className="C1009"></div>
 
               <div className="C1007">
@@ -2171,6 +2162,8 @@ export default function CustomerStatusSection({
                   <div className="C1015">
                     <div className="C1013"></div>
                   </div>
+                  <p className="T1003">미인증 고객</p>
+                </div>
               </div>
             </div>
             <div className="C1007">
