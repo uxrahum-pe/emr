@@ -408,18 +408,21 @@ const AsideInner = memo(function AsideInner({
     }
   }, [pages.length, currentIndex, mainPageContent, pathname]);
 
+  // 초기 마운트 시 pages가 비어있고 mainPageContent가 있으면 fallback 렌더링
+  const shouldShowFallback = pages.length === 0 && !!mainPageContent;
+
   return (
     <aside className="C013">
       <div className="C089">
-        {pages.length === 0 ? (
+        {shouldShowFallback ? (
           // pages가 비어있을 때 fallback 렌더링 (초기 마운트 시)
           <div
             className="C073"
             style={{ transform: "translateX(0%)", zIndex: 1 }}
           >
-            {mainPageContent || <div className="C073"></div>}
+            {mainPageContent}
           </div>
-        ) : (
+        ) : pages.length > 0 ? (
           pages.map((page, index) => {
             const offset = index - currentIndex;
             // page.content가 React 요소인지 확인하고, SlidePage 계열 컴포넌트인지 체크
@@ -478,10 +481,10 @@ const AsideInner = memo(function AsideInner({
                 >
                   {page.content}
                 </SlidePage>
-              );
-            }
-          })
-        )}
+            );
+          }
+        })
+        ) : null}
       </div>
 
       {/* 파트 참조사항 팝업 */}
