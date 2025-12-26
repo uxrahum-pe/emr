@@ -48,7 +48,7 @@ export default function NoteClickHandler({
       navigateToPageRef.current(
         "my-notes",
         <SlidePage title="내 쪽지 보기" showToggleSwitch={false}>
-          <div className="C070">
+          <div className="C070 isNoteWrite">
             <div className="C157">
               <div className="C212"></div>
               <p className="T089">

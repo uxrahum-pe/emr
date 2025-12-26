@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Popup from "@/components/Popup";
+import PopupSectionBox from "@/components/PopupSectionBox";
 
 interface ReceptionCheckInButtonProps {
   /** 고객 상세 패널(모달) 열림 여부 */
@@ -19,6 +21,9 @@ export default function ReceptionCheckInButton({
 }: ReceptionCheckInButtonProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
+
+  // 각 팝업의 열림 상태 관리
+  const [openPopup, setOpenPopup] = useState<string | null>(null);
 
   useEffect(() => {
     let openFrame1: number | null = null;
@@ -55,18 +60,273 @@ export default function ReceptionCheckInButton({
 
   if (!isVisible) return null;
 
+  // 팝업 버튼 데이터
+  const popupButtons = [
+    {
+      id: "checkIn",
+      title: "접수하기",
+      className: "isCheckIn",
+      iconClass: "isCheckIn",
+    },
+    {
+      id: "movePart",
+      title: "파트이동",
+      className: "isMovePart",
+      iconClass: "isPaperPlane",
+    },
+    {
+      id: "status",
+      title: "상태관리",
+      className: "isStatus",
+      iconClass: "isRibbon",
+    },
+    {
+      id: "appointment",
+      title: "상담예약",
+      className: "isAppointment",
+      iconClass: "isAlarmClock",
+    },
+    {
+      id: "dailyProcedure",
+      title: "일일시술&처방",
+      className: "isDailyProcedure",
+      iconClass: "isClinic",
+    },
+    {
+      id: "prescription",
+      title: "처방전",
+      className: "isPrescription",
+      iconClass: "isDrug",
+    },
+    {
+      id: "payment",
+      title: "수납등록",
+      className: "isPayment",
+      iconClass: "isCoin",
+    },
+    {
+      id: "checkOut",
+      title: "귀가처리",
+      className: "isCheckOut",
+      iconClass: "isExit",
+    },
+  ];
+
+  const handleButtonClick = (id: string) => {
+    setOpenPopup(id);
+  };
+
+  // 각 팝업의 내용을 렌더링하는 함수
+  const renderPopupContent = (popupId: string) => {
+    const button = popupButtons.find((b) => b.id === popupId);
+    if (!button) return null;
+
+    switch (popupId) {
+      case "checkIn":
+        return (
+          <>
+            <PopupSectionBox x={260} y={20} width={1400}>
+              <div className="C180">
+                <p className="T076">{button.title}</p>
+                <div
+                  className="C181 isCloseButton"
+                  onClick={() => setOpenPopup(null)}
+                >
+                  <div className="C179 isDepth1"></div>
+                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+                </div>
+              </div>
+            </PopupSectionBox>
+            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+              <div className="C180">{/* 접수하기 팝업 내용 */}</div>
+            </PopupSectionBox>
+          </>
+        );
+
+      case "movePart":
+        return (
+          <>
+            <PopupSectionBox x={260} y={20} width={1400}>
+              <div className="C180">
+                <p className="T076">{button.title}</p>
+                <div
+                  className="C181 isCloseButton"
+                  onClick={() => setOpenPopup(null)}
+                >
+                  <div className="C179 isDepth1"></div>
+                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+                </div>
+              </div>
+            </PopupSectionBox>
+            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+              <div className="C180">{/* 파트이동 팝업 내용 */}</div>
+            </PopupSectionBox>
+          </>
+        );
+
+      case "status":
+        return (
+          <>
+            <PopupSectionBox x={260} y={20} width={1400}>
+              <div className="C180">
+                <p className="T076">{button.title}</p>
+                <div
+                  className="C181 isCloseButton"
+                  onClick={() => setOpenPopup(null)}
+                >
+                  <div className="C179 isDepth1"></div>
+                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+                </div>
+              </div>
+            </PopupSectionBox>
+            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+              <div className="C180">{/* 상태관리 팝업 내용 */}</div>
+            </PopupSectionBox>
+          </>
+        );
+
+      case "appointment":
+        return (
+          <>
+            <PopupSectionBox x={260} y={20} width={1400}>
+              <div className="C180">
+                <p className="T076">{button.title}</p>
+                <div
+                  className="C181 isCloseButton"
+                  onClick={() => setOpenPopup(null)}
+                >
+                  <div className="C179 isDepth1"></div>
+                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+                </div>
+              </div>
+            </PopupSectionBox>
+            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+              <div className="C180">{/* 상담예약 팝업 내용 */}</div>
+            </PopupSectionBox>
+          </>
+        );
+
+      case "dailyProcedure":
+        return (
+          <>
+            <PopupSectionBox x={260} y={20} width={1400}>
+              <div className="C180">
+                <p className="T076">{button.title}</p>
+                <div
+                  className="C181 isCloseButton"
+                  onClick={() => setOpenPopup(null)}
+                >
+                  <div className="C179 isDepth1"></div>
+                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+                </div>
+              </div>
+            </PopupSectionBox>
+            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+              <div className="C180">{/* 일일시술&처방 팝업 내용 */}</div>
+            </PopupSectionBox>
+          </>
+        );
+
+      case "prescription":
+        return (
+          <>
+            <PopupSectionBox x={260} y={20} width={1400}>
+              <div className="C180">
+                <p className="T076">{button.title}</p>
+                <div
+                  className="C181 isCloseButton"
+                  onClick={() => setOpenPopup(null)}
+                >
+                  <div className="C179 isDepth1"></div>
+                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+                </div>
+              </div>
+            </PopupSectionBox>
+            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+              <div className="C180">{/* 처방전 팝업 내용 */}</div>
+            </PopupSectionBox>
+          </>
+        );
+
+      case "payment":
+        return (
+          <>
+            <PopupSectionBox x={260} y={20} width={1400}>
+              <div className="C180">
+                <p className="T076">{button.title}</p>
+                <div
+                  className="C181 isCloseButton"
+                  onClick={() => setOpenPopup(null)}
+                >
+                  <div className="C179 isDepth1"></div>
+                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+                </div>
+              </div>
+            </PopupSectionBox>
+            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+              <div className="C180">{/* 수납등록 팝업 내용 */}</div>
+            </PopupSectionBox>
+          </>
+        );
+
+      case "checkOut":
+        return (
+          <>
+            <PopupSectionBox x={260} y={20} width={1400}>
+              <div className="C180">
+                <p className="T076">{button.title}</p>
+                <div
+                  className="C181 isCloseButton"
+                  onClick={() => setOpenPopup(null)}
+                >
+                  <div className="C179 isDepth1"></div>
+                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+                </div>
+              </div>
+            </PopupSectionBox>
+            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+              <div className="C180">{/* 귀가처리 팝업 내용 */}</div>
+            </PopupSectionBox>
+          </>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
-    <section
-      className={`C152 ${isOpened ? "isOpened" : ""} ${
-        isFolded ? "isFolded" : ""
-      }`.trim()}
-    >
-      <div className="C153">
-        <div className="C154 styleSheet isIcon isCheckIn"></div>
-        <div className="C155">
-          <p className="T068">접수하기</p>
-        </div>
-      </div>
-    </section>
+    <>
+      <section
+        className={`C152 ${isOpened ? "isOpened" : ""} ${
+          isFolded ? "isFolded" : ""
+        }`.trim()}
+      >
+        {popupButtons.map((button) => (
+          <div
+            key={button.id}
+            className={`C153 ${button.className}`}
+            onClick={() => handleButtonClick(button.id)}
+            style={{ cursor: "pointer" }}
+          >
+            <div className={`C154 styleSheet isIcon ${button.iconClass}`}></div>
+            <div className="C155">
+              <p className="T068">{button.title}</p>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* 각 팝업을 별도로 렌더링 */}
+      {popupButtons.map((button) => (
+        <Popup
+          key={button.id}
+          isOpen={openPopup === button.id}
+          onClose={() => setOpenPopup(null)}
+        >
+          {renderPopupContent(button.id)}
+        </Popup>
+      ))}
+    </>
   );
 }

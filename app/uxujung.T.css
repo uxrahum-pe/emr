@@ -12,6 +12,10 @@
     font-size: var(--font-14);
     color: var(--color-black);
     margin: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .T2004 {
@@ -115,4 +119,37 @@
 
 .T2012.isDisconnected {
     color: var(--color-magenta);
+}
+
+.T2020 {
+    font-size: var(--font-15);
+    color: var(--color-white);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.T2021 {
+    font-size: var(--font-24);
+    font-weight: 700;
+    color: var(--color-yellow);
+    margin-bottom: var(--size-20);
+}
+
+.T2021Script {
+    font-size: var(--font-18);
+    font-style: italic;
+    font-family: 'NanumSquareNeo', sans-serif;
+}
+
+.T2022 {
+    font-size: var(--font-14);
+    color: var(--color-black);
+    font-weight: 400;
+    letter-spacing: var(--size-2);
+    text-align: center;
+}
+.T2023 {
+    font-size: var(--font-15);
+    color: var(--color-black);
+   
 }
