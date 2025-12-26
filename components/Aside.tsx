@@ -406,9 +406,15 @@ const AsideInner = memo(function AsideInner({
                 ? contentType.name
                 : null;
 
+            // pageId 기반으로 이미 SlidePage로 감싸진 컴포넌트 확인
+            // my-alarms, my-notes는 이미 SlidePage로 감싸져 있음
+            const isPreWrappedSlidePage =
+              page.id.startsWith("my-alarms") || page.id.startsWith("my-notes");
+
             const isSlidePageComponent =
               React.isValidElement(page.content) &&
               (contentType === SlidePage ||
+                isPreWrappedSlidePage ||
                 (typeof contentType === "function" &&
                   (contentDisplayName === "DoctorSlidePage" ||
                     contentDisplayName === "EmployeeSlidePage" ||
