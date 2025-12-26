@@ -5,6 +5,8 @@
  * AI가 코드를 이해할 때 이 파일을 참조하면 레이아웃 구조를 빠르게 파악할 수 있습니다.
  */
 
+import type { AsidePage } from "@/stores/useAsideStore";
+
 /**
  * SimplePageLayout 컴포넌트 Props
  *
@@ -57,4 +59,4 @@ export interface AsideInnerProps {
 }
 
 // AsidePage 타입 re-export (useAsideStore에서 정의됨)
-export type { AsidePage } from "@/stores/useAsideStore";
+export type { AsidePage };

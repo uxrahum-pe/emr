@@ -119,6 +119,7 @@ export const useAsideStore = create<AsideStore>((set, get) => ({
       newPages[existingPageIndex] = {
         id: newPages[existingPageIndex].id,
         content,
+        timestamp: newPages[existingPageIndex].timestamp,
       };
       set({
         pages: newPages,
@@ -134,6 +135,7 @@ export const useAsideStore = create<AsideStore>((set, get) => ({
       const newPage: AsidePage = {
         id: `${pageId}-${timestamp}`,
         content,
+        timestamp,
       };
       const newPages = [...state.pages, newPage];
       const newIndex = newPages.length - 1;

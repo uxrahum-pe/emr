@@ -253,6 +253,7 @@ const AsideInner = memo(function AsideInner({
           {
             id: "main",
             content: mainPageContent,
+            timestamp: Date.now(),
           },
           ...prev,
         ];
