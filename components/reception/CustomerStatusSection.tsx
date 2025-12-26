@@ -88,6 +88,28 @@ export default function CustomerStatusSection({
     registrationStatus: "가입완료" | "미연결";
   }
 
+  interface SurveyCustomerTableData {
+    customerName: string;
+    residentNumber: string;
+    phoneNumber: string;
+    registrationBranch: string;
+    chartNumber: string;
+    registrationDate: string;
+    surveyType: string;
+    registrationStatus: "가입완료" | "미연결";
+  }
+
+  interface PreRegistrationCustomerTableData {
+    customerName: string;
+    residentNumber: string;
+    phoneNumber: string;
+    registrationBranch: string;
+    preRegistrationNumber: string;
+    registrationDate: string;
+    registrant: string;
+    registrationStatus: "가입완료" | "미연결";
+  }
+
   // 샘플 데이터 (실제로는 API에서 가져올 데이터)
   const sampleTableData: CustomerTableData[] = Array.from(
     { length: 10 },
@@ -100,6 +122,36 @@ export default function CustomerStatusSection({
       registrationDate: "2024.08.11",
       webId: "uxmason",
       registrationStatus: Math.random() > 0.4 ? "가입완료" : "미연결",
+    })
+  );
+
+  // 설문지 고객 샘플 데이터
+  const surveyTableData: SurveyCustomerTableData[] = Array.from(
+    { length: 10 },
+    () => ({
+      customerName: "이신득",
+      residentNumber: "840923-1712313",
+      phoneNumber: "010-7444-4118",
+      registrationBranch: "서울365mc병원",
+      chartNumber: "360015819",
+      registrationDate: "2024.08.11",
+      surveyType: "신환설문지 (빼톡스)",
+      registrationStatus: "미연결",
+    })
+  );
+
+  // 상담 가등록 고객 샘플 데이터
+  const preRegistrationTableData: PreRegistrationCustomerTableData[] = Array.from(
+    { length: 10 },
+    () => ({
+      customerName: "이신득",
+      residentNumber: "840923-1712313",
+      phoneNumber: "010-7444-4118",
+      registrationBranch: "서울365mc병원",
+      preRegistrationNumber: "PR20240811001",
+      registrationDate: "2024.08.11",
+      registrant: "김상담",
+      registrationStatus: "미연결",
     })
   );
 
@@ -3012,7 +3064,61 @@ export default function CustomerStatusSection({
           {customerSearchTab === 1 && (
             <PopupSectionBox x={360} y={160} width={1200} height={170}>
               <div className="C2004">
-                {/* 설문지 고객 검색 폼 - 여기에 퍼블리싱 */}
+                <div className="C2005">
+                  <p className="T2004">이름:</p>
+                  <input
+                    className="T2005"
+                    placeholder="16자 이하"
+                    type="text"
+                  />
+                </div>
+                <div className="C2005">
+                  <p className="T2004">주민번호:</p>
+                  <input
+                    className="T2005"
+                    placeholder="14자 이내"
+                    type="text"
+                  />
+                </div>
+                <div className="C2005">
+                  <p className="T2004">휴대번호:</p>
+                  <input
+                    className="T2005"
+                    placeholder="17자 이내"
+                    type="text"
+                  />
+                </div>
+                <div className="C2005">
+                  <p className="T2004">차트번호:</p>
+                  <input className="T2006" placeholder="9자 이내" type="text" />
+                </div>
+              </div>
+
+              <div className="C2006">
+                <div className="C2005">
+                  <p className="T2004">예약번호:</p>
+                  <input className="T2006" placeholder="7자 이내" type="text" />
+                </div>
+
+                <div className="C2005">
+                  <div className="C2007">
+                    <p className="T2004">날짜 검색:</p>
+                    <input
+                      className="T2005"
+                      placeholder="날짜 선택"
+                      type="text"
+                    />
+                    <div className="C2007">
+                      <p className="T2004">~</p>
+                      <input
+                        className="T2005"
+                        placeholder="날짜 선택"
+                        type="text"
+                      />
+                    </div>
+                    <button className="C2008">검색</button>
+                  </div>
+                </div>
               </div>
             </PopupSectionBox>
           )}
@@ -3020,7 +3126,61 @@ export default function CustomerStatusSection({
           {customerSearchTab === 2 && (
             <PopupSectionBox x={360} y={160} width={1200} height={170}>
               <div className="C2004">
-                {/* 상담 가등록 고객 검색 폼 - 여기에 퍼블리싱 */}
+                <div className="C2005">
+                  <p className="T2004">이름:</p>
+                  <input
+                    className="T2005"
+                    placeholder="16자 이하"
+                    type="text"
+                  />
+                </div>
+                <div className="C2005">
+                  <p className="T2004">주민번호:</p>
+                  <input
+                    className="T2005"
+                    placeholder="14자 이내"
+                    type="text"
+                  />
+                </div>
+                <div className="C2005">
+                  <p className="T2004">휴대번호:</p>
+                  <input
+                    className="T2005"
+                    placeholder="17자 이내"
+                    type="text"
+                  />
+                </div>
+                <div className="C2005">
+                  <p className="T2004">차트번호:</p>
+                  <input className="T2006" placeholder="9자 이내" type="text" />
+                </div>
+              </div>
+
+              <div className="C2006">
+                <div className="C2005">
+                  <p className="T2004">예약번호:</p>
+                  <input className="T2006" placeholder="7자 이내" type="text" />
+                </div>
+
+                <div className="C2005">
+                  <div className="C2007">
+                    <p className="T2004">날짜 검색:</p>
+                    <input
+                      className="T2005"
+                      placeholder="날짜 선택"
+                      type="text"
+                    />
+                    <div className="C2007">
+                      <p className="T2004">~</p>
+                      <input
+                        className="T2005"
+                        placeholder="날짜 선택"
+                        type="text"
+                      />
+                    </div>
+                    <button className="C2008">검색</button>
+                  </div>
+                </div>
               </div>
             </PopupSectionBox>
           )}
@@ -3132,7 +3292,134 @@ export default function CustomerStatusSection({
           {customerSearchTab === 1 && (
             <PopupSectionBox x={360} y={350} width={1200} height={810}>
               <div className="C2009">
-                {/* 설문지 고객 테이블 - 여기에 퍼블리싱 */}
+                <div className="C2016">
+                  <div className="C2010">
+                    <div className="C2017">
+                      <div className="C2011">
+                        <div className="T2010 isFixed150">고객이름</div>
+                        <div className="T2010 isFixed150">주민번호</div>
+                        <div className="T2010 isFixed150">휴대번호</div>
+                        <div className="T2010 isFixed150">등록지점</div>
+                        <div className="T2010 isFixed150">차트번호</div>
+                        <div className="T2010 isFixed150">등록일자</div>
+                        <div className="T2010 isFixed150">설문지 종류</div>
+                        <div className="T2010 isFixed150">등록여부</div>
+                      </div>
+                    </div>
+                    <div className="C2018">
+                      {surveyTableData.map((row, index) => (
+                        <div
+                          key={index}
+                          className="C2012"
+                          onClick={() => {
+                            navigateToPage(
+                              "new-survey",
+                              <SlidePage
+                                title="신환 설문지 등록"
+                                customerName={row.customerName}
+                                customerId={row.chartNumber}
+                                showToggleSwitch={false}
+                              >
+                                {/* 신환 설문지 등록 폼 - 여기에 퍼블리싱 */}
+                              </SlidePage>
+                            );
+                          }}
+                        >
+                          <div className="T2011 isFixed150">{row.customerName}</div>
+                          <div className="T2011 isFixed150">
+                            {row.residentNumber}
+                          </div>
+                          <div className="T2011 isFixed150">{row.phoneNumber}</div>
+                          <div className="T2011 isFixed150">
+                            {row.registrationBranch}
+                          </div>
+                          <div className="T2011 isFixed150">{row.chartNumber}</div>
+                          <div className="T2011 isFixed150">{row.registrationDate}</div>
+                          <div className="T2011 isFixed150">{row.surveyType}</div>
+                          <div
+                            className={`T2012 isFixed150 ${
+                              row.registrationStatus === "가입완료"
+                                ? "isRegistered"
+                                : "isDisconnected"
+                            }`}
+                          >
+                            {row.registrationStatus}
+                          </div>
+                          <button
+                            className="C2020"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigateToPage(
+                                "new-survey",
+                                <SlidePage
+                                  title="신환 설문지 등록"
+                                  customerName={row.customerName}
+                                  customerId={row.chartNumber}
+                                  showToggleSwitch={false}
+                                >
+                                  {/* 신환 설문지 등록 폼 - 여기에 퍼블리싱 */}
+                                </SlidePage>
+                              );
+                            }}
+                          >
+                            <div className="C2021">
+                              <div className="C2019 styleSheet isIcon isArrow isMini"></div>
+                            </div>
+                            <span className="T2020">등록하기</span>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="C2013">
+                  <button
+                    className="C2014"
+                    onClick={() => setCurrentPage(1)}
+                    disabled={currentPage === 1}
+                  >
+                    <div className="C2019 styleSheet isIcon isMini isControl isLeftDouble"></div>
+                  </button>
+                  <button
+                    className="C2014"
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(1, prev - 1))
+                    }
+                    disabled={currentPage === 1}
+                  >
+                    <div className="C2019 styleSheet isIcon isMini isControl isLeft"></div>
+                  </button>
+                  {Array.from(
+                    { length: Math.min(10, totalPages) },
+                    (_, i) => i + 1
+                  ).map((page) => (
+                    <button
+                      key={page}
+                      className={`C2015 ${
+                        currentPage === page ? "isActive" : ""
+                      }`}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                  <button
+                    className="C2014"
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+                    }
+                    disabled={currentPage === totalPages}
+                  >
+                    <div className="C2019 styleSheet isIcon isMini isControl isRight"></div>
+                  </button>
+                  <button
+                    className="C2014"
+                    onClick={() => setCurrentPage(totalPages)}
+                    disabled={currentPage === totalPages}
+                  >
+                    <div className="C2019 styleSheet isIcon isMini isControl isRightDouble"></div>
+                  </button>
+                </div>
               </div>
             </PopupSectionBox>
           )}
@@ -3140,7 +3427,102 @@ export default function CustomerStatusSection({
           {customerSearchTab === 2 && (
             <PopupSectionBox x={360} y={350} width={1200} height={810}>
               <div className="C2009">
-                {/* 상담 가등록 고객 테이블 - 여기에 퍼블리싱 */}
+                <div className="C2016">
+                  <div className="C2010">
+                    <div className="C2017">
+                      <div className="C2011">
+                        <div className="T2010 isFixed150">고객이름</div>
+                        <div className="T2010 isFixed150">주민번호</div>
+                        <div className="T2010 isFixed150">휴대번호</div>
+                        <div className="T2010 isFixed150">등록지점</div>
+                        <div className="T2010 isFixed150">가등록 번호</div>
+                        <div className="T2010 isFixed150">등록일자</div>
+                        <div className="T2010 isFixed150">등록자</div>
+                        <div className="T2010 isFixed150">등록여부</div>
+                      </div>
+                    </div>
+                    <div className="C2018">
+                      {preRegistrationTableData.map((row, index) => (
+                        <div key={index} className="C2012">
+                          <div className="T2011 isFixed150">{row.customerName}</div>
+                          <div className="T2011 isFixed150">
+                            {row.residentNumber}
+                          </div>
+                          <div className="T2011 isFixed150">{row.phoneNumber}</div>
+                          <div className="T2011 isFixed150">
+                            {row.registrationBranch}
+                          </div>
+                          <div className="T2011 isFixed150">{row.preRegistrationNumber}</div>
+                          <div className="T2011 isFixed150">{row.registrationDate}</div>
+                          <div className="T2011 isFixed150">{row.registrant}</div>
+                          <div
+                            className={`T2012 isFixed150 ${
+                              row.registrationStatus === "가입완료"
+                                ? "isRegistered"
+                                : "isDisconnected"
+                            }`}
+                          >
+                            {row.registrationStatus}
+                          </div>
+                          <button className="C2020">
+                            <div className="C2021">
+                              <div className="C2019 styleSheet isIcon isArrow isMini"></div>
+                            </div>
+                            <span className="T2020">등록하기</span>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="C2013">
+                  <button
+                    className="C2014"
+                    onClick={() => setCurrentPage(1)}
+                    disabled={currentPage === 1}
+                  >
+                    <div className="C2019 styleSheet isIcon isMini isControl isLeftDouble"></div>
+                  </button>
+                  <button
+                    className="C2014"
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(1, prev - 1))
+                    }
+                    disabled={currentPage === 1}
+                  >
+                    <div className="C2019 styleSheet isIcon isMini isControl isLeft"></div>
+                  </button>
+                  {Array.from(
+                    { length: Math.min(10, totalPages) },
+                    (_, i) => i + 1
+                  ).map((page) => (
+                    <button
+                      key={page}
+                      className={`C2015 ${
+                        currentPage === page ? "isActive" : ""
+                      }`}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                  <button
+                    className="C2014"
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+                    }
+                    disabled={currentPage === totalPages}
+                  >
+                    <div className="C2019 styleSheet isIcon isMini isControl isRight"></div>
+                  </button>
+                  <button
+                    className="C2014"
+                    onClick={() => setCurrentPage(totalPages)}
+                    disabled={currentPage === totalPages}
+                  >
+                    <div className="C2019 styleSheet isIcon isMini isControl isRightDouble"></div>
+                  </button>
+                </div>
               </div>
             </PopupSectionBox>
           )}

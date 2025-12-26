@@ -252,7 +252,6 @@
     box-shadow: 0 var(--size-4) var(--size-12) var(--color-black-25);
     cursor: pointer;
     transition: all 0.2s ease;
-    z-index: 10;
     display: flex;
     width: 100%;
     height: 100%;
@@ -261,8 +260,8 @@
 }
 
 .C2023 {
-    width: var(--size-40);
-    background: linear-gradient(to bottom, var(--color-red), var(--color-yellow));
+    width: var(--size-30);
+    background-color: var(--color-red);
     border-radius: var(--size-15) 0 0 var(--size-15);
     flex-shrink: 0;
 }
@@ -350,8 +349,58 @@
         );
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    border: var(--size-1) solid var(--color-black-15);
-    border-radius: var(--size-5);
+   
     padding: var(--size-10);
+    box-sizing: border-box;
+}
+
+.C2027 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.C2028 {
+    position: absolute;
+    top: var(--size-30);
+    right: var(--size-30);
+    width: var(--size-120);
+    height: var(--size-60);
+    border-radius: var(--size-15);
+    background: linear-gradient(to right, var(--color-yellow), var(--color-red));
+    border: none;
+    color: var(--color-white);
+    font-size: var(--font-19);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.C2028:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+
+.C2029 {
+    width: var(--size-900);
+    height: var(--size-120);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.C2030 {
+    display: flex;
+    width: 100%;
+    height: var(--size-60);
+    box-sizing: border-box;
+    border-bottom: var(--size-2) solid var(--color-white-15);
+}
+
+.C2031 {
+    display: flex;
+    width: 100%;
+    height: var(--size-60);
     box-sizing: border-box;
 }
