@@ -23,10 +23,9 @@
 
 "use client";
 
-import { useState, useRef, useEffect, memo } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAside } from "@/components/AsideContext";
-import SlidePage from "@/components/SlidePage";
-import ReferenceMessage from "@/components/ReferenceMessage";
+import CustomerReferenceSlide from "@/components/slides/CustomerReferenceSlide";
 import ToggleSwitch from "@/components/ToggleSwitch";
 import Tooltip from "@/components/Tooltip";
 import DraggableScrollContainer from "@/components/DraggableScrollContainer";
@@ -37,131 +36,11 @@ import CustomerDetailPanel from "@/components/CustomerDetailPanel";
 import ReceptionCheckInButton from "@/components/ReceptionCheckInButton";
 import Popup from "@/components/Popup";
 import LabeledCheckbox from "@/components/LabeledCheckbox";
-import ValidatedInput from "@/components/ValidatedInput";
 import { getRoleInfo } from "@/lib/utils/role";
 import type { CustomerStatusSectionProps } from "@/types/reception";
 import PopupSectionBox from "../PopupSectionBox";
 
 import { useReceptionStore } from "@/stores/useReceptionStore";
-
-/**
- * 고객 참조사항 페이지 콘텐츠 컴포넌트
- *
- * @description 고객 클릭 시 표시되는 참조사항 페이지의 내용을 렌더링합니다.
- */
-const CustomerReferenceContent = memo(() => (
-  <>
-    <div className="C070">
-      <div className="C157">
-        <div className="C158 styleSheet isIcon isReception"></div>
-        <p className="T069">
-          <span className="isUnit">From:</span> 원무
-        </p>
-      </div>
-      <p className="T035">
-        <span className="isUnit">참조사항 입력</span>
-      </p>
-      <div className="C071">
-        <div className="C072 styleSheet isIcon isWrite"></div>
-      </div>
-    </div>
-    <div className="C156">
-      <ReferenceMessage
-        from={{
-          department: "원무",
-          type: "일반",
-          iconClass: "isReception",
-        }}
-        author={{
-          name: "김민수",
-          role: "원무팀장",
-          avatarClass: "isMale",
-          tooltipText: "김민수 원무팀장",
-          employeeId: "kms001",
-        }}
-        content="오늘 오후 2시부터 시스템 점검이 예정되어 있습니다. 점검 시간 동안 일시적으로 접속이 불가능할 수 있으니, 긴급한 업무는 사전에 처리해 주시기 바랍니다. 점검이 완료되면 자동으로 알림이 발송될 예정입니다."
-        time="AM 09:15"
-      />
-      <div className="C135">
-        <p className="T061">2025.12.15 (월)</p>
-      </div>
-      <ReferenceMessage
-        from={{
-          department: "원무",
-          type: "긴급",
-          iconClass: "isReception",
-        }}
-        to={{ department: "상담", type: "긴급", iconClass: "isCounseling" }}
-        author={{
-          name: "박지영",
-          role: "상담사",
-          avatarClass: "isFemale",
-          tooltipText: "박지영 상담사",
-          employeeId: "pjy002",
-        }}
-        content="홍길동 고객님께서 내일 오전 예약 변경을 요청하셨습니다. 원래 예약 시간은 오전 10시였는데, 오후 2시로 변경 희망하신다고 하셨습니다. 가능 여부 확인 후 연락 부탁드립니다."
-        time="AM 10:32"
-      />
-      <ReferenceMessage
-        from={{
-          department: "상담",
-          type: "일반",
-          iconClass: "isCounseling",
-        }}
-        author={{
-          name: "이수진",
-          role: "상담사",
-          avatarClass: "isMale",
-          tooltipText: "이수진 상담사",
-          employeeId: "lsj003",
-        }}
-        content="네, 확인했습니다. 오후 2시 시간대가 비어있어서 변경 가능합니다. 고객님께 확인 연락 드리겠습니다."
-        isMine={true}
-        time="AM 10:45"
-      />
-      <ReferenceMessage
-        from={{
-          department: "원무",
-          type: "일반",
-          iconClass: "isReception",
-        }}
-        to={{ department: "진료", type: "일반", iconClass: "isClinic" }}
-        author={{
-          name: "최영희",
-          role: "원무과장",
-          avatarClass: "isFemale",
-          tooltipText: "최영희 원무과장",
-          employeeId: "cyh004",
-        }}
-        content="이번 주 금요일부터 새로운 보험 정책이 적용됩니다. 주요 변경사항은 진료실로 공지문을 보내드렸으니 확인 부탁드립니다. 환자 상담 시 참고해 주시기 바랍니다."
-        isMine={true}
-        time="PM 02:15"
-      />
-    </div>
-    <div className="C167">
-      <div className="C168">
-        <div className="C169 styleSheet isIcon isMegaphone"></div>
-      </div>
-      <div className="C170">
-        <div className="C171">
-          <p className="T072 isRed">전체공지</p>
-          <p className="T019">
-            From: <span className="isBold isBlack">원무</span>
-          </p>
-        </div>
-        <p className="T073 isEllipsis">
-          네트웍스 서포터
-          asdfasdfasdfasdfasdㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹfasdf
-        </p>
-      </div>
-      <div className="C112">
-        <div className="C113 styleSheet isIcon isMini isChevron"></div>
-      </div>
-    </div>
-  </>
-));
-
-CustomerReferenceContent.displayName = "CustomerReferenceContent";
 
 /**
  * CustomerStatusSection 컴포넌트
@@ -194,21 +73,6 @@ export default function CustomerStatusSection({
   const [customerSearchTab, setCustomerSearchTab] = useState(0); // 0: 바코드 예약 고객, 1: 설문지 고객, 2: 상담 가등록 고객
   const [excludeRegisteredChecked, setExcludeRegisteredChecked] =
     useState(true);
-  
-  // 각 체크박스별 독립적인 상태
-  const [useAliasChecked, setUseAliasChecked] = useState(false);
-  const [customerRejectedChecked, setCustomerRejectedChecked] = useState(false);
-  const [smsRejectedChecked, setSmsRejectedChecked] = useState(false);
-  const [smsReceivedChecked, setSmsReceivedChecked] = useState(false);
-  const [verifiedCustomerChecked, setVerifiedCustomerChecked] = useState(false);
-  const [unverifiedCustomerChecked, setUnverifiedCustomerChecked] = useState(false);
-  const [registeredChecked, setRegisteredChecked] = useState(false);
-  const [preRegisteredChecked, setPreRegisteredChecked] = useState(false);
-  const [pendingChecked, setPendingChecked] = useState(false);
-  const [deletedChecked, setDeletedChecked] = useState(false);
-  const [refundedChecked, setRefundedChecked] = useState(false);
-  const [movedChecked, setMovedChecked] = useState(false);
-  
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // 테이블 데이터 타입
@@ -220,28 +84,6 @@ export default function CustomerStatusSection({
     barcodeNumber: string;
     registrationDate: string;
     webId: string;
-    registrationStatus: "가입완료" | "미연결";
-  }
-
-  interface SurveyCustomerTableData {
-    customerName: string;
-    residentNumber: string;
-    phoneNumber: string;
-    registrationBranch: string;
-    chartNumber: string;
-    registrationDate: string;
-    surveyType: string;
-    registrationStatus: "가입완료" | "미연결";
-  }
-
-  interface PreRegistrationCustomerTableData {
-    customerName: string;
-    residentNumber: string;
-    phoneNumber: string;
-    registrationBranch: string;
-    preRegistrationNumber: string;
-    registrationDate: string;
-    registrant: string;
     registrationStatus: "가입완료" | "미연결";
   }
 
@@ -259,34 +101,6 @@ export default function CustomerStatusSection({
       registrationStatus: Math.random() > 0.4 ? "가입완료" : "미연결",
     })
   );
-
-  // 설문지 고객 샘플 데이터
-  const surveyTableData: SurveyCustomerTableData[] = Array.from(
-    { length: 10 },
-    () => ({
-      customerName: "이신득",
-      residentNumber: "840923-1712313",
-      phoneNumber: "010-7444-4118",
-      registrationBranch: "서울365mc병원",
-      chartNumber: "360015819",
-      registrationDate: "2024.08.11",
-      surveyType: "신환설문지 (빼톡스)",
-      registrationStatus: "미연결",
-    })
-  );
-
-  // 상담 가등록 고객 샘플 데이터
-  const preRegistrationTableData: PreRegistrationCustomerTableData[] =
-    Array.from({ length: 10 }, () => ({
-      customerName: "이신득",
-      residentNumber: "840923-1712313",
-      phoneNumber: "010-7444-4118",
-      registrationBranch: "서울365mc병원",
-      preRegistrationNumber: "PR20240811001",
-      registrationDate: "2024.08.11",
-      registrant: "김상담",
-      registrationStatus: "미연결",
-    }));
 
   const totalPages = 10;
   const itemsPerPage = 10;
@@ -326,14 +140,10 @@ export default function CustomerStatusSection({
     // 모든 고객은 동일한 customer 카테고리로 묶어서 누적 없이 데이터만 리로드
     navigateToPage(
       "customer",
-      <SlidePage
-        title="고객 참조사항"
+      <CustomerReferenceSlide
         customerName={customerName}
         customerId={customerId}
-        showToggleSwitch={true}
-      >
-        <CustomerReferenceContent />
-      </SlidePage>
+      />
     );
   };
 
@@ -1979,6 +1789,7 @@ export default function CustomerStatusSection({
       <ReceptionCheckInButton
         isOpen={isCustomerDetailOpen}
         isFolded={isQuickActionsHovered}
+        allowedButtonIds={["movePart", "status"]}
       />
       <Popup
         isOpen={isCustomerRegistrationPopupOpen}
@@ -1990,70 +1801,44 @@ export default function CustomerStatusSection({
               <div className="C1007">
                 <div className="C1000">
                   <p className="T1000">주민번호:</p>
-                  <div className="C1017">
-                  <ValidatedInput
+                  <input
                     className="T1002"
                     type="text"
                     placeholder="000000-0******"
-                    minLength={14}
-                    required
-                    minLengthErrorMessage="입력값이 모자랍니다"
                   />
-                  </div>
-                  
                   <button className="C1005">중복검사</button>
                   <div className="C1011">
-                  <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
-                      text="가명 사용"
-                    />
+                    <div className="C1012">
+                      <div className="C1013 styleSheet isIcon isMini isChecked"></div>
+                    </div>
+                    <p className="T1003">가명 사용</p>
                   </div>
-                  
                 </div>
               </div>
               <div className="C1007">
                 <div className="C1000">
                   <p className="T1000">성명:</p>
-                  <div className="C1017">
-                  <ValidatedInput
+                  <input
                     className="T1002"
                     type="text"
                     placeholder="최대 16자까지"
-                    minLength={1}
-                    maxLength={16}
-                    required
-                    minLengthErrorMessage="입력값이 모자랍니다"
                   />
-                  </div>
                   <p className="T1000">가명:</p>
-                  <div className="C1017">
-                  <ValidatedInput
+                  <input
                     className="T1002"
                     type="text"
                     placeholder="최대 16자까지"
-                    minLength={1}
-                    maxLength={16}
-                    required
-                    minLengthErrorMessage="입력값이 모자랍니다"
                   />
-                  </div>
                 </div>
               </div>
               <div className="C1007">
                 <div className="C1000">
                   <p className="T1000">전화번호:</p>
-                  <div className="C1017">
-                  <ValidatedInput
+                  <input
                     className="T1002"
                     type="text"
                     placeholder="000-0000-0000"
-                    minLength={13}
-                    maxLength={13}
-                    required
-                    minLengthErrorMessage="입력값이 모자랍니다"
                   />
-                  </div>
                   <button className="C1005">인증요청</button>
 
                   <input className="T1002" type="text" placeholder="6자리" />
@@ -2063,35 +1848,21 @@ export default function CustomerStatusSection({
               <div className="C1007">
                 <div className="C1000">
                   <p className="T1000">자택번호:</p>
-                  <div className="C1017">
-                  <ValidatedInput
+                  <input
                     className="T1002"
                     type="text"
                     placeholder="000-0000-0000"
-                    minLength={13}
-                    maxLength={13}
-                    required
-                    minLengthErrorMessage="입력값이 모자랍니다"
                   />
-                  </div>
                   <p className="T1000">이메일:</p>
-                  <div className="C1017">
-                  <ValidatedInput
+                  <input
                     className="T1002"
                     type="text"
                     placeholder="최대32자까지"
-                    minLength={1}
-                    maxLength={32}
-                    required
-                    validateEmail={true}
-                    minLengthErrorMessage="입력값이 모자랍니다"
-                    emailErrorMessage="입력 양식이 잘못되었습니다."
                   />
-                  </div>
-                  
                 </div>
               </div>
             </div>
+            <div className="C1009"></div>
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">SMS수신:</p>
@@ -2101,59 +1872,51 @@ export default function CustomerStatusSection({
                   </div>
                 </div>
               </div>
-            <div className="C1009"></div>
-
+              <div className="C1007">
+                <div className="C1009"></div>
+              </div>
               <div className="C1007">
                 <div className="C1000">
                   <p className="T1000">SMS수신:</p>
-                    <div className="C1018">
-                    <LabeledCheckbox
-                      checked={customerRejectedChecked}
-                      onChange={setCustomerRejectedChecked}
-                      text="고객 거부"
-                    />
-                    <LabeledCheckbox
-                        checked={smsRejectedChecked}
-                      onChange={setSmsRejectedChecked}
-                      text="수신 금지"
-                    />
-                    <LabeledCheckbox
-                      checked={smsReceivedChecked}
-                      onChange={setSmsReceivedChecked}
-                      text="수신 받음"
-                    />
+                  <div className="C1014">
+                    <div className="C1015">
+                      <div className="C1013"></div>
+                    </div>
+                    <p className="T1003">고객 거부</p>
+                  </div>
+                  <p className="T1003">수신 금지</p>
+                </div>
+                <div className="C1016">
+                  <div className="C1012">
+                    <div className="C1013 styleSheet isIcon isMini isChecked"></div>
                   </div>
                 </div>
               </div>
-
+            </div>
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">거부사유:</p>
                 <div className="C1008">
-                  종류 선택
+                  <p className="T1003">종류 선택</p>
                   <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
                 </div>
-
-                <div className="C1017">
-                  <ValidatedInput
-                    className="T1002 isLong"
-                    type="text"
-                    placeholder="최대64자까지"
-                    maxLength={64}
-                  />
-                  </div>
+                <input
+                  className="T1002"
+                  type="text"
+                  placeholder="최대32자까지"
+                />
               </div>
             </div>
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">할인구분:</p>
                 <div className="C1008">
-                  종류 선택
+                  <p className="T1003">종류 선택</p>
                   <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
                 </div>
                 <p className="T1000">직업:</p>
                 <div className="C1008">
-                  종류 선택
+                  <p className="T1003">종류 선택</p>
                   <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
                 </div>
               </div>
@@ -2171,6 +1934,8 @@ export default function CustomerStatusSection({
                   <div className="C1015">
                     <div className="C1013"></div>
                   </div>
+                  <p className="T1003">미인증 고객</p>
+                </div>
               </div>
             </div>
             <div className="C1007">
@@ -2230,116 +1995,7 @@ export default function CustomerStatusSection({
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={190} width={660} height={820}>
-            <div className="C1003">
-            <div className="C1007">
-                <div className="C1000">
-                  <p className="T1000">특기사항:</p>
-                  <div className="C1018">
-                  <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
-                      text="원내 호출 거부"
-                    />
-                  <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
-                      text="서포터"
-                    />
-                  </div>
-                  
-                </div>
-              </div>
-              <div className="C1009"></div>
-              <div className="C1007">
-                <div className="C1000">
-                  <p className="T1000">분류:</p>
-                  <div className="C1018">
-                  <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
-                      text="외국인"
-                    />
-                  <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
-                      text="내국인"
-                    />
-                  </div>
-                  
-                </div>
-              </div>
-              <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  국적: 
-                </p>
-                <div className="C1008">
-                  종류 선택
-                  <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                </div>
-                <p className="T1000">
-                  영문명: 
-                </p>
-                
-              </div>
-            </div>
-            <div className="C1007">
-                <div className="C1000">
-                  <p className="T1000">여권번호:</p>
-                  <input
-                    className="T1002"
-                    type="text"
-                    placeholder="M00000000"
-                  />
-                  <p className="T1000">건강보험:</p>
-                  <input
-                    className="T1002"
-                    type="text"
-                    placeholder="3-00000000000"
-                  />
-                </div>
-              </div>
-              <div className="C1007">
-                <div className="C1000">
-                  <p className="T1000">거소증:</p>
-                  <div className="C1018">
-                  <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
-                      text="있음"
-                    />
-                  <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
-                      text="없음"
-                    />
-                  </div>
-                  
-                  <p className="T1000">체류자격:</p>
-                  <div className="C1008">
-                  코드 선택
-                  <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                </div>
-                </div>
-              </div>
-              <div className="C1012">
-                <div className="C1013"></div>
-                <div className="C1014">
-                  
-                  <div className="C1015">
-                    <p className="T1000">입국일:</p>
-                    <div className="C1016"><p className="T1004">2025.12.23</p></div>
-                  </div>
-                
-                  
-                  <div className="C1015">
-                    <p className="T1000">출국일:</p>
-                    <div className="C1016"><p className="T1004">2025.12.23</p></div>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div className="C200"></div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={1030} width={660} height={100}>
             <div className="C180"></div>
@@ -3233,61 +2889,7 @@ export default function CustomerStatusSection({
           {customerSearchTab === 1 && (
             <PopupSectionBox x={360} y={160} width={1200} height={170}>
               <div className="C2004">
-                <div className="C2005">
-                  <p className="T2004">이름:</p>
-                  <input
-                    className="T2005"
-                    placeholder="16자 이하"
-                    type="text"
-                  />
-                </div>
-                <div className="C2005">
-                  <p className="T2004">주민번호:</p>
-                  <input
-                    className="T2005"
-                    placeholder="14자 이내"
-                    type="text"
-                  />
-                </div>
-                <div className="C2005">
-                  <p className="T2004">휴대번호:</p>
-                  <input
-                    className="T2005"
-                    placeholder="17자 이내"
-                    type="text"
-                  />
-                </div>
-                <div className="C2005">
-                  <p className="T2004">차트번호:</p>
-                  <input className="T2006" placeholder="9자 이내" type="text" />
-                </div>
-              </div>
-
-              <div className="C2006">
-                <div className="C2005">
-                  <p className="T2004">예약번호:</p>
-                  <input className="T2006" placeholder="7자 이내" type="text" />
-                </div>
-
-                <div className="C2005">
-                  <div className="C2007">
-                    <p className="T2004">날짜 검색:</p>
-                    <input
-                      className="T2005"
-                      placeholder="날짜 선택"
-                      type="text"
-                    />
-                    <div className="C2007">
-                      <p className="T2004">~</p>
-                      <input
-                        className="T2005"
-                        placeholder="날짜 선택"
-                        type="text"
-                      />
-                    </div>
-                    <button className="C2008">검색</button>
-                  </div>
-                </div>
+                {/* 설문지 고객 검색 폼 - 여기에 퍼블리싱 */}
               </div>
             </PopupSectionBox>
           )}
@@ -3295,61 +2897,7 @@ export default function CustomerStatusSection({
           {customerSearchTab === 2 && (
             <PopupSectionBox x={360} y={160} width={1200} height={170}>
               <div className="C2004">
-                <div className="C2005">
-                  <p className="T2004">이름:</p>
-                  <input
-                    className="T2005"
-                    placeholder="16자 이하"
-                    type="text"
-                  />
-                </div>
-                <div className="C2005">
-                  <p className="T2004">주민번호:</p>
-                  <input
-                    className="T2005"
-                    placeholder="14자 이내"
-                    type="text"
-                  />
-                </div>
-                <div className="C2005">
-                  <p className="T2004">휴대번호:</p>
-                  <input
-                    className="T2005"
-                    placeholder="17자 이내"
-                    type="text"
-                  />
-                </div>
-                <div className="C2005">
-                  <p className="T2004">차트번호:</p>
-                  <input className="T2006" placeholder="9자 이내" type="text" />
-                </div>
-              </div>
-
-              <div className="C2006">
-                <div className="C2005">
-                  <p className="T2004">예약번호:</p>
-                  <input className="T2006" placeholder="7자 이내" type="text" />
-                </div>
-
-                <div className="C2005">
-                  <div className="C2007">
-                    <p className="T2004">날짜 검색:</p>
-                    <input
-                      className="T2005"
-                      placeholder="날짜 선택"
-                      type="text"
-                    />
-                    <div className="C2007">
-                      <p className="T2004">~</p>
-                      <input
-                        className="T2005"
-                        placeholder="날짜 선택"
-                        type="text"
-                      />
-                    </div>
-                    <button className="C2008">검색</button>
-                  </div>
-                </div>
+                {/* 상담 가등록 고객 검색 폼 - 여기에 퍼블리싱 */}
               </div>
             </PopupSectionBox>
           )}
@@ -3358,10 +2906,10 @@ export default function CustomerStatusSection({
           {customerSearchTab === 0 && (
             <PopupSectionBox x={360} y={350} width={1200} height={810}>
               <div className="C2009">
-                <div className="C2010">
-                  <div className="C2011">
-                    <div className="C2012">
-                      <div className="C2013">
+                <div className="C2016">
+                  <div className="C2010">
+                    <div className="C2017">
+                      <div className="C2011">
                         <div className="T2010">고객이름</div>
                         <div className="T2010 is15p">주민번호</div>
                         <div className="T2010 is15p">휴대번호</div>
@@ -3372,9 +2920,9 @@ export default function CustomerStatusSection({
                         <div className="T2010">등록여부</div>
                       </div>
                     </div>
-                    <div className="C2014">
+                    <div className="C2018">
                       {sampleTableData.map((row, index) => (
-                        <div key={index} className="C2015">
+                        <div key={index} className="C2012">
                           <div className="T2011">{row.customerName}</div>
                           <div className="T2011 is15p">
                             {row.residentNumber}
@@ -3395,9 +2943,9 @@ export default function CustomerStatusSection({
                           >
                             {row.registrationStatus}
                           </div>
-                          <button className="C2016">
-                            <div className="C2017">
-                              <div className="C2018 styleSheet isIcon isArrow isMini"></div>
+                          <button className="C2020">
+                            <div className="C2021">
+                              <div className="C2019 styleSheet isIcon isArrow isMini"></div>
                             </div>
                             <span className="T2020">등록하기</span>
                           </button>
@@ -3406,22 +2954,22 @@ export default function CustomerStatusSection({
                     </div>
                   </div>
                 </div>
-                <div className="C2019">
+                <div className="C2013">
                   <button
-                    className="C2020"
+                    className="C2014"
                     onClick={() => setCurrentPage(1)}
                     disabled={currentPage === 1}
                   >
-                    <div className="C2018 styleSheet isIcon isMini isControl isLeftDouble"></div>
+                    <div className="C2019 styleSheet isIcon isMini isControl isLeftDouble"></div>
                   </button>
                   <button
-                    className="C2020"
+                    className="C2014"
                     onClick={() =>
                       setCurrentPage((prev) => Math.max(1, prev - 1))
                     }
                     disabled={currentPage === 1}
                   >
-                    <div className="C2018 styleSheet isIcon isMini isControl isLeft"></div>
+                    <div className="C2019 styleSheet isIcon isMini isControl isLeft"></div>
                   </button>
                   {Array.from(
                     { length: Math.min(10, totalPages) },
@@ -3429,7 +2977,7 @@ export default function CustomerStatusSection({
                   ).map((page) => (
                     <button
                       key={page}
-                      className={`C2021 ${
+                      className={`C2015 ${
                         currentPage === page ? "isActive" : ""
                       }`}
                       onClick={() => setCurrentPage(page)}
@@ -3438,20 +2986,20 @@ export default function CustomerStatusSection({
                     </button>
                   ))}
                   <button
-                    className="C2020"
+                    className="C2014"
                     onClick={() =>
                       setCurrentPage((prev) => Math.min(totalPages, prev + 1))
                     }
                     disabled={currentPage === totalPages}
                   >
-                    <div className="C2018 styleSheet isIcon isMini isControl isRight"></div>
+                    <div className="C2019 styleSheet isIcon isMini isControl isRight"></div>
                   </button>
                   <button
-                    className="C2020"
+                    className="C2014"
                     onClick={() => setCurrentPage(totalPages)}
                     disabled={currentPage === totalPages}
                   >
-                    <div className="C2018 styleSheet isIcon isMini isControl isRightDouble"></div>
+                    <div className="C2019 styleSheet isIcon isMini isControl isRightDouble"></div>
                   </button>
                 </div>
               </div>
@@ -3461,136 +3009,7 @@ export default function CustomerStatusSection({
           {customerSearchTab === 1 && (
             <PopupSectionBox x={360} y={350} width={1200} height={810}>
               <div className="C2009">
-                <div className="C2010">
-                  <div className="C2011">
-                    <div className="C2012">
-                      <div className="C2013">
-                        <div className="T2010 isFixed150">고객이름</div>
-                        <div className="T2010 isFixed150">주민번호</div>
-                        <div className="T2010 isFixed150">휴대번호</div>
-                        <div className="T2010 isFixed150">등록지점</div>
-                        <div className="T2010 isFixed150">차트번호</div>
-                        <div className="T2010 isFixed150">등록일자</div>
-                        <div className="T2010 isFixed150">설문지 종류</div>
-                        <div className="T2010 isFixed150">등록여부</div>
-                      </div>
-                    </div>
-                    <div className="C2014">
-                      {surveyTableData.map((row, index) => {
-                        const surveyPageContent = (
-                          <SlidePage
-                            title="신환 설문지 등록"
-                            customerName={row.customerName}
-                            customerId={row.chartNumber}
-                            showToggleSwitch={false}
-                          >
-                            {/* 신환 설문지 등록 폼 - 여기에 퍼블리싱 */}
-                          </SlidePage>
-                        );
-                        return (
-                          <div
-                            key={index}
-                            className="C2015"
-                            onClick={() => {
-                              navigateToPage("new-survey", surveyPageContent);
-                            }}
-                          >
-                            <div className="T2011 isFixed150">
-                              {row.customerName}
-                            </div>
-                            <div className="T2011 isFixed150">
-                              {row.residentNumber}
-                            </div>
-                            <div className="T2011 isFixed150">
-                              {row.phoneNumber}
-                            </div>
-                            <div className="T2011 isFixed150">
-                              {row.registrationBranch}
-                            </div>
-                            <div className="T2011 isFixed150">
-                              {row.chartNumber}
-                            </div>
-                            <div className="T2011 isFixed150">
-                              {row.registrationDate}
-                            </div>
-                            <div className="T2011 isFixed150">
-                              {row.surveyType}
-                            </div>
-                            <div
-                              className={`T2012 isFixed150 ${
-                                row.registrationStatus === "가입완료"
-                                  ? "isRegistered"
-                                  : "isDisconnected"
-                              }`}
-                            >
-                              {row.registrationStatus}
-                            </div>
-                            <button
-                              className="C2016"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                navigateToPage("new-survey", surveyPageContent);
-                              }}
-                            >
-                              <div className="C2017">
-                                <div className="C2018 styleSheet isIcon isArrow isMini"></div>
-                              </div>
-                              <span className="T2011">등록하기</span>
-                            </button>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-                <div className="C2019">
-                  <button
-                    className="C2020"
-                    onClick={() => setCurrentPage(1)}
-                    disabled={currentPage === 1}
-                  >
-                    <div className="C2018 styleSheet isIcon isMini isControl isLeftDouble"></div>
-                  </button>
-                  <button
-                    className="C2020"
-                    onClick={() =>
-                      setCurrentPage((prev) => Math.max(1, prev - 1))
-                    }
-                    disabled={currentPage === 1}
-                  >
-                    <div className="C2018 styleSheet isIcon isMini isControl isLeft"></div>
-                  </button>
-                  {Array.from(
-                    { length: Math.min(10, totalPages) },
-                    (_, i) => i + 1
-                  ).map((page) => (
-                    <button
-                      key={page}
-                      className={`C2021 ${
-                        currentPage === page ? "isActive" : ""
-                      }`}
-                      onClick={() => setCurrentPage(page)}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                  <button
-                    className="C2020"
-                    onClick={() =>
-                      setCurrentPage((prev) => Math.min(totalPages, prev + 1))
-                    }
-                    disabled={currentPage === totalPages}
-                  >
-                    <div className="C2018 styleSheet isIcon isMini isControl isRight"></div>
-                  </button>
-                  <button
-                    className="C2020"
-                    onClick={() => setCurrentPage(totalPages)}
-                    disabled={currentPage === totalPages}
-                  >
-                    <div className="C2018 styleSheet isIcon isMini isControl isRightDouble"></div>
-                  </button>
-                </div>
+                {/* 설문지 고객 테이블 - 여기에 퍼블리싱 */}
               </div>
             </PopupSectionBox>
           )}
@@ -3598,112 +3017,7 @@ export default function CustomerStatusSection({
           {customerSearchTab === 2 && (
             <PopupSectionBox x={360} y={350} width={1200} height={810}>
               <div className="C2009">
-                <div className="C2010">
-                  <div className="C2011">
-                    <div className="C2012">
-                      <div className="C2013">
-                        <div className="T2010 isFixed150">고객이름</div>
-                        <div className="T2010 isFixed150">주민번호</div>
-                        <div className="T2010 isFixed150">휴대번호</div>
-                        <div className="T2010 isFixed150">등록지점</div>
-                        <div className="T2010 isFixed150">가등록 번호</div>
-                        <div className="T2010 isFixed150">등록일자</div>
-                        <div className="T2010 isFixed150">등록자</div>
-                        <div className="T2010 isFixed150">등록여부</div>
-                      </div>
-                    </div>
-                    <div className="C2014">
-                      {preRegistrationTableData.map((row, index) => (
-                        <div key={index} className="C2015">
-                          <div className="T2011 isFixed150">
-                            {row.customerName}
-                          </div>
-                          <div className="T2011 isFixed150">
-                            {row.residentNumber}
-                          </div>
-                          <div className="T2011 isFixed150">
-                            {row.phoneNumber}
-                          </div>
-                          <div className="T2011 isFixed150">
-                            {row.registrationBranch}
-                          </div>
-                          <div className="T2011 isFixed150">
-                            {row.preRegistrationNumber}
-                          </div>
-                          <div className="T2011 isFixed150">
-                            {row.registrationDate}
-                          </div>
-                          <div className="T2011 isFixed150">
-                            {row.registrant}
-                          </div>
-                          <div
-                            className={`T2012 isFixed150 ${
-                              row.registrationStatus === "가입완료"
-                                ? "isRegistered"
-                                : "isDisconnected"
-                            }`}
-                          >
-                            {row.registrationStatus}
-                          </div>
-                          <button className="C2016">
-                            <div className="C2017">
-                              <div className="C2018 styleSheet isIcon isArrow isMini"></div>
-                            </div>
-                            <span className="T2020">등록하기</span>
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="C2019">
-                  <button
-                    className="C2020"
-                    onClick={() => setCurrentPage(1)}
-                    disabled={currentPage === 1}
-                  >
-                    <div className="C2018 styleSheet isIcon isMini isControl isLeftDouble"></div>
-                  </button>
-                  <button
-                    className="C2020"
-                    onClick={() =>
-                      setCurrentPage((prev) => Math.max(1, prev - 1))
-                    }
-                    disabled={currentPage === 1}
-                  >
-                    <div className="C2018 styleSheet isIcon isMini isControl isLeft"></div>
-                  </button>
-                  {Array.from(
-                    { length: Math.min(10, totalPages) },
-                    (_, i) => i + 1
-                  ).map((page) => (
-                    <button
-                      key={page}
-                      className={`C2021 ${
-                        currentPage === page ? "isActive" : ""
-                      }`}
-                      onClick={() => setCurrentPage(page)}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                  <button
-                    className="C2020"
-                    onClick={() =>
-                      setCurrentPage((prev) => Math.min(totalPages, prev + 1))
-                    }
-                    disabled={currentPage === totalPages}
-                  >
-                    <div className="C2018 styleSheet isIcon isMini isControl isRight"></div>
-                  </button>
-                  <button
-                    className="C2020"
-                    onClick={() => setCurrentPage(totalPages)}
-                    disabled={currentPage === totalPages}
-                  >
-                    <div className="C2018 styleSheet isIcon isMini isControl isRightDouble"></div>
-                  </button>
-                </div>
+                {/* 상담 가등록 고객 테이블 - 여기에 퍼블리싱 */}
               </div>
             </PopupSectionBox>
           )}

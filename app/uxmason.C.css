@@ -1372,7 +1372,6 @@
     align-items: center;
     cursor: pointer;
     transition: .3s;
-    gap: var(--size-5);
     opacity: .5;
     width: var(--size-160);
     height: var(--size-60);

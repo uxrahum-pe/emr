@@ -9,6 +9,8 @@ import { PageHeaderProps } from "@/types/ui";
 import TabSelector from "./TabSelector";
 import CalendarMiniPopup from "./CalendarMiniPopup";
 import { startOfDay } from "date-fns";
+import ReservationServicePopup from "@/components/popups/ReservationServicePopup";
+import MenuSearchPopup from "@/components/popups/MenuSearchPopup";
 export default function PageHeader({
   title,
   onNoteClick,
@@ -19,6 +21,7 @@ export default function PageHeader({
 }: PageHeaderProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isMenuSearchPopupOpen, setIsMenuSearchPopupOpen] = useState(false);
+  const [isReservationPopupOpen, setIsReservationPopupOpen] = useState(false);
   const [selectedSortTab, setSelectedSortTab] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date | null>(() => {
     return startOfDay(new Date());
@@ -49,7 +52,15 @@ export default function PageHeader({
           </div>
         </Tooltip>
         <Tooltip text="통합 예약 서비스">
-          <div className="C014">
+          <div
+            className="C014"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsReservationPopupOpen(true);
+            }}
+            style={{ cursor: "pointer" }}
+          >
             <div className="C012 styleSheet isIcon isReservation"></div>
           </div>
         </Tooltip>
@@ -883,29 +894,14 @@ export default function PageHeader({
         </PopupSectionBox>
       </Popup>
 
-      {/* 메뉴 및 기능 검색 팝업 */}
-      <Popup
+      <MenuSearchPopup
         isOpen={isMenuSearchPopupOpen}
         onClose={() => setIsMenuSearchPopupOpen(false)}
-      >
-        <>
-          <PopupSectionBox x={260} y={20} width={1400}>
-            <div className="C180">
-              <p className="T076">메뉴 및 기능 검색</p>
-              <div
-                className="C181 isCloseButton"
-                onClick={() => setIsMenuSearchPopupOpen(false)}
-              >
-                <div className="C179 isDepth1"></div>
-                <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-              </div>
-            </div>
-          </PopupSectionBox>
-          <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-            <div className="C180">{/* 메뉴 및 기능 검색 팝업 내용 */}</div>
-          </PopupSectionBox>
-        </>
-      </Popup>
+      />
+      <ReservationServicePopup
+        isOpen={isReservationPopupOpen}
+        onClose={() => setIsReservationPopupOpen(false)}
+      />
     </>
   );
 }

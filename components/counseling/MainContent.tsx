@@ -1,7 +1,7 @@
 /**
  * MainContent Component
  *
- * @description 원무 페이지의 메인 콘텐츠 영역을 렌더링합니다.
+ * @description 상담 페이지의 메인 콘텐츠 영역을 렌더링합니다.
  * 고객 및 직원 클릭 이벤트를 처리하고, Aside의 navigateToPage를 사용하여
  * 슬라이드 페이지를 표시합니다.
  *
@@ -196,15 +196,15 @@ function MainContent({ onCustomerClick }: MainContentProps) {
         <div className="C079 isMine isComment">
           <div className="C087">
             <div className="C084">
-              <div className="C033 isIcon styleSheet isReception"></div>
+              <div className="C033 isIcon styleSheet isCounseling"></div>
             </div>
             <div className="C083">
               <p className="T039">
-                <span className="isBold">원무파트</span>{" "}
+                <span className="isBold">상담파트</span>{" "}
                 <span className="isGrey">- 전체 전달사항</span>
               </p>
               <ExpandableText
-                text="오늘 오후 2시부터 시스템 점검이 예정되어 있습니다. 업무에 참고 부탁드립니다. 점검 시간 동안 일시적으로 접속이 불가능할 수 있으며, 긴급한 업무는 사전에 처리해 주시기 바랍니다. 점검이 완료되면 자동으로 알림이 발송될 예정입니다. 추가 문의사항이 있으시면 원무팀으로 연락 부탁드립니다."
+                text="오늘 오후 2시부터 시스템 점검이 예정되어 있습니다. 업무에 참고 부탁드립니다. 점검 시간 동안 일시적으로 접속이 불가능할 수 있으며, 긴급한 업무는 사전에 처리해 주시기 바랍니다. 점검이 완료되면 자동으로 알림이 발송될 예정입니다. 추가 문의사항이 있으시면 상담팀으로 연락 부탁드립니다."
                 maxLines={4}
               />
             </div>

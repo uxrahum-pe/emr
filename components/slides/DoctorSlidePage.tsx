@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import { SlidePageProps } from '@/types/ui'
-import SlidePage from './SlidePage'
+import { SlidePageProps } from "@/types/ui";
+import SlidePage from "../SlidePage";
 
 /**
  * 원장용 슬라이드 페이지 컴포넌트
  * 원장 전용 스타일과 기능을 제공하는 SlidePage
  */
-export default function DoctorSlidePage({ 
-  children, 
-  className = '', 
-  transform, 
-  zIndex, 
+export default function DoctorSlidePage({
+  children,
+  className = "",
+  transform,
+  zIndex,
   style,
   onGoBack,
   showBackButton = false,
-  title = '원장 일정 보기',
-  employeeName = '',
-  employeeRole = '원장',
-  employeeId = ''
+  title = "원장 일정 보기",
+  employeeName = "",
+  employeeRole = "원장",
+  employeeId = "",
 }: SlidePageProps) {
   return (
     <SlidePage
@@ -35,6 +35,5 @@ export default function DoctorSlidePage({
     >
       {children}
     </SlidePage>
-  )
+  );
 }
-

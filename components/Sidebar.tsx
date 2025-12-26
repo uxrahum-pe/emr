@@ -241,11 +241,11 @@ export default function Sidebar() {
               }
             >
               <div className="C194">
-                <div className="C195 styleSheet isIcon isEarth"></div>
+                <div className="C195 styleSheet isIcon isAgreement"></div>
                 <p className="T083">동의서 현황</p>
               </div>
               <div className="C194">
-                <div className="C195 styleSheet isIcon isEarth"></div>
+                <div className="C195 styleSheet isIcon isPeople"></div>
                 <p className="T083">고객 현황</p>
               </div>
               <div className="C194">
@@ -253,7 +253,7 @@ export default function Sidebar() {
                 <p className="T083">외국인 현황</p>
               </div>
               <div className="C194">
-                <div className="C195 styleSheet isIcon isEarth"></div>
+                <div className="C195 styleSheet isIcon isGold"></div>
                 <p className="T083">실천지수 현황</p>
               </div>
             </div>

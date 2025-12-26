@@ -2,13 +2,22 @@
 
 import { useEffect, useState } from "react";
 import Popup from "@/components/Popup";
-import PopupSectionBox from "@/components/PopupSectionBox";
+import CheckInPopup from "@/components/popups/CheckInPopup";
+import MovePartPopup from "@/components/popups/MovePartPopup";
+import StatusManagementPopup from "@/components/popups/StatusManagementPopup";
+import AppointmentPopup from "@/components/popups/AppointmentPopup";
+import DailyProcedurePopup from "@/components/popups/DailyProcedurePopup";
+import PrescriptionPopup from "@/components/popups/PrescriptionPopup";
+import PaymentPopup from "@/components/popups/PaymentPopup";
+import CheckOutPopup from "@/components/popups/CheckOutPopup";
 
 interface ReceptionCheckInButtonProps {
   /** 고객 상세 패널(모달) 열림 여부 */
   isOpen: boolean;
   /** 퀵액션(C100) hover 여부에 따른 접힘 상태 */
   isFolded?: boolean;
+  /** 허용된 버튼 ID 목록 (지정되지 않으면 모든 버튼 표시) */
+  allowedButtonIds?: string[];
 }
 
 /**
@@ -18,6 +27,7 @@ interface ReceptionCheckInButtonProps {
 export default function ReceptionCheckInButton({
   isOpen,
   isFolded = false,
+  allowedButtonIds,
 }: ReceptionCheckInButtonProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
@@ -116,184 +126,10 @@ export default function ReceptionCheckInButton({
     setOpenPopup(id);
   };
 
-  // 각 팝업의 내용을 렌더링하는 함수
-  const renderPopupContent = (popupId: string) => {
-    const button = popupButtons.find((b) => b.id === popupId);
-    if (!button) return null;
-
-    switch (popupId) {
-      case "checkIn":
-        return (
-          <>
-            <PopupSectionBox x={260} y={20} width={1400}>
-              <div className="C180">
-                <p className="T076">{button.title}</p>
-                <div
-                  className="C181 isCloseButton"
-                  onClick={() => setOpenPopup(null)}
-                >
-                  <div className="C179 isDepth1"></div>
-                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-                </div>
-              </div>
-            </PopupSectionBox>
-            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-              <div className="C180">{/* 접수하기 팝업 내용 */}</div>
-            </PopupSectionBox>
-          </>
-        );
-
-      case "movePart":
-        return (
-          <>
-            <PopupSectionBox x={260} y={20} width={1400}>
-              <div className="C180">
-                <p className="T076">{button.title}</p>
-                <div
-                  className="C181 isCloseButton"
-                  onClick={() => setOpenPopup(null)}
-                >
-                  <div className="C179 isDepth1"></div>
-                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-                </div>
-              </div>
-            </PopupSectionBox>
-            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-              <div className="C180">{/* 파트이동 팝업 내용 */}</div>
-            </PopupSectionBox>
-          </>
-        );
-
-      case "status":
-        return (
-          <>
-            <PopupSectionBox x={260} y={20} width={1400}>
-              <div className="C180">
-                <p className="T076">{button.title}</p>
-                <div
-                  className="C181 isCloseButton"
-                  onClick={() => setOpenPopup(null)}
-                >
-                  <div className="C179 isDepth1"></div>
-                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-                </div>
-              </div>
-            </PopupSectionBox>
-            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-              <div className="C180">{/* 상태관리 팝업 내용 */}</div>
-            </PopupSectionBox>
-          </>
-        );
-
-      case "appointment":
-        return (
-          <>
-            <PopupSectionBox x={260} y={20} width={1400}>
-              <div className="C180">
-                <p className="T076">{button.title}</p>
-                <div
-                  className="C181 isCloseButton"
-                  onClick={() => setOpenPopup(null)}
-                >
-                  <div className="C179 isDepth1"></div>
-                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-                </div>
-              </div>
-            </PopupSectionBox>
-            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-              <div className="C180">{/* 상담예약 팝업 내용 */}</div>
-            </PopupSectionBox>
-          </>
-        );
-
-      case "dailyProcedure":
-        return (
-          <>
-            <PopupSectionBox x={260} y={20} width={1400}>
-              <div className="C180">
-                <p className="T076">{button.title}</p>
-                <div
-                  className="C181 isCloseButton"
-                  onClick={() => setOpenPopup(null)}
-                >
-                  <div className="C179 isDepth1"></div>
-                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-                </div>
-              </div>
-            </PopupSectionBox>
-            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-              <div className="C180">{/* 일일시술&처방 팝업 내용 */}</div>
-            </PopupSectionBox>
-          </>
-        );
-
-      case "prescription":
-        return (
-          <>
-            <PopupSectionBox x={260} y={20} width={1400}>
-              <div className="C180">
-                <p className="T076">{button.title}</p>
-                <div
-                  className="C181 isCloseButton"
-                  onClick={() => setOpenPopup(null)}
-                >
-                  <div className="C179 isDepth1"></div>
-                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-                </div>
-              </div>
-            </PopupSectionBox>
-            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-              <div className="C180">{/* 처방전 팝업 내용 */}</div>
-            </PopupSectionBox>
-          </>
-        );
-
-      case "payment":
-        return (
-          <>
-            <PopupSectionBox x={260} y={20} width={1400}>
-              <div className="C180">
-                <p className="T076">{button.title}</p>
-                <div
-                  className="C181 isCloseButton"
-                  onClick={() => setOpenPopup(null)}
-                >
-                  <div className="C179 isDepth1"></div>
-                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-                </div>
-              </div>
-            </PopupSectionBox>
-            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-              <div className="C180">{/* 수납등록 팝업 내용 */}</div>
-            </PopupSectionBox>
-          </>
-        );
-
-      case "checkOut":
-        return (
-          <>
-            <PopupSectionBox x={260} y={20} width={1400}>
-              <div className="C180">
-                <p className="T076">{button.title}</p>
-                <div
-                  className="C181 isCloseButton"
-                  onClick={() => setOpenPopup(null)}
-                >
-                  <div className="C179 isDepth1"></div>
-                  <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-                </div>
-              </div>
-            </PopupSectionBox>
-            <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-              <div className="C180">{/* 귀가처리 팝업 내용 */}</div>
-            </PopupSectionBox>
-          </>
-        );
-
-      default:
-        return null;
-    }
-  };
+  // allowedButtonIds가 제공되면 해당 버튼들만 필터링
+  const filteredButtons = allowedButtonIds
+    ? popupButtons.filter((button) => allowedButtonIds.includes(button.id))
+    : popupButtons;
 
   return (
     <>
@@ -302,7 +138,7 @@ export default function ReceptionCheckInButton({
           isFolded ? "isFolded" : ""
         }`.trim()}
       >
-        {popupButtons.map((button) => (
+        {filteredButtons.map((button) => (
           <div
             key={button.id}
             className={`C153 ${button.className}`}
@@ -318,15 +154,51 @@ export default function ReceptionCheckInButton({
       </section>
 
       {/* 각 팝업을 별도로 렌더링 */}
-      {popupButtons.map((button) => (
-        <Popup
-          key={button.id}
-          isOpen={openPopup === button.id}
-          onClose={() => setOpenPopup(null)}
-        >
-          {renderPopupContent(button.id)}
-        </Popup>
-      ))}
+      <Popup
+        isOpen={openPopup === "checkIn"}
+        onClose={() => setOpenPopup(null)}
+      >
+        <CheckInPopup onClose={() => setOpenPopup(null)} />
+      </Popup>
+      <Popup
+        isOpen={openPopup === "movePart"}
+        onClose={() => setOpenPopup(null)}
+      >
+        <MovePartPopup onClose={() => setOpenPopup(null)} />
+      </Popup>
+      <Popup isOpen={openPopup === "status"} onClose={() => setOpenPopup(null)}>
+        <StatusManagementPopup onClose={() => setOpenPopup(null)} />
+      </Popup>
+      <Popup
+        isOpen={openPopup === "appointment"}
+        onClose={() => setOpenPopup(null)}
+      >
+        <AppointmentPopup onClose={() => setOpenPopup(null)} />
+      </Popup>
+      <Popup
+        isOpen={openPopup === "dailyProcedure"}
+        onClose={() => setOpenPopup(null)}
+      >
+        <DailyProcedurePopup onClose={() => setOpenPopup(null)} />
+      </Popup>
+      <Popup
+        isOpen={openPopup === "prescription"}
+        onClose={() => setOpenPopup(null)}
+      >
+        <PrescriptionPopup onClose={() => setOpenPopup(null)} />
+      </Popup>
+      <Popup
+        isOpen={openPopup === "payment"}
+        onClose={() => setOpenPopup(null)}
+      >
+        <PaymentPopup onClose={() => setOpenPopup(null)} />
+      </Popup>
+      <Popup
+        isOpen={openPopup === "checkOut"}
+        onClose={() => setOpenPopup(null)}
+      >
+        <CheckOutPopup onClose={() => setOpenPopup(null)} />
+      </Popup>
     </>
   );
 }

@@ -19,7 +19,6 @@
 
 import { memo, useState } from "react";
 import MonthlyCalendar from "@/components/MonthlyCalendar";
-import ScrollableContainer from "@/components/ScrollableContainer";
 import { startOfDay } from "date-fns";
 
 /**
@@ -49,7 +48,7 @@ const PersonalSchedule = memo(() => {
           onDateSelect={handleDateSelect}
         />
       </div>
-      <ScrollableContainer className="C227">
+      <div className="C227">
         <p className="T093">일별 기록</p>
         <div className="C223">
           <div className="C226">
@@ -111,7 +110,7 @@ const PersonalSchedule = memo(() => {
             <div className="C113 styleSheet isIcon isMini isChevron isRight"></div>
           </div>
         </div>
-      </ScrollableContainer>
+      </div>
     </>
   );
 });

@@ -24,13 +24,14 @@
 
 "use client";
 
-import { ReactNode, useEffect, memo } from "react";
+import { ReactNode, useEffect, memo, useState } from "react";
 import React from "react";
 import { usePathname } from "next/navigation";
 import WeeklyCalendar from "./WeeklyCalendar";
 import { AsideProvider } from "./AsideContext";
 import SlidePage from "./SlidePage";
 import { useAsideStore, type AsidePage } from "@/stores/useAsideStore";
+import PartReferencePopup from "./popups/PartReferencePopup";
 
 /**
  * Aside 컴포넌트 Props
@@ -122,6 +123,18 @@ const AsideInner = memo(function AsideInner({
   // 현재 경로 확인 (대시보드는 /)
   const pathname = usePathname();
   const isDashboard = pathname === "/";
+  const isCounseling = pathname === "/counseling";
+  const isReception = pathname === "/reception";
+  const isPreCare = pathname === "/pre-care";
+  const isClinic = pathname === "/clinic";
+  const isSurgery = pathname === "/surgery";
+  const isProcedure = pathname === "/procedure";
+  const isPostCare = pathname === "/post-care";
+  const isStatistics = pathname === "/statistics";
+
+  // C070 클릭 시 팝업 상태
+  const [isPartReferencePopupOpen, setIsPartReferencePopupOpen] =
+    useState(false);
 
   // Render mainContent inside provider to access useAside
   // mainContent가 변경될 때마다 재계산되도록 useMemo 사용
@@ -139,11 +152,38 @@ const AsideInner = memo(function AsideInner({
       return <div className="C073"></div>;
     }
 
+    // 상담 페이지용 레이아웃
+    if (isCounseling) {
+      return (
+        <>
+          <WeeklyCalendar />
+          <div
+            className="C070 isCounseling"
+            onClick={() => setIsPartReferencePopupOpen(true)}
+            style={{ cursor: "pointer" }}
+          >
+            <p className="T035">
+              상담파트 <span className="isUnit">전체 전달사항 입력</span>
+            </p>
+            <div className="C071">
+              <div className="C072 styleSheet isIcon isWrite"></div>
+            </div>
+          </div>
+          <div className="C074"></div>
+          <div className="C075">{content}</div>
+        </>
+      );
+    }
+
     // 원무 페이지용 레이아웃
     return (
       <>
         <WeeklyCalendar />
-        <div className="C070 isReception">
+        <div
+          className="C070 isReception"
+          onClick={() => setIsPartReferencePopupOpen(true)}
+          style={{ cursor: "pointer" }}
+        >
           <p className="T035">
             원무파트 <span className="isUnit">전체 전달사항 입력</span>
           </p>
@@ -155,7 +195,7 @@ const AsideInner = memo(function AsideInner({
         <div className="C075">{content}</div>
       </>
     );
-  }, [mainContent, isDashboard]);
+  }, [mainContent, isDashboard, isCounseling]);
 
   // 대시보드용 C073인지 확인하는 함수
   const isDashboardC073 = React.useMemo(() => {
@@ -200,7 +240,10 @@ const AsideInner = memo(function AsideInner({
               (typeof page.content.type === "function" &&
                 (page.content.type.name === "DoctorSlidePage" ||
                   page.content.type.name === "EmployeeSlidePage" ||
-                  page.content.type.name === "CounselorSlidePage")));
+                  page.content.type.name === "CounselorSlidePage" ||
+                  page.content.type.name === "CustomerReferenceSlide" ||
+                  page.content.type.name === "MyNotesSlide" ||
+                  page.content.type.name === "MyAlarmsSlide")));
 
           if (isSlidePageComponent) {
             // SlidePage 계열 컴포넌트면 props를 전달하여 clone
@@ -245,6 +288,21 @@ const AsideInner = memo(function AsideInner({
           }
         })}
       </div>
+
+      {/* 파트 참조사항 팝업 */}
+      {(isReception ||
+        isCounseling ||
+        isPreCare ||
+        isClinic ||
+        isSurgery ||
+        isProcedure ||
+        isPostCare ||
+        isStatistics) && (
+        <PartReferencePopup
+          isOpen={isPartReferencePopupOpen}
+          onClose={() => setIsPartReferencePopupOpen(false)}
+        />
+      )}
     </aside>
   );
 });

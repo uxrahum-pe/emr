@@ -1,32 +1,32 @@
-'use client'
+"use client";
 
-import { SlidePageProps } from '@/types/ui'
-import SlidePage from './SlidePage'
+import { SlidePageProps } from "@/types/ui";
+import SlidePage from "../SlidePage";
 
 /**
  * 일반직원용 슬라이드 페이지 컴포넌트
  * 일반직원 전용 스타일과 기능을 제공하는 SlidePage
  */
-export default function EmployeeSlidePage({ 
-  children, 
-  className = '', 
-  transform, 
-  zIndex, 
+export default function EmployeeSlidePage({
+  children,
+  className = "",
+  transform,
+  zIndex,
   style,
   onGoBack,
   showBackButton = false,
-  title = '업무 일정 보기',
-  employeeName = '',
-  employeeRole = '',
-  employeeId = ''
+  title = "업무 일정 보기",
+  employeeName = "",
+  employeeRole = "",
+  employeeId = "",
 }: SlidePageProps) {
   // 역할에 따라 title 결정
   const getTitle = () => {
-    if (title) return title
-    if (employeeRole.includes('상담사')) return '상담 일정 보기'
-    if (employeeRole.includes('원장')) return '원장 일정 보기'
-    return '업무 일정 보기'
-  }
+    if (title) return title;
+    if (employeeRole.includes("상담사")) return "상담 일정 보기";
+    if (employeeRole.includes("원장")) return "원장 일정 보기";
+    return "업무 일정 보기";
+  };
 
   return (
     <SlidePage
@@ -43,6 +43,5 @@ export default function EmployeeSlidePage({
     >
       {children}
     </SlidePage>
-  )
+  );
 }
-
