@@ -109,14 +109,14 @@ const AsideInner = memo(function AsideInner({
   // 로컬 상태로 pages 관리 (Zustand 구독 타이밍 이슈 해결)
   // 초기값을 storePages로 설정하여 첫 렌더링에서도 값이 있도록 함
   const [localPages, setLocalPages] = useState<typeof storePages>(storePages);
-  
+
   // Zustand store의 pages와 동기화 (useLayoutEffect로 즉시 반영)
   React.useLayoutEffect(() => {
-    if (storePages.length > 0 && storePages !== localPages) {
+    if (storePages.length > 0) {
       setLocalPages(storePages);
     }
   }, [storePages]);
-  
+
   // 렌더링에는 로컬 상태 우선 사용, 없으면 store 상태 사용
   const pages = localPages.length > 0 ? localPages : storePages;
 
