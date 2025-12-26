@@ -3324,35 +3324,8 @@ export default function CustomerStatusSection({
                               navigateToPage("new-survey", surveyPageContent);
                             }}
                           >
-                          <div className="T2011 isFixed150">{row.customerName}</div>
-                          <div className="T2011 isFixed150">
-                            {row.residentNumber}
-                          </div>
-                          <div className="T2011 isFixed150">{row.phoneNumber}</div>
-                          <div className="T2011 isFixed150">
-                            {row.registrationBranch}
-                          </div>
-                          <div className="T2011 isFixed150">{row.chartNumber}</div>
-                          <div className="T2011 isFixed150">{row.registrationDate}</div>
-                          <div className="T2011 isFixed150">{row.surveyType}</div>
-                          <div
-                            className={`T2012 isFixed150 ${
-                              row.registrationStatus === "가입완료"
-                                ? "isRegistered"
-                                : "isDisconnected"
-                            }`}
-                          >
-                            {row.registrationStatus}
-                          </div>
-                          <button
-                            className="C2016"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              navigateToPage("new-survey", surveyPageContent);
-                            }}
-                          >
-                            <div className="C2017">
-                              <div className="C2018 styleSheet isIcon isArrow isMini"></div>
+                            <div className="T2011 isFixed150">
+                              {row.customerName}
                             </div>
                             <div className="T2011 isFixed150">
                               {row.residentNumber}
@@ -3382,16 +3355,16 @@ export default function CustomerStatusSection({
                               {row.registrationStatus}
                             </div>
                             <button
-                              className="C2020"
+                              className="C2016"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 navigateToPage("new-survey", surveyPageContent);
                               }}
                             >
-                              <div className="C2021">
-                                <div className="C2019 styleSheet isIcon isArrow isMini"></div>
+                              <div className="C2017">
+                                <div className="C2018 styleSheet isIcon isArrow isMini"></div>
                               </div>
-                              <span className="T2020">등록하기</span>
+                              <span className="T2011">등록하기</span>
                             </button>
                           </div>
                         );
@@ -3471,7 +3444,9 @@ export default function CustomerStatusSection({
                     <div className="C2014">
                       {preRegistrationTableData.map((row, index) => (
                         <div key={index} className="C2015">
-                          <div className="T2011 isFixed150">{row.customerName}</div>
+                          <div className="T2011 isFixed150">
+                            {row.customerName}
+                          </div>
                           <div className="T2011 isFixed150">
                             {row.residentNumber}
                           </div>
