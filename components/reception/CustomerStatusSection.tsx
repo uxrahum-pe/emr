@@ -85,16 +85,19 @@ export default function CustomerStatusSection({
   }
 
   // 샘플 데이터 (실제로는 API에서 가져올 데이터)
-  const sampleTableData: CustomerTableData[] = Array.from({ length: 10 }, () => ({
-    customerName: "이신득",
-    residentNumber: "840923-1712313",
-    phoneNumber: "010-7444-4118",
-    registrationBranch: "서울365mc병원",
-    barcodeNumber: "1600016819392871",
-    registrationDate: "2024.08.11",
-    webId: "uxmason",
-    registrationStatus: Math.random() > 0.4 ? "가입완료" : "미연결",
-  }));
+  const sampleTableData: CustomerTableData[] = Array.from(
+    { length: 10 },
+    () => ({
+      customerName: "이신득",
+      residentNumber: "840923-1712313",
+      phoneNumber: "010-7444-4118",
+      registrationBranch: "서울365mc병원",
+      barcodeNumber: "1600016819392871",
+      registrationDate: "2024.08.11",
+      webId: "uxmason",
+      registrationStatus: Math.random() > 0.4 ? "가입완료" : "미연결",
+    })
+  );
 
   const totalPages = 10;
   const itemsPerPage = 10;
@@ -1901,164 +1904,134 @@ export default function CustomerStatusSection({
         <div>
           <PopupSectionBox x={290} y={70} width={660} height={1060}>
             <div className="C1003">
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  주민번호:      
-                </p>
-                <input
-                  className="T1002"
-                  type="text"
-                  placeholder="000000-0******"
-                />
-                <button className="C1005">중복검사</button>
-                <div className="C1011">
-                  <div className="C1012">
-                    <div className="C1013 styleSheet isIcon isMini isChecked"></div>
-                  </div>
-                  <p className="T1003">가명 사용</p>
-                </div>
-              </div>
-            </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  성명: 
-                </p>
-                <input
-                  className="T1002"
-                  type="text"
-                  placeholder="최대 16자까지"
-                />
-                <p className="T1000">
-                  가명: 
-                </p>
-                <input
-                  className="T1002"
-                  type="text"
-                  placeholder="최대 16자까지"
-                />
-              </div>
-            </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  전화번호: 
-                </p>
-                <input
-                  className="T1002"
-                  type="text"
-                  placeholder="000-0000-0000"
-                />
-                <button className="C1005">인증요청</button>
-                
-                <input
-                  className="T1002"
-                  type="text"
-                  placeholder="6자리"
-                />
-                <button className="C1010">확인</button>
-              </div>
-            </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  자택번호: 
-                </p>
-                <input
-                  className="T1002"
-                  type="text"
-                  placeholder="000-0000-0000"
-                />
-                <p className="T1000">
-                  이메일: 
-                </p>
-                <input
-                  className="T1002"
-                  type="text"
-                  placeholder="최대32자까지"
-                />
-              </div>
-            </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">주소:</p>
-                <div className="C1004">
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">주민번호:</p>
                   <input
-                    className="T1001"
+                    className="T1002"
                     type="text"
-                    placeholder="주소를 입력하세요"
+                    placeholder="000000-0******"
                   />
-                  <button className="C1005">주소검색</button>
-                </div>
-              </div>
-            </div>
-            <div className="C1007">
-              <div className="C1009"></div>
-            </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  SMS수신: 
-                </p>
-                <div className="C1014">
-                  <div className="C1015">
-                    <div className="C1013"></div>
+                  <button className="C1005">중복검사</button>
+                  <div className="C1011">
+                    <div className="C1012">
+                      <div className="C1013 styleSheet isIcon isMini isChecked"></div>
+                    </div>
+                    <p className="T1003">가명 사용</p>
                   </div>
-                  <p className="T1003">고객 거부</p>
                 </div>
-                <div className="C1014">
-                  <div className="C1015">
-                    <div className="C1013"></div>
+              </div>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">성명:</p>
+                  <input
+                    className="T1002"
+                    type="text"
+                    placeholder="최대 16자까지"
+                  />
+                  <p className="T1000">가명:</p>
+                  <input
+                    className="T1002"
+                    type="text"
+                    placeholder="최대 16자까지"
+                  />
+                </div>
+              </div>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">전화번호:</p>
+                  <input
+                    className="T1002"
+                    type="text"
+                    placeholder="000-0000-0000"
+                  />
+                  <button className="C1005">인증요청</button>
+
+                  <input className="T1002" type="text" placeholder="6자리" />
+                  <button className="C1010">확인</button>
+                </div>
+              </div>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">자택번호:</p>
+                  <input
+                    className="T1002"
+                    type="text"
+                    placeholder="000-0000-0000"
+                  />
+                  <p className="T1000">이메일:</p>
+                  <input
+                    className="T1002"
+                    type="text"
+                    placeholder="최대32자까지"
+                  />
+                </div>
+              </div>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">주소:</p>
+                  <div className="C1004">
+                    <input
+                      className="T1001"
+                      type="text"
+                      placeholder="주소를 입력하세요"
+                    />
+                    <button className="C1005">주소검색</button>
                   </div>
-                  <p className="T1003">수신 금지</p>
                 </div>
-                <div className="C1011">
-                  <div className="C1012">
-                    <div className="C1013 styleSheet isIcon isMini isChecked"></div>
+              </div>
+              <div className="C1007">
+                <div className="C1009"></div>
+              </div>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">SMS수신:</p>
+                  <div className="C1014">
+                    <div className="C1015">
+                      <div className="C1013"></div>
+                    </div>
+                    <p className="T1003">고객 거부</p>
                   </div>
-                  <p className="T1003">수신 받음</p>
+                  <div className="C1014">
+                    <div className="C1015">
+                      <div className="C1013"></div>
+                    </div>
+                    <p className="T1003">수신 금지</p>
+                  </div>
+                  <div className="C1011">
+                    <div className="C1012">
+                      <div className="C1013 styleSheet isIcon isMini isChecked"></div>
+                    </div>
+                    <p className="T1003">수신 받음</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  거부사유: 
-                </p>
-                <input
-                  className="T1002"
-                  type="text"
-                  placeholder="최대32자까지"
-                />
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">거부사유:</p>
+                  <input
+                    className="T1002"
+                    type="text"
+                    placeholder="최대32자까지"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  할인구분: 
-                </p>
-                <p className="T1000">
-                  직업: 
-                </p>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">할인구분:</p>
+                  <p className="T1000">직업:</p>
+                </div>
               </div>
-            </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  본인인증: 
-                </p>
-                
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">본인인증:</p>
+                </div>
               </div>
-            </div>
-            <div className="C1007">
-              <div className="C1000">
-                <p className="T1000">
-                  상태: 
-                </p>
-                
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">상태:</p>
+                </div>
               </div>
-            </div>
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={70} width={660}>
@@ -2875,18 +2848,24 @@ export default function CustomerStatusSection({
               <div className="C2000">
                 <p className="T2000">보기:</p>
                 <TabSelector
-                  items={[{ title: "바코드 예약 고객" }, { title: "설문지 고객" }, { title: "상담 가등록 고객" }]}
+                  items={[
+                    { title: "바코드 예약 고객" },
+                    { title: "설문지 고객" },
+                    { title: "상담 가등록 고객" },
+                  ]}
                   width="var(--size-340)"
                   multiple={false}
                   value={selectedSortTab}
-                  onChange={(selected) => setSelectedSortTab(selected as number)
+                  onChange={(selected) =>
+                    setSelectedSortTab(selected as number)
                   }
                 />
                 <div className="C2001">
                   <div className="C2002">
                     <div className="C2003 styleSheet isIcon isMini isChecked"></div>
                   </div>
-                  <p className="T2001">등록 완료된 고객 제외</p></div>
+                  <p className="T2001">등록 완료된 고객 제외</p>
+                </div>
               </div>
               <div
                 className="C181 isCloseButton"
@@ -2899,45 +2878,50 @@ export default function CustomerStatusSection({
           </PopupSectionBox>
           <PopupSectionBox x={360} y={160} width={1200} height={170}>
             <div className="C2004">
-             <div className="C2005">
-              <p className="T2004">이름:</p>
-              <input className="T2005" placeholder="16자 이하" type="text" />
-            </div>
-            <div className="C2005">
-              <p className="T2004">주민번호:</p>
-              <input className="T2005" placeholder="14자 이내" type="text" />
-            </div>
-            <div className="C2005">
-              <p className="T2004">휴대번호:</p>
-              <input className="T2005" placeholder="17자 이내" type="text" />
-            </div>
-            <div className="C2005">
-              <p className="T2004">차트번호:</p>
-              <input className="T2006" placeholder="9자 이내" type="text" />
-            </div>
-            </div>
-
-           <div className="C2006">
-             <div className="C2005">
-              <p className="T2004">예약번호:</p>
-              <input className="T2006" placeholder="7자 이내" type="text" />
-            </div>
-
-           <div className="C2005">
-            <div className="C2007">
-              <p className="T2004">날짜 검색:</p>
-              <input className="T2005" placeholder="날짜 선택" type="text" />
-              <div className="C2007">
-              <p className="T2004">~</p>
-              <input className="T2005" placeholder="날짜 선택" type="text" />
+              <div className="C2005">
+                <p className="T2004">이름:</p>
+                <input className="T2005" placeholder="16자 이하" type="text" />
               </div>
-              <button className="C2008">검색</button>
+              <div className="C2005">
+                <p className="T2004">주민번호:</p>
+                <input className="T2005" placeholder="14자 이내" type="text" />
+              </div>
+              <div className="C2005">
+                <p className="T2004">휴대번호:</p>
+                <input className="T2005" placeholder="17자 이내" type="text" />
+              </div>
+              <div className="C2005">
+                <p className="T2004">차트번호:</p>
+                <input className="T2006" placeholder="9자 이내" type="text" />
+              </div>
             </div>
-            </div>
-            
 
-            </div>
+            <div className="C2006">
+              <div className="C2005">
+                <p className="T2004">예약번호:</p>
+                <input className="T2006" placeholder="7자 이내" type="text" />
+              </div>
 
+              <div className="C2005">
+                <div className="C2007">
+                  <p className="T2004">날짜 검색:</p>
+                  <input
+                    className="T2005"
+                    placeholder="날짜 선택"
+                    type="text"
+                  />
+                  <div className="C2007">
+                    <p className="T2004">~</p>
+                    <input
+                      className="T2005"
+                      placeholder="날짜 선택"
+                      type="text"
+                    />
+                  </div>
+                  <button className="C2008">검색</button>
+                </div>
+              </div>
+            </div>
           </PopupSectionBox>
 
           <PopupSectionBox x={360} y={350} width={1200} height={810}>
@@ -2962,11 +2946,19 @@ export default function CustomerStatusSection({
                         <div className="T2011">{row.customerName}</div>
                         <div className="T2011 is15p">{row.residentNumber}</div>
                         <div className="T2011 is15p">{row.phoneNumber}</div>
-                        <div className="T2011 is15p">{row.registrationBranch}</div>
+                        <div className="T2011 is15p">
+                          {row.registrationBranch}
+                        </div>
                         <div className="T2011 is15p">{row.barcodeNumber}</div>
                         <div className="T2011">{row.registrationDate}</div>
                         <div className="T2011">{row.webId}</div>
-                        <div className={`T2012 ${row.registrationStatus === "가입완료" ? "isRegistered" : "isDisconnected"}`}>
+                        <div
+                          className={`T2012 ${
+                            row.registrationStatus === "가입완료"
+                              ? "isRegistered"
+                              : "isDisconnected"
+                          }`}
+                        >
                           {row.registrationStatus}
                         </div>
                       </div>
@@ -2984,15 +2976,22 @@ export default function CustomerStatusSection({
                 </button>
                 <button
                   className="C2014"
-                  onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(1, prev - 1))
+                  }
                   disabled={currentPage === 1}
                 >
                   &lt;
                 </button>
-                {Array.from({ length: Math.min(10, totalPages) }, (_, i) => i + 1).map((page) => (
+                {Array.from(
+                  { length: Math.min(10, totalPages) },
+                  (_, i) => i + 1
+                ).map((page) => (
                   <button
                     key={page}
-                    className={`C2015 ${currentPage === page ? "isActive" : ""}`}
+                    className={`C2015 ${
+                      currentPage === page ? "isActive" : ""
+                    }`}
                     onClick={() => setCurrentPage(page)}
                   >
                     {page}
@@ -3000,17 +2999,31 @@ export default function CustomerStatusSection({
                 ))}
                 <button
                   className="C2014"
-                  onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+                  }
                   disabled={currentPage === totalPages}
                 >
-                  &gt;
+                  <div
+                    className="styleSheet isIcon isMini isControl isRight"
+                    style={{
+                      width: "var(--size-20)",
+                      height: "var(--size-20)",
+                    }}
+                  ></div>
                 </button>
                 <button
                   className="C2014"
                   onClick={() => setCurrentPage(totalPages)}
                   disabled={currentPage === totalPages}
                 >
-                  &gt;&gt;
+                  <div
+                    className="styleSheet isIcon isMini isControl isRightDouble"
+                    style={{
+                      width: "var(--size-20)",
+                      height: "var(--size-20)",
+                    }}
+                  ></div>
                 </button>
               </div>
             </div>

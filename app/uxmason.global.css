@@ -1077,6 +1077,24 @@ span.isLink {
 .isIcon.isClock.isMini {
   background-position-y: calc(-1 * var(--size-180));
 }
+.isIcon.isControl.isLeft.isMini {
+  background-position-y: calc(-1 * var(--size-200));
+  filter: brightness(0) invert(1);
+}
+.isIcon.isControl.isLeftDouble.isMini {
+  background-position-y: calc(-1 * var(--size-220));
+  filter: brightness(0) invert(1);
+}
+.isIcon.isControl.isRight.isMini {
+  background-position-y: calc(-1 * var(--size-200));
+  transform: rotate(180deg);
+  filter: brightness(0) invert(1);
+}
+.isIcon.isControl.isRightDouble.isMini {
+  background-position-y: calc(-1 * var(--size-220));
+  transform: rotate(180deg);
+  filter: brightness(0) invert(1);
+}
 
 .isIcon.isPart {
   background-position-x: calc(-1 * var(--size-800));
