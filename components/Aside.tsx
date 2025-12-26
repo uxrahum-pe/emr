@@ -8,10 +8,7 @@
  * @component
  * @example
  * ```tsx
- * <Aside
- *   mainContent={<MainContent />}
- *   onNavigate={(pageId) => console.log(pageId)}
- * >
+ * <Aside mainContent={<MainContent />}>
  *   <NoteClickHandler onHandlerReady={handleNoteHandlerReady} />
  * </Aside>
  * ```
