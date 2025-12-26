@@ -106,6 +106,10 @@ const AsideInner = memo(function AsideInner({
   // PageHeader 핸들러 리셋을 위한 스토어
   const resetHandlers = usePageHeaderStore((state) => state.resetHandlers);
 
+  // 클라이언트 마운트 상태 (SSR/Hydration 문제 방지)
+  // lazy initialization을 사용하여 클라이언트에서만 true로 초기화
+  const [isMounted] = useState(() => typeof window !== "undefined");
+
   // 현재 경로 확인 (대시보드는 /)
   const pathname = usePathname();
 
@@ -235,8 +239,8 @@ const AsideInner = memo(function AsideInner({
 
   // Initialize and update main page when mainContent changes
   React.useEffect(() => {
-    // 클라이언트에서만 실행 (SSR 환경에서는 무시)
-    if (typeof window === "undefined") return;
+    // 클라이언트 마운트 후에만 실행
+    if (!isMounted || typeof window === "undefined") return;
 
     // mainPageContent가 없으면 생성하지 않음
     if (!mainPageContent) return;
@@ -305,7 +309,7 @@ const AsideInner = memo(function AsideInner({
 
       return newPages;
     });
-  }, [mainPageContent, setPages]);
+  }, [isMounted, mainPageContent, setPages]);
 
   // pathname 변경 후 pages가 main 페이지만 있을 때 currentIndex를 0으로 설정
   // goBack처럼 pages와 currentIndex를 동시에 설정해야 작동함
@@ -331,67 +335,77 @@ const AsideInner = memo(function AsideInner({
   return (
     <aside className="C013">
       <div className="C089">
-        {pages.map((page, index) => {
-          const offset = index - currentIndex;
-          // page.content가 React 요소인지 확인하고, SlidePage 계열 컴포넌트인지 체크
-          const isSlidePageComponent =
-            React.isValidElement(page.content) &&
-            (page.content.type === SlidePage ||
-              (typeof page.content.type === "function" &&
-                (page.content.type.name === "DoctorSlidePage" ||
-                  page.content.type.name === "EmployeeSlidePage" ||
-                  page.content.type.name === "CounselorSlidePage" ||
-                  page.content.type.name === "CustomerReferenceSlide" ||
-                  page.content.type.name === "MyNotesSlide" ||
-                  page.content.type.name === "MyAlarmsSlide")));
+        {pages.length === 0 ? (
+          // pages가 비어있을 때 fallback 렌더링 (초기 마운트 시)
+          <div
+            className="C073"
+            style={{ transform: "translateX(0%)", zIndex: 1 }}
+          >
+            {mainPageContent || <div className="C073"></div>}
+          </div>
+        ) : (
+          pages.map((page, index) => {
+            const offset = index - currentIndex;
+            // page.content가 React 요소인지 확인하고, SlidePage 계열 컴포넌트인지 체크
+            const isSlidePageComponent =
+              React.isValidElement(page.content) &&
+              (page.content.type === SlidePage ||
+                (typeof page.content.type === "function" &&
+                  (page.content.type.name === "DoctorSlidePage" ||
+                    page.content.type.name === "EmployeeSlidePage" ||
+                    page.content.type.name === "CounselorSlidePage" ||
+                    page.content.type.name === "CustomerReferenceSlide" ||
+                    page.content.type.name === "MyNotesSlide" ||
+                    page.content.type.name === "MyAlarmsSlide")));
 
-          if (isSlidePageComponent) {
-            // SlidePage 계열 컴포넌트면 props를 전달하여 clone
-            return React.cloneElement(
-              page.content as React.ReactElement<{
-                transform?: string;
-                zIndex?: number;
-                onGoBack?: () => void;
-                showBackButton?: boolean;
-              }>,
-              {
-                key: page.id,
-                transform: `translateX(${offset * 100}%)`,
-                zIndex: pages.length - index,
-                onGoBack: goBack,
-                showBackButton: index > 0,
+            if (isSlidePageComponent) {
+              // SlidePage 계열 컴포넌트면 props를 전달하여 clone
+              return React.cloneElement(
+                page.content as React.ReactElement<{
+                  transform?: string;
+                  zIndex?: number;
+                  onGoBack?: () => void;
+                  showBackButton?: boolean;
+                }>,
+                {
+                  key: page.id,
+                  transform: `translateX(${offset * 100}%)`,
+                  zIndex: pages.length - index,
+                  onGoBack: goBack,
+                  showBackButton: index > 0,
+                }
+              );
+            } else {
+              // 대시보드용 C073이면 SlidePage로 감싸지 않고 직접 렌더링
+              if (page.id === "main" && isDashboardC073) {
+                return (
+                  <div
+                    key={page.id}
+                    className="C073"
+                    style={{
+                      transform: `translateX(${offset * 100}%)`,
+                      zIndex: pages.length - index,
+                    }}
+                  >
+                    {page.content}
+                  </div>
+                );
               }
-            );
-          } else {
-            // 대시보드용 C073이면 SlidePage로 감싸지 않고 직접 렌더링
-            if (page.id === "main" && isDashboardC073) {
+              // 일반 content면 SlidePage로 감싸기
               return (
-                <div
+                <SlidePage
                   key={page.id}
-                  className="C073"
-                  style={{
-                    transform: `translateX(${offset * 100}%)`,
-                    zIndex: pages.length - index,
-                  }}
+                  transform={`translateX(${offset * 100}%)`}
+                  zIndex={pages.length - index}
+                  onGoBack={goBack}
+                  showBackButton={index > 0}
                 >
                   {page.content}
-                </div>
+                </SlidePage>
               );
             }
-            // 일반 content면 SlidePage로 감싸기
-            return (
-              <SlidePage
-                key={page.id}
-                transform={`translateX(${offset * 100}%)`}
-                zIndex={pages.length - index}
-                onGoBack={goBack}
-                showBackButton={index > 0}
-              >
-                {page.content}
-              </SlidePage>
-            );
-          }
-        })}
+          })
+        )}
       </div>
 
       {/* 파트 참조사항 팝업 */}
