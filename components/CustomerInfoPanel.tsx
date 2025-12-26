@@ -735,7 +735,11 @@ export default function CustomerInfoPanel({
               <div className="C2022">
                 <div className="C2023"></div>
                 <div className="C2024">
-                  <div className="T2021">365<span className="T2021Script">mc</span></div>
+                  <img 
+                    src="/images/365mcLogo.png" 
+                    alt="365mc" 
+                    className="C2032"
+                  />
                   <div className="C2025">
                     <div className="C2026"></div>
                     <div className="T2022">1600016819392871</div>

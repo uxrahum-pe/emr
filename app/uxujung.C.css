@@ -274,6 +274,15 @@
     position: relative;
 }
 
+.C2032 {
+    width: var(--size-70);
+    height: var(--size-35);
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .C2025 {
     display: flex;
     flex-direction: column;
