@@ -417,8 +417,19 @@ const AsideInner = memo(function AsideInner({
                     contentDisplayName === "MyNotesSlide" ||
                     contentDisplayName === "MyAlarmsSlide")));
 
+            console.log("🔍 [Aside] 페이지 컴포넌트 체크", {
+              pageId: page.id,
+              contentType:
+                contentType?.name ||
+                contentType?.displayName ||
+                typeof contentType,
+              contentDisplayName,
+              isSlidePageComponent,
+              isValidElement: React.isValidElement(page.content),
+            });
+
             if (isSlidePageComponent) {
-              return React.cloneElement(
+              const clonedElement = React.cloneElement(
                 page.content as React.ReactElement<{
                   transform?: string;
                   zIndex?: number;
@@ -433,6 +444,13 @@ const AsideInner = memo(function AsideInner({
                   showBackButton: index > 0,
                 }
               );
+              console.log("✅ [Aside] SlidePage 컴포넌트 cloneElement", {
+                pageId: page.id,
+                transform: `translateX(${offset * 100}%)`,
+                zIndex: pages.length - index,
+                showBackButton: index > 0,
+              });
+              return clonedElement;
             }
 
             if (page.id === "main" && isDashboardC073) {
