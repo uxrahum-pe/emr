@@ -106,10 +106,6 @@ const AsideInner = memo(function AsideInner({
   // PageHeader 핸들러 리셋을 위한 스토어
   const resetHandlers = usePageHeaderStore((state) => state.resetHandlers);
 
-  // 클라이언트 마운트 상태 (SSR/Hydration 문제 방지)
-  // lazy initialization을 사용하여 클라이언트에서만 true로 초기화
-  const [isMounted] = useState(() => typeof window !== "undefined");
-
   // 현재 경로 확인 (대시보드는 /)
   const pathname = usePathname();
 
@@ -120,19 +116,36 @@ const AsideInner = memo(function AsideInner({
   // useLayoutEffect를 사용하여 mainPageContent useEffect보다 먼저 실행되도록 함
   useLayoutEffect(() => {
     // 클라이언트에서만 실행 (SSR 환경에서는 무시)
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") {
+      console.log("🔴 [Aside] pathname useLayoutEffect - SSR 환경, 실행 안 함");
+      return;
+    }
+
+    console.log("🟡 [Aside] pathname useLayoutEffect 실행", {
+      pathname,
+      lastPathname,
+      isClient: typeof window !== "undefined",
+    });
 
     // pathname이 유효하지 않으면 무시
-    if (!pathname) return;
+    if (!pathname) {
+      console.log("⚠️ [Aside] pathname이 유효하지 않음");
+      return;
+    }
 
     // 첫 마운트 시에는 pathname만 저장
     if (lastPathname === null) {
+      console.log("🆕 [Aside] 첫 마운트, pathname 저장", { pathname });
       setLastPathname(pathname);
       return;
     }
 
     // pathname이 변경되었을 때만 리셋
     if (lastPathname !== pathname) {
+      console.log("🔄 [Aside] pathname 변경 감지", {
+        from: lastPathname,
+        to: pathname,
+      });
       setLastPathname(pathname);
       pathnameChangedRef.current = true;
 
@@ -141,6 +154,7 @@ const AsideInner = memo(function AsideInner({
 
       // 즉시 pages를 빈 배열로 초기화 (main 페이지는 mainPageContent useEffect에서 생성됨)
       setPages([]);
+      console.log("🗑️ [Aside] pages 빈 배열로 초기화");
 
       // PageHeader 핸들러도 리셋 (이전 페이지의 핸들러가 남아있지 않도록)
       resetHandlers();
@@ -174,6 +188,15 @@ const AsideInner = memo(function AsideInner({
   const mainPageContent = React.useMemo(() => {
     const content =
       typeof mainContent === "function" ? mainContent() : mainContent;
+
+    console.log("🔵 [Aside] mainPageContent useMemo 실행", {
+      pathname,
+      isDashboard,
+      isCounseling,
+      isReception,
+      hasContent: !!content,
+      isClient: typeof window !== "undefined",
+    });
 
     // 대시보드 경로일 때는 content를 C073으로 감싸서 반환 (SlidePage로 감싸지 않음)
     if (isDashboard) {
@@ -228,7 +251,7 @@ const AsideInner = memo(function AsideInner({
         <div className="C075">{content}</div>
       </>
     );
-  }, [mainContent, isDashboard, isCounseling]);
+  }, [mainContent, isDashboard, isCounseling, isReception, pathname]);
 
   // 대시보드용 C073인지 확인하는 함수
   const isDashboardC073 = React.useMemo(() => {
@@ -239,15 +262,37 @@ const AsideInner = memo(function AsideInner({
 
   // Initialize and update main page when mainContent changes
   React.useEffect(() => {
-    // 클라이언트 마운트 후에만 실행
-    if (!isMounted || typeof window === "undefined") return;
+    // 클라이언트에서만 실행 (SSR 환경에서는 무시)
+    if (typeof window === "undefined") {
+      console.log(
+        "🔴 [Aside] mainPageContent useEffect - SSR 환경, 실행 안 함"
+      );
+      return;
+    }
+
+    console.log("🟢 [Aside] mainPageContent useEffect 시작", {
+      hasMainPageContent: !!mainPageContent,
+      pathname,
+      pagesLength: pages.length,
+      currentIndex,
+    });
 
     // mainPageContent가 없으면 생성하지 않음
-    if (!mainPageContent) return;
+    if (!mainPageContent) {
+      console.log("⚠️ [Aside] mainPageContent가 없어서 생성 안 함");
+      return;
+    }
 
     setPages((prev) => {
       const wasEmpty = prev.length === 0;
       const mainPageIndex = prev.findIndex((page) => page.id === "main");
+
+      console.log("📝 [Aside] setPages 실행", {
+        wasEmpty,
+        mainPageIndex,
+        prevLength: prev.length,
+        pathnameChanged: pathnameChangedRef.current,
+      });
 
       let newPages: AsidePage[];
       if (mainPageIndex !== -1) {
@@ -257,6 +302,9 @@ const AsideInner = memo(function AsideInner({
           ...newPages[mainPageIndex],
           content: mainPageContent,
         };
+        console.log("✅ [Aside] 메인 페이지 업데이트", {
+          newPagesLength: newPages.length,
+        });
       } else {
         // 메인 페이지가 없으면 생성
         newPages = [
@@ -267,6 +315,9 @@ const AsideInner = memo(function AsideInner({
           },
           ...prev,
         ];
+        console.log("🆕 [Aside] 메인 페이지 생성", {
+          newPagesLength: newPages.length,
+        });
       }
 
       // 초기 마운트 시 또는 pathname 변경으로 pages가 비어있을 때
@@ -274,6 +325,7 @@ const AsideInner = memo(function AsideInner({
       if (wasEmpty) {
         // pathname 변경으로 인한 경우
         if (pathnameChangedRef.current) {
+          console.log("🔄 [Aside] pathname 변경으로 인한 초기화");
           pathnameChangedRef.current = false;
 
           // goBack처럼 pages와 currentIndex를 한 번에 설정
@@ -281,6 +333,10 @@ const AsideInner = memo(function AsideInner({
           if (mainPage) {
             // 다음 틱에 실행하여 setPages 완료 후 currentIndex 설정
             setTimeout(() => {
+              console.log("⏰ [Aside] pathname 변경 후 상태 설정", {
+                pagesLength: 1,
+                currentIndex: 0,
+              });
               useAsideStore.setState({
                 pages: [mainPage],
                 currentIndex: 0,
@@ -289,6 +345,7 @@ const AsideInner = memo(function AsideInner({
 
               // goBack처럼 setTimeout을 사용하여 애니메이션 종료
               setTimeout(() => {
+                console.log("✅ [Aside] 애니메이션 종료");
                 useAsideStore.setState({
                   isAnimating: false,
                 });
@@ -297,11 +354,16 @@ const AsideInner = memo(function AsideInner({
           }
         } else {
           // 초기 마운트 시에는 즉시 currentIndex를 0으로 설정
+          console.log("🚀 [Aside] 초기 마운트 시 상태 설정");
           setTimeout(() => {
             useAsideStore.setState({
               currentIndex: 0,
               currentPageId: null,
               isAnimating: false,
+            });
+            console.log("✅ [Aside] 초기 마운트 완료", {
+              currentIndex: 0,
+              pagesLength: newPages.length,
             });
           }, 0);
         }
@@ -309,7 +371,7 @@ const AsideInner = memo(function AsideInner({
 
       return newPages;
     });
-  }, [isMounted, mainPageContent, setPages]);
+  }, [mainPageContent, setPages, pathname, pages.length, currentIndex]);
 
   // pathname 변경 후 pages가 main 페이지만 있을 때 currentIndex를 0으로 설정
   // goBack처럼 pages와 currentIndex를 동시에 설정해야 작동함
@@ -331,6 +393,18 @@ const AsideInner = memo(function AsideInner({
       }
     }
   }, [pages]);
+
+  // 렌더링 상태 로깅
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      console.log("🎨 [Aside] 렌더링 상태", {
+        pagesLength: pages.length,
+        currentIndex,
+        hasMainPageContent: !!mainPageContent,
+        pathname,
+      });
+    }
+  }, [pages.length, currentIndex, mainPageContent, pathname]);
 
   return (
     <aside className="C013">
