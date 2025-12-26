@@ -116,3 +116,10 @@
 .T2012.isDisconnected {
     color: var(--color-magenta);
 }
+
+.T2020 {
+    font-size: var(--font-15);
+    color: var(--color-white);
+    font-weight: 500;
+    white-space: nowrap;
+}

@@ -2961,6 +2961,12 @@ export default function CustomerStatusSection({
                         >
                           {row.registrationStatus}
                         </div>
+                        <button className="C2020">
+                          <div className="C2021">
+                            <div className="C2019 styleSheet isIcon isArrow isMini"></div>
+                          </div>
+                          <span className="T2020">등록하기</span>
+                        </button>
                       </div>
                     ))}
                   </div>
@@ -2972,7 +2978,9 @@ export default function CustomerStatusSection({
                   onClick={() => setCurrentPage(1)}
                   disabled={currentPage === 1}
                 >
-                  &lt;&lt;
+                 <div
+                    className="C2019 styleSheet isIcon isMini isControl isLeftDouble"
+                  ></div>
                 </button>
                 <button
                   className="C2014"
@@ -2981,7 +2989,10 @@ export default function CustomerStatusSection({
                   }
                   disabled={currentPage === 1}
                 >
-                  &lt;
+                  <div
+                    className="C2019 styleSheet isIcon isMini isControl isLeft"
+                  ></div>
+
                 </button>
                 {Array.from(
                   { length: Math.min(10, totalPages) },
@@ -3005,12 +3016,9 @@ export default function CustomerStatusSection({
                   disabled={currentPage === totalPages}
                 >
                   <div
-                    className="styleSheet isIcon isMini isControl isRight"
-                    style={{
-                      width: "var(--size-20)",
-                      height: "var(--size-20)",
-                    }}
+                    className="C2019 styleSheet isIcon isMini isControl isRight"
                   ></div>
+                  
                 </button>
                 <button
                   className="C2014"
@@ -3018,11 +3026,8 @@ export default function CustomerStatusSection({
                   disabled={currentPage === totalPages}
                 >
                   <div
-                    className="styleSheet isIcon isMini isControl isRightDouble"
-                    style={{
-                      width: "var(--size-20)",
-                      height: "var(--size-20)",
-                    }}
+                    className="C2019 styleSheet isIcon isMini isControl isRightDouble"
+                   
                   ></div>
                 </button>
               </div>
