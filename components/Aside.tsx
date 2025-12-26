@@ -120,7 +120,11 @@ const AsideInner = memo(function AsideInner({
 
   // pathname 변경 시 Aside를 메인으로 초기화
   // useLayoutEffect를 사용하여 mainPageContent useEffect보다 먼저 실행되도록 함
+  // 클라이언트에서만 실행되도록 보장 (SSR/Hydration 문제 방지)
   useLayoutEffect(() => {
+    // 클라이언트에서만 실행 (SSR 환경에서는 무시)
+    if (typeof window === "undefined") return;
+
     // 첫 마운트 시에는 pathname만 저장
     if (lastPathname === null) {
       setLastPathname(pathname);
@@ -235,6 +239,9 @@ const AsideInner = memo(function AsideInner({
 
   // Initialize and update main page when mainContent changes
   React.useEffect(() => {
+    // 클라이언트에서만 실행 (SSR 환경에서는 무시)
+    if (typeof window === "undefined") return;
+
     setPages((prev) => {
       const wasEmpty = prev.length === 0;
       const mainPageIndex = prev.findIndex((page) => page.id === "main");
