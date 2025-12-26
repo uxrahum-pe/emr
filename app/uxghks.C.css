@@ -64,9 +64,9 @@
     font-weight: bold;
     white-space: nowrap;
     margin-left: calc(-1 * var(--size-20));
-    margin-right: var(--size-15);
-    padding: 0 var(--size-15);
-    font-size: var(--font-17);
+    margin-right: calc(1.11 * var(--size-20));
+    padding: 0 var(--size-20);
+    font-size: var(--font-15);
     text-align: center;
     line-height: var(--size-50);
 }
@@ -111,11 +111,13 @@ padding: var(--size-10) var(--size-15) var(--size-10) var(--size-20);
 background-color: var(--color-white-25); /* 이미지의 배경색 느낌 */
 border-radius: var(--size-15);       /* 둥근 모서리 */
 color: var(--color-white);              /* 글자 및 아이콘 색상 */
+font-size: var(--font-17);
 
 /* 4. 기타 */
 cursor: pointer;
 box-sizing: border-box;
-margin-left: var(--size-10);
+/* margin-left: var(--size-10); */
+text-align: center;
 }
 
 /* 점선 */
@@ -129,14 +131,15 @@ margin-left: var(--size-10);
 
 /* 검은색 버튼 */
 .C1010 {
-    background: var(--color-black); /* 주황색 그라디언트 */
+    background: linear-gradient(to right, var(--color-black-50), var(--color-black-75)); /* 검은색 그라디언트 */
     border: none;
-    border-radius: 10px;
+    border-radius: var(--size-15);
     color: var(--color-white);
     font-weight: bold;
     white-space: nowrap;
-    margin-left: calc(-1 * var(--size-60));
-    padding: 0 var(--size-15);
+    margin-left: calc(-1.11 * var(--size-65));
+    /* margin-left: calc(-1 * var(--size-65)); */
+    padding: 0 var(--size-20);
     font-size: var(--font-17);
     text-align: center;
     line-height: var(--size-50);
@@ -144,80 +147,77 @@ margin-left: var(--size-10);
 
 /* 그라디언트 체크박스 */
 .C1011 {
-    display: flex;
-    align-items: center;
-    margin-left: var(--size-70);
-    padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
-    border-radius: var(--size-15);
-    background : linear-gradient(to right, var(--color-green), var(--color-blue));
+    margin-left: calc(1.1 * var(--size-70));
 }
-
 
 .C1012 {
-    display: flex;
-    align-items: center;
-    padding: var(--size-5);
-    border-radius: var(--size-10);
-    background-color: var(--color-white);
-    width: var(--size-30);
-    height: var(--size-30);
-    margin-right: var(--size-15);
-    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
-}
-
-
-.C1013 {
-    width: var(--size-20);
-    height: var(--size-20);
-}
-
-
-.C1014 {
-    display: flex;
-    align-items: center;
-    margin-left: var(--size-10);
-    padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
-    border-radius: var(--size-15);
-    background : var(--color-white-25);
-}
-
-.C1015 {
-    display: flex;
-    align-items: center;
-    padding: var(--size-5);
-    border-radius: var(--size-10);
-    background-color: var(--color-black-25);
-    width: var(--size-30);
-    height: var(--size-30);
-    margin-right: var(--size-15);
-    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
-}
-
-.C1016 {
-    display: flex;
-    align-items: center;
-    margin-left: var(--size-10);
-    padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
-    border-radius: var(--size-15);
-    background : linear-gradient(to right, var(--color-green), var(--color-blue));
-}
-
-/* C1017 */
-.C1017 {
     display: flex;
     flex-wrap: wrap;
     margin-top: var(--size-30);
     padding: var(--size-5);
     margin-bottom: var(--size-10);
     margin-left: var(--size-30);
+    box-sizing: border-box;  /* 추가 */
+}
+
+
+.C1013 {
+    font-weight: 800;
+    /* 경계선 */
+    border: var(--size-2) dashed var(--color-white-25);
+    border-radius: var(--size-15);
+
+    /* 크기 */
+    width: var(--size-280);
+    height: var(--size-170);
+    background-color: var(--color-white-3);
+
+    /* 여백 */
+    margin-left: var(--size-20);
+}
+
+
+.C1014 {
+    /* line-height: var(--size-50); */
+    /* padding-top: var(--size-35); */
+    margin-left: var(--size-10);
+    /* column-gap: var(--size-35); */
+}
+
+.C1015 {
+    margin-top: var(--size-35);
+    display: flex;
+    align-items: center;
+}
+
+.C1016 {
+    /* margin-left: var(--size-20); */
+    align-items: center;
+    font-weight: 800;
+    /* border: var(--size-2) solid var(--color-black-25); */
+    background-color: var(--color-white-3);
+    /* color: var(--color-white); */
+    font-size: var(--font-17);
+    padding: 0 var(--size-20);
+    border-radius: var(--size-15);
+    width: var(--size-200);
+    /* margin-left: var(--size-10); */
+    line-height: var(--size-50);
+}
+
+/* C1017 */
+.C1017 {
+    display: flex;
 }
 
 /* 체크박스 Wrapper */
 .C1018 {
     display: flex;
     flex-wrap: wrap; /* 여기서 줄바꿈 발생 */
+    column-gap: var(--size-10);
     row-gap: var(--size-20);
     flex: 1; /* 남은 가로 공간을 모두 차지하게 함 */
+    /* margin-left:var(--size-10); */
 }
 
 /* 작은아이콘 */
@@ -229,4 +229,10 @@ margin-left: var(--size-10);
     display: flex;
     color: var(--color-white);
     filter: brightness(0) invert(1);
+}
+
+
+/* 에러 발생 시 노출 */
+.C1017.is-invalid + .C1020 {
+    display: block;
 }

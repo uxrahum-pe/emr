@@ -5,7 +5,7 @@
     font-weight: 800;
     flex: 0 0 var(--size-80);
     text-align: right;
-    margin-right: var(--size-10);
+    margin-right: var(--size-20);
     /* margin-top: var(--size-10); */
 
 }
@@ -16,24 +16,25 @@
 
 .T1001 {
     /* margin-left: var(--size-20); */
+    position: relative;
     align-items: center;
     font-weight: 800;
-    border: var(--size-2) solid var(--color-black-25);
-    background-color: var(--color-black-25);
-    color: var(--color-white);
+    /* border: var(--size-2) solid var(--color-black-25); */
+    background-color: var(--color-white-3);
+    /* color: var(--color-white); */
     font-size: var(--font-17);
     padding: 0 var(--size-20);
     border-radius: var(--size-15);
     width: var(--size-425);
-    margin-left: var(--size-10);
+    /* margin-left: var(--size-10); */
     line-height: var(--size-50);
+    
     
 }
 
 .T1001:focus {
     outline: none;
-    border: var(--size-2) solid var(--color-blue-75);
-
+    /* border: var(--size-1) solid var(--color-blue-75); */
 }
 
 .T1002{
@@ -42,9 +43,15 @@
     padding: 0 var(--size-20);
     border-radius: var(--size-15);
     border: var(--size-2) solid var(--color-white-25);
+    background-color: var(--color-white-7);
     width: var(--size-200);
-    margin-left: var(--size-10);
+    /* margin-left: var(--size-10); */
     line-height: var(--size-46);
+}
+
+.T1002.isLong {
+    width: var(--size-290);
+    margin-left: var(--size-10);
 }
 
 .T1002:focus {
@@ -59,4 +66,22 @@
     color: var(--color-black);
     margin: 0;
     white-space: nowrap;
+}
+
+.T1004 {
+    padding-right: var(--size-10);
+    border-right: var(--size-2) solid var(--color-black-7);
+    font-size: var(--font-17);
+}
+
+
+/* 에러메시지 */
+.T1005 {
+    position: absolute; /* 흐름에서 제외되어 다른 요소를 밀어내지 않음 */
+    top: 100%;          /* input 박스 바로 아래 끝 지점 */
+    left: var(--size-12);
+    margin-top: var(--size-2);
+    color: var(--color-red);
+    font-size: var(--size-15);
+    display: none;      /* 평소엔 숨김 */
 }
