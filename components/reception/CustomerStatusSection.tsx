@@ -3187,10 +3187,10 @@ export default function CustomerStatusSection({
           {customerSearchTab === 0 && (
             <PopupSectionBox x={360} y={350} width={1200} height={810}>
               <div className="C2009">
-                <div className="C2016">
-                  <div className="C2010">
-                    <div className="C2017">
-                      <div className="C2011">
+                <div className="C2010">
+                  <div className="C2011">
+                    <div className="C2012">
+                      <div className="C2013">
                         <div className="T2010">고객이름</div>
                         <div className="T2010 is15p">주민번호</div>
                         <div className="T2010 is15p">휴대번호</div>
@@ -3201,9 +3201,9 @@ export default function CustomerStatusSection({
                         <div className="T2010">등록여부</div>
                       </div>
                     </div>
-                    <div className="C2018">
+                    <div className="C2014">
                       {sampleTableData.map((row, index) => (
-                        <div key={index} className="C2012">
+                        <div key={index} className="C2015">
                           <div className="T2011">{row.customerName}</div>
                           <div className="T2011 is15p">
                             {row.residentNumber}
@@ -3224,9 +3224,9 @@ export default function CustomerStatusSection({
                           >
                             {row.registrationStatus}
                           </div>
-                          <button className="C2020">
-                            <div className="C2021">
-                              <div className="C2019 styleSheet isIcon isArrow isMini"></div>
+                          <button className="C2016">
+                            <div className="C2017">
+                              <div className="C2018 styleSheet isIcon isArrow isMini"></div>
                             </div>
                             <span className="T2020">등록하기</span>
                           </button>
@@ -3235,22 +3235,22 @@ export default function CustomerStatusSection({
                     </div>
                   </div>
                 </div>
-                <div className="C2013">
+                <div className="C2019">
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() => setCurrentPage(1)}
                     disabled={currentPage === 1}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isLeftDouble"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isLeftDouble"></div>
                   </button>
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() =>
                       setCurrentPage((prev) => Math.max(1, prev - 1))
                     }
                     disabled={currentPage === 1}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isLeft"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isLeft"></div>
                   </button>
                   {Array.from(
                     { length: Math.min(10, totalPages) },
@@ -3258,7 +3258,7 @@ export default function CustomerStatusSection({
                   ).map((page) => (
                     <button
                       key={page}
-                      className={`C2015 ${
+                      className={`C2021 ${
                         currentPage === page ? "isActive" : ""
                       }`}
                       onClick={() => setCurrentPage(page)}
@@ -3267,20 +3267,20 @@ export default function CustomerStatusSection({
                     </button>
                   ))}
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() =>
                       setCurrentPage((prev) => Math.min(totalPages, prev + 1))
                     }
                     disabled={currentPage === totalPages}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isRight"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isRight"></div>
                   </button>
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() => setCurrentPage(totalPages)}
                     disabled={currentPage === totalPages}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isRightDouble"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isRightDouble"></div>
                   </button>
                 </div>
               </div>
@@ -3290,10 +3290,10 @@ export default function CustomerStatusSection({
           {customerSearchTab === 1 && (
             <PopupSectionBox x={360} y={350} width={1200} height={810}>
               <div className="C2009">
-                <div className="C2016">
-                  <div className="C2010">
-                    <div className="C2017">
-                      <div className="C2011">
+                <div className="C2010">
+                  <div className="C2011">
+                    <div className="C2012">
+                      <div className="C2013">
                         <div className="T2010 isFixed150">고객이름</div>
                         <div className="T2010 isFixed150">주민번호</div>
                         <div className="T2010 isFixed150">휴대번호</div>
@@ -3304,7 +3304,7 @@ export default function CustomerStatusSection({
                         <div className="T2010 isFixed150">등록여부</div>
                       </div>
                     </div>
-                    <div className="C2018">
+                    <div className="C2014">
                       {surveyTableData.map((row, index) => {
                         const surveyPageContent = (
                           <SlidePage
@@ -3319,13 +3319,40 @@ export default function CustomerStatusSection({
                         return (
                           <div
                             key={index}
-                            className="C2012"
+                            className="C2015"
                             onClick={() => {
                               navigateToPage("new-survey", surveyPageContent);
                             }}
                           >
-                            <div className="T2011 isFixed150">
-                              {row.customerName}
+                          <div className="T2011 isFixed150">{row.customerName}</div>
+                          <div className="T2011 isFixed150">
+                            {row.residentNumber}
+                          </div>
+                          <div className="T2011 isFixed150">{row.phoneNumber}</div>
+                          <div className="T2011 isFixed150">
+                            {row.registrationBranch}
+                          </div>
+                          <div className="T2011 isFixed150">{row.chartNumber}</div>
+                          <div className="T2011 isFixed150">{row.registrationDate}</div>
+                          <div className="T2011 isFixed150">{row.surveyType}</div>
+                          <div
+                            className={`T2012 isFixed150 ${
+                              row.registrationStatus === "가입완료"
+                                ? "isRegistered"
+                                : "isDisconnected"
+                            }`}
+                          >
+                            {row.registrationStatus}
+                          </div>
+                          <button
+                            className="C2016"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigateToPage("new-survey", surveyPageContent);
+                            }}
+                          >
+                            <div className="C2017">
+                              <div className="C2018 styleSheet isIcon isArrow isMini"></div>
                             </div>
                             <div className="T2011 isFixed150">
                               {row.residentNumber}
@@ -3372,22 +3399,22 @@ export default function CustomerStatusSection({
                     </div>
                   </div>
                 </div>
-                <div className="C2013">
+                <div className="C2019">
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() => setCurrentPage(1)}
                     disabled={currentPage === 1}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isLeftDouble"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isLeftDouble"></div>
                   </button>
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() =>
                       setCurrentPage((prev) => Math.max(1, prev - 1))
                     }
                     disabled={currentPage === 1}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isLeft"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isLeft"></div>
                   </button>
                   {Array.from(
                     { length: Math.min(10, totalPages) },
@@ -3395,7 +3422,7 @@ export default function CustomerStatusSection({
                   ).map((page) => (
                     <button
                       key={page}
-                      className={`C2015 ${
+                      className={`C2021 ${
                         currentPage === page ? "isActive" : ""
                       }`}
                       onClick={() => setCurrentPage(page)}
@@ -3404,20 +3431,20 @@ export default function CustomerStatusSection({
                     </button>
                   ))}
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() =>
                       setCurrentPage((prev) => Math.min(totalPages, prev + 1))
                     }
                     disabled={currentPage === totalPages}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isRight"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isRight"></div>
                   </button>
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() => setCurrentPage(totalPages)}
                     disabled={currentPage === totalPages}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isRightDouble"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isRightDouble"></div>
                   </button>
                 </div>
               </div>
@@ -3427,10 +3454,10 @@ export default function CustomerStatusSection({
           {customerSearchTab === 2 && (
             <PopupSectionBox x={360} y={350} width={1200} height={810}>
               <div className="C2009">
-                <div className="C2016">
-                  <div className="C2010">
-                    <div className="C2017">
-                      <div className="C2011">
+                <div className="C2010">
+                  <div className="C2011">
+                    <div className="C2012">
+                      <div className="C2013">
                         <div className="T2010 isFixed150">고객이름</div>
                         <div className="T2010 isFixed150">주민번호</div>
                         <div className="T2010 isFixed150">휴대번호</div>
@@ -3441,12 +3468,10 @@ export default function CustomerStatusSection({
                         <div className="T2010 isFixed150">등록여부</div>
                       </div>
                     </div>
-                    <div className="C2018">
+                    <div className="C2014">
                       {preRegistrationTableData.map((row, index) => (
-                        <div key={index} className="C2012">
-                          <div className="T2011 isFixed150">
-                            {row.customerName}
-                          </div>
+                        <div key={index} className="C2015">
+                          <div className="T2011 isFixed150">{row.customerName}</div>
                           <div className="T2011 isFixed150">
                             {row.residentNumber}
                           </div>
@@ -3474,9 +3499,9 @@ export default function CustomerStatusSection({
                           >
                             {row.registrationStatus}
                           </div>
-                          <button className="C2020">
-                            <div className="C2021">
-                              <div className="C2019 styleSheet isIcon isArrow isMini"></div>
+                          <button className="C2016">
+                            <div className="C2017">
+                              <div className="C2018 styleSheet isIcon isArrow isMini"></div>
                             </div>
                             <span className="T2020">등록하기</span>
                           </button>
@@ -3485,22 +3510,22 @@ export default function CustomerStatusSection({
                     </div>
                   </div>
                 </div>
-                <div className="C2013">
+                <div className="C2019">
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() => setCurrentPage(1)}
                     disabled={currentPage === 1}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isLeftDouble"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isLeftDouble"></div>
                   </button>
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() =>
                       setCurrentPage((prev) => Math.max(1, prev - 1))
                     }
                     disabled={currentPage === 1}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isLeft"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isLeft"></div>
                   </button>
                   {Array.from(
                     { length: Math.min(10, totalPages) },
@@ -3508,7 +3533,7 @@ export default function CustomerStatusSection({
                   ).map((page) => (
                     <button
                       key={page}
-                      className={`C2015 ${
+                      className={`C2021 ${
                         currentPage === page ? "isActive" : ""
                       }`}
                       onClick={() => setCurrentPage(page)}
@@ -3517,20 +3542,20 @@ export default function CustomerStatusSection({
                     </button>
                   ))}
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() =>
                       setCurrentPage((prev) => Math.min(totalPages, prev + 1))
                     }
                     disabled={currentPage === totalPages}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isRight"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isRight"></div>
                   </button>
                   <button
-                    className="C2014"
+                    className="C2020"
                     onClick={() => setCurrentPage(totalPages)}
                     disabled={currentPage === totalPages}
                   >
-                    <div className="C2019 styleSheet isIcon isMini isControl isRightDouble"></div>
+                    <div className="C2018 styleSheet isIcon isMini isControl isRightDouble"></div>
                   </button>
                 </div>
               </div>

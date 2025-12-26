@@ -35,7 +35,11 @@
   
     border-radius: var(--size-15);
     border: var(--size-2) solid var(--color-white-25);
+}
 
+.T2005:focus {
+    outline: none;
+    border: var(--size-2) solid var(--color-blue-75);
 }
 
 .T2006 {
@@ -49,7 +53,11 @@
   
     border-radius: var(--size-15);
     border: var(--size-2) solid var(--color-white-25);
+}
 
+.T2006:focus {
+    outline: none;
+    border: var(--size-2) solid var(--color-blue-75);
 }
 
 .T2010 {

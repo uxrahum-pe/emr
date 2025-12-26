@@ -81,6 +81,12 @@
    
     color: var(--color-white);
     font-size: var(--font-19);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.C2008:hover {
+    opacity: 0.9;
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
 }
 
 .C2009 {
@@ -93,22 +99,34 @@
    
 }
 
-
-
-
 .C2010 {
+    height: calc(var(--size-80) + var(--size-600));
+    overflow: hidden;
+}
+
+.C2011 {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.C2011 {
+.C2012 {
+    display: flex;
+    flex-direction: column;
+}
+
+.C2013 {
     display: flex;
     background-color: var(--color-black-7);
     width: 100%;
 }
 
-.C2012 {
+.C2014 {
+    display: flex;
+    flex-direction: column;
+}
+
+.C2015 {
     display: flex;
     border-bottom: var(--size-1) solid var(--color-black-15);
     width: 100%;
@@ -117,7 +135,7 @@
     box-sizing: border-box;
 }
 
-.C2012:hover {
+.C2015:hover {
     background-color: var(--color-blue-15);
     border-bottom: var(--size-1) solid var(--color-black-15);
     outline: var(--size-3) dashed var(--color-blue);
@@ -125,13 +143,44 @@
     cursor: pointer;
 }
 
-
-
-.C2012:hover .C2020 {
+.C2015:hover .C2016 {
     display: flex;
 }
 
-.C2013 {
+.C2016 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+    display: none;
+    align-items: center;
+    gap: var(--size-8);
+    padding: var(--size-5) var(--size-10);
+    border-radius: var(--size-15);
+    background-color: var(--color-blue-25);
+    backdrop-filter: blur(var(--size-25));
+}
+
+.C2017 {
+    width: var(--size-30);
+    height: var(--size-30);
+    border-radius: 50%;
+    background-color: var(--color-white-15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.C2018 {
+    width: var(--size-20);
+    height: var(--size-20);
+}
+
+.C2016 .C2018 {
+    filter: brightness(0) invert(1);
+}
+
+.C2019 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,7 +190,7 @@
     border-top: var(--size-2) solid var(--color-white-15);
 }
 
-.C2014 {
+.C2020 {
     width: var(--size-50);
     height: var(--size-50);
     border-radius: var(--size-15);
@@ -156,16 +205,16 @@
     transition: .3s;
 }
 
-.C2014:hover:not(:disabled) {
+.C2020:hover:not(:disabled) {
     background-color: var(--color-white-15);
 }
 
-.C2014:disabled {
+.C2020:disabled {
     opacity: 0.3;
     cursor: not-allowed;
 }
 
-.C2015 {
+.C2021 {
     width: var(--size-40);
     height: var(--size-40);
     border-radius: var(--size-15);
@@ -180,68 +229,16 @@
     transition: .3s;
 }
 
-.C2015:hover {
+.C2021:hover {
     background-color: var(--color-white-7);
 }
 
-.C2015.isActive {
+.C2021.isActive {
     width: var(--size-40);
     height: var(--size-40);
     border-radius: var(--size-15);
     background-color: var(--color-white);
     color: var(--color-black);
-}
-
-.C2016 {
-    height: calc(var(--size-80) + var(--size-600));
-    overflow: hidden;
-}
-
-.C2017 {
-    display: flex;
-    flex-direction: column;
-}
-
-.C2018 {
-    display: flex;
-    flex-direction: column;
-}
-
-
-.C2019 {
-    width: var(--size-20);
-    height: var(--size-20);
-}
-
-.C2020 .C2019 {
-    filter: brightness(0) invert(1);
-}
-
-
-.C2020 {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); 
-    display: none;
-    align-items: center;
-    gap: var(--size-8);
-    padding: var(--size-5) var(--size-10);
-    border-radius: var(--size-15);
-    background-color: var(--color-blue-25);
-    backdrop-filter: blur(var(--size-25));
-
-}
-
-
-.C2021 {
-    width: var(--size-30);
-    height: var(--size-30);
-    border-radius: 50%;
-    background-color: var(--color-white-15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 
@@ -291,24 +288,44 @@
     flex: 1;
     gap: var(--size-10);
 }
+
 .C2026 {
     width: 100%;
     max-width: var(--size-300);
     height: var(--size-80);
-    /* 짧은 구간만 정의하면 브라우저가 알아서 끝까지 채웁니다 */
-    background: repeating-linear-gradient(
+   
+    /* 이미지의 선 굵기와 간격을 정밀하게 모사한 그라데이션 */
+    background-image: linear-gradient(
         90deg,
-        var(--color-black) 0px,
-        var(--color-black) 2px,
-        transparent 2px,
-        transparent 5px,
-        var(--color-black) 5px,
-        var(--color-black) 6px,
-        transparent 6px,
-        transparent 10px
+        var(--color-black) 0px, var(--color-black) 2px,      /* 시작 선 */
+        transparent 2px, transparent 5px,                    /* 넓은 간격 */
+        var(--color-black) 5px, var(--color-black) 6px,      /* 얇은 선 */
+        transparent 6px, transparent 8px,                    /* 중간 간격 */
+        var(--color-black) 8px, var(--color-black) 12px,     /* 굵은 선 */
+        transparent 12px, transparent 13px,                  /* 좁은 간격 */
+        var(--color-black) 13px, var(--color-black) 14px,    /* 얇은 선 */
+        transparent 14px, transparent 17px,                  /* 중간 간격 */
+        var(--color-black) 17px, var(--color-black) 23px,    /* 매우 굵은 선 */
+        transparent 23px, transparent 25px,                  /* 중간 간격 */
+        var(--color-black) 25px, var(--color-black) 26px,    /* 얇은 선 */
+        transparent 26px, transparent 27px,                  /* 좁은 간격 */
+        var(--color-black) 27px, var(--color-black) 34px,    /* 최대 굵기 선 */
+        transparent 34px, transparent 36px,                  /* 중간 간격 */
+        var(--color-black) 36px, var(--color-black) 37px,    /* 얇은 선 */
+        transparent 37px, transparent 39px,                  /* 중간 간격 */
+        var(--color-black) 39px, var(--color-black) 41px,    /* 중간 선 */
+        transparent 41px, transparent 42px,                  /* 좁은 간격 */
+        var(--color-black) 42px, var(--color-black) 43px,    /* 얇은 선 */
+        transparent 43px, transparent 47px,                  /* 넓은 간격 */
+        var(--color-black) 47px, var(--color-black) 49px,    /* 중간 선 */
+        transparent 49px, transparent 50px                   /* 끝 간격 */
     );
-    background-color:var(--color-white); 
-    border: 1px solid #ff1212; /* 영역 확인용 */
+    
+    /* 50px 단위의 이 패턴을 가로로 반복시켜 자연스러운 밀도 형성 */
+    background-size: 50px 100%; 
+    background-repeat: repeat-x;
+   
+    box-sizing: border-box;
 }
 .C2027 {
     position: relative;
@@ -334,7 +351,6 @@
 
 .C2028:hover {
     opacity: 0.9;
-    transform: translateY(-2px);
     box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
 }
 
