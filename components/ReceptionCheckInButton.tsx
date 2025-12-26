@@ -16,6 +16,8 @@ interface ReceptionCheckInButtonProps {
   isOpen: boolean;
   /** 퀵액션(C100) hover 여부에 따른 접힘 상태 */
   isFolded?: boolean;
+  /** 허용된 버튼 ID 목록 (지정되지 않으면 모든 버튼 표시) */
+  allowedButtonIds?: string[];
 }
 
 /**
@@ -25,6 +27,7 @@ interface ReceptionCheckInButtonProps {
 export default function ReceptionCheckInButton({
   isOpen,
   isFolded = false,
+  allowedButtonIds,
 }: ReceptionCheckInButtonProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
@@ -123,6 +126,11 @@ export default function ReceptionCheckInButton({
     setOpenPopup(id);
   };
 
+  // allowedButtonIds가 제공되면 해당 버튼들만 필터링
+  const filteredButtons = allowedButtonIds
+    ? popupButtons.filter((button) => allowedButtonIds.includes(button.id))
+    : popupButtons;
+
   return (
     <>
       <section
@@ -130,7 +138,7 @@ export default function ReceptionCheckInButton({
           isFolded ? "isFolded" : ""
         }`.trim()}
       >
-        {popupButtons.map((button) => (
+        {filteredButtons.map((button) => (
           <div
             key={button.id}
             className={`C153 ${button.className}`}
