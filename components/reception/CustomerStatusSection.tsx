@@ -3530,7 +3530,7 @@ export default function CustomerStatusSection({
                               <div className="C2017">
                                 <div className="C2018 styleSheet isIcon isArrow isMini"></div>
                               </div>
-                              <span className="T2011">등록하기</span>
+                              <span className="T2020">등록하기</span>
                             </button>
                           </div>
                         );
