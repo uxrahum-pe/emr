@@ -106,6 +106,9 @@ const AsideInner = memo(function AsideInner({
   // PageHeader 핸들러 리셋을 위한 스토어
   const resetHandlers = usePageHeaderStore((state) => state.resetHandlers);
 
+  // 초기 마운트 플래그 (fallback 렌더링 보장)
+  const [isInitialMount, setIsInitialMount] = useState(true);
+
   // 현재 경로 확인 (대시보드는 /)
   const pathname = usePathname();
 
@@ -275,12 +278,18 @@ const AsideInner = memo(function AsideInner({
       pathname,
       pagesLength: pages.length,
       currentIndex,
+      isInitialMount,
     });
 
     // mainPageContent가 없으면 생성하지 않음
     if (!mainPageContent) {
       console.log("⚠️ [Aside] mainPageContent가 없어서 생성 안 함");
       return;
+    }
+
+    // 초기 마운트 플래그 해제
+    if (isInitialMount) {
+      setIsInitialMount(false);
     }
 
     const currentState = useAsideStore.getState();
@@ -373,7 +382,14 @@ const AsideInner = memo(function AsideInner({
         setPages(newPages);
       }
     }
-  }, [mainPageContent, setPages, pathname, pages.length, currentIndex]);
+  }, [
+    mainPageContent,
+    setPages,
+    pathname,
+    pages.length,
+    currentIndex,
+    isInitialMount,
+  ]);
 
   // pathname 변경 후 pages가 main 페이지만 있을 때 currentIndex를 0으로 설정
   // goBack처럼 pages와 currentIndex를 동시에 설정해야 작동함
@@ -409,7 +425,9 @@ const AsideInner = memo(function AsideInner({
   }, [pages.length, currentIndex, mainPageContent, pathname]);
 
   // 초기 마운트 시 pages가 비어있고 mainPageContent가 있으면 fallback 렌더링
-  const shouldShowFallback = pages.length === 0 && !!mainPageContent;
+  // 또는 초기 마운트 플래그가 true일 때도 fallback 렌더링
+  const shouldShowFallback =
+    (pages.length === 0 || isInitialMount) && !!mainPageContent;
 
   return (
     <aside className="C013">
@@ -481,9 +499,9 @@ const AsideInner = memo(function AsideInner({
                 >
                   {page.content}
                 </SlidePage>
-            );
-          }
-        })
+              );
+            }
+          })
         ) : null}
       </div>
 
