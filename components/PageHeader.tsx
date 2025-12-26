@@ -18,6 +18,7 @@ export default function PageHeader({
   onReservationClick,
 }: PageHeaderProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isMenuSearchPopupOpen, setIsMenuSearchPopupOpen] = useState(false);
   const [selectedSortTab, setSelectedSortTab] = useState(0);
   const [selectedDate, setSelectedDate] = useState<Date | null>(() => {
     return startOfDay(new Date());
@@ -53,7 +54,15 @@ export default function PageHeader({
           </div>
         </Tooltip>
         <div className="C015">
-          <div className="C016">
+          <div
+            className="C016"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsMenuSearchPopupOpen(true);
+            }}
+            style={{ cursor: "pointer" }}
+          >
             <div className="C017 styleSheet isIcon isMagnifier"></div>
             <p className="T005">메뉴 및 기능 검색</p>
           </div>
@@ -872,6 +881,30 @@ export default function PageHeader({
             </div>
           </ScrollableContainer>
         </PopupSectionBox>
+      </Popup>
+
+      {/* 메뉴 및 기능 검색 팝업 */}
+      <Popup
+        isOpen={isMenuSearchPopupOpen}
+        onClose={() => setIsMenuSearchPopupOpen(false)}
+      >
+        <>
+          <PopupSectionBox x={260} y={20} width={1400}>
+            <div className="C180">
+              <p className="T076">메뉴 및 기능 검색</p>
+              <div
+                className="C181 isCloseButton"
+                onClick={() => setIsMenuSearchPopupOpen(false)}
+              >
+                <div className="C179 isDepth1"></div>
+                <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+              </div>
+            </div>
+          </PopupSectionBox>
+          <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+            <div className="C180">{/* 메뉴 및 기능 검색 팝업 내용 */}</div>
+          </PopupSectionBox>
+        </>
       </Popup>
     </>
   );

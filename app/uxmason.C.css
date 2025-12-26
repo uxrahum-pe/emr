@@ -321,6 +321,7 @@
     padding: 0 var(--size-20);
     height: 100%;
     display: flex;
+    overflow: hidden;
 }
 .C031 {
     width: 25%;
@@ -1611,17 +1612,17 @@
 .C152 {
     position: absolute;
     background: linear-gradient(to right, var(--color-black-50), var(--color-black-75));
-    backdrop-filter: blur(var(--size-5));
+    backdrop-filter: blur(var(--size-10));
     right: calc(-1 * var(--size-65));
     bottom: var(--size-20);
     width: var(--size-180);
-    height: var(--size-60);
-    border-radius: var(--size-20);
+    border-radius: var(--size-30);
     box-shadow: 0 var(--size-10) var(--size-35) var(--color-black-50);
     transform: translateX(var(--size-40));
     opacity: 0;
     transition: .3s;
     z-index: 1;
+    padding: var(--size-10) 0;
 }
 .C152.isOpened {
     transform: translateX(0);
@@ -1634,7 +1635,6 @@
 .C153 {
     display: flex;
     align-items: center;
-    gap: var(--size-10);
     padding: var(--size-10);
     height: 100%;
     transition: .3s;
@@ -1647,9 +1647,11 @@
     width: var(--size-40);
     height: var(--size-40);
     filter: brightness(0) invert(1);
+    flex: 0 0 var(--size-40);
 }
 .C155 {
     overflow: hidden;
+    margin-left: var(--size-10);
 }
 .C156 {
     width: 100%;

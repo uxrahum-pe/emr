@@ -89,5 +89,6 @@ export type RoleCategory =
 export interface RoleInfo {
   category: RoleCategory;
   title: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: React.ComponentType<any>;
 }

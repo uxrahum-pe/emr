@@ -143,7 +143,7 @@ export default function CustomerStatusSection({
         customerId={customerId}
         showToggleSwitch={true}
       >
-        <div className="C070">
+        <div className="C070 isCustomerReference">
           <div className="C157">
             <div className="C158 styleSheet isIcon isReception"></div>
             <p className="T069">

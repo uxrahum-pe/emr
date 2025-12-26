@@ -143,7 +143,7 @@ const AsideInner = memo(function AsideInner({
     return (
       <>
         <WeeklyCalendar />
-        <div className="C070">
+        <div className="C070 isReception">
           <p className="T035">
             원무파트 <span className="isUnit">전체 전달사항 입력</span>
           </p>
