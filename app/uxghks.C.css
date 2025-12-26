@@ -5,8 +5,14 @@
     /* gap: var(--size-30); */
     /* flex-flow: wrap; */
     display: flex;
+    /* flex-wrap: wrap; */
     align-items: center;
     font-size: var(--font-17);
+    row-gap: var(--size-20);
+}
+
+.C1000.isTopFitted {
+    align-items: flex-start;
 }
 
 
@@ -58,7 +64,7 @@
     font-weight: bold;
     white-space: nowrap;
     margin-left: calc(-1 * var(--size-20));
-    margin-right: var(--size-25);
+    margin-right: var(--size-15);
     padding: 0 var(--size-15);
     font-size: var(--font-17);
     text-align: center;
@@ -77,27 +83,47 @@
 }
 
 .C1007 {
-    /* display: flex; */
+    display: flex;
+    flex-wrap: wrap;
     margin-top: var(--size-30);
     padding: var(--size-5);
     margin-bottom: var(--size-10);
     margin-left: var(--size-30);
+    box-sizing: border-box;  /* 추가 */
+
+    /* max-width: 100%; */
 }
+
+
 
 /* 드랍다운 */
 .C1008 {
-    display: flex;
-    gap: var(--size-3);
-    height: var(--size-50);
-    align-items: center;
-    padding: var(--size-10) var(--size-20);
-    /* border-bottom: var(--size-2) dashed var(--color-white-7); */
+/* 1. 레이아웃: 가로로 배치하고 양 끝으로 밀기 */
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+/* 2. 크기 및 여백 */
+width: var(--size-200); /* 원하는 너비로 조절 */
+padding: var(--size-10) var(--size-15) var(--size-10) var(--size-20);
+
+/* 3. 디자인: 배경색, 곡률, 글자색 */
+background-color: var(--color-white-25); /* 이미지의 배경색 느낌 */
+border-radius: var(--size-15);       /* 둥근 모서리 */
+color: var(--color-white);              /* 글자 및 아이콘 색상 */
+
+/* 4. 기타 */
+cursor: pointer;
+box-sizing: border-box;
+margin-left: var(--size-10);
 }
 
 /* 점선 */
 .C1009 {
     border-top: var(--size-2) dashed var(--color-white-25); /* 동글동글한 점선 */
-    margin-right: var(--size-25);
+    margin-left: var(--size-30);
+    margin-top: var(--size-30);
+    margin-right: var(--size-30);
 }
 
 
@@ -120,7 +146,7 @@
 .C1011 {
     display: flex;
     align-items: center;
-    margin-left: var(--size-50);
+    margin-left: var(--size-70);
     padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
     border-radius: var(--size-15);
     background : linear-gradient(to right, var(--color-green), var(--color-blue));
@@ -149,10 +175,10 @@
 .C1014 {
     display: flex;
     align-items: center;
-    margin-left: var(--size-50);
+    margin-left: var(--size-10);
     padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
     border-radius: var(--size-15);
-    background : var(--color-black-25);
+    background : var(--color-white-25);
 }
 
 .C1015 {
@@ -165,4 +191,42 @@
     height: var(--size-30);
     margin-right: var(--size-15);
     box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+
+.C1016 {
+    display: flex;
+    align-items: center;
+    margin-left: var(--size-10);
+    padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
+    border-radius: var(--size-15);
+    background : linear-gradient(to right, var(--color-green), var(--color-blue));
+}
+
+/* C1017 */
+.C1017 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: var(--size-30);
+    padding: var(--size-5);
+    margin-bottom: var(--size-10);
+    margin-left: var(--size-30);
+}
+
+/* 체크박스 Wrapper */
+.C1018 {
+    display: flex;
+    flex-wrap: wrap; /* 여기서 줄바꿈 발생 */
+    row-gap: var(--size-20);
+    flex: 1; /* 남은 가로 공간을 모두 차지하게 함 */
+}
+
+/* 작은아이콘 */
+.C1019 {
+    width: var(--size-20);
+    height: var(--size-20);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color: var(--color-white);
+    filter: brightness(0) invert(1);
 }

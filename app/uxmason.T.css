@@ -540,6 +540,10 @@
 .T053 {
     margin-bottom: var(--size-5);
 }
+.T054 {
+    font-size: var(--font-14);
+    margin-left: var(--size-10);
+}
 .T056 {
     font-size: var(--font-24);
     font-weight: 200;

@@ -8,9 +8,9 @@
  * - AI가 역할 처리 로직을 이해할 때 이 파일을 참조하면 됩니다.
  */
 
-import DoctorSlidePage from "@/components/DoctorSlidePage";
-import EmployeeSlidePage from "@/components/EmployeeSlidePage";
-import CounselorSlidePage from "@/components/CounselorSlidePage";
+import DoctorSlidePage from "@/components/slides/DoctorSlidePage";
+import EmployeeSlidePage from "@/components/slides/EmployeeSlidePage";
+import CounselorSlidePage from "@/components/slides/CounselorSlidePage";
 import type { RoleCategory, RoleInfo } from "@/types/reception";
 
 /**

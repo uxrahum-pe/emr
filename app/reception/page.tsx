@@ -15,7 +15,7 @@
 
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import PageHeader from "@/components/PageHeader";
 import Aside from "@/components/Aside";
@@ -56,6 +56,11 @@ export default function ReceptionPage() {
     setIsQuickActionsHovered,
     setIsCustomerDetailOpen,
   } = useReceptionStore();
+
+  // 페이지 마운트 시 고객 상세 패널 초기화
+  useEffect(() => {
+    setIsCustomerDetailOpen(false);
+  }, [setIsCustomerDetailOpen]);
 
   const handleC032Click = useCallback(
     (index: number, e: React.MouseEvent) => {

@@ -5,9 +5,9 @@
  * 역할 카테고리 판단, 컴포넌트 선택 등의 로직을 중앙화합니다.
  */
 
-import EmployeeSlidePage from "@/components/EmployeeSlidePage";
-import DoctorSlidePage from "@/components/DoctorSlidePage";
-import CounselorSlidePage from "@/components/CounselorSlidePage";
+import EmployeeSlidePage from "@/components/slides/EmployeeSlidePage";
+import DoctorSlidePage from "@/components/slides/DoctorSlidePage";
+import CounselorSlidePage from "@/components/slides/CounselorSlidePage";
 
 /**
  * 역할 카테고리 타입
