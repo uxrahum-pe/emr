@@ -279,8 +279,8 @@
     height: var(--size-35);
     object-fit: contain;
     position: absolute;
-    top: 0;
-    left: 0;
+    top:var(--size-20);
+    left:var(--size-20);
 }
 
 .C2025 {
@@ -291,78 +291,25 @@
     flex: 1;
     gap: var(--size-10);
 }
-
 .C2026 {
     width: 100%;
     max-width: var(--size-300);
     height: var(--size-80);
-    background: 
-        repeating-linear-gradient(
-            90deg,
-            var(--color-black) 0,
-            var(--color-black) var(--size-2),
-            transparent var(--size-2),
-            transparent var(--size-4),
-            var(--color-black) var(--size-4),
-            var(--color-black) var(--size-6),
-            transparent var(--size-6),
-            transparent var(--size-8),
-            var(--color-black) var(--size-8),
-            var(--color-black) var(--size-10),
-            transparent var(--size-10),
-            transparent var(--size-12),
-            var(--color-black) var(--size-12),
-            var(--color-black) var(--size-13),
-            transparent var(--size-13),
-            transparent var(--size-15),
-            var(--color-black) var(--size-15),
-            var(--color-black) var(--size-17),
-            transparent var(--size-17),
-            transparent var(--size-19),
-            var(--color-black) var(--size-19),
-            var(--color-black) var(--size-20),
-            transparent var(--size-20),
-            transparent var(--size-22),
-            var(--color-black) var(--size-22),
-            var(--color-black) var(--size-24),
-            transparent var(--size-24),
-            transparent var(--size-26),
-            var(--color-black) var(--size-26),
-            var(--color-black) var(--size-27),
-            transparent var(--size-27),
-            transparent var(--size-29),
-            var(--color-black) var(--size-29),
-            var(--color-black) var(--size-31),
-            transparent var(--size-31),
-            transparent var(--size-33),
-            var(--color-black) var(--size-33),
-            var(--color-black) var(--size-34),
-            transparent var(--size-34),
-            transparent var(--size-36),
-            var(--color-black) var(--size-36),
-            var(--color-black) var(--size-38),
-            transparent var(--size-38),
-            transparent var(--size-40),
-            var(--color-black) var(--size-40),
-            var(--color-black) var(--size-41),
-            transparent var(--size-41),
-            transparent var(--size-43),
-            var(--color-black) var(--size-43),
-            var(--color-black) var(--size-45),
-            transparent var(--size-45),
-            transparent var(--size-47),
-            var(--color-black) var(--size-47),
-            var(--color-black) var(--size-48),
-            transparent var(--size-48),
-            transparent var(--size-50)
-        );
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-   
-    padding: var(--size-10);
-    box-sizing: border-box;
+    /* 짧은 구간만 정의하면 브라우저가 알아서 끝까지 채웁니다 */
+    background: repeating-linear-gradient(
+        90deg,
+        var(--color-black) 0px,
+        var(--color-black) 2px,
+        transparent 2px,
+        transparent 5px,
+        var(--color-black) 5px,
+        var(--color-black) 6px,
+        transparent 6px,
+        transparent 10px
+    );
+    background-color:var(--color-white); 
+    border: 1px solid #ff1212; /* 영역 확인용 */
 }
-
 .C2027 {
     position: relative;
     width: 100%;
