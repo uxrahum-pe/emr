@@ -718,7 +718,7 @@ export default function CustomerInfoPanel({
         onClose={() => setOpenPopup(null)}
       >
         <>
-          <PopupSectionBox x={260} y={20} width={1400}>
+          <PopupSectionBox x={960} y={395} width={450}>
             <div className="C180">
               <p className="T076">바코드 관리</p>
               <div
@@ -730,7 +730,25 @@ export default function CustomerInfoPanel({
               </div>
             </div>
           </PopupSectionBox>
-          <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+
+          <PopupSectionBox x={510} y={395} width={430} height={270}>
+              <div className="C2022">
+                <div className="C2023"></div>
+                <div className="C2024">
+                  <div className="T2021">365<span className="T2021Script">mc</span></div>
+                  <div className="C2025">
+                    <div className="C2026"></div>
+                    <div className="T2022">0123456789012</div>
+                  </div>
+                </div>
+              </div>
+          </PopupSectionBox>
+
+          <PopupSectionBox x={960} y={515} width={450} height={150}>
+            <div className="C180">{/* 바코드 관리 팝업 내용 */}</div>
+          </PopupSectionBox>
+
+          <PopupSectionBox x={510} y={685} width={900} height={120}>
             <div className="C180">{/* 바코드 관리 팝업 내용 */}</div>
           </PopupSectionBox>
         </>

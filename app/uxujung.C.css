@@ -87,23 +87,11 @@ height: var(--size-20);
    
 }
 
-.C2016 {
-    height: calc(var(--size-80) + var(--size-600));
-    overflow: hidden;
-}
+
+
 
 .C2010 {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.C2017 {
-    display: flex;
-    flex-direction: column;
-}
-
-.C2018 {
     display: flex;
     flex-direction: column;
 }
@@ -131,39 +119,7 @@ height: var(--size-20);
     cursor: pointer;
 }
 
-.C2020 {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); 
-    display: none;
-    align-items: center;
-    gap: var(--size-8);
-    padding: var(--size-5) var(--size-10);
-    border-radius: var(--size-15);
-    background-color: var(--color-blue-25);
-    backdrop-filter: blur(var(--size-25));
-   
-  
-    
-    /* z-index: 10; */
-}
 
-
-
-.C2021 {
-    width: var(--size-30);
-    height: var(--size-30);
-    border-radius: 50%;
-    background-color: var(--color-white-15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.C2020 .C2019 {
-    filter: brightness(0) invert(1);
-}
 
 .C2012:hover .C2020 {
     display: flex;
@@ -232,7 +188,166 @@ height: var(--size-20);
     color: var(--color-black);
 }
 
+.C2016 {
+    height: calc(var(--size-80) + var(--size-600));
+    overflow: hidden;
+}
+
+.C2017 {
+    display: flex;
+    flex-direction: column;
+}
+
+.C2018 {
+    display: flex;
+    flex-direction: column;
+}
+
+
 .C2019 {
     width: var(--size-20);
     height: var(--size-20);
+}
+
+.C2020 .C2019 {
+    filter: brightness(0) invert(1);
+}
+
+
+.C2020 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+    display: none;
+    align-items: center;
+    gap: var(--size-8);
+    padding: var(--size-5) var(--size-10);
+    border-radius: var(--size-15);
+    background-color: var(--color-blue-25);
+    backdrop-filter: blur(var(--size-25));
+
+}
+
+
+.C2021 {
+    width: var(--size-30);
+    height: var(--size-30);
+    border-radius: 50%;
+    background-color: var(--color-white-15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.C2022 {
+    background-color: var(--color-white);
+    border-radius: var(--size-15);
+    padding: 0;
+    box-shadow: 0 var(--size-4) var(--size-12) var(--color-black-25);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.C2023 {
+    width: var(--size-40);
+    background: linear-gradient(to bottom, var(--color-red), var(--color-yellow));
+    border-radius: var(--size-15) 0 0 var(--size-15);
+    flex-shrink: 0;
+}
+
+.C2024 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: var(--size-20) var(--size-20) var(--size-20) var(--size-15);
+    position: relative;
+}
+
+.C2025 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: var(--size-10);
+}
+
+.C2026 {
+    width: 100%;
+    max-width: var(--size-300);
+    height: var(--size-80);
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            var(--color-black) 0,
+            var(--color-black) var(--size-2),
+            transparent var(--size-2),
+            transparent var(--size-4),
+            var(--color-black) var(--size-4),
+            var(--color-black) var(--size-6),
+            transparent var(--size-6),
+            transparent var(--size-8),
+            var(--color-black) var(--size-8),
+            var(--color-black) var(--size-10),
+            transparent var(--size-10),
+            transparent var(--size-12),
+            var(--color-black) var(--size-12),
+            var(--color-black) var(--size-13),
+            transparent var(--size-13),
+            transparent var(--size-15),
+            var(--color-black) var(--size-15),
+            var(--color-black) var(--size-17),
+            transparent var(--size-17),
+            transparent var(--size-19),
+            var(--color-black) var(--size-19),
+            var(--color-black) var(--size-20),
+            transparent var(--size-20),
+            transparent var(--size-22),
+            var(--color-black) var(--size-22),
+            var(--color-black) var(--size-24),
+            transparent var(--size-24),
+            transparent var(--size-26),
+            var(--color-black) var(--size-26),
+            var(--color-black) var(--size-27),
+            transparent var(--size-27),
+            transparent var(--size-29),
+            var(--color-black) var(--size-29),
+            var(--color-black) var(--size-31),
+            transparent var(--size-31),
+            transparent var(--size-33),
+            var(--color-black) var(--size-33),
+            var(--color-black) var(--size-34),
+            transparent var(--size-34),
+            transparent var(--size-36),
+            var(--color-black) var(--size-36),
+            var(--color-black) var(--size-38),
+            transparent var(--size-38),
+            transparent var(--size-40),
+            var(--color-black) var(--size-40),
+            var(--color-black) var(--size-41),
+            transparent var(--size-41),
+            transparent var(--size-43),
+            var(--color-black) var(--size-43),
+            var(--color-black) var(--size-45),
+            transparent var(--size-45),
+            transparent var(--size-47),
+            var(--color-black) var(--size-47),
+            var(--color-black) var(--size-48),
+            transparent var(--size-48),
+            transparent var(--size-50)
+        );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border: var(--size-1) solid var(--color-black-15);
+    border-radius: var(--size-5);
+    padding: var(--size-10);
+    box-sizing: border-box;
 }
