@@ -738,18 +738,41 @@ export default function CustomerInfoPanel({
                   <div className="T2021">365<span className="T2021Script">mc</span></div>
                   <div className="C2025">
                     <div className="C2026"></div>
-                    <div className="T2022">0123456789012</div>
+                    <div className="T2022">1600016819392871</div>
                   </div>
                 </div>
               </div>
           </PopupSectionBox>
 
           <PopupSectionBox x={960} y={515} width={450} height={150}>
-            <div className="C180">{/* 바코드 관리 팝업 내용 */}</div>
+            <div className="C2027">
+              <div className="T2027">
+                <div>전화번호 <span className="T2027Phone">010-7444-4118</span>로</div>
+                <div>설치 안내 문자를 발송할까요?</div>
+              </div>
+              <button className="C2028">문자발송</button>
+            </div>
           </PopupSectionBox>
 
           <PopupSectionBox x={510} y={685} width={900} height={120}>
-            <div className="C180">{/* 바코드 관리 팝업 내용 */}</div>
+            <div className="C2029">
+              <div className="C2030">
+                <div className="T2029">고객이름</div>
+                <div className="T2029 is20p">주민번호</div>
+                <div className="T2029">휴대번호</div>
+                <div className="T2029">웹 ID</div>
+                <div className="T2029 is20p">바코드번호</div>
+                <div className="T2029">차트연동</div>
+              </div>
+              <div className="C2031">
+                <div className="T2030">이신득</div>
+                <div className="T2030 is20p">840923-1712313</div>
+                <div className="T2030">010-7444-4118</div>
+                <div className="T2030">uxrahum</div>
+                <div className="T2031 is20p">1600016819392871</div>
+                <div className="T2032">연결완료</div>
+              </div>
+            </div>
           </PopupSectionBox>
         </>
       </Popup>
