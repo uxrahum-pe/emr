@@ -186,6 +186,7 @@ const AsideInner = memo(function AsideInner({
     setIsAnimating,
     resetHandlers,
     setLastPathname,
+    isMounted,
   ]);
   const isDashboard = pathname === "/";
   const isCounseling = pathname === "/counseling";
