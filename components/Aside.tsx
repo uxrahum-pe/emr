@@ -407,9 +407,19 @@ const AsideInner = memo(function AsideInner({
                 : null;
 
             // pageId 기반으로 이미 SlidePage로 감싸진 컴포넌트 확인
-            // my-alarms, my-notes는 이미 SlidePage로 감싸져 있음
+            // Production 빌드에서 minification으로 컴포넌트 이름이 변경되므로
+            // pageId를 기반으로 감지하는 것이 더 안정적
             const isPreWrappedSlidePage =
-              page.id.startsWith("my-alarms") || page.id.startsWith("my-notes");
+              page.id.startsWith("my-alarms") ||
+              page.id.startsWith("my-notes") ||
+              page.id.startsWith("customer") ||
+              page.id.startsWith("doctor") ||
+              page.id.startsWith("counselor") ||
+              page.id.startsWith("employee") ||
+              page.id.startsWith("manager") ||
+              page.id.startsWith("assistant") ||
+              page.id.startsWith("team-leader") ||
+              page.id.startsWith("clerk");
 
             const isSlidePageComponent =
               React.isValidElement(page.content) &&
