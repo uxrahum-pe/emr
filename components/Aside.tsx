@@ -97,6 +97,14 @@ const AsideInner = memo(function AsideInner({
   currentIndex,
   goBack,
 }: AsideInnerProps) {
+  // 클라이언트 마운트 플래그 (SSR/Hydration 이슈 해결)
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // 클라이언트에서만 마운트 플래그 설정
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  
   // pages를 직접 구독하여 즉시 업데이트 반영
   const storePages = useAsideStore((state) => state.pages);
   const setPages = useAsideStore((state) => state.setPages);
@@ -107,18 +115,19 @@ const AsideInner = memo(function AsideInner({
   const resetHandlers = usePageHeaderStore((state) => state.resetHandlers);
 
   // 로컬 상태로 pages 관리 (Zustand 구독 타이밍 이슈 해결)
-  // 초기값을 storePages로 설정하여 첫 렌더링에서도 값이 있도록 함
-  const [localPages, setLocalPages] = useState<typeof storePages>(storePages);
-
-  // Zustand store의 pages와 동기화 (useLayoutEffect로 즉시 반영)
+  // 클라이언트 마운트 후에만 초기화
+  const [localPages, setLocalPages] = useState<typeof storePages>([]);
+  
+  // 클라이언트 마운트 후 Zustand store의 pages와 동기화
   React.useLayoutEffect(() => {
+    if (!isMounted) return;
     if (storePages.length > 0) {
       setLocalPages(storePages);
     }
-  }, [storePages]);
-
+  }, [storePages, isMounted]);
+  
   // 렌더링에는 로컬 상태 우선 사용, 없으면 store 상태 사용
-  const pages = localPages.length > 0 ? localPages : storePages;
+  const pages = isMounted && localPages.length > 0 ? localPages : storePages;
 
   // 현재 경로 확인 (대시보드는 /)
   const pathname = usePathname();
@@ -277,9 +286,10 @@ const AsideInner = memo(function AsideInner({
   // Initialize and update main page when mainContent changes
   React.useEffect(() => {
     // 클라이언트에서만 실행 (SSR 환경에서는 무시)
-    if (typeof window === "undefined") {
+    if (typeof window === "undefined" || !isMounted) {
       console.log(
-        "🔴 [Aside] mainPageContent useEffect - SSR 환경, 실행 안 함"
+        "🔴 [Aside] mainPageContent useEffect - SSR 환경 또는 마운트 전, 실행 안 함",
+        { isMounted }
       );
       return;
     }
@@ -440,7 +450,17 @@ const AsideInner = memo(function AsideInner({
   ]);
 
   // 초기 마운트 시 pages가 비어있고 mainPageContent가 있으면 fallback 렌더링
-  const shouldShowFallback = pages.length === 0 && !!mainPageContent;
+  // 클라이언트 마운트 전에는 렌더링하지 않음
+  const shouldShowFallback = isMounted && pages.length === 0 && !!mainPageContent;
+
+  // SSR에서는 빈 상태로 렌더링 (Hydration mismatch 방지)
+  if (!isMounted) {
+    return (
+      <aside className="C013">
+        <div className="C089" />
+      </aside>
+    );
+  }
 
   return (
     <aside className="C013">
