@@ -150,7 +150,7 @@ export default function ValidatedInput({
             top: "100%",
             left: "var(--size-12)",
             marginTop: "var(--size-2)",
-            color: "var(--color-red)",
+            color: "var(--color-magenta)",
             fontSize: "var(--font-14)",
           }}
         >

@@ -2030,7 +2030,8 @@ export default function CustomerStatusSection({
                     />
                   </div>
 
-                  <button className="C1005">중복검사</button>
+                  <button className="C1005"><p className="T1008 isSize15">중복검사
+                  </p></button>
                   <div className="C1011">
                     <LabeledCheckbox
                       checked={useAliasChecked}
@@ -2082,7 +2083,8 @@ export default function CustomerStatusSection({
                       minLengthErrorMessage="입력값이 모자랍니다"
                     />
                   </div>
-                  <button className="C1005">인증요청</button>
+                  <button className="C1005"><p className="T1008 isSize15">인증요청
+                  </p></button>
 
                   <input className="T1002" type="text" placeholder="6자리" />
                   <button className="C1010">확인</button>
@@ -2128,8 +2130,10 @@ export default function CustomerStatusSection({
                       type="text"
                       placeholder=""
                       required
+                      disabled
                     />
-                    <button className="C1005">주소검색</button>
+                    <button className="C1005"><p className="T1008 isSize15">등록완료
+                    </p></button>
                   </div>
               </div>
             </div>
@@ -2248,6 +2252,16 @@ export default function CustomerStatusSection({
           <PopupSectionBox x={970} y={70} width={660}>
             <div className="C180">
               <p className="T076">신규 고객 등록</p>
+              <div className="C2036">
+                <img alt="작성자" className="C2037" src="/images/male-64.jpg" />
+                <div className="C2038">
+                  <p className="T2038">작성자</p>
+                  <p className="T2039">
+                    홍성훈<span className="T2040"> 원장님</span>
+                  </p>
+                </div>
+                <div className="C2040 styleSheet isIcon isMini isChevron isRight"></div>
+              </div>
               <div
                 className="C181 isCloseButton"
                 onClick={() => setIsCustomerRegistrationPopupOpen(false)}
@@ -2259,7 +2273,7 @@ export default function CustomerStatusSection({
           </PopupSectionBox>
           <PopupSectionBox x={970} y={190} width={660} height={820}>
             <div className="C1003">
-              <div className="C1007">
+              <div className="C1007 isReducedMarginLeft">
                 <div className="C1000">
                   <p className="T1000">특기사항:</p>
                   <div className="C1018">
@@ -2277,7 +2291,7 @@ export default function CustomerStatusSection({
                 </div>
               </div>
               <div className="C1009"></div>
-              <div className="C1007">
+              <div className="C1007 isReducedMarginLeft">
                 <div className="C1000">
                   <p className="T1000">분류:</p>
                   <div className="C1018">
@@ -2294,7 +2308,7 @@ export default function CustomerStatusSection({
                   </div>
                 </div>
               </div>
-              <div className="C1007">
+              <div className="C1007 isReducedMarginLeft">
                 <div className="C1000">
                   <p className="T1000">국적:</p>
                   <div className="C1008">
@@ -2315,7 +2329,7 @@ export default function CustomerStatusSection({
                   </div>
                 </div>
               </div>
-              <div className="C1007">
+              <div className="C1007 isReducedMarginLeft">
                 <div className="C1000">
                   <p className="T1000">여권번호:</p>
 
@@ -2345,7 +2359,7 @@ export default function CustomerStatusSection({
                   </div>
                 </div>
               </div>
-              <div className="C1007">
+              <div className="C1007 isReducedMarginLeft">
                 <div className="C1000">
                   <p className="T1000">거소증:</p>
                   <div className="C1018">

@@ -73,7 +73,14 @@
     font-size: var(--font-15);
     text-align: center;
     line-height: var(--size-50);
+    cursor: pointer
 }
+
+.C1005:hover .T1008{
+    /* 4. 기타 */
+    opacity: .5;
+}
+
 
 /* 왼쪽 컨테이너 */
 .C1006 {
@@ -93,9 +100,11 @@
     padding: var(--size-5);
     margin-bottom: var(--size-10);
     margin-left: var(--size-30);
-    box-sizing: border-box;  /* 추가 */
+    box-sizing: border-box;
+}
 
-    /* max-width: 100%; */
+.C1007.isReducedMarginLeft {
+    margin-left: var(--size-20);
 }
 
 
@@ -309,7 +318,21 @@ text-align: center;
     border-radius: var(--size-15);
     background : linear-gradient(to right, var(--color-green), var(--color-blue));
     transition: .3s;
+    cursor: pointer;
 }
+
+.C1023.isEdit {
+    background : linear-gradient(to right, var(--color-yellow), var(--color-green));
+}
+
+.C1023:hover .T1008{
+    /* 4. 기타 */
+    opacity: .5;
+}
+
+
+
+
 /* 등록하기 화살표 컨테이너 */
 .C1024{
     /* 정렬 */
