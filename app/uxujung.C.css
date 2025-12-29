@@ -422,9 +422,10 @@
     padding: var(--size-10);
     box-sizing: border-box;
     cursor: pointer;
-    margin-left: auto;
+    margin-left: 0;
     transition: .3s;
     justify-content: flex-end;
+    
 }
 
 .C2033:hover {
@@ -620,18 +621,36 @@
     height: var(--size-940);
     width: 100%;
     display: flex;
-    /* background-color: rgb(255, 159, 159); */
+    background-color: rgb(255, 159, 159);
 }
 
 .C2050{
     display: flex;
-    background-color: aliceblue;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color:var(--color-white);
     width: var(--size-630);
     height: var(--size-890);
     left: 50%;
     transform: translateX(-50%);
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
 }
-.C2051{
+
+.C2051 {
+    position: relative;
+    align-self: flex-start;
+    object-fit: contain;
+}
+
+.C2052 {
+    position: relative;
+    align-self: flex-end;
+    object-fit: contain;
+}
+
+.C2053{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -640,7 +659,7 @@
     height: 100%;
 }
 
-.C2052 {
+.C2054 {
     width: var(--size-340);
     height: var(--size-80);
     border-radius: var(--size-20);
@@ -655,7 +674,55 @@
     justify-content: center;
 }
 
-.C2052:hover {
+.C2054:hover {
     opacity: 0.75;
     box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+.C2055{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+    overflow-y: auto;
+}
+
+.C2056 {
+    padding-left: var(--size-65);
+    margin-top: var(--size-60);
+    margin-bottom: var(--size-20);
+}
+
+.C2057,
+.C2060,
+.C2062 {
+    margin-bottom: var(--size-10);
+    position: relative;
+}
+
+.C2058 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--size-10);
+    padding-left: var(--size-95);
+    margin-top: var(--size-20);
+}
+
+.C2059 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-5);
+}
+
+.C2061,
+.C2063 {
+    padding-left: var(--size-95);
+    margin-top: var(--size-20);
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-10);
 }
