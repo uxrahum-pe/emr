@@ -32,6 +32,10 @@
     
 }
 
+.T1001.isReducedMarginLeft {
+    margin-left: var(--size-10);
+}
+
 .T1001:focus {
     outline: none;
     /* border: var(--size-1) solid var(--color-blue-75); */
@@ -110,4 +114,9 @@
     color: var(--color-white);
     font-size: var(--font-21);
     margin-right: var(--size-30);
+}
+
+.T1008.isSize15 {
+    font-size: var(--font-15);
+    margin-right: 0
 }
