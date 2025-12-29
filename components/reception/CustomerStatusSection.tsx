@@ -3926,6 +3926,7 @@ export default function CustomerStatusSection({
       <Popup
         isOpen={isCustomerDetailRegistrationPopupOpen}
         onClose={() => setIsCustomerDetailRegistrationPopupOpen(false)}
+        className="isOverlay"
       >
         <PopupSectionBox x={290} y={70} width={660} height={1060}>
           <div className="C180">

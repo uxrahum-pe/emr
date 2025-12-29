@@ -11,6 +11,7 @@ import PopupSectionBox from "@/components/PopupSectionBox";
  */
 
 import type { CheckInPopupProps } from "@/types/popups";
+import AuthorInfo from "../AuthorInfo";
 
 /**
  * 접수하기 팝업 컴포넌트
@@ -18,14 +19,45 @@ import type { CheckInPopupProps } from "@/types/popups";
 export default function CheckInPopup({ onClose }: CheckInPopupProps) {
   return (
     <>
-      <PopupSectionBox x={260} y={20} width={1400}>
+      <PopupSectionBox x={390} y={70} width={520}>
         <div className="C180">
-          {/* 접수하기 팝업 헤더 - 여기에 퍼블리싱 (제목, 닫기 버튼 등)
-              닫기 버튼 클릭 시: onClose() 호출 */}
+          <p className="T076">접수하기</p>
+          <AuthorInfo
+            imageSrc="/images/male-64.jpg"
+            imageAlt="작성자"
+            label="작성자"
+            name="홍성훈"
+            title="원장님"
+          />
+          <div className="C181 isCloseButton" onClick={onClose}>
+            <div className="C179 isDepth1"></div>
+            <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+          </div>
         </div>
       </PopupSectionBox>
-      <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-        <div className="C180">{/* 접수하기 팝업 내용 - 여기에 퍼블리싱 */}</div>
+      <PopupSectionBox x={390} y={70} width={520}>
+        <div className="C180">
+          <p className="T076">접수하기</p>
+          <AuthorInfo
+            imageSrc="/images/male-64.jpg"
+            imageAlt="작성자"
+            label="작성자"
+            name="홍성훈"
+            title="원장님"
+          />
+          <div className="C181 isCloseButton" onClick={onClose}>
+            <div className="C179 isDepth1"></div>
+            <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+          </div>
+        </div>
+      </PopupSectionBox>
+      <PopupSectionBox x={1430} y={70} width={100}>
+        <div className="C230">
+          <div className="C181 isCloseButton" onClick={onClose}>
+            <div className="C179 isDepth1"></div>
+            <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+          </div>
+        </div>
       </PopupSectionBox>
     </>
   );

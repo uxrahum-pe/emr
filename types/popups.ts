@@ -15,23 +15,6 @@ export interface BasePopupProps {
   onClose: () => void;
 }
 
-/**
- * PopupHeader 컴포넌트 Props
- */
-export interface PopupHeaderProps {
-  /** 팝업 제목 */
-  title: string;
-  /** 닫기 버튼 클릭 핸들러 */
-  onClose: () => void;
-  /** 헤더 영역의 X 좌표 (기본값: 260) */
-  x?: number;
-  /** 헤더 영역의 Y 좌표 (기본값: 20) */
-  y?: number;
-  /** 헤더 영역의 너비 (기본값: 1400) */
-  width?: number;
-}
-
-
 // ============================================
 // 상태 팝업 Props (Sidebar C194 메뉴)
 // ============================================

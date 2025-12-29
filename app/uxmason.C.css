@@ -1878,6 +1878,9 @@
 .C176.isOpened {
     opacity: 1;
 }
+.C176.isOverlay {
+    background-color: var(--color-black-50);
+}
 .isMidRange .C176 {
     backdrop-filter: blur(var(--size-20));
 }
@@ -2412,4 +2415,7 @@
 }
 .C229:hover {
     background-color: var(--color-white-15);
+}
+.C230 {
+    padding: var(--size-20);
 }
