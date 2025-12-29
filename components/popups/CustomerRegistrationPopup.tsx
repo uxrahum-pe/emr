@@ -11,6 +11,7 @@ import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
 import LabeledCheckbox from "@/components/LabeledCheckbox";
 import ValidatedInput from "@/components/ValidatedInput";
+import CalendarIconPopup from "@/components/CalendarIconPopup";
 
 interface CustomerRegistrationPopupProps {
   isOpen: boolean;
@@ -26,14 +27,22 @@ const CustomerRegistrationPopup = memo(function CustomerRegistrationPopup({
   const [customerRejectedChecked, setCustomerRejectedChecked] = useState(false);
   const [smsRejectedChecked, setSmsRejectedChecked] = useState(false);
   const [smsReceivedChecked, setSmsReceivedChecked] = useState(false);
-  const [verifiedCustomerAuthChecked, setVerifiedCustomerAuthChecked] = useState(false);
-  const [unverifiedCustomerAuthChecked, setUnverifiedCustomerAuthChecked] = useState(false);
-  const [hospitalCallRejectedChecked, setHospitalCallRejectedChecked] = useState(false);
+  const [verifiedCustomerAuthChecked, setVerifiedCustomerAuthChecked] =
+    useState(false);
+  const [unverifiedCustomerAuthChecked, setUnverifiedCustomerAuthChecked] =
+    useState(false);
+  const [hospitalCallRejectedChecked, setHospitalCallRejectedChecked] =
+    useState(false);
   const [supporterChecked, setSupporterChecked] = useState(false);
   const [foreignerChecked, setForeignerChecked] = useState(false);
   const [koreanChecked, setKoreanChecked] = useState(false);
-  const [hasResidencePermitChecked, setHasResidencePermitChecked] = useState(false);
-  const [noResidencePermitChecked, setNoResidencePermitChecked] = useState(false);
+  const [hasResidencePermitChecked, setHasResidencePermitChecked] =
+    useState(false);
+  const [noResidencePermitChecked, setNoResidencePermitChecked] =
+    useState(false);
+
+  // 생년월일 상태
+  const [birthDate, setBirthDate] = useState<Date | null>(null);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose}>
@@ -60,6 +69,18 @@ const CustomerRegistrationPopup = memo(function CustomerRegistrationPopup({
                   text="가명 사용"
                 />
               </div>
+            </div>
+          </div>
+
+          <div className="C1007">
+            <div className="C1000">
+              <p className="T1000">생년월일:</p>
+              <CalendarIconPopup
+                selectedDate={birthDate}
+                onDateSelect={setBirthDate}
+                triggerClassName="C1016"
+                isDark={true}
+              />
             </div>
           </div>
 
@@ -148,7 +169,12 @@ const CustomerRegistrationPopup = memo(function CustomerRegistrationPopup({
           <div className="C1000">
             <p className="T1000">주소:</p>
             <div className="C1004">
-              <ValidatedInput className="T1001" type="text" placeholder="" required />
+              <ValidatedInput
+                className="T1001"
+                type="text"
+                placeholder=""
+                required
+              />
               <button className="C1005">주소검색</button>
             </div>
           </div>
@@ -335,7 +361,11 @@ const CustomerRegistrationPopup = memo(function CustomerRegistrationPopup({
           <div className="C1000">
             <p className="T1000">메모:</p>
             <div className="C1004">
-              <textarea className="T1003" placeholder="최대 500자까지" maxLength={500} />
+              <textarea
+                className="T1003"
+                placeholder="최대 500자까지"
+                maxLength={500}
+              />
             </div>
           </div>
         </div>

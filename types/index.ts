@@ -35,6 +35,8 @@ export type {
   PopupSectionBoxProps,
   TabItem,
   TabSelectorProps,
+  DropdownListItem,
+  DropdownListProps,
 } from "./ui";
 
 // ============================================

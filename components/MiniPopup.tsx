@@ -13,6 +13,8 @@ export interface MiniPopupProps {
   onClose: () => void;
   /** 트리거 요소의 클릭 이벤트 (마우스 위치 계산용) */
   triggerEvent?: MouseEvent | null;
+  /** 다크 모드 스타일 적용 여부 */
+  isDark?: boolean;
 }
 
 /**
@@ -24,6 +26,7 @@ export default function MiniPopup({
   isOpen,
   onClose,
   triggerEvent,
+  isDark = false,
 }: MiniPopupProps) {
   const [mounted, setMounted] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
@@ -130,7 +133,7 @@ export default function MiniPopup({
       <div className="C062" onClick={onClose}></div>
       <div
         ref={popupRef}
-        className="C063"
+        className={isDark ? "C063 isDark" : "C063"}
         style={{
           top: `${position.top}px`,
           left: `${position.left}px`,
