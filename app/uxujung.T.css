@@ -348,3 +348,20 @@
     margin: 0;
     line-height: 1.5;
 }
+
+.T2050 {
+    font-size: var(--font-32);
+    color: var(--color-white);
+    white-space: nowrap;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.T2051 {
+    font-size: var(--font-19);
+    color: var(--color-white);
+    position: relative;
+}

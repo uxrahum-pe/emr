@@ -49,6 +49,7 @@ import CalendarIconPopup from "@/components/CalendarIconPopup";
 import DropdownList from "@/components/DropdownList";
 import { formatDate } from "@/lib/utils/date";
 import { startOfDay } from "date-fns";
+import AuthorInfo from "@/components/AuthorInfo";
 
 import { usePartCommonStore } from "@/stores/useReceptionStore";
 
@@ -3928,9 +3929,32 @@ export default function CustomerStatusSection({
         onClose={() => setIsCustomerDetailRegistrationPopupOpen(false)}
         className="isOverlay"
       >
-        <PopupSectionBox x={290} y={70} width={660} height={1060}>
-          <div className="C180">
-            <p className="T076">고객 등록</p>
+        
+          <div className="C2043">
+            <div className="C2044">
+            <AuthorInfo
+              imageSrc="/images/male-64.jpg"
+              imageAlt="작성자"
+              label="고객이름"
+              name="신수빈"
+              title="원장님"
+              />
+            <p className="T2050">신환 설문지 등록(빼톡스)</p>
+            <div className="C2045">
+              <div className="C2046">
+                <div className="C179 isDepth1"></div>
+                <span className="T2051">내용수정</span>
+              </div>
+              <div className="C2047">
+                <div className="C179 isDepth1"></div>
+                <div className="C182 styleSheet isIcon isBig isDownload isWhite"></div>
+              </div>
+              <div className="C2048">
+                <div className="C179 isDepth1"></div>
+                <div className="C182 styleSheet isIcon isBig isPrint isWhite"></div>
+              </div>
+            </div>
+            
             <div
               className="C181 isCloseButton"
               onClick={() => setIsCustomerDetailRegistrationPopupOpen(false)}
@@ -3938,9 +3962,15 @@ export default function CustomerStatusSection({
               <div className="C179 isDepth1"></div>
               <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
             </div>
+            </div>
+            <div className="C2049">
+            <div className="C2050">
+            </div>
+            </div>
+            <div className="C2051">
+              <button className="C2052">이 정보로 신규 고객 등록</button>
+            </div>
           </div>
-        </PopupSectionBox>
-        {/* 여기에 퍼블리싱할 내용 추가 */}
       </Popup>
     </article>
   );
