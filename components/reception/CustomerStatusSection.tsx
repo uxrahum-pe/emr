@@ -51,6 +51,7 @@ import { formatDate } from "@/lib/utils/date";
 import { startOfDay } from "date-fns";
 
 import { usePartCommonStore } from "@/stores/useReceptionStore";
+import CustomLabeledCheckbox from "../CustomLabeledCheckbox";
 
 /**
  * 고객 참조사항 페이지 콘텐츠 컴포넌트
@@ -2102,7 +2103,7 @@ export default function CustomerStatusSection({
                   <button className="C1005"><p className="T1008 isSize15">중복검사
                   </p></button>
                   <div className="C1011">
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={useAliasChecked}
                       onChange={setUseAliasChecked}
                       text="가명 사용"
@@ -2210,17 +2211,17 @@ export default function CustomerStatusSection({
               <div className="C1000">
                 <p className="T1000">SMS수신:</p>
                 <div className="C1018">
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={customerRejectedChecked}
                     onChange={setCustomerRejectedChecked}
                     text="고객 거부"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={smsRejectedChecked}
                     onChange={setSmsRejectedChecked}
                     text="수신 금지"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={smsReceivedChecked}
                     onChange={setSmsReceivedChecked}
                     text="수신 받음"
@@ -2262,12 +2263,12 @@ export default function CustomerStatusSection({
               <div className="C1000">
                 <p className="T1000">본인인증:</p>
                 <div className="C1018">
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={verifiedCustomerAuthChecked}
                     onChange={setVerifiedCustomerAuthChecked}
                     text="인증 고객"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={unverifiedCustomerAuthChecked}
                     onChange={setUnverifiedCustomerAuthChecked}
                     text="미인증 고객"
@@ -2279,32 +2280,32 @@ export default function CustomerStatusSection({
               <div className="C1000 isTopFitted">
                 <p className="T1000">상태:</p>
                 <div className="C1018">
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={registeredChecked}
                     onChange={setRegisteredChecked}
                     text="등록"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={preRegisteredChecked}
                     onChange={setPreRegisteredChecked}
                     text="가등록"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={pendingChecked}
                     onChange={setPendingChecked}
                     text="보류"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={deletedChecked}
                     onChange={setDeletedChecked}
                     text="삭제"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={refundedChecked}
                     onChange={setRefundedChecked}
                     text="환불"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={movedChecked}
                     onChange={setMovedChecked}
                     text="이동"
@@ -2316,15 +2317,15 @@ export default function CustomerStatusSection({
           <PopupSectionBox x={970} y={70} width={660}>
             <div className="C180">
               <p className="T076">신규 고객 등록</p>
-              <div className="C2036">
-                <img alt="작성자" className="C2037" src="/images/male-64.jpg" />
-                <div className="C2038">
-                  <p className="T2038">작성자</p>
-                  <p className="T2039">
-                    홍성훈<span className="T2040"> 원장님</span>
+              <div className="C2033">
+                <img alt="작성자" className="C2034" src="/images/male-64.jpg" />
+                <div className="C2035">
+                  <p className="T2040">작성자</p>
+                  <p className="T2041">
+                    홍성훈<span className="T2042"> 원장님</span>
                   </p>
                 </div>
-                <div className="C2040 styleSheet isIcon isMini isChevron isRight"></div>
+                <div className="C2036 styleSheet isIcon isMini isChevron isRight"></div>
               </div>
               <div
                 className="C181 isCloseButton"
@@ -2341,12 +2342,14 @@ export default function CustomerStatusSection({
                 <div className="C1000">
                   <p className="T1000">특기사항:</p>
                   <div className="C1018">
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={hospitalCallRejectedChecked}
                       onChange={setHospitalCallRejectedChecked}
+                      checkedBackgroundColor="linear-gradient(to right, var(--color-yellow), var(--color-red))"
+                      checkedIconClassName="isIMaskMagenta isIcon isMini isCheckedBold"
                       text="원내 호출 거부"
                     />
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={supporterChecked}
                       onChange={setSupporterChecked}
                       text="서포터"
@@ -2359,12 +2362,12 @@ export default function CustomerStatusSection({
                 <div className="C1000">
                   <p className="T1000">분류:</p>
                   <div className="C1018">
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={foreignerChecked}
                       onChange={setForeignerChecked}
                       text="외국인"
                     />
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={koreanChecked}
                       onChange={setKoreanChecked}
                       text="내국인"
@@ -2429,12 +2432,12 @@ export default function CustomerStatusSection({
                 <div className="C1000">
                   <p className="T1000">거소증:</p>
                   <div className="C1018">
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={hasResidencePermitChecked}
                       onChange={setHasResidencePermitChecked}
                       text="있음"
                     />
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={noResidencePermitChecked}
                       onChange={setNoResidencePermitChecked}
                       text="없음"
@@ -2489,7 +2492,7 @@ export default function CustomerStatusSection({
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={1030} width={660} height={100}>
-            <div className="C1000">
+            <div className="C1000 isRegisterButtonContainer">
               <button className="C1023">
                 <div className="C1024">
                   <div className="C1025 styleSheet isIcon isArrow isRight"></div>
@@ -3307,7 +3310,7 @@ export default function CustomerStatusSection({
                     setCustomerSearchTab(selected as number)
                   }
                 />
-                <LabeledCheckbox
+                <CustomLabeledCheckbox
                   checked={excludeRegisteredChecked}
                   onChange={setExcludeRegisteredChecked}
                   text="등록 완료된 고객 제외"

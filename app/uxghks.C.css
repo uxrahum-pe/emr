@@ -2,10 +2,7 @@
 
 /* 신규고객 등록  */
 .C1000 {
-    /* gap: var(--size-30); */
-    /* flex-flow: wrap; */
     display: flex;
-    /* flex-wrap: wrap; */
     align-items: center;
     font-size: var(--font-17);
     row-gap: var(--size-20);
@@ -15,8 +12,13 @@
     align-items: flex-start;
 }
 
-.C1000:has(.C1023) {
+.C1000.isRegisterButtonContainer {
     justify-content: flex-end;
+}
+
+.c1000.isEditButtonContainer{
+    /* 1. 레이아웃: 가로로 배치하고 양 끝으로 밀기 */
+    justify-content: space-between;
 }
 
 
@@ -73,12 +75,18 @@
     font-size: var(--font-15);
     text-align: center;
     line-height: var(--size-50);
-    cursor: pointer
+    cursor: pointer;
+    backdrop-filter: blur(var(--size-10));
+    transition: all .3s;
+
 }
 
-.C1005:hover .T1008{
-    /* 4. 기타 */
-    opacity: .5;
+.C1005:hover {
+    opacity: .80;
+}
+
+.C1005.isRetryIdentification {
+    margin-right: calc(1.88 * var(--size-20));
 }
 
 
@@ -105,6 +113,10 @@
 
 .C1007.isReducedMarginLeft {
     margin-left: var(--size-20);
+}
+
+.C1007.isEditButtonContainer {
+    justify-content: space-between;
 }
 
 
@@ -135,6 +147,7 @@ text-align: center;
 cursor: pointer;
 transition: .3s;
 }
+
 .C1008:hover {
     background-color: var(--color-white-15);
 }
@@ -162,6 +175,13 @@ transition: .3s;
     font-size: var(--font-17);
     text-align: center;
     line-height: var(--size-50);
+    transition: all .3s;
+}
+
+.C1010:hover{
+    /* 4. 기타 */
+    /* background : linear-gradient(to right, var(--color-black-50), var(--color-black-50)); */
+    opacity: .75;
 }
 
 /* 그라디언트 체크박스 */
@@ -324,17 +344,20 @@ text-align: center;
     padding: var(--size-10) var(--size-2) var(--size-10) var(--size-10);
     border-radius: var(--size-15);
     background : linear-gradient(to right, var(--color-green), var(--color-blue));
-    transition: .3s;
+    transition: all .3s;
     cursor: pointer;
 }
 
 .C1023.isEdit {
+    margin-top: 0;
+    margin-left: auto;
     background : linear-gradient(to right, var(--color-yellow), var(--color-green));
 }
 
-.C1023:hover .T1008{
+.C1023:hover{
     /* 4. 기타 */
-    opacity: .5;
+    /* background : linear-gradient(to right, var(--color-green-75), var(--color-blue-75)); */
+    opacity: .75;
 }
 
 
@@ -380,6 +403,7 @@ text-align: center;
 
     /* 3. 디자인: 배경색, 곡률, 글자색 */
     border-left: var(--size-2) solid var(--color-white-25);
+
 }
 
 /* 달력 아이콘 */
