@@ -1,3 +1,34 @@
+/**
+ * PageHeader Component
+ *
+ * @description 모든 페이지 상단에 표시되는 공통 헤더 컴포넌트입니다.
+ * 페이지 제목, 방문 고객 현황, 통합 예약 서비스, 검색, 쪽지, 알림 기능을 제공합니다.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // 기본 사용
+ * <PageHeader title="원무" />
+ *
+ * // 쪽지/알림 핸들러와 함께 사용
+ * <PageHeader
+ *   title="원무"
+ *   onNoteClick={() => navigateToPage("my-notes", <MyNotesSlide />)}
+ *   isNoteSelected={currentPageId === "my-notes"}
+ *   onAlarmClick={() => navigateToPage("my-alarms", <MyAlarmsSlide />)}
+ *   isAlarmSelected={currentPageId === "my-alarms"}
+ * />
+ * ```
+ *
+ * @remarks
+ * - 쪽지/알림 버튼 클릭 핸들러는 usePageHeaderStore를 통해 전역으로 관리됩니다.
+ * - isNoteSelected, isAlarmSelected는 Aside의 currentPageId와 연동하여 사용합니다.
+ * - 방문 고객 현황 클릭 시 전체 파트별 현황 팝업이 표시됩니다.
+ *
+ * @see usePageHeaderStore - 핸들러 전역 관리 스토어
+ * @see useAsideStore - Aside 상태 관리 스토어
+ */
+
 "use client";
 
 import { useState } from "react";
@@ -11,6 +42,7 @@ import CalendarMiniPopup from "./CalendarMiniPopup";
 import { startOfDay } from "date-fns";
 import ReservationServicePopup from "@/components/popups/ReservationServicePopup";
 import MenuSearchPopup from "@/components/popups/MenuSearchPopup";
+
 export default function PageHeader({
   title,
   onNoteClick,
