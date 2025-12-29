@@ -410,25 +410,22 @@
 }
 
 .C2033 {
-    position: absolute;
-    top: var(--size-20);
-    right: var(--size-100);
     width: var(--size-200);
     height: var(--size-60);
     background-color: var(--color-white-7);
     border-radius: var(--size-15);
     display: flex;
     align-items: center;
-    gap: var(--size-10);
     padding: var(--size-10);
     box-sizing: border-box;
     cursor: pointer;
+    margin-left: auto;
     transition: .3s;
+    justify-content: flex-end;
 }
 .C2033:hover {
     opacity: .5;
 }
-
 .C2034 {
     width: var(--size-40);
     height: var(--size-40);
@@ -443,6 +440,7 @@
     flex-direction: column;
     gap: var(--size-2);
     flex: 1;
+    margin-left: var(--size-10);
 }
 
 .C2036 {
@@ -466,19 +464,18 @@
 }
 
 .C2038 {
-    position: absolute;
-    right: var(--size-20);
-    top: var(--size-20);
     width: var(--size-60);
     height: var(--size-60);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     border-radius: var(--size-15);
     background: var(--color-white-3);
     box-shadow: 0 var(--size-10) var(--size-40) 0 var(--color-black-25);
     cursor: pointer;
+    margin-left: auto;
     transition: .3s;
+    flex: 0 0 var(--size-60);
 }
 
 .C2038:hover {
@@ -522,7 +519,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: auto;
+    margin-top: var(--size-50);
     margin-bottom: var(--size-30);
 }
 
