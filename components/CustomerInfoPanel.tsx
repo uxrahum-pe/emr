@@ -8,7 +8,9 @@ import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
 import ValidatedInput from "@/components/ValidatedInput";
 import LabeledCheckbox from "@/components/LabeledCheckbox";
+import CustomLabeledCheckbox from "@/components/CustomLabeledCheckbox";
 import CalendarIconPopup from "@/components/CalendarIconPopup";
+import DropdownList from "@/components/DropdownList";
 import { formatDate } from "@/lib/utils/date";
 import { startOfDay } from "date-fns";
 
@@ -55,6 +57,65 @@ export default function CustomerInfoPanel({
   // 날짜 상태 관리
   const [entryDate, setEntryDate] = useState<Date | null>(() => startOfDay(new Date("2025-12-23")));
   const [exitDate, setExitDate] = useState<Date | null>(() => startOfDay(new Date("2025-12-23")));
+
+  // 거부사유 드롭다운 상태
+  const [rejectionReason, setRejectionReason] = useState<
+    string | number | null
+  >(null);
+
+  // 거부사유 드롭다운 데이터
+  const rejectionReasonItems = [
+    { value: "", label: "사유1" },
+    { value: "0", label: "종류 선택" },
+    { value: "1", label: "종류 선택" },
+    { value: "2", label: "종류 선택" },
+  ];
+
+  // 할인구분 드롭다운 상태
+  const [discountType, setDiscountType] = useState<string | number | null>(
+    null
+  );
+
+  // 할인구분 드롭다운 데이터
+  const discountTypeItems = [
+    { value: "0", label: "종류 선택" },
+    { value: "1", label: "할인 유형 1" },
+    { value: "2", label: "할인 유형 2" },
+  ];
+
+  // 직업 드롭다운 상태
+  const [occupation, setOccupation] = useState<string | number | null>(null);
+
+  // 직업 드롭다운 데이터
+  const occupationItems = [
+    { value: "0", label: "종류 선택" },
+    { value: "1", label: "직업 1" },
+    { value: "2", label: "직업 2" },
+  ];
+
+  // 국적 드롭다운 상태
+  const [nationality, setNationality] = useState<string | number | null>(null);
+
+  // 국적 드롭다운 데이터
+  const nationalityItems = [
+    { value: "0", label: "국적 선택" },
+    { value: "1", label: "한국" },
+    { value: "2", label: "중국" },
+    { value: "3", label: "베트남" },
+    { value: "4", label: "태국" },
+  ];
+
+  // 체류자격 드롭다운 상태
+  const [residenceStatus, setResidenceStatus] = useState<
+    string | number | null
+  >(null);
+
+  // 체류자격 드롭다운 데이터
+  const residenceStatusItems = [
+    { value: "0", label: "코드 선택" },
+    { value: "1", label: "코드 1" },
+    { value: "2", label: "코드 2" },
+  ];
 
   // Section toggle handler with scroll logic
   const handleSectionToggle = (sectionKey: string, event: React.MouseEvent) => {
@@ -834,7 +895,7 @@ export default function CustomerInfoPanel({
 
                   <button className="C1005"><p className="T1008 isSize15">중복검사</p></button>
                   <div className="C1011">
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={useAliasChecked}
                       onChange={setUseAliasChecked}
                       text="가명 사용"
@@ -884,7 +945,7 @@ export default function CustomerInfoPanel({
                       minLengthErrorMessage="입력값이 모자랍니다"
                     />
                   </div>
-                  <button className="C1005"><p className="T1008 isSize15">재인증</p></button>
+                  <button className="C1005 isRetryIdentification"><p className="T1008 isSize15">재인증</p></button>
 
                   <input className="T1002" type="text" placeholder="6자리" />
                   <button className="C1010">확인</button>
@@ -942,17 +1003,17 @@ export default function CustomerInfoPanel({
               <div className="C1000">
                 <p className="T1000">SMS수신:</p>
                 <div className="C1018">
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={customerRejectedChecked}
                     onChange={setCustomerRejectedChecked}
                     text="고객 거부"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={smsRejectedChecked}
                     onChange={setSmsRejectedChecked}
                     text="수신 금지"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={smsReceivedChecked}
                     onChange={setSmsReceivedChecked}
                     text="수신 받음"
@@ -964,45 +1025,42 @@ export default function CustomerInfoPanel({
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">거부사유:</p>
-                <div className="C1008">
-                  종류 선택
-                  <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                </div>
-
-                <div className="C1017">
-                  <ValidatedInput
-                    className="T1002 isLong"
-                    type="text"
-                    placeholder="최대64자까지"
-                    maxLength={64}
-                  />
-                </div>
+                <DropdownList
+                  items={rejectionReasonItems}
+                  selectedValue={rejectionReason}
+                  onSelect={(item) => setRejectionReason(item.value)}
+                  placeholder="종류 선택"
+                />
               </div>
             </div>
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">할인구분:</p>
-                <div className="C1008">
-                  종류 선택
-                  <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                </div>
+                <DropdownList
+                  items={discountTypeItems}
+                  selectedValue={discountType}
+                  onSelect={(item) => setDiscountType(item.value)}
+                  placeholder="종류 선택"
+                />
                 <p className="T1000">직업:</p>
-                <div className="C1008">
-                  종류 선택
-                  <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                </div>
+                <DropdownList
+                  items={occupationItems}
+                  selectedValue={occupation}
+                  onSelect={(item) => setOccupation(item.value)}
+                  placeholder="종류 선택"
+                />
               </div>
             </div>
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">본인인증:</p>
                 <div className="C1018">
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={verifiedCustomerAuthChecked}
                     onChange={setVerifiedCustomerAuthChecked}
                     text="인증 고객"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={unverifiedCustomerAuthChecked}
                     onChange={setUnverifiedCustomerAuthChecked}
                     text="미인증 고객"
@@ -1014,32 +1072,32 @@ export default function CustomerInfoPanel({
               <div className="C1000 isTopFitted">
                 <p className="T1000">상태:</p>
                 <div className="C1018">
-                <LabeledCheckbox
+                <CustomLabeledCheckbox
                     checked={registeredChecked}
                     onChange={setRegisteredChecked}
                     text="등록"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={preRegisteredChecked}
                     onChange={setPreRegisteredChecked}
                     text="가등록"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={pendingChecked}
                     onChange={setPendingChecked}
                     text="보류"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={deletedChecked}
                     onChange={setDeletedChecked}
                     text="삭제"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={refundedChecked}
                     onChange={setRefundedChecked}
                     text="환불"
                   />
-                  <LabeledCheckbox
+                  <CustomLabeledCheckbox
                     checked={movedChecked}
                     onChange={setMovedChecked}
                     text="이동"
@@ -1051,15 +1109,15 @@ export default function CustomerInfoPanel({
           <PopupSectionBox x={970} y={70} width={660}>
             <div className="C180">
               <p className="T076">고객 정보 수정</p>
-              <div className="C2036">
-                <img alt="작성자" className="C2037" src="/images/male-64.jpg" />
-                <div className="C2038">
-                  <p className="T2038">작성자</p>
-                  <p className="T2039">
-                    홍성훈<span className="T2040"> 원장님</span>
+              <div className="C2033">
+                <img alt="작성자" className="C2034" src="/images/male-64.jpg" />
+                <div className="C2035">
+                  <p className="T2040">작성자</p>
+                  <p className="T2041">
+                    홍성훈<span className="T2042"> 원장님</span>
                   </p>
                 </div>
-                <div className="C2040 styleSheet isIcon isMini isChevron isRight"></div>
+                <div className="C2036 styleSheet isIcon isMini isChevron isRight"></div>
               </div>
               <div
                 className="C181 isCloseButton"
@@ -1076,12 +1134,14 @@ export default function CustomerInfoPanel({
                 <div className="C1000">
                   <p className="T1000">특기사항:</p>
                   <div className="C1018">
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={hospitalCallRejectedChecked}
                       onChange={setHospitalCallRejectedChecked}
+                      checkedBackgroundColor="linear-gradient(to right, var(--color-yellow), var(--color-red))"
+                      checkedIconClassName="isIMaskMagenta isIcon isMini isCheckedBold"
                       text="원내 호출 거부"
                     />
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={supporterChecked}
                       onChange={setSupporterChecked}
                       text="서포터"
@@ -1094,12 +1154,12 @@ export default function CustomerInfoPanel({
                 <div className="C1000">
                   <p className="T1000">분류:</p>
                   <div className="C1018">
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={foreignerChecked}
                       onChange={setForeignerChecked}
                       text="외국인"
                     />
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={koreanChecked}
                       onChange={setKoreanChecked}
                       text="내국인"
@@ -1110,10 +1170,12 @@ export default function CustomerInfoPanel({
               <div className="C1007 isReducedMarginLeft">
                 <div className="C1000">
                   <p className="T1000">국적:</p>
-                  <div className="C1008">
-                    국적 선택
-                    <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                  </div>
+                  <DropdownList
+                    items={nationalityItems}
+                    selectedValue={nationality}
+                    onSelect={(item) => setNationality(item.value)}
+                    placeholder="국적 선택"
+                  />
                   <p className="T1000">영문명:</p>
                   <div className="C1017">
                     <ValidatedInput
@@ -1132,7 +1194,7 @@ export default function CustomerInfoPanel({
                 <div className="C1000">
                   <p className="T1000">여권번호:</p>
 
-                    <div className="C1017">
+                  <div className="C1017">
                     <ValidatedInput
                       className="T1002"
                       type="text"
@@ -1145,7 +1207,7 @@ export default function CustomerInfoPanel({
                   </div>
                   <p className="T1000">건강보험:</p>
 
-                    <div className="C1017">
+                  <div className="C1017">
                     <ValidatedInput
                       className="T1002"
                       type="text"
@@ -1162,12 +1224,12 @@ export default function CustomerInfoPanel({
                 <div className="C1000">
                   <p className="T1000">거소증:</p>
                   <div className="C1018">
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={hasResidencePermitChecked}
                       onChange={setHasResidencePermitChecked}
                       text="있음"
                     />
-                    <LabeledCheckbox
+                    <CustomLabeledCheckbox
                       checked={noResidencePermitChecked}
                       onChange={setNoResidencePermitChecked}
                       text="없음"
@@ -1175,10 +1237,12 @@ export default function CustomerInfoPanel({
                   </div>
 
                   <p className="T1000">체류자격:</p>
-                  <div className="C1008">
-                    코드 선택
-                    <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                  </div>
+                  <DropdownList
+                    items={residenceStatusItems}
+                    selectedValue={residenceStatus}
+                    onSelect={(item) => setResidenceStatus(item.value)}
+                    placeholder="코드 선택"
+                  />
                 </div>
               </div>
               <div className="C1012">
@@ -1198,28 +1262,22 @@ export default function CustomerInfoPanel({
                 <div className="C1014">
                   <div className="C1015">
                     <p className="T1000">입국일:</p>
-                    <div className="C1016">
-                      <p className="T1004">
-                        {entryDate ? formatDate(entryDate, "yyyy-MM-dd") : ""}
-                      </p>
-                      <CalendarIconPopup
-                        selectedDate={entryDate}
-                        onDateSelect={setEntryDate}
-                      />
-                    </div>
+                    <CalendarIconPopup
+                      selectedDate={entryDate}
+                      onDateSelect={setEntryDate}
+                      triggerClassName="C1016"
+                      isDark={true}
+                    />
                   </div>
 
                   <div className="C1015">
                     <p className="T1000">출국일:</p>
-                    <div className="C1016">
-                      <p className="T1004">
-                        {exitDate ? formatDate(exitDate, "yyyy-MM-dd") : ""}
-                      </p>
-                      <CalendarIconPopup
-                        selectedDate={exitDate}
-                        onDateSelect={setExitDate}
-                      />
-                    </div>
+                    <CalendarIconPopup
+                      selectedDate={exitDate}
+                      onDateSelect={setExitDate}
+                      triggerClassName="C1016"
+                      isDark={true}
+                    />
                   </div>
                 </div>
               </div>
@@ -1227,7 +1285,12 @@ export default function CustomerInfoPanel({
           </PopupSectionBox>
           <PopupSectionBox x={970} y={1030} width={660} height={100}>
             <div className="C1000">
-
+              <div style={{ display: "flex", alignItems: "center", textAlign: "center", gap: "var(--size-5)", marginLeft: "var(--size-50)", lineHeight: "var(--size-100)" }}>
+                <p style={{ color: "var(--color-white-50)", fontSize: "var(--font-15)", fontWeight: "800" }}>최종 등록 및 수정일자:</p>
+                <p style={{ color: "var(--color-white)", fontSize: "var(--font-15)", fontWeight: "800" }}>2025.08.21</p>
+                <p style={{ color: "var(--color-white-50)", fontSize: "var(--font-15)", fontWeight: "800" }}>PM</p>
+                <p style={{ color: "var(--color-white)", fontSize: "var(--font-15)", fontWeight: "800" }}>03:23</p>
+              </div>
               <button className="C1023 isEdit">
                 <div className="C1024"><div className="C1025 styleSheet isIcon isArrow isRight"></div></div>
               

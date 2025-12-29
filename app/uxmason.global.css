@@ -822,6 +822,9 @@ span.isLink {
 .isIMaskMagenta.isAlert {
   mask-position: calc(-1 * var(--size-280)) calc(-1 * var(--size-440));
 }
+.isIMaskMagenta.isIcon.isCheckedBold.isMini {
+  mask-position: calc(-1 * var(--size-750)) calc(-1 * var(--size-240));
+}
 .isIMaskGreen {
   background-color: var(--color-green);
   mask-image: url(/images/styleSheet.png);

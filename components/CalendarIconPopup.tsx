@@ -130,7 +130,10 @@ export default function CalendarIconPopup({
           <p className="T1004">
             {selectedDate ? formatDate(selectedDate, "yyyy-MM-dd") : ""}
           </p>
+          <div className="C1026">
           <div className="C1027 styleSheet isIcon isCalendar"></div>
+          </div>
+          
         </div>
         <MiniPopup
           isOpen={isOpen}
@@ -148,10 +151,11 @@ export default function CalendarIconPopup({
     );
   }
 
+  // 캘린더 아이콘: C1026(아이콘 컨테이너) + C1027(아이콘 표시)
   return (
     <>
       <div
-        className={triggerClassName}
+        className="C1026"
         ref={triggerRef}
         onClick={handleClick}
         style={{ cursor: "pointer" }}
