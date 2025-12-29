@@ -17,6 +17,10 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    cursor: pointer;
+}
+.C2001:hover {
+    opacity: 0.5;
 }
 .C2001.isUnChecked {
     background: var(--color-white-15);

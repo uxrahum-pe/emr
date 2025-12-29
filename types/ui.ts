@@ -166,3 +166,28 @@ export interface TabSelectorProps {
   className?: string;
   width?: string | number;
 }
+
+// DropdownList 컴포넌트 타입
+export interface DropdownListItem {
+  /** 항목의 값 (고유 식별자) */
+  value: string | number;
+  /** 표시할 텍스트 */
+  label: string;
+  /** 추가 데이터 (선택사항) */
+  data?: unknown;
+}
+
+export interface DropdownListProps {
+  /** 드롭다운 항목 리스트 (JSON 데이터) */
+  items: DropdownListItem[];
+  /** 현재 선택된 값 */
+  selectedValue?: string | number | null;
+  /** 선택 변경 핸들러 */
+  onSelect?: (item: DropdownListItem) => void;
+  /** 플레이스홀더 텍스트 */
+  placeholder?: string;
+  /** 커스텀 클래스명 */
+  className?: string;
+  /** 비활성화 여부 */
+  disabled?: boolean;
+}

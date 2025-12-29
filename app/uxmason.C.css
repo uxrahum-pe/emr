@@ -745,6 +745,11 @@
     z-index: 10000;
     height: fit-content
 }
+.C063.isDark {
+    background-color: var(--color-black-75);
+    box-shadow: 0 var(--size-20) var(--size-80) var(--color-black-50);
+    border: var(--size-2) solid var(--color-white-15);
+}
 .C064 {
     display: flex;
     width: fit-content;
@@ -770,9 +775,13 @@
     width: var(--size-40);
     height: var(--size-40);
 }
+.C063.isDark .C066 {
+    filter: brightness(0) invert(1);
+}
 .C067 {
     display: flex;
     flex-direction: column;
+    margin: 0 calc(-1 * var(--size-2));
 }
 .C068 {
     display: flex;
@@ -2378,4 +2387,29 @@
 }
 .C227.isOverflowed {
     background-image: linear-gradient(var(--color-black-3), var(--color-black-0) 15%, var(--color-black-0) 85%, var(--color-black-3) 100%);
+}
+.C228 {
+    width: var(--size-200);
+    padding: var(--size-10);
+    background-color: var(--color-white-15);
+    backdrop-filter: blur(var(--size-30));
+    border-radius: var(--size-15);
+    position: absolute;
+    top: var(--size-60);
+    left: 0;
+    z-index: 1;
+    box-shadow: 0 var(--size-10) var(--size-30) var(--color-black-25);
+    display: none;
+}
+.C228.isOpened {
+    display: block;
+}
+.C229 {
+    border-radius: var(--size-10);
+    cursor: pointer;
+    transition: .3s;
+    padding: var(--size-10);
+}
+.C229:hover {
+    background-color: var(--color-white-15);
 }

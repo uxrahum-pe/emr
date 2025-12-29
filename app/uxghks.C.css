@@ -104,12 +104,13 @@
 .C1008 {
 /* 1. 레이아웃: 가로로 배치하고 양 끝으로 밀기 */
 display: flex;
-justify-content: space-between;
+justify-content: flex-start;
 align-items: center;
 
 /* 2. 크기 및 여백 */
 width: var(--size-200); /* 원하는 너비로 조절 */
-padding: var(--size-10) var(--size-15) var(--size-10) var(--size-20);
+height: var(--size-50);
+padding: var(--size-10) var(--size-15);
 
 /* 3. 디자인: 배경색, 곡률, 글자색 */
 background-color: var(--color-white-25); /* 이미지의 배경색 느낌 */
@@ -122,6 +123,11 @@ cursor: pointer;
 box-sizing: border-box;
 /* margin-left: var(--size-10); */
 text-align: center;
+cursor: pointer;
+transition: .3s;
+}
+.C1008:hover {
+    background-color: var(--color-white-15);
 }
 
 /* 점선 */
@@ -252,10 +258,11 @@ text-align: center;
     width: var(--size-20);
     height: var(--size-20);
     justify-content: center;
-    align-items: center;
     display: flex;
     color: var(--color-white);
     filter: brightness(0) invert(1);
+    align-items: center;
+    margin-left: auto;
 }
 
 

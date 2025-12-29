@@ -46,6 +46,7 @@ import ForeignerStatusPopup from "@/components/popups/ForeignerStatusPopup";
 import AgreementStatusPopup from "@/components/popups/AgreementStatusPopup";
 import PracticeIndexStatusPopup from "@/components/popups/PracticeIndexStatusPopup";
 import CalendarIconPopup from "@/components/CalendarIconPopup";
+import DropdownList from "@/components/DropdownList";
 import { formatDate } from "@/lib/utils/date";
 import { startOfDay } from "date-fns";
 
@@ -222,21 +223,89 @@ export default function CustomerStatusSection({
   const [refundedChecked, setRefundedChecked] = useState(false);
   const [movedChecked, setMovedChecked] = useState(false);
   // 본인인증 체크박스 상태
-  const [verifiedCustomerAuthChecked, setVerifiedCustomerAuthChecked] = useState(false);
-  const [unverifiedCustomerAuthChecked, setUnverifiedCustomerAuthChecked] = useState(false);
+  const [verifiedCustomerAuthChecked, setVerifiedCustomerAuthChecked] =
+    useState(false);
+  const [unverifiedCustomerAuthChecked, setUnverifiedCustomerAuthChecked] =
+    useState(false);
   // 특기사항 체크박스 상태
-  const [hospitalCallRejectedChecked, setHospitalCallRejectedChecked] = useState(false);
+  const [hospitalCallRejectedChecked, setHospitalCallRejectedChecked] =
+    useState(false);
   const [supporterChecked, setSupporterChecked] = useState(false);
   // 분류 체크박스 상태
   const [foreignerChecked, setForeignerChecked] = useState(false);
   const [koreanChecked, setKoreanChecked] = useState(false);
   // 거소증 체크박스 상태
-  const [hasResidencePermitChecked, setHasResidencePermitChecked] = useState(false);
-  const [noResidencePermitChecked, setNoResidencePermitChecked] = useState(false);
+  const [hasResidencePermitChecked, setHasResidencePermitChecked] =
+    useState(false);
+  const [noResidencePermitChecked, setNoResidencePermitChecked] =
+    useState(false);
 
   // 입국일/출국일 날짜 상태
-  const [entryDate, setEntryDate] = useState<Date | null>(() => startOfDay(new Date("2025-12-23")));
-  const [exitDate, setExitDate] = useState<Date | null>(() => startOfDay(new Date("2025-12-23")));
+  const [entryDate, setEntryDate] = useState<Date | null>(() =>
+    startOfDay(new Date("2025-12-23"))
+  );
+  const [exitDate, setExitDate] = useState<Date | null>(() =>
+    startOfDay(new Date("2025-12-23"))
+  );
+
+  // 거부사유 드롭다운 상태
+  const [rejectionReason, setRejectionReason] = useState<
+    string | number | null
+  >(null);
+
+  // 거부사유 드롭다운 데이터
+  const rejectionReasonItems = [
+    { value: "", label: "사유1" },
+    { value: "0", label: "종류 선택" },
+    { value: "1", label: "종류 선택" },
+    { value: "2", label: "종류 선택" },
+  ];
+
+  // 할인구분 드롭다운 상태
+  const [discountType, setDiscountType] = useState<string | number | null>(
+    null
+  );
+
+  // 할인구분 드롭다운 데이터
+  const discountTypeItems = [
+    { value: "0", label: "종류 선택" },
+    { value: "1", label: "할인 유형 1" },
+    { value: "2", label: "할인 유형 2" },
+  ];
+
+  // 직업 드롭다운 상태
+  const [occupation, setOccupation] = useState<string | number | null>(null);
+
+  // 직업 드롭다운 데이터
+  const occupationItems = [
+    { value: "0", label: "종류 선택" },
+    { value: "1", label: "직업 1" },
+    { value: "2", label: "직업 2" },
+  ];
+
+  // 국적 드롭다운 상태
+  const [nationality, setNationality] = useState<string | number | null>(null);
+
+  // 국적 드롭다운 데이터
+  const nationalityItems = [
+    { value: "0", label: "국적 선택" },
+    { value: "1", label: "한국" },
+    { value: "2", label: "중국" },
+    { value: "3", label: "베트남" },
+    { value: "4", label: "태국" },
+  ];
+
+  // 체류자격 드롭다운 상태
+  const [residenceStatus, setResidenceStatus] = useState<
+    string | number | null
+  >(null);
+
+  // 체류자격 드롭다운 데이터
+  const residenceStatusItems = [
+    { value: "0", label: "코드 선택" },
+    { value: "1", label: "코드 1" },
+    { value: "2", label: "코드 2" },
+  ];
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -2122,15 +2191,15 @@ export default function CustomerStatusSection({
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">주소:</p>
-                  <div className="C1004">
-                    <ValidatedInput
-                      className="T1001"
-                      type="text"
-                      placeholder=""
-                      required
-                    />
-                    <button className="C1005">주소검색</button>
-                  </div>
+                <div className="C1004">
+                  <ValidatedInput
+                    className="T1001"
+                    type="text"
+                    placeholder=""
+                    required
+                  />
+                  <button className="C1005">주소검색</button>
+                </div>
               </div>
             </div>
             <div className="C1009"></div>
@@ -2161,33 +2230,30 @@ export default function CustomerStatusSection({
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">거부사유:</p>
-                <div className="C1008">
-                  종류 선택
-                  <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                </div>
-
-                <div className="C1017">
-                  <ValidatedInput
-                    className="T1002 isLong"
-                    type="text"
-                    placeholder="최대64자까지"
-                    maxLength={64}
-                  />
-                </div>
+                <DropdownList
+                  items={rejectionReasonItems}
+                  selectedValue={rejectionReason}
+                  onSelect={(item) => setRejectionReason(item.value)}
+                  placeholder="종류 선택"
+                />
               </div>
             </div>
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">할인구분:</p>
-                <div className="C1008">
-                  종류 선택
-                  <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                </div>
+                <DropdownList
+                  items={discountTypeItems}
+                  selectedValue={discountType}
+                  onSelect={(item) => setDiscountType(item.value)}
+                  placeholder="종류 선택"
+                />
                 <p className="T1000">직업:</p>
-                <div className="C1008">
-                  종류 선택
-                  <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                </div>
+                <DropdownList
+                  items={occupationItems}
+                  selectedValue={occupation}
+                  onSelect={(item) => setOccupation(item.value)}
+                  placeholder="종류 선택"
+                />
               </div>
             </div>
             <div className="C1007">
@@ -2211,7 +2277,7 @@ export default function CustomerStatusSection({
               <div className="C1000 isTopFitted">
                 <p className="T1000">상태:</p>
                 <div className="C1018">
-                <LabeledCheckbox
+                  <LabeledCheckbox
                     checked={registeredChecked}
                     onChange={setRegisteredChecked}
                     text="등록"
@@ -2297,10 +2363,12 @@ export default function CustomerStatusSection({
               <div className="C1007">
                 <div className="C1000">
                   <p className="T1000">국적:</p>
-                  <div className="C1008">
-                    국적 선택
-                    <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                  </div>
+                  <DropdownList
+                    items={nationalityItems}
+                    selectedValue={nationality}
+                    onSelect={(item) => setNationality(item.value)}
+                    placeholder="국적 선택"
+                  />
                   <p className="T1000">영문명:</p>
                   <div className="C1017">
                     <ValidatedInput
@@ -2319,7 +2387,7 @@ export default function CustomerStatusSection({
                 <div className="C1000">
                   <p className="T1000">여권번호:</p>
 
-                    <div className="C1017">
+                  <div className="C1017">
                     <ValidatedInput
                       className="T1002"
                       type="text"
@@ -2332,7 +2400,7 @@ export default function CustomerStatusSection({
                   </div>
                   <p className="T1000">건강보험:</p>
 
-                    <div className="C1017">
+                  <div className="C1017">
                     <ValidatedInput
                       className="T1002"
                       type="text"
@@ -2362,10 +2430,12 @@ export default function CustomerStatusSection({
                   </div>
 
                   <p className="T1000">체류자격:</p>
-                  <div className="C1008">
-                    코드 선택
-                    <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
-                  </div>
+                  <DropdownList
+                    items={residenceStatusItems}
+                    selectedValue={residenceStatus}
+                    onSelect={(item) => setResidenceStatus(item.value)}
+                    placeholder="코드 선택"
+                  />
                 </div>
               </div>
               <div className="C1012">
@@ -2375,38 +2445,32 @@ export default function CustomerStatusSection({
                     첨부할 거소증 이미지를 올리세요.
                   </label>
                   <input
-                    className="T1006" 
-                    type="file" 
-                    id="img-upload" 
-                    accept="image/*" 
+                    className="T1006"
+                    type="file"
+                    id="img-upload"
+                    accept="image/*"
                     hidden
                   />
                 </div>
                 <div className="C1014">
                   <div className="C1015">
                     <p className="T1000">입국일:</p>
-                    <div className="C1016">
-                      <p className="T1004">
-                        {entryDate ? formatDate(entryDate, "yyyy-MM-dd") : ""}
-                      </p>
-                      <CalendarIconPopup
-                        selectedDate={entryDate}
-                        onDateSelect={setEntryDate}
-                      />
-                    </div>
+                    <CalendarIconPopup
+                      selectedDate={entryDate}
+                      onDateSelect={setEntryDate}
+                      triggerClassName="C1016"
+                      isDark={true}
+                    />
                   </div>
 
                   <div className="C1015">
                     <p className="T1000">출국일:</p>
-                    <div className="C1016">
-                      <p className="T1004">
-                        {exitDate ? formatDate(exitDate, "yyyy-MM-dd") : ""}
-                      </p>
-                      <CalendarIconPopup
-                        selectedDate={exitDate}
-                        onDateSelect={setExitDate}
-                      />
-                    </div>
+                    <CalendarIconPopup
+                      selectedDate={exitDate}
+                      onDateSelect={setExitDate}
+                      triggerClassName="C1016"
+                      isDark={true}
+                    />
                   </div>
                 </div>
               </div>
@@ -2414,12 +2478,13 @@ export default function CustomerStatusSection({
           </PopupSectionBox>
           <PopupSectionBox x={970} y={1030} width={660} height={100}>
             <div className="C1000">
-
               <button className="C1023">
-                <div className="C1024"><div className="C1025 styleSheet isIcon isArrow isRight"></div></div>
-              
-                <p className="T1008">등록완료
-                </p></button>
+                <div className="C1024">
+                  <div className="C1025 styleSheet isIcon isArrow isRight"></div>
+                </div>
+
+                <p className="T1008">등록완료</p>
+              </button>
             </div>
           </PopupSectionBox>
         </div>
