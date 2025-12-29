@@ -17,7 +17,7 @@
  *
  * @remarks
  * - 원무 페이지에서만 사용되는 컴포넌트입니다.
- * - Zustand 스토어(useReceptionStore)를 사용하여 상태를 관리합니다.
+ * - Zustand 스토어(usePartCommonStore)를 사용하여 상태를 관리합니다.
  * - useAside 훅을 사용하여 Aside 네비게이션을 수행합니다.
  */
 
@@ -41,8 +41,12 @@ import ValidatedInput from "@/components/ValidatedInput";
 import { getRoleInfo } from "@/lib/utils/role";
 import type { CustomerStatusSectionProps } from "@/types/reception";
 import PopupSectionBox from "../PopupSectionBox";
+import CustomerStatusPopup from "@/components/popups/CustomerStatusPopup";
+import ForeignerStatusPopup from "@/components/popups/ForeignerStatusPopup";
+import AgreementStatusPopup from "@/components/popups/AgreementStatusPopup";
+import PracticeIndexStatusPopup from "@/components/popups/PracticeIndexStatusPopup";
 
-import { useReceptionStore } from "@/stores/useReceptionStore";
+import { usePartCommonStore } from "@/stores/useReceptionStore";
 
 /**
  * 고객 참조사항 페이지 콘텐츠 컴포넌트
@@ -182,7 +186,12 @@ export default function CustomerStatusSection({
   isCustomerDetailOpen,
   setIsCustomerDetailOpen,
 }: CustomerStatusSectionProps) {
-  const { sortOrder, toggleSortOrder } = useReceptionStore();
+  const {
+    sortOrder,
+    toggleSortOrder,
+    openSidebarMenuPopup,
+    setOpenSidebarMenuPopup,
+  } = usePartCommonStore();
   const { navigateToPage, resetToMain } = useAside();
   const [isCustomerRegistrationPopupOpen, setIsCustomerRegistrationPopupOpen] =
     useState(false);
@@ -3581,7 +3590,7 @@ export default function CustomerStatusSection({
                               <div className="C2017">
                                 <div className="C2018 styleSheet isIcon isArrow isMini"></div>
                               </div>
-                              <span className="T2011">등록하기</span>
+                              <span className="T2020">등록하기</span>
                             </button>
                           </div>
                         );
@@ -3755,6 +3764,32 @@ export default function CustomerStatusSection({
           )}
         </>
       </Popup>
+
+      {/* Sidebar C193 메뉴 팝업들 */}
+      <CustomerStatusPopup
+        isOpen={openSidebarMenuPopup === "customer"}
+        onClose={() => {
+          setOpenSidebarMenuPopup(null);
+        }}
+      />
+      <ForeignerStatusPopup
+        isOpen={openSidebarMenuPopup === "foreigner"}
+        onClose={() => {
+          setOpenSidebarMenuPopup(null);
+        }}
+      />
+      <AgreementStatusPopup
+        isOpen={openSidebarMenuPopup === "agreement"}
+        onClose={() => {
+          setOpenSidebarMenuPopup(null);
+        }}
+      />
+      <PracticeIndexStatusPopup
+        isOpen={openSidebarMenuPopup === "practiceIndex"}
+        onClose={() => {
+          setOpenSidebarMenuPopup(null);
+        }}
+      />
     </article>
   );
 }

@@ -10,10 +10,7 @@ import PopupSectionBox from "@/components/PopupSectionBox";
  * @component
  */
 
-export interface StatusManagementPopupProps {
-  /** 팝업 닫기 핸들러 */
-  onClose: () => void;
-}
+import type { StatusManagementPopupProps } from "@/types/popups";
 
 /**
  * 상태관리 팝업 컴포넌트

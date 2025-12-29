@@ -4,10 +4,7 @@ import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
 import PopupHeader from "./PopupHeader";
 
-export interface RecordingFilePopupProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import type { RecordingFilePopupProps } from "@/types/popups";
 
 /**
  * 녹취파일 관리 팝업 컴포넌트

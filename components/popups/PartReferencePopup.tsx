@@ -5,10 +5,7 @@ import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
 import PopupHeader from "./PopupHeader";
 
-export interface PartReferencePopupProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import type { PartReferencePopupProps } from "@/types/popups";
 
 /**
  * 파트 참조사항 팝업 컴포넌트

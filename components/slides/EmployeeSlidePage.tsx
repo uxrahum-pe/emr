@@ -41,7 +41,13 @@ export default function EmployeeSlidePage({
       employeeRole={employeeRole}
       showToggleSwitch={false}
     >
+      {/* ============================================
+          업무 일정 보기 / 상담 일정 보기 Slide 내용 - 여기에 퍼블리싱
+          (WeeklyCalendar는 자동 표시됨)
+          ============================================ */}
       {children}
     </SlidePage>
   );
 }
+
+EmployeeSlidePage.displayName = "EmployeeSlidePage";

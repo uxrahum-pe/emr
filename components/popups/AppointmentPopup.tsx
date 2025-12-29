@@ -10,10 +10,7 @@ import PopupSectionBox from "@/components/PopupSectionBox";
  * @component
  */
 
-export interface AppointmentPopupProps {
-  /** 팝업 닫기 핸들러 */
-  onClose: () => void;
-}
+import type { AppointmentPopupProps } from "@/types/popups";
 
 /**
  * 상담예약 팝업 컴포넌트

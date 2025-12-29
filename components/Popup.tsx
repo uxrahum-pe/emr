@@ -4,16 +4,7 @@ import { useEffect, useState, ReactNode, useRef } from "react";
 import { createPortal } from "react-dom";
 import { modalStack } from "@/lib/modal-stack";
 
-export interface PopupProps {
-  /** 팝업 열림 상태 */
-  isOpen: boolean;
-  /** 팝업 닫기 핸들러 */
-  onClose: () => void;
-  /** 팝업 내용 */
-  children: ReactNode;
-  /** 추가 클래스명 */
-  className?: string;
-}
+import type { PopupProps } from "@/types/ui";
 
 /**
  * 대형 팝업 컴포넌트 (C176)

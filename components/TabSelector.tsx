@@ -2,20 +2,7 @@
 
 import { useState } from "react";
 
-export interface TabItem {
-  title: string;
-  link?: string;
-}
-
-export interface TabSelectorProps {
-  items: TabItem[];
-  multiple?: boolean;
-  defaultValue?: number | number[];
-  value?: number | number[];
-  onChange?: (selected: number | number[]) => void;
-  className?: string;
-  width?: string | number;
-}
+import type { TabItem, TabSelectorProps } from "@/types/ui";
 
 export default function TabSelector(props: TabSelectorProps) {
   const {

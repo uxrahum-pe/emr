@@ -17,7 +17,7 @@
  *
  * @remarks
  * - 원무 페이지에서만 사용되는 컴포넌트입니다.
- * - Zustand 스토어(useReceptionStore)를 사용하여 상태를 관리합니다.
+ * - Zustand 스토어(usePartCommonStore)를 사용하여 상태를 관리합니다.
  * - useAside 훅을 사용하여 Aside 네비게이션을 수행합니다.
  */
 
@@ -40,7 +40,7 @@ import { getRoleInfo } from "@/lib/utils/role";
 import type { CustomerStatusSectionProps } from "@/types/reception";
 import PopupSectionBox from "../PopupSectionBox";
 
-import { useReceptionStore } from "@/stores/useReceptionStore";
+import { usePartCommonStore } from "@/stores/useReceptionStore";
 
 /**
  * CustomerStatusSection 컴포넌트
@@ -61,7 +61,7 @@ export default function CustomerStatusSection({
   isCustomerDetailOpen,
   setIsCustomerDetailOpen,
 }: CustomerStatusSectionProps) {
-  const { sortOrder, toggleSortOrder } = useReceptionStore();
+  const { sortOrder, toggleSortOrder } = usePartCommonStore();
   const { navigateToPage, resetToMain } = useAside();
   const [isCustomerRegistrationPopupOpen, setIsCustomerRegistrationPopupOpen] =
     useState(false);
@@ -194,28 +194,6 @@ export default function CustomerStatusSection({
           >
             <div className="C017 styleSheet isIcon isMagnifier"></div>
             <p className="T005">고객 통합 검색</p>
-          </div>
-          <div
-            className="C023"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsSurveyBarcodeSearchPopupOpen(true);
-            }}
-          >
-            <div className="C019 styleSheet isIcon isCheck"></div>
-            <p className="T008">설문지 & 바코드 고객 검색</p>
-          </div>
-          <div
-            className="C023"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsCustomerRegistrationPopupOpen(true);
-            }}
-          >
-            <div className="C019 styleSheet isIcon isSignUp"></div>
-            <p className="T008">고객 직접 등록</p>
           </div>
           <div className="C024">
             <p className="T009">화면 크기:</p>

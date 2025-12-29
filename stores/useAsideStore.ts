@@ -3,6 +3,11 @@
  *
  * @description Aside 컴포넌트의 전역 상태를 관리하는 스토어입니다.
  * 여러 페이지에서 공유되는 Aside 상태를 중앙화하여 관리합니다.
+ *
+ * @remarks
+ * - 페이지 스택 관리: `pages` 배열로 슬라이드 페이지 스택을 관리합니다.
+ * - pathname 변경 감지: `lastPathname`을 저장하여 페이지 간 이동 시 Aside를 초기화합니다.
+ * - 애니메이션 제어: `isAnimating`으로 애니메이션 중 중복 네비게이션을 방지합니다.
  */
 
 import { create } from "zustand";
@@ -16,6 +21,8 @@ export interface AsidePage {
   id: string;
   /** 페이지 콘텐츠 (ReactNode) */
   content: ReactNode;
+  /** 타임스탬프 (페이지 생성 시간) */
+  timestamp: number;
 }
 
 /**
@@ -30,6 +37,8 @@ interface AsideStoreState {
   isAnimating: boolean;
   /** 현재 페이지 ID (PageHeader 선택 상태용) */
   currentPageId: string | null;
+  /** 마지막 pathname (pathname 변경 감지용) */
+  lastPathname: string | null;
 }
 
 /**
@@ -44,6 +53,8 @@ interface AsideStoreActions {
   setIsAnimating: (isAnimating: boolean | ((prev: boolean) => boolean)) => void;
   /** 현재 페이지 ID 설정 */
   setCurrentPageId: (pageId: string | null) => void;
+  /** 마지막 pathname 설정 */
+  setLastPathname: (pathname: string | null) => void;
   /** 페이지로 네비게이션 */
   navigateToPage: (pageId: string, content: ReactNode) => void;
   /** 메인 페이지로 리셋 */
@@ -66,6 +77,7 @@ export const useAsideStore = create<AsideStore>((set, get) => ({
   currentIndex: 0,
   isAnimating: false,
   currentPageId: null,
+  lastPathname: null,
 
   // Actions
   setPages: (updater) =>
@@ -87,9 +99,14 @@ export const useAsideStore = create<AsideStore>((set, get) => ({
 
   setCurrentPageId: (pageId) => set({ currentPageId: pageId }),
 
+  setLastPathname: (pathname) => set({ lastPathname: pathname }),
+
   navigateToPage: (pageId, content) => {
     const state = get();
-    if (state.isAnimating) return;
+
+    if (state.isAnimating) {
+      return;
+    }
 
     set({ isAnimating: true });
 
@@ -105,6 +122,7 @@ export const useAsideStore = create<AsideStore>((set, get) => ({
       newPages[existingPageIndex] = {
         id: newPages[existingPageIndex].id,
         content,
+        timestamp: newPages[existingPageIndex].timestamp,
       };
       set({
         pages: newPages,
@@ -120,6 +138,7 @@ export const useAsideStore = create<AsideStore>((set, get) => ({
       const newPage: AsidePage = {
         id: `${pageId}-${timestamp}`,
         content,
+        timestamp,
       };
       const newPages = [...state.pages, newPage];
       const newIndex = newPages.length - 1;

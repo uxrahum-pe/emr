@@ -1,39 +1,29 @@
 "use client";
 
+import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
+import PopupHeader from "@/components/popups/PopupHeader";
 
-/**
- * PracticeIndexStatusPopup Component
- *
- * @description 실천지수 현황 팝업 컴포넌트입니다.
- *
- * @component
- */
+import type { PracticeIndexStatusPopupProps } from "@/types/popups";
 
-export interface PracticeIndexStatusPopupProps {
-  /** 팝업 닫기 핸들러 */
-  onClose: () => void;
-}
-
-/**
- * 실천지수 현황 팝업 컴포넌트
- */
 export default function PracticeIndexStatusPopup({
+  isOpen,
   onClose,
 }: PracticeIndexStatusPopupProps) {
   return (
-    <>
-      <PopupSectionBox x={260} y={20} width={1400}>
-        <div className="C180">
-          {/* 실천지수 현황 팝업 헤더 - 여기에 퍼블리싱 (제목, 닫기 버튼 등)
-              닫기 버튼 클릭 시: onClose() 호출 */}
-        </div>
-      </PopupSectionBox>
-      <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-        <div className="C180">
-          {/* 실천지수 현황 팝업 내용 - 여기에 퍼블리싱 */}
-        </div>
-      </PopupSectionBox>
-    </>
+    <Popup isOpen={isOpen} onClose={onClose}>
+      <>
+        <PopupSectionBox x={260} y={20} width={1400}>
+          <PopupHeader title="실천지수 현황" onClose={onClose} />
+        </PopupSectionBox>
+        <PopupSectionBox x={260} y={140} width={1400} height={1040}>
+          <div className="C180">
+            {/* ============================================
+                실천지수 현황 팝업 내용 - 여기에 퍼블리싱
+                ============================================ */}
+          </div>
+        </PopupSectionBox>
+      </>
+    </Popup>
   );
 }

@@ -24,7 +24,7 @@ import NoteClickHandler from "@/components/reception/NoteClickHandler";
 import AlarmClickHandler from "@/components/reception/AlarmClickHandler";
 import CustomerStatusSection from "@/components/reception/CustomerStatusSection";
 import { useAsideStore } from "@/stores/useAsideStore";
-import { useReceptionStore } from "@/stores/useReceptionStore";
+import { usePartCommonStore } from "@/stores/useReceptionStore";
 import { usePageHeaderHandlers } from "@/hooks/usePageHeaderHandlers";
 
 export default function ReceptionPage() {
@@ -55,7 +55,7 @@ export default function ReceptionPage() {
     setSelectedSortTab,
     setIsQuickActionsHovered,
     setIsCustomerDetailOpen,
-  } = useReceptionStore();
+  } = usePartCommonStore();
 
   // 페이지 마운트 시 고객 상세 패널 초기화
   useEffect(() => {

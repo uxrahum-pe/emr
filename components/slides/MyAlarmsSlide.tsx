@@ -3,16 +3,7 @@
 import SlidePage from "@/components/SlidePage";
 import ScrollableContainer from "@/components/ScrollableContainer";
 
-export interface MyAlarmsSlideProps {
-  /** 뒤로 가기 핸들러 (Aside에서 전달) */
-  onGoBack?: () => void;
-  /** 뒤로 가기 버튼 표시 여부 (Aside에서 전달) */
-  showBackButton?: boolean;
-  /** Transform 스타일 (Aside에서 전달) */
-  transform?: string;
-  /** Z-index (Aside에서 전달) */
-  zIndex?: number;
-}
+import type { MyAlarmsSlideProps } from "@/types/slides";
 
 /**
  * 내 알림 보기 Slide 컴포넌트
@@ -36,6 +27,9 @@ export default function MyAlarmsSlide({
       zIndex={zIndex}
     >
       <ScrollableContainer className="C156">
+        {/* ============================================
+            내 알림 보기 Slide 내용 - 여기에 퍼블리싱
+            ============================================ */}
         <>
           <div className="C220">
             <div className="C087">
@@ -77,3 +71,5 @@ export default function MyAlarmsSlide({
     </SlidePage>
   );
 }
+
+MyAlarmsSlide.displayName = "MyAlarmsSlide";

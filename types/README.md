@@ -8,8 +8,12 @@
 types/
 ├── api.ts          # API 응답 타입 (DB ↔ API)
 ├── database.ts     # DB 스키마 타입 (Prisma 기반)
+├── layout.ts       # 레이아웃 컴포넌트 타입 (Aside, SimplePageLayout 등)
+├── popups.ts       # 팝업 컴포넌트 Props 인터페이스 (18개)
+├── reception.ts    # 원무 페이지 타입
+├── slides.ts       # 슬라이드 컴포넌트 Props 인터페이스 (6개)
 ├── timeline.ts     # Timeline UI 컴포넌트 타입
-└── ui.ts          # 공통 UI 컴포넌트 타입
+└── ui.ts          # 공통 UI 컴포넌트 타입 (Popup, TabSelector, SlidePage 등)
 ```
 
 ## 🔄 타입 흐름
@@ -28,9 +32,14 @@ Prisma Schema → database.ts → api.ts → type-transformers.ts → timeline.t
 - 프론트엔드 변환 타입 (UI에서 사용하는 형식)
 - API 엔드포인트별 응답 타입
 
-### 3. **timeline.ts / ui.ts** - UI 레이어
+### 3. **timeline.ts / ui.ts / popups.ts / slides.ts / layout.ts** - UI 레이어
 - 컴포넌트에서 직접 사용하는 타입
 - API 타입과 호환되도록 설계
+- **인터페이스 분리 원칙**: 모든 컴포넌트 Props 인터페이스는 `types/` 폴더에 정의
+  - `popups.ts`: 모든 팝업 컴포넌트 Props (CustomerStatusPopupProps, AgencyStatusPopupProps 등 18개)
+  - `slides.ts`: 모든 슬라이드 컴포넌트 Props (MyNotesSlideProps, CustomerReferenceSlideProps 등 6개)
+  - `layout.ts`: 레이아웃 컴포넌트 Props (AsideProps, AsideInnerProps, SimplePageLayoutProps)
+  - `ui.ts`: 공통 UI 컴포넌트 Props (PopupProps, TabSelectorProps, SlidePageProps 등)
 
 ## 📝 사용 가이드
 

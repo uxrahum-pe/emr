@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export interface TipState {
   visible: boolean;
   text: string;
@@ -117,4 +119,50 @@ export interface SlidePageProps {
   customerName?: string;
   customerId?: string;
   showToggleSwitch?: boolean;
+}
+
+// Popup 컴포넌트 props
+export interface PopupProps {
+  /** 팝업 열림 상태 */
+  isOpen: boolean;
+  /** 팝업 닫기 핸들러 */
+  onClose: () => void;
+  /** 팝업 내용 */
+  children: React.ReactNode;
+  /** 추가 클래스명 */
+  className?: string;
+}
+
+// PopupSectionBox 컴포넌트 props
+export interface PopupSectionBoxProps {
+  /** 컨테이너 내용 */
+  children: ReactNode;
+  /** X 좌표 (left) */
+  x?: number | string;
+  /** Y 좌표 (top) */
+  y?: number | string;
+  /** 너비 */
+  width?: number | string;
+  /** 높이 */
+  height?: number | string;
+  /** 추가 클래스명 */
+  className?: string;
+  /** C183 영역의 배경색상 (CSS 변수명 예: "white-25", "magenta-7" 또는 직접 색상 값) */
+  borderBackgroundColor?: string;
+}
+
+// TabSelector 컴포넌트 props
+export interface TabItem {
+  title: string;
+  link?: string;
+}
+
+export interface TabSelectorProps {
+  items: TabItem[];
+  multiple?: boolean;
+  defaultValue?: number | number[];
+  value?: number | number[];
+  onChange?: (selected: number | number[]) => void;
+  className?: string;
+  width?: string | number;
 }

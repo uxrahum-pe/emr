@@ -4,12 +4,7 @@ import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
 import PopupHeader from "./PopupHeader";
 
-export interface MenuSearchPopupProps {
-  /** 팝업 열림 상태 */
-  isOpen: boolean;
-  /** 팝업 닫기 핸들러 */
-  onClose: () => void;
-}
+import type { MenuSearchPopupProps } from "@/types/popups";
 
 /**
  * 메뉴 및 기능 검색 팝업 컴포넌트

@@ -84,7 +84,7 @@ emr/
 ├── stores/                 # Zustand 스토어
 │   ├── useAsideStore.ts   # Aside 상태 관리
 │   ├── usePageHeaderStore.ts # PageHeader 핸들러 관리
-│   └── useReceptionStore.ts  # 원무 페이지 상태
+│   └── useReceptionStore.ts  # 파트 공통 상태 (usePartCommonStore export, 원무/상담 등)
 │
 ├── hooks/                  # 커스텀 훅
 │   ├── usePageHeaderHandlers.ts # PageHeader 핸들러 훅
@@ -125,11 +125,18 @@ emr/
 - `currentIndex`: 현재 활성 페이지 인덱스
 - `isAnimating`: 애니메이션 진행 중 여부
 - `currentPageId`: 현재 페이지 ID (PageHeader 선택 상태용)
+- `lastPathname`: 마지막 pathname (pathname 변경 감지용, Fast Refresh 대응)
 
 **액션**:
 - `navigateToPage`: 페이지로 네비게이션
 - `goBack`: 이전 페이지로 돌아가기
 - `resetToMain`: 메인 페이지로 리셋
+- `setLastPathname`: 마지막 pathname 설정
+
+**특징**:
+- 페이지 간 이동 시 자동으로 Aside를 메인 페이지로 초기화
+- `useLayoutEffect`를 사용하여 pathname 변경을 먼저 감지
+- Fast Refresh 시에도 `lastPathname`이 유지되어 pathname 변경 감지 가능
 
 **사용 위치**: `components/Aside.tsx`, 모든 페이지
 
@@ -149,8 +156,8 @@ emr/
 
 **사용 위치**: `components/PageHeader.tsx`, 모든 페이지
 
-#### 3. `useReceptionStore`
-**용도**: 원무 페이지 전용 상태 관리
+#### 3. `usePartCommonStore` (이전: `useReceptionStore`)
+**용도**: 여러 파트(원무, 상담 등)에서 공통으로 사용하는 상태 관리
 
 **상태**:
 - `isSmallScreen`: 작은 화면 모드 여부
@@ -160,8 +167,9 @@ emr/
 - `selectedSortTab`: 선택된 정렬 탭
 - `isQuickActionsHovered`: Quick Actions 호버 상태
 - `isCustomerDetailOpen`: 고객 상세 패널 열림 상태
+- `openSidebarMenuPopup`: Sidebar C193 메뉴에서 열리는 팝업 상태
 
-**사용 위치**: `app/reception/page.tsx`
+**사용 위치**: `app/reception/page.tsx`, `app/counseling/page.tsx`
 
 ### TanStack Query
 
@@ -251,12 +259,25 @@ API Call (TanStack Query Mutation)
 
 ## 타입 시스템
 
-자세한 내용은 `TYPESYSTEM.md` 참조
+자세한 내용은 `types/README.md` 참조
+
+### 인터페이스 분리 원칙
+
+모든 컴포넌트 Props 인터페이스는 `types/` 폴더에 정의되어 있습니다:
+
+- **팝업 컴포넌트**: `types/popups.ts`에 모든 팝업 Props 인터페이스 정의 (18개)
+- **슬라이드 컴포넌트**: `types/slides.ts`에 모든 슬라이드 Props 인터페이스 정의 (6개)
+- **레이아웃 컴포넌트**: `types/layout.ts`에 레이아웃 관련 Props 인터페이스 정의
+- **공통 UI 컴포넌트**: `types/ui.ts`에 공통 UI 컴포넌트 Props 인터페이스 정의
+
+이를 통해 타입의 재사용성과 유지보수성을 향상시킵니다.
 
 ### 주요 타입 파일
-- `types/ui.ts`: 공통 UI 컴포넌트 타입
+- `types/ui.ts`: 공통 UI 컴포넌트 타입 (Popup, PopupSectionBox, TabSelector, SlidePage 등)
+- `types/popups.ts`: 모든 팝업 컴포넌트 Props 인터페이스 (18개)
+- `types/slides.ts`: 모든 슬라이드 컴포넌트 Props 인터페이스 (6개)
+- `types/layout.ts`: 레이아웃 컴포넌트 타입 (Aside, AsideInner, SimplePageLayout)
 - `types/reception.ts`: 원무 페이지 타입
-- `types/layout.ts`: 레이아웃 컴포넌트 타입
 - `types/api.ts`: API 응답 타입
 - `types/database.ts`: 데이터베이스 타입 (Prisma)
 
@@ -358,3 +379,4 @@ const onSubmit = (data: PatientFormData) => {
 - `types/README.md`: 타입 정의 가이드
 - `components/NAMING_CONVENTIONS.md`: 네이밍 규칙
 - `docs/DATABASE_STRATEGY.md`: 데이터베이스 전략
+- `docs/AI_OPTIMIZATION.md`: AI 최적화 가이드 (Production 빌드 호환성, useEffect 최적화 등)

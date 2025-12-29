@@ -23,8 +23,10 @@ import MainContent from "@/components/counseling/MainContent";
 import NoteClickHandler from "@/components/counseling/NoteClickHandler";
 import AlarmClickHandler from "@/components/counseling/AlarmClickHandler";
 import CustomerStatusSection from "@/components/counseling/CustomerStatusSection";
+import AgencyStatusPopup from "@/components/popups/AgencyStatusPopup";
+import RecordingFilePopup from "@/components/popups/RecordingFilePopup";
 import { useAsideStore } from "@/stores/useAsideStore";
-import { useReceptionStore } from "@/stores/useReceptionStore";
+import { usePartCommonStore } from "@/stores/useReceptionStore";
 import { usePageHeaderHandlers } from "@/hooks/usePageHeaderHandlers";
 
 export default function CounselingPage() {
@@ -48,6 +50,7 @@ export default function CounselingPage() {
     selectedSortTab,
     isQuickActionsHovered,
     isCustomerDetailOpen,
+    openSidebarMenuPopup,
     setIsSmallScreen,
     setActiveIndex,
     setSelectedTabs,
@@ -55,7 +58,8 @@ export default function CounselingPage() {
     setSelectedSortTab,
     setIsQuickActionsHovered,
     setIsCustomerDetailOpen,
-  } = useReceptionStore();
+    setOpenSidebarMenuPopup,
+  } = usePartCommonStore();
 
   // 페이지 마운트 시 고객 상세 패널 초기화
   useEffect(() => {
@@ -108,6 +112,15 @@ export default function CounselingPage() {
         </Aside>
       </main>
       <Sidebar />
+      {/* 상담 파트 팝업들 */}
+      <AgencyStatusPopup
+        isOpen={openSidebarMenuPopup === "agency"}
+        onClose={() => setOpenSidebarMenuPopup(null)}
+      />
+      <RecordingFilePopup
+        isOpen={openSidebarMenuPopup === "recordingFile"}
+        onClose={() => setOpenSidebarMenuPopup(null)}
+      />
     </>
   );
 }

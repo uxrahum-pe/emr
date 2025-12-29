@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Tooltip from "@/components/Tooltip";
+import { usePartCommonStore } from "@/stores/useReceptionStore";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -12,6 +13,7 @@ export default function Sidebar() {
   const c190Refs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const c191Refs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const c193Refs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const { setOpenSidebarMenuPopup } = usePartCommonStore();
   const [c190Positions, setC190Positions] = useState<{
     [key: string]: number;
   }>({});
@@ -117,7 +119,6 @@ export default function Sidebar() {
 
           // C193의 뷰포트 경계 체크
           const c190Rect = c190.getBoundingClientRect();
-          const c193Rect = c193.getBoundingClientRect();
           const viewportHeight = window.innerHeight;
 
           // C193의 현재 브라우저 상단 위치 (C190의 top + C193의 margin-top)
@@ -178,6 +179,7 @@ export default function Sidebar() {
       window.removeEventListener("resize", calculatePositions);
       window.removeEventListener("scroll", calculatePositions, true);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -240,22 +242,143 @@ export default function Sidebar() {
                   : undefined
               }
             >
-              <div className="C194">
-                <div className="C195 styleSheet isIcon isAgreement"></div>
-                <p className="T083">동의서 현황</p>
-              </div>
-              <div className="C194">
-                <div className="C195 styleSheet isIcon isPeople"></div>
-                <p className="T083">고객 현황</p>
-              </div>
-              <div className="C194">
-                <div className="C195 styleSheet isIcon isEarth"></div>
-                <p className="T083">외국인 현황</p>
-              </div>
-              <div className="C194">
-                <div className="C195 styleSheet isIcon isGold"></div>
-                <p className="T083">실천지수 현황</p>
-              </div>
+              {/* 원무 파트 C193 영역 */}
+              {iconClass === "isReception" && (
+                <>
+                  <div
+                    className="C194"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setOpenSidebarMenuPopup("agreement");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <div className="C195 styleSheet isIcon isAgreement"></div>
+                    <p className="T083">동의서 현황</p>
+                  </div>
+                  <div
+                    className="C194"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setOpenSidebarMenuPopup("customer");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <div className="C195 styleSheet isIcon isPeople"></div>
+                    <p className="T083">고객 현황</p>
+                  </div>
+                  <div
+                    className="C194"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setOpenSidebarMenuPopup("foreigner");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <div className="C195 styleSheet isIcon isEarth"></div>
+                    <p className="T083">외국인 현황</p>
+                  </div>
+                  <div
+                    className="C194"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setOpenSidebarMenuPopup("practiceIndex");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <div className="C195 styleSheet isIcon isGold"></div>
+                    <p className="T083">실천지수 현황</p>
+                  </div>
+                </>
+              )}
+
+              {/* 상담 파트 C193 영역 */}
+              {iconClass === "isCounseling" && (
+                <>
+                  <div
+                    className="C194"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setOpenSidebarMenuPopup("agency");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <div className="C195 styleSheet isIcon isBuilding"></div>
+                    <p className="T083">대행사 현황</p>
+                  </div>
+                  <div
+                    className="C194"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setOpenSidebarMenuPopup("recordingFile");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <div className="C195 styleSheet isIcon isMicrophone"></div>
+                    <p className="T083">녹취파일 관리</p>
+                  </div>
+                </>
+              )}
+
+              {/* 전처치 파트 C193 영역 */}
+              {iconClass === "isPreCare" && (
+                <>
+                  {/* ============================================
+                      전처치 파트 C193 영역 - 여기에 퍼블리싱
+                      ============================================ */}
+                </>
+              )}
+
+              {/* 진료 파트 C193 영역 */}
+              {iconClass === "isProcedure" && (
+                <>
+                  {/* ============================================
+                      진료 파트 C193 영역 - 여기에 퍼블리싱
+                      ============================================ */}
+                </>
+              )}
+
+              {/* 수술 파트 C193 영역 */}
+              {iconClass === "isSurgery" && (
+                <>
+                  {/* ============================================
+                      수술 파트 C193 영역 - 여기에 퍼블리싱
+                      ============================================ */}
+                </>
+              )}
+
+              {/* 시술 파트 C193 영역 */}
+              {iconClass === "isClinic" && (
+                <>
+                  {/* ============================================
+                      시술 파트 C193 영역 - 여기에 퍼블리싱
+                      ============================================ */}
+                </>
+              )}
+
+              {/* 후관리 파트 C193 영역 */}
+              {iconClass === "isPostCare" && (
+                <>
+                  {/* ============================================
+                      후관리 파트 C193 영역 - 여기에 퍼블리싱
+                      ============================================ */}
+                </>
+              )}
+
+              {/* 통계 파트 C193 영역 */}
+              {iconClass === "isStatistics" && (
+                <>
+                  {/* ============================================
+                      통계 파트 C193 영역 - 여기에 퍼블리싱
+                      ============================================ */}
+                </>
+              )}
             </div>
             <div
               className="C191"

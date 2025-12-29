@@ -4,10 +4,7 @@ import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
 import PopupHeader from "./PopupHeader";
 
-export interface AgencyStatusPopupProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import type { AgencyStatusPopupProps } from "@/types/popups";
 
 /**
  * 대행사 현황 팝업 컴포넌트
