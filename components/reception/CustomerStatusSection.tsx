@@ -209,6 +209,18 @@ export default function CustomerStatusSection({
   const [deletedChecked, setDeletedChecked] = useState(false);
   const [refundedChecked, setRefundedChecked] = useState(false);
   const [movedChecked, setMovedChecked] = useState(false);
+  // 본인인증 체크박스 상태
+  const [verifiedCustomerAuthChecked, setVerifiedCustomerAuthChecked] = useState(false);
+  const [unverifiedCustomerAuthChecked, setUnverifiedCustomerAuthChecked] = useState(false);
+  // 특기사항 체크박스 상태
+  const [hospitalCallRejectedChecked, setHospitalCallRejectedChecked] = useState(false);
+  const [supporterChecked, setSupporterChecked] = useState(false);
+  // 분류 체크박스 상태
+  const [foreignerChecked, setForeignerChecked] = useState(false);
+  const [koreanChecked, setKoreanChecked] = useState(false);
+  // 거소증 체크박스 상태
+  const [hasResidencePermitChecked, setHasResidencePermitChecked] = useState(false);
+  const [noResidencePermitChecked, setNoResidencePermitChecked] = useState(false);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -2091,6 +2103,20 @@ export default function CustomerStatusSection({
                 </div>
               </div>
             </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">주소:</p>
+                  <div className="C1004">
+                    <ValidatedInput
+                      className="T1001"
+                      type="text"
+                      placeholder=""
+                      required
+                    />
+                    <button className="C1005">주소검색</button>
+                  </div>
+              </div>
+            </div>
             <div className="C1009"></div>
 
             <div className="C1007">
@@ -2151,17 +2177,17 @@ export default function CustomerStatusSection({
             <div className="C1007">
               <div className="C1000">
                 <p className="T1000">본인인증:</p>
-                <div className="C1016">
-                  <div className="C1012">
-                    <div className="C1013 styleSheet isIcon isMini isChecked"></div>
-                  </div>
-                  <p className="T1003">인증 고객</p>
-                </div>
-                <div className="C1014">
-                  <div className="C1015">
-                    <div className="C1013"></div>
-                  </div>
-                  <p className="T1003">미인증 고객</p>
+                <div className="C1018">
+                  <LabeledCheckbox
+                    checked={verifiedCustomerAuthChecked}
+                    onChange={setVerifiedCustomerAuthChecked}
+                    text="인증 고객"
+                  />
+                  <LabeledCheckbox
+                    checked={unverifiedCustomerAuthChecked}
+                    onChange={setUnverifiedCustomerAuthChecked}
+                    text="미인증 고객"
+                  />
                 </div>
               </div>
             </div>
@@ -2169,49 +2195,48 @@ export default function CustomerStatusSection({
               <div className="C1000 isTopFitted">
                 <p className="T1000">상태:</p>
                 <div className="C1018">
-                  <div className="C1014">
-                    <div className="C1015">
-                      <div className="C1013"></div>
-                    </div>
-                    <p className="T1003">등록</p>
-                  </div>
-                  <div className="C1014">
-                    <div className="C1015">
-                      <div className="C1013"></div>
-                    </div>
-                    <p className="T1003">가등록</p>
-                  </div>
-                  <div className="C1014">
-                    <div className="C1015">
-                      <div className="C1013"></div>
-                    </div>
-                    <p className="T1003">보류</p>
-                  </div>
-                  <div className="C1014">
-                    <div className="C1015">
-                      <div className="C1013"></div>
-                    </div>
-                    <p className="T1003">삭제</p>
-                  </div>
-                  <div className="C1014">
-                    <div className="C1015">
-                      <div className="C1013"></div>
-                    </div>
-                    <p className="T1003">환불</p>
-                  </div>
-                  <div className="C1014">
-                    <div className="C1015">
-                      <div className="C1013"></div>
-                    </div>
-                    <p className="T1003">이동</p>
-                  </div>
+                <LabeledCheckbox
+                    checked={registeredChecked}
+                    onChange={setRegisteredChecked}
+                    text="등록"
+                  />
+                  <LabeledCheckbox
+                    checked={preRegisteredChecked}
+                    onChange={setPreRegisteredChecked}
+                    text="가등록"
+                  />
+                  <LabeledCheckbox
+                    checked={pendingChecked}
+                    onChange={setPendingChecked}
+                    text="보류"
+                  />
+                  <LabeledCheckbox
+                    checked={deletedChecked}
+                    onChange={setDeletedChecked}
+                    text="삭제"
+                  />
+                  <LabeledCheckbox
+                    checked={refundedChecked}
+                    onChange={setRefundedChecked}
+                    text="환불"
+                  />
+                  <LabeledCheckbox
+                    checked={movedChecked}
+                    onChange={setMovedChecked}
+                    text="이동"
+                  />
                 </div>
               </div>
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={70} width={660}>
-            <div className="C180">
-              <p className="T076">신규 고객 등록</p>
+            <div className="C1000">
+              <p className="T1007">신규 고객 등록</p>
+              <div className="C1021">
+                  <div className="C1022">
+                  </div>
+                  <p className="T1000">작성자</p>
+              </div>
               <div
                 className="C181 isCloseButton"
                 onClick={() => setIsCustomerRegistrationPopupOpen(false)}
@@ -2228,13 +2253,13 @@ export default function CustomerStatusSection({
                   <p className="T1000">특기사항:</p>
                   <div className="C1018">
                     <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
+                      checked={hospitalCallRejectedChecked}
+                      onChange={setHospitalCallRejectedChecked}
                       text="원내 호출 거부"
                     />
                     <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
+                      checked={supporterChecked}
+                      onChange={setSupporterChecked}
                       text="서포터"
                     />
                   </div>
@@ -2246,13 +2271,13 @@ export default function CustomerStatusSection({
                   <p className="T1000">분류:</p>
                   <div className="C1018">
                     <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
+                      checked={foreignerChecked}
+                      onChange={setForeignerChecked}
                       text="외국인"
                     />
                     <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
+                      checked={koreanChecked}
+                      onChange={setKoreanChecked}
                       text="내국인"
                     />
                   </div>
@@ -2262,26 +2287,51 @@ export default function CustomerStatusSection({
                 <div className="C1000">
                   <p className="T1000">국적:</p>
                   <div className="C1008">
-                    종류 선택
+                    국적 선택
                     <div className="C1019 isIcon styleSheet isMini isChevron isWhite"></div>
                   </div>
                   <p className="T1000">영문명:</p>
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="최대 16자까지"
+                      minLength={1}
+                      maxLength={16}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="C1007">
                 <div className="C1000">
                   <p className="T1000">여권번호:</p>
-                  <input
-                    className="T1002"
-                    type="text"
-                    placeholder="M00000000"
-                  />
+
+                    <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="M00000000"
+                      minLength={8}
+                      maxLength={8}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
                   <p className="T1000">건강보험:</p>
-                  <input
-                    className="T1002"
-                    type="text"
-                    placeholder="3-00000000000"
-                  />
+
+                    <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="3-00000000000"
+                      minLength={13}
+                      maxLength={13}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="C1007">
@@ -2289,13 +2339,13 @@ export default function CustomerStatusSection({
                   <p className="T1000">거소증:</p>
                   <div className="C1018">
                     <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
+                      checked={hasResidencePermitChecked}
+                      onChange={setHasResidencePermitChecked}
                       text="있음"
                     />
                     <LabeledCheckbox
-                      checked={useAliasChecked}
-                      onChange={setUseAliasChecked}
+                      checked={noResidencePermitChecked}
+                      onChange={setNoResidencePermitChecked}
                       text="없음"
                     />
                   </div>
@@ -2308,13 +2358,19 @@ export default function CustomerStatusSection({
                 </div>
               </div>
               <div className="C1012">
-                <div className="C1013"></div>
+                <div className="C1013">
+                  
+                  <p className="T1006">
+                  첨부할 거소증 이미지를 올리세요.
+                  </p>
+                </div>
                 <div className="C1014">
                   <div className="C1015">
                     <p className="T1000">입국일:</p>
                     <div className="C1016">
                       <p className="T1004">2025.12.23</p>
                     </div>
+                    <div className="C1019 styleSheet isIcon isCalendare"></div>
                   </div>
 
                   <div className="C1015">
@@ -2322,13 +2378,17 @@ export default function CustomerStatusSection({
                     <div className="C1016">
                       <p className="T1004">2025.12.23</p>
                     </div>
+                    <div className="C1019 styleSheet isIcon isCalendare"></div>
                   </div>
                 </div>
               </div>
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={1030} width={660} height={100}>
-            <div className="C180"></div>
+            <div className="C1000">
+
+              <button className="C1023">등록 완료</button>
+            </div>
           </PopupSectionBox>
         </div>
       </Popup>
