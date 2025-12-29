@@ -2,7 +2,6 @@
 
 import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
-import PopupHeader from "./PopupHeader";
 
 import type { ReservationServicePopupProps } from "@/types/popups";
 
@@ -20,7 +19,13 @@ export default function ReservationServicePopup({
     <Popup isOpen={isOpen} onClose={onClose}>
       <>
         <PopupSectionBox x={260} y={20} width={1400}>
-          <PopupHeader title="통합 예약 서비스" onClose={onClose} />
+          <div className="C180">
+            <p className="T076">통합 예약 서비스</p>
+            <div className="C181 isCloseButton" onClick={onClose}>
+              <div className="C179 isDepth1"></div>
+              <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+            </div>
+          </div>
         </PopupSectionBox>
         <PopupSectionBox x={260} y={140} width={1400} height={1040}>
           <div className="C180">

@@ -267,3 +267,178 @@
 .T2032:last-child {
     border-right: none;
 }
+
+.T2040 {
+    font-size: var(--font-12);
+    color: var(--color-white-50) !important;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.C2035 .T2040 {
+    color: var(--color-white-50) !important;
+}
+
+.T2041 {
+    font-size: var(--font-15);
+    color: var(--color-white);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.T2042 {
+    color: var(--color-white-25);
+}
+
+.T2043 {
+    font-size: var(--font-27);
+    color: var(--color-white);
+    margin-right: var(--size-10);
+}
+
+
+.T2044 {
+    font-size: var(--font-15);
+    color: var(--color-white);
+    background-color: var(--color-magenta);
+    padding: var(--size-5);
+    border-radius: var(--size-10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.T2045 {
+    font-size: var(--font-15);
+    color: var(--color-white);
+    background-color: var(--color-white-25);
+    padding: var(--size-5);
+    border-radius: var(--size-10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.T2046 {
+    font-size: var(--font-17);
+    color: var(--color-white-50);
+}
+
+.C2037 .T2046 {
+    color: var(--color-white-50) !important;
+}
+
+.T2047 {
+    color: var(--color-white-50);
+}
+
+.T2048 {
+    font-size: var(--font-21);
+    color: var(--color-white);
+    text-align: center;
+    margin: 0;
+}
+
+.T2049 {
+    font-size: var(--font-15);
+    color: var(--color-white-50) !important;
+    text-align: center;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.T2050 {
+    font-size: var(--font-32);
+    color: var(--color-white);
+    white-space: nowrap;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.T2051 {
+    font-size: var(--font-19);
+    color: var(--color-white);
+    position: relative;
+}
+
+.T2055 {
+    font-size: var(--font-29);
+    color: var(--color-red);
+}
+
+.T2056,
+.T2059,
+.T2068 {
+    padding-left: var(--size-85);
+    margin-top: var(--size-40);
+    font-size: var(--font-14);
+    color: var(--color-red);
+}
+
+.T2057 {
+    font-size: var(--font-14);
+    color: var(--color-black-50);
+}
+
+.T2071 {
+    color: var(--color-red);
+}
+
+.T2058 {
+    font-size: var(--font-14);
+    color: var(--color-black);
+}
+
+.T2060,
+.T2062 {
+    font-size: var(--font-14);
+    color: var(--color-black-50);
+}
+
+.T2061,
+.T2063 {
+    color: var(--color-black);
+}
+
+.T2064 {
+    color: var(--color-black-25);
+}
+
+.T2065 {
+    font-size: var(--font-14);
+    color: var(--color-black-50);
+    padding-left: var(--size-20);
+}
+
+.T2066 {
+    color: var(--color-black-50);
+}
+
+.T2067 {
+    font-size: var(--font-14);
+    color: var(--color-green-25);
+    padding-left: var(--size-20);
+}
+
+.T2069 {
+    font-size: var(--font-14);
+    color: var(--color-black-50);
+    display: flex;
+    align-items: center;
+    gap: var(--size-10);
+}
+
+.T2069 .isIMaskBlueMint.isCheck {
+    width: var(--size-20);
+    height: var(--size-20);
+    flex-shrink: 0;
+}
+
+.T2070 {
+    color: var(--color-black-25);
+}

@@ -251,6 +251,9 @@
     color: var(--color-black-50);
     margin: 0 var(--size-5);
 }
+.C063.isDark .T027 {
+    color: var(--color-white);
+}
 .T028 {
     font-size: var(--font-24);
     text-align: center;
@@ -332,10 +335,16 @@
     line-height: var(--size-40);
     text-align: center;
 }
+.C063.isDark .T032 {
+    color: var(--color-white);
+}
 .T033 {
     font-size: var(--font-19);
     text-align: center;
     margin-top: var(--size-20);
+}
+.C063.isDark .T033 {
+    color: var(--color-white);
 }
 .T034 {
     color: var(--color-black-50);
@@ -347,9 +356,16 @@
     cursor: pointer;
     transition: .3s;
 }
+.C063.isDark .T034 {
+    color: var(--color-white);
+}
 .T034.isSelected {
     color: var(--color-white);
     background-color: var(--color-black);
+}
+.C063.isDark .T034.isSelected {
+    background-color: var(--color-white);
+    color: var(--color-black);
 }
 .T034.isToday {
     background-color: var(--color-red);
@@ -374,7 +390,16 @@
     position: relative;
     overflow: hidden;
 }
-
+.C063.isDark .T034.isSelected.isToday {
+    background: repeating-linear-gradient(
+        45deg,
+        var(--color-red),
+        var(--color-red) var(--size-5),
+        var(--color-white) var(--size-5),
+        var(--color-white) var(--size-10)
+    );
+    background-size: calc(var(--size-10) * 1.414) calc(var(--size-10) * 1.414);
+}
 .T034.isSelected.isToday::before {
     content: '';
     position: absolute;
@@ -854,4 +879,29 @@ p.T087 {
 .T095 .isMini {
     font-size: var(--font-12);
     font-weight: 800;
+}
+.T096 {
+    margin-left:var(--size-10);
+}
+.T097 {
+    font-size: var(--font-14);
+}
+.T098 {
+    font-size: var(--font-17);
+    margin-left: var(--size-30);
+}
+.T099 {
+    margin-top: var(--size-5);
+}
+p.T100 {
+    color: var(--color-white-25);
+}
+.T101 {
+    font-size: var(--font-17);
+}
+.T101 .isUnit {
+    font-size: var(--font-14);
+}
+.T101 .isValue {
+    font-size: var(--font-14);
 }

@@ -6,6 +6,13 @@ import ScrollableContainer, {
 } from "@/components/ScrollableContainer";
 import Popup from "@/components/Popup";
 import PopupSectionBox from "@/components/PopupSectionBox";
+import ValidatedInput from "@/components/ValidatedInput";
+import LabeledCheckbox from "@/components/LabeledCheckbox";
+import CustomLabeledCheckbox from "@/components/CustomLabeledCheckbox";
+import CalendarIconPopup from "@/components/CalendarIconPopup";
+import DropdownList from "@/components/DropdownList";
+import { formatDate } from "@/lib/utils/date";
+import { startOfDay } from "date-fns";
 
 interface CustomerInfoPanelProps {
   sectionStates: Record<string, boolean>;
@@ -26,6 +33,89 @@ export default function CustomerInfoPanel({
 
   // 팝업 상태 관리
   const [openPopup, setOpenPopup] = useState<string | null>(null);
+
+  // 체크박스 상태 관리
+  const [useAliasChecked, setUseAliasChecked] = useState(false);
+  const [customerRejectedChecked, setCustomerRejectedChecked] = useState(false);
+  const [smsRejectedChecked, setSmsRejectedChecked] = useState(false);
+  const [smsReceivedChecked, setSmsReceivedChecked] = useState(false);
+  const [verifiedCustomerAuthChecked, setVerifiedCustomerAuthChecked] = useState(false);
+  const [unverifiedCustomerAuthChecked, setUnverifiedCustomerAuthChecked] = useState(false);
+  const [registeredChecked, setRegisteredChecked] = useState(false);
+  const [preRegisteredChecked, setPreRegisteredChecked] = useState(false);
+  const [pendingChecked, setPendingChecked] = useState(false);
+  const [deletedChecked, setDeletedChecked] = useState(false);
+  const [refundedChecked, setRefundedChecked] = useState(false);
+  const [movedChecked, setMovedChecked] = useState(false);
+  const [hospitalCallRejectedChecked, setHospitalCallRejectedChecked] = useState(false);
+  const [supporterChecked, setSupporterChecked] = useState(false);
+  const [foreignerChecked, setForeignerChecked] = useState(false);
+  const [koreanChecked, setKoreanChecked] = useState(false);
+  const [hasResidencePermitChecked, setHasResidencePermitChecked] = useState(false);
+  const [noResidencePermitChecked, setNoResidencePermitChecked] = useState(false);
+
+  // 날짜 상태 관리
+  const [entryDate, setEntryDate] = useState<Date | null>(() => startOfDay(new Date("2025-12-23")));
+  const [exitDate, setExitDate] = useState<Date | null>(() => startOfDay(new Date("2025-12-23")));
+
+  // 거부사유 드롭다운 상태
+  const [rejectionReason, setRejectionReason] = useState<
+    string | number | null
+  >(null);
+
+  // 거부사유 드롭다운 데이터
+  const rejectionReasonItems = [
+    { value: "", label: "사유1" },
+    { value: "0", label: "종류 선택" },
+    { value: "1", label: "종류 선택" },
+    { value: "2", label: "종류 선택" },
+  ];
+
+  // 할인구분 드롭다운 상태
+  const [discountType, setDiscountType] = useState<string | number | null>(
+    null
+  );
+
+  // 할인구분 드롭다운 데이터
+  const discountTypeItems = [
+    { value: "0", label: "종류 선택" },
+    { value: "1", label: "할인 유형 1" },
+    { value: "2", label: "할인 유형 2" },
+  ];
+
+  // 직업 드롭다운 상태
+  const [occupation, setOccupation] = useState<string | number | null>(null);
+
+  // 직업 드롭다운 데이터
+  const occupationItems = [
+    { value: "0", label: "종류 선택" },
+    { value: "1", label: "직업 1" },
+    { value: "2", label: "직업 2" },
+  ];
+
+  // 국적 드롭다운 상태
+  const [nationality, setNationality] = useState<string | number | null>(null);
+
+  // 국적 드롭다운 데이터
+  const nationalityItems = [
+    { value: "0", label: "국적 선택" },
+    { value: "1", label: "한국" },
+    { value: "2", label: "중국" },
+    { value: "3", label: "베트남" },
+    { value: "4", label: "태국" },
+  ];
+
+  // 체류자격 드롭다운 상태
+  const [residenceStatus, setResidenceStatus] = useState<
+    string | number | null
+  >(null);
+
+  // 체류자격 드롭다운 데이터
+  const residenceStatusItems = [
+    { value: "0", label: "코드 선택" },
+    { value: "1", label: "코드 1" },
+    { value: "2", label: "코드 2" },
+  ];
 
   // Section toggle handler with scroll logic
   const handleSectionToggle = (sectionKey: string, event: React.MouseEvent) => {
@@ -786,10 +876,249 @@ export default function CustomerInfoPanel({
         isOpen={openPopup === "customerEdit"}
         onClose={() => setOpenPopup(null)}
       >
-        <>
-          <PopupSectionBox x={260} y={20} width={1400}>
+                <div>
+          <PopupSectionBox x={290} y={70} width={660} height={1060}>
+            <div className="C1003">
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">주민번호:</p>
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="000000-0******"
+                      minLength={14}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
+
+                  <button className="C1005"><p className="T1008 isSize15">중복검사</p></button>
+                  <div className="C1011">
+                    <CustomLabeledCheckbox
+                      checked={useAliasChecked}
+                      onChange={setUseAliasChecked}
+                      text="가명 사용"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">성명:</p>
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="최대 16자까지"
+                      minLength={1}
+                      maxLength={16}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
+                  <p className="T1000">가명:</p>
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="최대 16자까지"
+                      minLength={1}
+                      maxLength={16}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">전화번호:</p>
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="000-0000-0000"
+                      minLength={13}
+                      maxLength={13}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
+                  <button className="C1005 isRetryIdentification"><p className="T1008 isSize15">재인증</p></button>
+
+                  <input className="T1002" type="text" placeholder="6자리" />
+                  <button className="C1010">확인</button>
+                </div>
+              </div>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">자택번호:</p>
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="000-0000-0000"
+                      minLength={13}
+                      maxLength={13}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
+                  <p className="T1000">이메일:</p>
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="최대32자까지"
+                      minLength={1}
+                      maxLength={32}
+                      required
+                      validateEmail={true}
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                      emailErrorMessage="입력 양식이 잘못되었습니다."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">주소:</p>
+                  <div className="C1004">
+                    <ValidatedInput
+                      className="T1001"
+                      type="text"
+                      placeholder=""
+                      required
+                      disabled
+                    />
+                    <button className="C1005"><p className="T1008 isSize15">주소검색</p></button>
+                  </div>
+              </div>
+            </div>
+            <div className="C1009"></div>
+
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">SMS수신:</p>
+                <div className="C1018">
+                  <CustomLabeledCheckbox
+                    checked={customerRejectedChecked}
+                    onChange={setCustomerRejectedChecked}
+                    text="고객 거부"
+                  />
+                  <CustomLabeledCheckbox
+                    checked={smsRejectedChecked}
+                    onChange={setSmsRejectedChecked}
+                    text="수신 금지"
+                  />
+                  <CustomLabeledCheckbox
+                    checked={smsReceivedChecked}
+                    onChange={setSmsReceivedChecked}
+                    text="수신 받음"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">거부사유:</p>
+                <DropdownList
+                  items={rejectionReasonItems}
+                  selectedValue={rejectionReason}
+                  onSelect={(item) => setRejectionReason(item.value)}
+                  placeholder="종류 선택"
+                />
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">할인구분:</p>
+                <DropdownList
+                  items={discountTypeItems}
+                  selectedValue={discountType}
+                  onSelect={(item) => setDiscountType(item.value)}
+                  placeholder="종류 선택"
+                />
+                <p className="T1000">직업:</p>
+                <DropdownList
+                  items={occupationItems}
+                  selectedValue={occupation}
+                  onSelect={(item) => setOccupation(item.value)}
+                  placeholder="종류 선택"
+                />
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000">
+                <p className="T1000">본인인증:</p>
+                <div className="C1018">
+                  <CustomLabeledCheckbox
+                    checked={verifiedCustomerAuthChecked}
+                    onChange={setVerifiedCustomerAuthChecked}
+                    text="인증 고객"
+                  />
+                  <CustomLabeledCheckbox
+                    checked={unverifiedCustomerAuthChecked}
+                    onChange={setUnverifiedCustomerAuthChecked}
+                    text="미인증 고객"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="C1007">
+              <div className="C1000 isTopFitted">
+                <p className="T1000">상태:</p>
+                <div className="C1018">
+                <CustomLabeledCheckbox
+                    checked={registeredChecked}
+                    onChange={setRegisteredChecked}
+                    text="등록"
+                  />
+                  <CustomLabeledCheckbox
+                    checked={preRegisteredChecked}
+                    onChange={setPreRegisteredChecked}
+                    text="가등록"
+                  />
+                  <CustomLabeledCheckbox
+                    checked={pendingChecked}
+                    onChange={setPendingChecked}
+                    text="보류"
+                  />
+                  <CustomLabeledCheckbox
+                    checked={deletedChecked}
+                    onChange={setDeletedChecked}
+                    text="삭제"
+                  />
+                  <CustomLabeledCheckbox
+                    checked={refundedChecked}
+                    onChange={setRefundedChecked}
+                    text="환불"
+                  />
+                  <CustomLabeledCheckbox
+                    checked={movedChecked}
+                    onChange={setMovedChecked}
+                    text="이동"
+                  />
+                </div>
+              </div>
+            </div>
+          </PopupSectionBox>
+          <PopupSectionBox x={970} y={70} width={660}>
             <div className="C180">
-              <p className="T076">고객정보 수정</p>
+              <p className="T076">고객 정보 수정</p>
+              <div className="C2033">
+                <img alt="작성자" className="C2034" src="/images/male-64.jpg" />
+                <div className="C2035">
+                  <p className="T2040">작성자</p>
+                  <p className="T2041">
+                    홍성훈<span className="T2042"> 원장님</span>
+                  </p>
+                </div>
+                <div className="C2036 styleSheet isIcon isMini isChevron isRight"></div>
+              </div>
               <div
                 className="C181 isCloseButton"
                 onClick={() => setOpenPopup(null)}
@@ -799,10 +1128,177 @@ export default function CustomerInfoPanel({
               </div>
             </div>
           </PopupSectionBox>
-          <PopupSectionBox x={260} y={140} width={1400} height={1040}>
-            <div className="C180">{/* 고객정보 수정 팝업 내용 */}</div>
+          <PopupSectionBox x={970} y={190} width={660} height={820}>
+            <div className="C1003">
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">특기사항:</p>
+                  <div className="C1018">
+                    <CustomLabeledCheckbox
+                      checked={hospitalCallRejectedChecked}
+                      onChange={setHospitalCallRejectedChecked}
+                      checkedBackgroundColor="linear-gradient(to right, var(--color-yellow), var(--color-red))"
+                      checkedIconClassName="isIMaskMagenta isIcon isMini isCheckedBold"
+                      text="원내 호출 거부"
+                    />
+                    <CustomLabeledCheckbox
+                      checked={supporterChecked}
+                      onChange={setSupporterChecked}
+                      text="서포터"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="C1009"></div>
+              <div className="C1007">
+                <div className="C1000">
+                  <p className="T1000">분류:</p>
+                  <div className="C1018">
+                    <CustomLabeledCheckbox
+                      checked={foreignerChecked}
+                      onChange={setForeignerChecked}
+                      text="외국인"
+                    />
+                    <CustomLabeledCheckbox
+                      checked={koreanChecked}
+                      onChange={setKoreanChecked}
+                      text="내국인"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="C1007 isReducedMarginLeft">
+                <div className="C1000">
+                  <p className="T1000">국적:</p>
+                  <DropdownList
+                    items={nationalityItems}
+                    selectedValue={nationality}
+                    onSelect={(item) => setNationality(item.value)}
+                    placeholder="국적 선택"
+                  />
+                  <p className="T1000">영문명:</p>
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="최대 16자까지"
+                      minLength={1}
+                      maxLength={16}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="C1007 isReducedMarginLeft">
+                <div className="C1000">
+                  <p className="T1000">여권번호:</p>
+
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="M00000000"
+                      minLength={8}
+                      maxLength={8}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
+                  <p className="T1000">건강보험:</p>
+
+                  <div className="C1017">
+                    <ValidatedInput
+                      className="T1002"
+                      type="text"
+                      placeholder="3-00000000000"
+                      minLength={13}
+                      maxLength={13}
+                      required
+                      minLengthErrorMessage="입력값이 모자랍니다"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="C1007 isReducedMarginLeft">
+                <div className="C1000">
+                  <p className="T1000">거소증:</p>
+                  <div className="C1018">
+                    <CustomLabeledCheckbox
+                      checked={hasResidencePermitChecked}
+                      onChange={setHasResidencePermitChecked}
+                      text="있음"
+                    />
+                    <CustomLabeledCheckbox
+                      checked={noResidencePermitChecked}
+                      onChange={setNoResidencePermitChecked}
+                      text="없음"
+                    />
+                  </div>
+
+                  <p className="T1000">체류자격:</p>
+                  <DropdownList
+                    items={residenceStatusItems}
+                    selectedValue={residenceStatus}
+                    onSelect={(item) => setResidenceStatus(item.value)}
+                    placeholder="코드 선택"
+                  />
+                </div>
+              </div>
+              <div className="C1012">
+                <div className="C1013">
+                  <div className="C1028 styleSheet isIcon isClip"></div>
+                  <label htmlFor="img-upload" className="T1006">
+                    첨부할 거소증 이미지를 올리세요.
+                  </label>
+                  <input
+                    className="T1006" 
+                    type="file" 
+                    id="img-upload" 
+                    accept="image/*" 
+                    hidden
+                  />
+                </div>
+                <div className="C1014">
+                  <div className="C1015">
+                    <p className="T1000">입국일:</p>
+                    <CalendarIconPopup
+                      selectedDate={entryDate}
+                      onDateSelect={setEntryDate}
+                      triggerClassName="C1016"
+                      isDark={true}
+                    />
+                  </div>
+
+                  <div className="C1015">
+                    <p className="T1000">출국일:</p>
+                    <CalendarIconPopup
+                      selectedDate={exitDate}
+                      onDateSelect={setExitDate}
+                      triggerClassName="C1016"
+                      isDark={true}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </PopupSectionBox>
-        </>
+          <PopupSectionBox x={970} y={1030} width={660} height={100}>
+            <div className="C1000">
+              <div style={{ display: "flex", alignItems: "center", textAlign: "center", gap: "var(--size-5)", marginLeft: "var(--size-50)", lineHeight: "var(--size-100)" }}>
+                <p style={{ color: "var(--color-white-50)", fontSize: "var(--font-15)", fontWeight: "800" }}>최종 등록 및 수정일자:</p>
+                <p style={{ color: "var(--color-white)", fontSize: "var(--font-15)", fontWeight: "800" }}>2025.08.21</p>
+                <p style={{ color: "var(--color-white-50)", fontSize: "var(--font-15)", fontWeight: "800" }}>PM</p>
+                <p style={{ color: "var(--color-white)", fontSize: "var(--font-15)", fontWeight: "800" }}>03:23</p>
+              </div>
+              <button className="C1023 isEdit">
+                <div className="C1024"><div className="C1025 styleSheet isIcon isArrow isRight"></div></div>
+              
+                <p className="T1008">정보수정
+                </p></button>
+            </div>
+          </PopupSectionBox>
+        </div>
       </Popup>
     </div>
   );

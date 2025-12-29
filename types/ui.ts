@@ -166,3 +166,68 @@ export interface TabSelectorProps {
   className?: string;
   width?: string | number;
 }
+
+// DropdownList 컴포넌트 타입
+export interface DropdownListItem {
+  /** 항목의 값 (고유 식별자) */
+  value: string | number;
+  /** 표시할 텍스트 */
+  label: string;
+  /** 추가 데이터 (선택사항) */
+  data?: unknown;
+}
+
+export interface DropdownListProps {
+  /** 드롭다운 항목 리스트 (JSON 데이터) */
+  items: DropdownListItem[];
+  /** 현재 선택된 값 */
+  selectedValue?: string | number | null;
+  /** 선택 변경 핸들러 */
+  onSelect?: (item: DropdownListItem) => void;
+  /** 플레이스홀더 텍스트 */
+  placeholder?: string;
+  /** 커스텀 클래스명 */
+  className?: string;
+  /** 비활성화 여부 */
+  disabled?: boolean;
+}
+
+// AuthorInfo 컴포넌트 props
+export interface AuthorInfoProps {
+  /** 작성자 프로필 이미지 URL */
+  imageSrc: string;
+  /** 이미지 alt 텍스트 */
+  imageAlt?: string;
+  /** 라벨 텍스트 (예: "작성자") */
+  label?: string;
+  /** 작성자 이름 */
+  name: string;
+  /** 작성자 호칭 (예: "원장님") */
+  title?: string;
+  /** 클릭 핸들러 (제공 시 chevron 아이콘 표시 및 클릭 가능) */
+  onClick?: () => void;
+  /** 커스텀 클래스명 */
+  className?: string;
+  /** 길이 옵션: "short" | "shorter" | "veryShorter" */
+  length?: "short" | "shorter" | "veryShorter";
+}
+
+// CustomerInfo 컴포넌트 props
+export interface CustomerInfoProps {
+  /** 고객 이름 */
+  name?: string;
+  /** 성별 */
+  gender?: string;
+  /** 나이 */
+  age?: number;
+  /** 기수 */
+  packageNumber?: number;
+  /** 고객번호 */
+  customerNumber?: string;
+  /** 정보 아이콘 클릭 핸들러 (제공 시 정보 아이콘 표시) */
+  onInfoClick?: () => void;
+  /** 커스텀 클래스명 */
+  className?: string;
+  /** 길이 옵션: "short" | "shorter" | "veryShorter" */
+  length?: "short" | "shorter" | "veryShorter";
+}
