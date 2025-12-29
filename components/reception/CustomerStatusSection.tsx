@@ -203,6 +203,10 @@ export default function CustomerStatusSection({
     useState(false);
   const [isSurveyBarcodeSearchPopupOpen, setIsSurveyBarcodeSearchPopupOpen] =
     useState(false);
+  const [
+    isCustomerDetailRegistrationPopupOpen,
+    setIsCustomerDetailRegistrationPopupOpen,
+  ] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [customerSearchTab, setCustomerSearchTab] = useState(0); // 0: 바코드 예약 고객, 1: 설문지 고객, 2: 상담 가등록 고객
   const [excludeRegisteredChecked, setExcludeRegisteredChecked] =
@@ -2099,8 +2103,9 @@ export default function CustomerStatusSection({
                     />
                   </div>
 
-                  <button className="C1005"><p className="T1008 isSize15">중복검사
-                  </p></button>
+                  <button className="C1005">
+                    <p className="T1008 isSize15">중복검사</p>
+                  </button>
                   <div className="C1011">
                     <LabeledCheckbox
                       checked={useAliasChecked}
@@ -2152,8 +2157,9 @@ export default function CustomerStatusSection({
                       minLengthErrorMessage="입력값이 모자랍니다"
                     />
                   </div>
-                  <button className="C1005"><p className="T1008 isSize15">인증요청
-                  </p></button>
+                  <button className="C1005">
+                    <p className="T1008 isSize15">인증요청</p>
+                  </button>
 
                   <input className="T1002" type="text" placeholder="6자리" />
                   <button className="C1010">확인</button>
@@ -3529,7 +3535,14 @@ export default function CustomerStatusSection({
                     </div>
                     <div className="C2014">
                       {sampleTableData.map((row, index) => (
-                        <div key={index} className="C2015">
+                        <div
+                          key={index}
+                          className="C2015"
+                          onClick={() =>
+                            setIsCustomerDetailRegistrationPopupOpen(true)
+                          }
+                          style={{ cursor: "pointer" }}
+                        >
                           <div className="T2011">{row.customerName}</div>
                           <div className="T2011 is15p">
                             {row.residentNumber}
@@ -3550,7 +3563,13 @@ export default function CustomerStatusSection({
                           >
                             {row.registrationStatus}
                           </div>
-                          <button className="C2016">
+                          <button
+                            className="C2016"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsCustomerDetailRegistrationPopupOpen(true);
+                            }}
+                          >
                             <div className="C2017">
                               <div className="C2018 styleSheet isIcon isArrow isMini"></div>
                             </div>
@@ -3769,7 +3788,14 @@ export default function CustomerStatusSection({
                     </div>
                     <div className="C2014">
                       {preRegistrationTableData.map((row, index) => (
-                        <div key={index} className="C2015">
+                        <div
+                          key={index}
+                          className="C2015"
+                          onClick={() =>
+                            setIsCustomerDetailRegistrationPopupOpen(true)
+                          }
+                          style={{ cursor: "pointer" }}
+                        >
                           <div className="T2011 isFixed150">
                             {row.customerName}
                           </div>
@@ -3800,7 +3826,13 @@ export default function CustomerStatusSection({
                           >
                             {row.registrationStatus}
                           </div>
-                          <button className="C2016">
+                          <button
+                            className="C2016"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsCustomerDetailRegistrationPopupOpen(true);
+                            }}
+                          >
                             <div className="C2017">
                               <div className="C2018 styleSheet isIcon isArrow isMini"></div>
                             </div>
@@ -3890,6 +3922,25 @@ export default function CustomerStatusSection({
           setOpenSidebarMenuPopup(null);
         }}
       />
+      {/* 고객 상세 등록 팝업 (제목과 닫기만 있는 비어있는 팝업) */}
+      <Popup
+        isOpen={isCustomerDetailRegistrationPopupOpen}
+        onClose={() => setIsCustomerDetailRegistrationPopupOpen(false)}
+      >
+        <PopupSectionBox x={290} y={70} width={660} height={1060}>
+          <div className="C180">
+            <p className="T076">고객 등록</p>
+            <div
+              className="C181 isCloseButton"
+              onClick={() => setIsCustomerDetailRegistrationPopupOpen(false)}
+            >
+              <div className="C179 isDepth1"></div>
+              <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+            </div>
+          </div>
+        </PopupSectionBox>
+        {/* 여기에 퍼블리싱할 내용 추가 */}
+      </Popup>
     </article>
   );
 }
