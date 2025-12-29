@@ -950,6 +950,10 @@ span.isLink {
   background-position-x: calc(-1 * var(--size-280));
   background-position-y: calc(-1 * var(--size-200));
 }
+.isIcon.isInfo {
+  background-position-x: calc(-1 * var(--size-280));
+  background-position-y: calc(-1 * var(--size-240));
+}
 .isIcon.isAlert {
   background-position-x: calc(-1 * var(--size-280));
   background-position-y: calc(-1 * var(--size-440));
