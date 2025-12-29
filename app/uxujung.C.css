@@ -693,7 +693,7 @@
 
 .C2056 {
     padding-left: var(--size-65);
-    margin-top: var(--size-60);
+    /* margin-top: var(--size-60); */
     margin-bottom: var(--size-20);
 }
 
