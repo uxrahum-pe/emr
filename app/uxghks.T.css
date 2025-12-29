@@ -68,10 +68,14 @@
     white-space: nowrap;
 }
 
+
 .T1004 {
+    /* 2. 디자인: 글자 크기 */
+    font-size: var(--font-15);
+    font-weight: 800;
+
+    /* 3. 여백 */
     padding-right: var(--size-10);
-    /* border-right: var(--size-2) solid var(--color-black-7); */
-    font-size: var(--font-17);
 }
 
 
@@ -87,8 +91,9 @@
 }
 
 .T1006{
-    color: var(--color-white-3);
+    color: var(--color-white-50);
     font-size: var(--font-15);
+    
 }
 
 /* 팝업 제목 */
@@ -98,4 +103,11 @@
     color: var(--color-white);
     margin-left: var(--size-40);
     margin-right: var(--size-8);
+}
+
+/* 등록완료 버튼 텍스트 */
+.T1008{
+    color: var(--color-white);
+    font-size: var(--font-21);
+    margin-right: var(--size-30);
 }

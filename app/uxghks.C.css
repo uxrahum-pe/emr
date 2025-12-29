@@ -15,6 +15,10 @@
     align-items: flex-start;
 }
 
+.C1000:has(.C1023) {
+    justify-content: flex-end;
+}
+
 
 .C1001 {
     position: absolute;
@@ -41,9 +45,9 @@
 }
 
 .C1003 {
-    display: 'flex';
-    flexDirection: 'column';
-    gap: 'var(--size-30)';
+    /* display: flex; */
+    flex-direction: column;
+    /* gap: var(--size-30); */
 }
 
 .C1004 {
@@ -177,13 +181,23 @@ text-align: center;
     align-items: center;
     justify-content: center;
     display: flex;
+    flex-direction: column;
+    gap: var(--size-10);
+}
+
+/* 파일 업로드 아이콘 */
+.C1028 {
+    width: var(--size-40);
+    height: var(--size-40);
+    filter: brightness(0) invert(1);
+    opacity: 0.25;
 }
 
 
 .C1014 {
     /* line-height: var(--size-50); */
     /* padding-top: var(--size-35); */
-    margin-left: var(--size-10);
+    /* margin-left: var(--size-10); */
     /* column-gap: var(--size-35); */
 }
 
@@ -201,13 +215,13 @@ align-items: center;
 
 /* 2. 크기 및 여백 */
 width: var(--size-200); /* 원하는 너비로 조절 */
-padding: var(--size-10) var(--size-15) var(--size-10) var(--size-20);
+padding-left: var(--size-25);
 
 /* 3. 디자인: 배경색, 곡률, 글자색 */
 background-color: var(--color-white-3); /* 이미지의 배경색 느낌 */
 border-radius: var(--size-15);       /* 둥근 모서리 */
 /* border-color: var(--color-white-3); */
-border: var(--size-2) solid var(--color-white-25);
+border: var(--size-2) solid var(--color-white-50);
 color: var(--color-white);              /* 글자 및 아이콘 색상 */
 font-size: var(--font-17);
 
@@ -281,14 +295,75 @@ text-align: center;
 .C1023{
     /* 정렬 */
     display: flex;
+    justify-content: space-between;
     align-items: center;
+
     /* 크기 */
     width: var(--size-200);
     height: var(--size-70);
 
     /* 여백 */
-    padding: var(--size-10) var(--size-15) var(--size-10) var(--size-10);
+    margin-top: var(--size-15);
+    margin-right: var(--size-15);
+    padding: var(--size-10) var(--size-2) var(--size-10) var(--size-10);
     border-radius: var(--size-15);
     background : linear-gradient(to right, var(--color-green), var(--color-blue));
     transition: .3s;
+}
+/* 등록하기 화살표 컨테이너 */
+.C1024{
+    /* 정렬 */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    /* 크기 */
+    width: var(--size-50);
+    height: var(--size-50);
+
+    /* 여백 */
+    margin-left: var(--size-10);
+    /* 속성 */
+    border-radius: 50%;
+    background-color: var(--color-white-25);
+}
+/* 등록하기 화살표 */
+.C1025{
+    width: var(--size-40);
+    height: var(--size-40);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    filter: brightness(0) invert(1);
+}
+
+/* 달력 컨테이너 */
+.C1026{
+    /* 1. 레이아웃: 가로로 배치하고 양 끝으로 밀기 */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    /* 2. 크기 및 여백 */
+    width: var(--size-60);
+    height: var(--size-45);
+
+    /* 3. 디자인: 배경색, 곡률, 글자색 */
+    border-left: var(--size-2) solid var(--color-white-25);
+}
+
+/* 달력 아이콘 */
+.C1027{
+    /* 2. 크기 및 여백 */
+    width: var(--size-40);
+    height: var(--size-40);
+
+    /* 4. 기타 */
+    filter: brightness(0) invert(1);
+    opacity: 0.25;
+}
+
+/* 체크박스 그라디언트 (주황색) */
+.C1029{
+    background: linear-gradient(to right, var(--color-yellow), var(--color-red)); /* 주황색 그라디언트 */
 }

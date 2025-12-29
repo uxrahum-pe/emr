@@ -45,6 +45,9 @@ import CustomerStatusPopup from "@/components/popups/CustomerStatusPopup";
 import ForeignerStatusPopup from "@/components/popups/ForeignerStatusPopup";
 import AgreementStatusPopup from "@/components/popups/AgreementStatusPopup";
 import PracticeIndexStatusPopup from "@/components/popups/PracticeIndexStatusPopup";
+import CalendarIconPopup from "@/components/CalendarIconPopup";
+import { formatDate } from "@/lib/utils/date";
+import { startOfDay } from "date-fns";
 
 import { usePartCommonStore } from "@/stores/useReceptionStore";
 
@@ -230,6 +233,10 @@ export default function CustomerStatusSection({
   // 거소증 체크박스 상태
   const [hasResidencePermitChecked, setHasResidencePermitChecked] = useState(false);
   const [noResidencePermitChecked, setNoResidencePermitChecked] = useState(false);
+
+  // 입국일/출국일 날짜 상태
+  const [entryDate, setEntryDate] = useState<Date | null>(() => startOfDay(new Date("2025-12-23")));
+  const [exitDate, setExitDate] = useState<Date | null>(() => startOfDay(new Date("2025-12-23")));
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -2239,13 +2246,8 @@ export default function CustomerStatusSection({
             </div>
           </PopupSectionBox>
           <PopupSectionBox x={970} y={70} width={660}>
-            <div className="C1000">
-              <p className="T1007">신규 고객 등록</p>
-              <div className="C1021">
-                  <div className="C1022">
-                  </div>
-                  <p className="T1000">작성자</p>
-              </div>
+            <div className="C180">
+              <p className="T076">신규 고객 등록</p>
               <div
                 className="C181 isCloseButton"
                 onClick={() => setIsCustomerRegistrationPopupOpen(false)}
@@ -2368,26 +2370,43 @@ export default function CustomerStatusSection({
               </div>
               <div className="C1012">
                 <div className="C1013">
-                  
-                  <p className="T1006">
-                  첨부할 거소증 이미지를 올리세요.
-                  </p>
+                  <div className="C1028 styleSheet isIcon isClip"></div>
+                  <label htmlFor="img-upload" className="T1006">
+                    첨부할 거소증 이미지를 올리세요.
+                  </label>
+                  <input
+                    className="T1006" 
+                    type="file" 
+                    id="img-upload" 
+                    accept="image/*" 
+                    hidden
+                  />
                 </div>
                 <div className="C1014">
                   <div className="C1015">
                     <p className="T1000">입국일:</p>
                     <div className="C1016">
-                      <p className="T1004">2025.12.23</p>
+                      <p className="T1004">
+                        {entryDate ? formatDate(entryDate, "yyyy-MM-dd") : ""}
+                      </p>
+                      <CalendarIconPopup
+                        selectedDate={entryDate}
+                        onDateSelect={setEntryDate}
+                      />
                     </div>
-                    <div className="C1019 styleSheet isIcon isCalendare"></div>
                   </div>
 
                   <div className="C1015">
                     <p className="T1000">출국일:</p>
                     <div className="C1016">
-                      <p className="T1004">2025.12.23</p>
+                      <p className="T1004">
+                        {exitDate ? formatDate(exitDate, "yyyy-MM-dd") : ""}
+                      </p>
+                      <CalendarIconPopup
+                        selectedDate={exitDate}
+                        onDateSelect={setExitDate}
+                      />
                     </div>
-                    <div className="C1019 styleSheet isIcon isCalendare"></div>
                   </div>
                 </div>
               </div>
@@ -2396,7 +2415,11 @@ export default function CustomerStatusSection({
           <PopupSectionBox x={970} y={1030} width={660} height={100}>
             <div className="C1000">
 
-              <button className="C1023">등록 완료</button>
+              <button className="C1023">
+                <div className="C1024"><div className="C1025 styleSheet isIcon isArrow isRight"></div></div>
+              
+                <p className="T1008">등록완료
+                </p></button>
             </div>
           </PopupSectionBox>
         </div>
