@@ -21,6 +21,7 @@ export default function AuthorInfo({
   onClick,
   className = "",
   length,
+  isLeftFitted = false,
 }: AuthorInfoProps) {
   const lengthClass =
     length === "short"
@@ -31,7 +32,12 @@ export default function AuthorInfo({
       ? "isVeryShorter"
       : "";
 
-  const containerClassName = ["C2033", lengthClass, className]
+  const containerClassName = [
+    "C2033",
+    lengthClass,
+    isLeftFitted ? "isLeftFitted" : "",
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 

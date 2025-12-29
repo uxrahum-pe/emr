@@ -422,10 +422,12 @@
     padding: var(--size-10);
     box-sizing: border-box;
     cursor: pointer;
-    margin-left: 0;
+    margin-left: auto;
     transition: .3s;
     justify-content: flex-end;
-    
+}
+.C2033.isLeftFitted {
+    margin-left: 0;
 }
 
 .C2033:hover {

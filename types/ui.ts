@@ -210,6 +210,8 @@ export interface AuthorInfoProps {
   className?: string;
   /** 길이 옵션: "short" | "shorter" | "veryShorter" */
   length?: "short" | "shorter" | "veryShorter";
+  /** 왼쪽 여백 제거 옵션 */
+  isLeftFitted?: boolean;
 }
 
 // CustomerInfo 컴포넌트 props
