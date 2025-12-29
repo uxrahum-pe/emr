@@ -136,6 +136,7 @@
   --font-21: calc(100vw * 21 / var(--breakpoint));
   --font-24: calc(100vw * 24 / var(--breakpoint));
   --font-27: calc(100vw * 27 / var(--breakpoint));
+  --font-29: calc(100vw * 29 / var(--breakpoint));
   --font-32: calc(100vw * 32 / var(--breakpoint));
   --font-40: calc(100vw * 40 / var(--breakpoint));
 
@@ -407,6 +408,7 @@
     --font-21: 21px;
     --font-24: 24px;
     --font-27: 27px;
+    --font-29: 29px;
     --font-32: 32px;
     --font-40: 40px;
 
