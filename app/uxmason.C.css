@@ -1880,6 +1880,10 @@
 }
 .C176.isOverlay {
     background-color: var(--color-black-50);
+    opacity: 0;
+}
+.C176.isOverlay.isOpened {
+    opacity: 1;
 }
 .isMidRange .C176 {
     backdrop-filter: blur(var(--size-20));
@@ -1928,8 +1932,8 @@
 .C178 {
     position: relative;
     border-radius: var(--size-30);
-    background: var(--color-white-3);
-    box-shadow: 0 var(--size-10) var(--size-40) 0 var(--color-black-25);
+    background: var(--background-black);
+    box-shadow: 0 var(--size-20) var(--size-80) 0 var(--color-black-25);
     width: fit-content;
 }
 .C179 {
@@ -1953,11 +1957,15 @@
 .C179.isDepth2 {
     border-radius: var(--size-15);
 }
+.C176.isOverlay .C178 {
+    background: var(--background-black-deep);
+}
 .C180 {
     display: flex;
     padding: var(--size-20);
     align-items: center;
     margin-left: var(--size-20);
+    min-height: var(--size-100);
 }
 .C181 {
     width: var(--size-60);
@@ -1981,7 +1989,7 @@
     filter: brightness(0) invert(1);
 }
 .C183 {
-    height:100%;
+    min-height: var(--size-100);
     overflow: hidden;
     border-radius: var(--size-30);
 }

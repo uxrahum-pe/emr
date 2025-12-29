@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, ReactNode, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { modalStack } from "@/lib/modal-stack";
 
@@ -33,9 +33,12 @@ export default function Popup({
   }, [onClose]);
 
   useEffect(() => {
+    let openFrame1: number | null = null;
+    let openFrame2: number | null = null;
+    let closeFrame: number | null = null;
+    let closeTimer: number | null = null;
+
     if (isOpen) {
-      // 컴포넌트가 나타나면 바로 렌더링
-      setIsVisible(true);
       // 모달 스택에 추가
       const closeHandler = () => {
         onCloseRef.current();
@@ -56,13 +59,20 @@ export default function Popup({
         document.body.style.paddingRight = `${scrollbarWidth}px`;
       }
 
-      // 브라우저가 초기 상태를 인식한 후 애니메이션 트리거
-      const timer = setTimeout(() => {
-        setIsOpened(true);
-      }, 10);
+      // 1프레임째: DOM 추가 (isOpened=false 상태)
+      openFrame1 = requestAnimationFrame(() => {
+        setIsVisible(true);
+        // 2프레임째: isOpened=true 부여 → 트랜지션 시작
+        openFrame2 = requestAnimationFrame(() => {
+          setIsOpened(true);
+        });
+      });
 
       return () => {
-        clearTimeout(timer);
+        if (openFrame1 !== null) cancelAnimationFrame(openFrame1);
+        if (openFrame2 !== null) cancelAnimationFrame(openFrame2);
+        // isOpened를 false로 설정 (cleanup 시)
+        setIsOpened(false);
         // 모달 스택에서 제거
         if (closeHandlerRef.current) {
           modalStack.remove(closeHandlerRef.current);
@@ -76,8 +86,14 @@ export default function Popup({
         }
       };
     } else {
-      // 닫을 때: isOpened 제거 후 0.3초 뒤 컴포넌트 제거
-      setIsOpened(false);
+      // 닫을 때: 다음 프레임에 isOpened 제거 후, 트랜지션 끝나면 DOM 제거
+      closeFrame = requestAnimationFrame(() => {
+        setIsOpened(false);
+        closeTimer = window.setTimeout(() => {
+          setIsVisible(false);
+        }, 300);
+      });
+
       // 모달 스택에서 제거
       if (closeHandlerRef.current) {
         modalStack.remove(closeHandlerRef.current);
@@ -90,10 +106,12 @@ export default function Popup({
         document.body.style.paddingRight = "";
       }
 
-      const timer = setTimeout(() => {
-        setIsVisible(false);
-      }, 300);
-      return () => clearTimeout(timer);
+      return () => {
+        if (closeFrame !== null) cancelAnimationFrame(closeFrame);
+        if (closeTimer !== null) clearTimeout(closeTimer);
+        // 타이머가 취소되더라도 isOpened는 false로 유지
+        setIsOpened(false);
+      };
     }
   }, [isOpen]); // onClose는 ref로 처리하므로 의존성에서 제거
 

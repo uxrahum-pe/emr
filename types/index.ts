@@ -38,6 +38,7 @@ export type {
   DropdownListItem,
   DropdownListProps,
   AuthorInfoProps,
+  CustomerInfoProps,
 } from "./ui";
 
 // ============================================
