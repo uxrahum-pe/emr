@@ -191,3 +191,23 @@ export interface DropdownListProps {
   /** 비활성화 여부 */
   disabled?: boolean;
 }
+
+// AuthorInfo 컴포넌트 props
+export interface AuthorInfoProps {
+  /** 작성자 프로필 이미지 URL */
+  imageSrc: string;
+  /** 이미지 alt 텍스트 */
+  imageAlt?: string;
+  /** 라벨 텍스트 (예: "작성자") */
+  label?: string;
+  /** 작성자 이름 */
+  name: string;
+  /** 작성자 호칭 (예: "원장님") */
+  title?: string;
+  /** 클릭 핸들러 (제공 시 chevron 아이콘 표시 및 클릭 가능) */
+  onClick?: () => void;
+  /** 커스텀 클래스명 */
+  className?: string;
+  /** 길이 옵션: "short" | "shorter" | "veryShorter" */
+  length?: "short" | "shorter" | "veryShorter";
+}

@@ -37,6 +37,7 @@ export type {
   TabSelectorProps,
   DropdownListItem,
   DropdownListProps,
+  AuthorInfoProps,
 } from "./ui";
 
 // ============================================
@@ -117,7 +118,6 @@ export type {
 // ============================================
 export type {
   BasePopupProps,
-  PopupHeaderProps,
   // 상태 팝업
   CustomerStatusPopupProps,
   ForeignerStatusPopupProps,

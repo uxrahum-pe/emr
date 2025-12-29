@@ -422,6 +422,11 @@
     gap: var(--size-10);
     padding: var(--size-10);
     box-sizing: border-box;
+    cursor: pointer;
+    transition: .3s;
+}
+.C2033:hover {
+    opacity: .5;
 }
 
 .C2034 {
@@ -522,7 +527,7 @@
 }
 
 .C2041:hover {
-    opacity: 0.9;
+    opacity: 0.75;
     box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
 }
 
