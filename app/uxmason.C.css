@@ -2427,3 +2427,9 @@
 .C230 {
     padding: var(--size-20);
 }
+.C231 {
+    height: var(--size-50);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--size-20);
+}

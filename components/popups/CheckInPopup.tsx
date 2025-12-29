@@ -57,7 +57,12 @@ export default function CheckInPopup({ onClose }: CheckInPopupProps) {
         </div>
       </PopupSectionBox>
       <PopupSectionBox x={390} y={190} width={520} height={580}>
-        <div className="C230"></div>
+        <div className="C230">
+          <div className="C231">
+            <p className="T098">Vital 고객 이력</p>
+          </div>
+          <div className="C232"></div>
+        </div>
       </PopupSectionBox>
       <PopupSectionBox x={390} y={710} width={520} height={260}>
         <div className="C230"></div>

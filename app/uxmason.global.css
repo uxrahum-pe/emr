@@ -1083,6 +1083,21 @@ span.isLink {
 .isIcon.isSettings.isBig {
   background-position-y: calc(-1 * var(--size-450));
 }
+.isIcon.isLens.isMicrophone.isBig {
+  background-position-y: calc(-1 * var(--size-500));
+}
+.isIcon.isLens.isBig {
+  background-position-y: calc(-1 * var(--size-550));
+}
+.isIcon.isDownload.isBig {
+  background-position-y: calc(-1 * var(--size-600));
+}
+.isIcon.isPrinter.isBig {
+  background-position-y: calc(-1 * var(--size-650));
+}
+.isIcon.isExpand.isBig {
+  background-position-y: calc(-1 * var(--size-700));
+}
 .isIcon.isClose.isBig {
   background-position-y: calc(-1 * var(--size-750));
 }
