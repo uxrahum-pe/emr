@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import PopupSectionBox from "@/components/PopupSectionBox";
-import PopupHeader from "./PopupHeader";
+import Popup from "@/components/Popup";
+import AuthorInfo from "@/components/AuthorInfo";
+import CustomerInfo from "@/components/CustomerInfo";
 import type { CheckOutPopupProps } from "@/types/popups";
 
 /**
@@ -16,35 +19,36 @@ import type { CheckOutPopupProps } from "@/types/popups";
  * 귀가처리 팝업 컴포넌트
  */
 export default function CheckOutPopup({ onClose }: CheckOutPopupProps) {
+  const [isCustomerBasicInfoPopupOpen, setIsCustomerBasicInfoPopupOpen] =
+    useState(false);
   return (
     <>
-      <PopupSectionBox x={700} y={330} width={520} height={100}>
-        <PopupHeader title="귀가처리" onClose={onClose} />
-        <div className="C2033">
-          <img 
-            src="/images/male-64.jpg" 
-            alt="작성자" 
-            className="C2034"
+      <PopupSectionBox x={700} y={330} width={520}>
+        <div className="C180">
+          <p className="T076">귀가처리</p>
+          <AuthorInfo
+            imageSrc="/images/male-64.jpg"
+            imageAlt="작성자"
+            label="작성자"
+            name="홍성훈"
+            title="원장님"
           />
-          <div className="C2035">
-            <p className="T2040">작성자</p>
-            <p className="T2041">홍성훈<span className="T2042"> 원장님</span></p>
+          <div className="C181 isCloseButton" onClick={onClose}>
+            <div className="C179 isDepth1"></div>
+            <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
           </div>
-          <div className="C2036 styleSheet isIcon isMini isChevron isRight"></div>
-
         </div>
       </PopupSectionBox>
-      <PopupSectionBox x={700} y={450} width={520} height={100}>
-        <div className="C2037">
-          <p className="T2043">신수빈</p>
-          <p className="T2044">여성</p>
-          <p className="T2045">32<span className="T2047">세</span></p>
-          <p className="T2045">1<span className="T2047">기</span></p>
-          <p className="T2046">210047938</p>
-          <div className="C2038">
-            <div className="C179 isDepth1"></div>
-            <div className="C2039 styleSheet isIcon isInfo"></div>
-          </div>
+      <PopupSectionBox x={700} y={450} width={520}>
+        <div className="C180">
+          <CustomerInfo
+            name="신수빈"
+            gender="여성"
+            age={32}
+            packageNumber={1}
+            customerNumber="210047938"
+            onInfoClick={() => setIsCustomerBasicInfoPopupOpen(true)}
+          />
         </div>
       </PopupSectionBox>
       <PopupSectionBox x={700} y={570} width={520} height={300}>
@@ -57,6 +61,27 @@ export default function CheckOutPopup({ onClose }: CheckOutPopupProps) {
           <button className="C2041">귀가처리</button>
         </div>
       </PopupSectionBox>
+
+      {/* 고객 기본 정보 중첩 팝업 */}
+      <Popup
+        isOpen={isCustomerBasicInfoPopupOpen}
+        onClose={() => setIsCustomerBasicInfoPopupOpen(false)}
+        className="isOverlay"
+      >
+        <PopupSectionBox x={290} y={70} width={660} height={1060}>
+          <div className="C180">
+            <p className="T076">고객 기본 정보</p>
+            <div
+              className="C181 isCloseButton"
+              onClick={() => setIsCustomerBasicInfoPopupOpen(false)}
+            >
+              <div className="C179 isDepth1"></div>
+              <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
+            </div>
+          </div>
+        </PopupSectionBox>
+        {/* 여기에 고객 기본 정보 퍼블리싱할 내용 추가 */}
+      </Popup>
     </>
   );
 }
