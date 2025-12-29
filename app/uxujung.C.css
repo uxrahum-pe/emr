@@ -267,6 +267,34 @@
     flex-shrink: 0;
 }
 
+
+.C2023 {
+    width: var(--size-60);
+    height: var(--size-60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: var(--size-10);
+    border-radius: var(--size-20);
+    background: var(--color-white-3);
+    box-shadow: 0 var(--size-10) var(--size-40) 0 var(--color-black-25);
+    cursor: pointer;
+    transition: .3s;
+    position: relative;
+}
+
+.C2023:hover {
+    opacity: .5;
+}
+
+.C2023 .C182 {
+    width: var(--size-20);
+    height: var(--size-20);
+    filter: brightness(0) invert(1);
+}
+
+
 .C2024 {
     flex: 1;
     display: flex;
@@ -382,6 +410,43 @@
 }
 
 .C2033 {
+    position: absolute;
+    top: var(--size-20);
+    right: var(--size-100);
+    width: var(--size-200);
+    height: var(--size-60);
+    background-color: var(--color-white-7);
+    border-radius: var(--size-15);
+    display: flex;
+    align-items: center;
+    gap: var(--size-10);
+    padding: var(--size-10);
+    box-sizing: border-box;
+}
+
+.C2034 {
+    width: var(--size-40);
+    height: var(--size-40);
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: var(--size-2) solid var(--color-white);
+}
+
+.C2035 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+    flex: 1;
+}
+
+.C2036 {
+    width: var(--size-20);
+    height: var(--size-20);
+    filter: brightness(0) invert(1);
+}
+
+.C2037 {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -391,11 +456,11 @@
     position: relative;
 }
 
-.C2033 > .T2035:last-of-type {
+.C2037 > .T2045:last-of-type {
     margin-right: var(--size-10);
 }
 
-.C2035 {
+.C2038 {
     position: absolute;
     right: var(--size-20);
     top: var(--size-20);
@@ -411,85 +476,61 @@
     transition: .3s;
 }
 
-.C2035:hover {
+.C2038:hover {
     opacity: .5;
 }
 
-.C2035 .C182 {
-    width: var(--size-50);
-    height: var(--size-50);
-    filter: brightness(0) invert(1);
-}
-
-.C2023 {
-    width: var(--size-60);
-    height: var(--size-60);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: var(--size-10);
-    border-radius: var(--size-20);
-    background: var(--color-white-3);
-    box-shadow: 0 var(--size-10) var(--size-40) 0 var(--color-black-25);
-    cursor: pointer;
-    transition: .3s;
-    position: relative;
-}
-
-.C2023:hover {
-    opacity: .5;
-}
-
-.C2023 .C182 {
-    width: var(--size-20);
-    height: var(--size-20);
-    filter: brightness(0) invert(1);
-}
-
-.C2033 > .T2033 {
-    margin-right: var(--size-25);
-}
-
-.C2036 {
+.C2039 {
+    width: var(--size-40);
+    height: var(--size-40);
     position: absolute;
-    top: var(--size-20);
-    right: var(--size-100);
-    width: var(--size-200);
-    height: var(--size-60);
-    background-color: var(--color-white-7);
-    border-radius: var(--size-15);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: brightness(0) invert(1);
+    opacity: .5;
+ 
+}
+
+
+.C2040 {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: var(--size-10);
-    padding: var(--size-10);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-top: var(--size-50);
     box-sizing: border-box;
 }
 
-.C2037 {
-    width: var(--size-40);
-    height: var(--size-40);
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    border: var(--size-2) solid var(--color-white);
+.C2041 {
+    width: var(--size-440);
+    height: var(--size-80);
+    border-radius: var(--size-20);
+    border: none;
+    background: linear-gradient(to right, var(--color-magenta), var(--color-red));
+    color: var(--color-white);
+    font-size: var(--font-24);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: var(--size-30);
 }
 
-.C2038 {
+.C2041:hover {
+    opacity: 0.9;
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+
+.C2042 {
     display: flex;
     flex-direction: column;
-    gap: var(--size-2);
-    flex: 1;
+    align-items: center;
+    gap: 0;
+    margin-top: var(--size-10);
 }
 
-.C2040 {
-    width: var(--size-20);
-    height: var(--size-20);
-    filter: brightness(0) invert(1);
-}
-
-.C2041 {
-    width: var(--size-50);
-    height: var(--size-50);
-   
-}

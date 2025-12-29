@@ -268,72 +268,87 @@
     border-right: none;
 }
 
-.T2033 {
-    font-size: var(--font-27);
-    color: var(--color-white);
-    padding-left: var(--size-40);
-    margin: 0;
-}
-
-.T2034 {
-    font-size: var(--font-15);
-    color: var(--color-white);
-    background-color: var(--color-magenta);
-    padding: var(--size-5) var(--size-10);
-    border-radius: var(--size-10);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-}
-
-.T2035 {
-    font-size: var(--font-15);
-    color: var(--color-white);
-    background-color: var(--color-white-25);
-    padding: var(--size-5) var(--size-10);
-    border-radius: var(--size-10);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-}
-
-.T2036 {
-    font-size: var(--font-17);
-    color: var(--color-white-50);
-}
-
-.C2033 .T2036 {
-    
-    color: var(--color-white-50) !important;
-}
-
-.T2037 {
-    color: var(--color-white-50);
-}
-
-.T2038 {
+.T2040 {
     font-size: var(--font-12);
     color: var(--color-white-50) !important;
     margin: 0;
     line-height: 1.2;
 }
 
-.C2038 .T2038 {
+.C2035 .T2040 {
     color: var(--color-white-50) !important;
 }
 
-.T2039 {
+.T2041 {
     font-size: var(--font-15);
     color: var(--color-white);
     margin: 0;
     line-height: 1.2;
 }
 
-.T2040 {
+.T2042 {
     color: var(--color-white-25);
 }
 
+.T2043 {
+    font-size: var(--font-27);
+    color: var(--color-white);
+    padding-left: var(--size-40);
+
+    margin-right: var(--size-20);
+}
+
+
+.T2044 {
+    font-size: var(--font-15);
+    color: var(--color-white);
+    background-color: var(--color-magenta);
+    padding: var(--size-5) var(--size-10);
+    border-radius: var(--size-10);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.T2045 {
+    font-size: var(--font-15);
+    color: var(--color-white);
+    background-color: var(--color-white-25);
+    padding: var(--size-5) var(--size-10);
+    border-radius: var(--size-10);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.T2046 {
+    font-size: var(--font-17);
+    color: var(--color-white-50);
+}
+
+.C2037 .T2046 {
+    color: var(--color-white-50) !important;
+}
+
+.T2047 {
+    color: var(--color-white-50);
+}
+
+.T2048 {
+    font-size: var(--font-21);
+    color: var(--color-white);
+    text-align: center;
+    margin: 0;
+}
+
+.T2049 {
+    font-size: var(--font-15);
+    color: var(--color-white-50) !important;
+    text-align: center;
+    margin: 0;
+    line-height: 1.5;
+}
