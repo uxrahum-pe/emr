@@ -566,6 +566,7 @@
     position: relative;
     top: 0;
     left: 0;
+    width: var(--size-400);
 }
 
 .C2045 {
@@ -623,7 +624,7 @@
     height: var(--size-940);
     width: 100%;
     display: flex;
-    background-color: rgb(255, 159, 159);
+  
 }
 
 .C2050{
@@ -640,16 +641,23 @@
     box-sizing: border-box;
 }
 
+
 .C2051 {
     position: relative;
     align-self: flex-start;
+    width: 30%;
+    height: auto;
     object-fit: contain;
+    max-width: 30%;
 }
 
 .C2052 {
     position: relative;
     align-self: flex-end;
+    width: 30%;
+    height: auto;
     object-fit: contain;
+    max-width: 30%;
 }
 
 .C2053{
@@ -693,38 +701,637 @@
     overflow-y: auto;
 }
 
+/* 1. 타이틀 섹션 */
 .C2056 {
+    position: relative;
+    width: var(--size-630);
+    height: var(--size-95);
+    padding-top: var(--size-60);
+   
     padding-left: var(--size-65);
-    /* margin-top: var(--size-60); */
-    margin-bottom: var(--size-20);
+    box-sizing: border-box;
 }
 
-.C2057,
-.C2060,
-.C2062 {
-    margin-bottom: var(--size-10);
+/* 2. 고객상담 섹션 */
+.C2057 {
     position: relative;
+    width: var(--size-630);
+    height: var(--size-230);
+    margin-top: var(--size-20);
 }
 
 .C2058 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--size-10);
+    gap: 0;
+    margin-top: 0;
     padding-left: var(--size-95);
-    margin-top: var(--size-20);
+    box-sizing: border-box;
 }
 
 .C2059 {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--size-5);
+    min-height: var(--size-30);
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.C2068 {
+    /* 7번 오른쪽 빈칸 */
+    visibility: hidden;
+}
+
+.C2069 {
+    grid-column: 1 / -1;
+    white-space: normal;
+    overflow: visible;
+    word-wrap: break-word;
+}
+
+/* 3. 시술상담 섹션 */
+.C2060 {
+    position: relative;
+    width: var(--size-630);
+    height: var(--size-335);
+    margin-top: var(--size-20);
+}
+
+.C2061 {
+    padding-left: var(--size-95);
+    margin-top: 0;
+    display: flex;
     flex-direction: column;
+    gap: 0;
+    box-sizing: border-box;
+}
+
+.C2064 {
+    height: var(--size-30);
+    line-height: var(--size-30);
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.C2065 {
+    height: var(--size-30);
+    line-height: var(--size-30);
+    padding: 0;
+    padding-left: var(--size-10);
+    box-sizing: border-box;
+}
+
+
+.C2066 {
+    width: var(--size-480);
+    height: 0;
+    border-top: var(--size-2) dotted var(--color-black-7);
+    margin: var(--size-5);
+    box-sizing: border-box;
+}
+.C2067 {
+    height: var(--size-30);
+    line-height: var(--size-30);
+    padding: 0;
+    padding-left: var(--size-10);
+    box-sizing: border-box;
+}
+
+
+   
+
+/* 4. 개인정보 수집 이용동의 섹션 */
+.C2062 {
+    position: relative;
+    width: var(--size-630);
+    margin-top: var(--size-20);
+}
+
+.C2063 {
+    padding-left: var(--size-95);
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    box-sizing: border-box;
+}
+
+
+.C2072{
+    height: 100%;
+    width: 100%;
+    display: flex;
+  
+}
+
+.C2073{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color:var(--color-white);
+    width: var(--size-640);
+    height: var(--size-900);
+    left: 50%;
+    top: var(--size-50);
+    transform: translateX(-50%);
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.C2074 {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.C2075 {
+    width: var(--size-180);
+    height: var(--size-70);
+    border-radius: var(--size-20);
+    border: none;
+    background: linear-gradient(to right, var(--color-magenta), var(--color-red));
+    color: var(--color-white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--size-10);
+    padding: 0 var(--size-15);
+    box-sizing: border-box;
+ 
+}
+
+.C2075:hover {
+    opacity: 0.75;
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+
+.C2076 {
+    width: var(--size-50);
+    height: var(--size-50);
+    border-radius: 50%;
+    background-color: var(--color-white-25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.C2077 {
+    width: var(--size-50);
+    height: var(--size-50);
+    filter: brightness(0) invert(1);
+}
+
+.C180.isButtonContainer {
+    height: var(--size-100);
+    min-height: var(--size-100);
+    max-height: var(--size-100);
+    box-sizing: border-box;
+    padding: 0;
+    margin-left: 0;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-top: var(--size-15);
+    margin-right: var(--size-15);
+    margin-left: auto;
+}
+
+
+/* 높이 40 체크박스 스타일 */
+.C2078 {
+    display: flex;
+    align-items: center;
+    padding: var(--size-5) var(--size-15) var(--size-5) var(--size-5);
+    border-radius: var(--size-15);
+    background: linear-gradient(to right, var(--color-green), var(--color-blue));
+    transition: .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+    height: var(--size-40);
+    box-sizing: border-box;
+    position: absolute;
+    top: var(--size-10);
+    right: var(--size-10);
+}
+
+.C2078:hover {
+    opacity: 0.5;
+}
+.C2078.isUnChecked {
+    background: var(--color-white-15);
+}
+.C2078.isUnChecked:hover {
+    opacity: 0.5;
+}
+
+.C2079 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--size-5);
+    border-radius: var(--size-10);
+    background-color: var(--color-white);
+    width: var(--size-30);
+    height: var(--size-30);
+    margin-right: var(--size-10);
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+    flex-shrink: 0;
+}
+.C2078.isUnChecked .C2079 {
+    background-color: var(--color-white-15);
+}
+
+.C2080 {
+    width: var(--size-20);
+    height: var(--size-20);
+}
+
+/* C231, C232, C233 재할당 스타일 */
+.C2081 {
+    height: var(--size-70);
+    display: flex;
+    align-items: center;
+}
+
+.C2082 {
+    height: calc(100% - var(--size-70));
+    background: linear-gradient(to bottom, var(--color-black-7), var(--color-black-0) 20%);
+    margin: 0 calc(-1 * var(--size-10));
+    margin-left: calc(-1 * var(--size-10) - var(--size-40));
+    overflow-y: auto;
+    overflow-x: clip;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: var(--size-10);
+    padding-left: calc(var(--size-10) + var(--size-40));
+    box-sizing: border-box;
+}
+
+.C2082::-webkit-scrollbar {
+    display: none;
+}
+
+.C2083 {
+    padding: var(--size-10);
+    height: 100%;
+    overflow: visible;
+}
+
+/* RoomCard 스타일 */
+.C2084 {
+    width: var(--size-540);
+    height: var(--size-90);
+    border-radius: var(--size-15);
+    background: var(--color-magenta-7);
+    border: var(--size-1) solid transparent;
+    box-shadow: 0 var(--size-20) var(--size-80) 0 var(--color-black-15);
+    position: relative;
+    margin: 0 auto;
+    transition: all 0.2s ease;
+    overflow: visible;
+}
+
+/* 진행중 카드 배경 */
+.C2084:not(.isCurrent):not(.isSelectable) {
+    background: var(--color-magenta-7);
+}
+
+/* 선택하기 카드 배경 */
+.C2084.isSelectable {
+    background: var(--color-white-7);
+}
+
+/* 현재상태 카드 배경 */
+.C2084.isCurrent {
+    background: var(--color-white);
+}
+
+/* 테두리 그라디언트 효과 */
+.C2084::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--size-15);
+    padding: var(--size-1);
+    background: linear-gradient(45deg, var(--color-white-25) 0%, var(--color-white-7) 25%, var(--color-white-25) 50%, var(--color-white-7) 75%, var(--color-white-25) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.C2084.isClickable:hover {
+    background: var(--color-white-15);
+    box-shadow: 0 var(--size-20) var(--size-80) 0 var(--color-black-25);
+}
+
+.C2084.isCurrent:hover {
+    background: var(--color-white-75);
+}
+
+/* 진행중 배지 (왼쪽) */
+.C2085 {
+    position: absolute;
+    left: calc(-1 * var(--size-30));
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--size-50);
+    height: var(--size-30);
+    background: linear-gradient(to right, var(--color-magenta), var(--color-red));
+    border-radius: var(--size-15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    box-shadow: 0 var(--size-4) var(--size-16) 0 var(--color-black-25);
+}
+
+/* 카드 내용 영역 */
+.C2086 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: var(--size-15) var(--size-20);
+    box-sizing: border-box;
+    position: relative;
+}
+
+.C2086::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--size-15);
+    background: linear-gradient(45deg, var(--color-white-25) 0%, var(--color-white-7) 25%, var(--color-white-25) 50%, var(--color-white-7) 75%, var(--color-white-25) 100%);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    padding: var(--size-2);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.C2086 > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 좌측 정보 */
+.C2087 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-5);
+    flex: 2;
+}
+
+/* 우측 정보 */
+.C2088 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--size-5);
+    flex: 3;
+}
+
+/* 선택하기 배지 (우측 상단) */
+.C2089 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--color-blue);
+    border-radius:  0 var(--size-15) 0 var(--size-10);
+    padding: var(--size-5) var(--size-12);
+    z-index: 1;
+}
+
+/* 현재상태 배지 (우측 상단) */
+.C2090 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--color-black);
+    border-radius: 0 var(--size-15) 0 var(--size-10);
+    padding: var(--size-5) var(--size-12);
+    z-index: 1;
+}
+
+/* 환자 정보 컨테이너 */
+.C2091 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: var(--size-5);
 }
 
-.C2061,
-.C2063 {
-    padding-left: var(--size-95);
-    margin-top: var(--size-20);
+/* 환자 정보 첫 번째 줄 컨테이너 */
+.C2093 {
+    display: flex;
+    align-items: center;
+    /* gap: var(--size-10); */
+}
+
+/* 여성 배경 */
+.C2094 {
+    width: var(--size-40);
+    height: var(--size-25);
+    background-color: var(--color-magenta);
+    border-radius: var(--size-10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* 32세, 1기 배경 */
+.C2095 {
+    width: var(--size-45);
+    height: var(--size-25);
+    background-color: var(--color-white-25);
+    backdrop-filter: blur(var(--size-10));
+    border-radius: var(--size-10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: calc(-1 * var(--size-5));
+    position: relative;
+    z-index: 2;
+}
+
+/* 두 번째 C2095 (기수)는 더 높은 z-index */
+.C2095 + .C2095 {
+    z-index: 3;
+}
+
+/* 수술신환상담 배경 */
+.C2096 {
+    display: inline-block;
+    background-color: var(--color-white-15);
+    padding: 0;
+    line-height: 1;
+}
+
+.C2084.isCurrent .C2096 {
+    background-color: var(--color-black-15);
+}
+
+/* RoomAssignment 컨테이너 */
+.C2092 {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: var(--size-10);
+    padding-top: var(--size-20);
+    padding-bottom: var(--size-20);
+}
+
+/* C183 대체 클래스 (overflow: visible) */
+.C2097 {
+    min-height: var(--size-100);
+    overflow: visible;
+    border-radius: var(--size-30);
+    height: 100%;
+    position: relative;
+}
+
+/* C178 대체 클래스 (overflow: visible) */
+.C2098 {
+    position: relative;
+    border-radius: var(--size-30);
+    background: var(--background-black);
+    box-shadow: 0 var(--size-20) var(--size-80) 0 var(--color-black-25);
+    width: fit-content;
+    overflow: visible;
+}
+
+/* C2099: 예약 상태 카드 그리드 컨테이너 */
+.C2099 {
+    display: grid;
+    grid-template-columns: repeat(2, var(--size-265));
+    gap: var(--size-10);
+    justify-content: center;
+    padding-top: var(--size-20);
+    box-sizing: border-box;
+}
+
+/* C2100: 예약 상태 카드 */
+.C2100 {
+    width: var(--size-265);
+    height: var(--size-100);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(var(--size-10));
+    border-radius: var(--size-12);
+    border: var(--size-1) solid transparent;
+    position: relative;
+    overflow: visible;
+    box-sizing: border-box;
+    box-shadow: 0 var(--size-20) var(--size-80) 0 var(--color-black-15);
+}
+
+.C2100::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--size-12);
+    background: linear-gradient(45deg, var(--color-white-25) 0%, var(--color-white-7) 25%, var(--color-white-25) 50%, var(--color-white-7) 75%, var(--color-white-25) 100%);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    padding: var(--size-2);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.C2100 > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* C2101: 선택 배지 (우측 상단) */
+.C2101 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--size-50);
+    height: var(--size-35);
+    background-color: var(--color-blue);
+    border-radius: 0 var(--size-12) 0 var(--size-10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+/* C2102: 인원수 및 아바타 칩 컨테이너 */
+.C2102 {
+    position: absolute;
+    left: var(--size-25);
+    bottom: var(--size-15);
+    display: flex;
+    align-items: center;
     gap: var(--size-10);
 }
+
+/* C2103: 아바타 칩 그룹 */
+.C2103 {
+    display: flex;
+    align-items: center;
+    gap: calc(-1 * var(--size-4));
+}
+
+/* C2104: 아바타 칩 */
+.C2104 {
+    width: var(--size-24);
+    height: var(--size-24);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: var(--color-magenta);
+    position: relative;
+    z-index: 0;
+    box-shadow: 0 var(--size-2) var(--size-8) 0 var(--color-black-25);
+
+}
+
+.C2104 + .C2104 {
+    margin-left: calc(-1 * var(--size-4));
+    z-index: 1;
+}
+
+.C2104 + .C2104 + .C2104 {
+    z-index: 2;
+}
+
+.C2104 + .C2104 + .C2104 + .C2104 {
+    z-index: 3;
+}
+
+.C2104.isBlue {
+    background-color: var(--color-blue);
+}
+
