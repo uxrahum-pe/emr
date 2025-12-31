@@ -152,6 +152,7 @@
   --size-15: calc(100vw * 15 / var(--breakpoint));
   --size-16: calc(100vw * 16 / var(--breakpoint));
   --size-20: calc(100vw * 20 / var(--breakpoint));
+  --size-24: calc(100vw * 24 / var(--breakpoint));
   --size-25: calc(100vw * 25 / var(--breakpoint));
   --size-26: calc(100vw * 26 / var(--breakpoint));
   --size-28: calc(100vw * 28 / var(--breakpoint));
@@ -424,6 +425,7 @@
     --size-15: 15px;
     --size-16: 16px;
     --size-20: 20px;
+    --size-24: 24px;
     --size-25: 25px;
     --size-26: 26px;
     --size-28: 28px;

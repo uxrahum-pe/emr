@@ -149,6 +149,8 @@ export interface PopupSectionBoxProps {
   className?: string;
   /** C183 영역의 배경색상 (CSS 변수명 예: "white-25", "magenta-7" 또는 직접 색상 값) */
   borderBackgroundColor?: string;
+  /** 내부 컨테이너 클래스명 (기본값: "C183") */
+  innerClassName?: string;
 }
 
 // TabSelector 컴포넌트 props

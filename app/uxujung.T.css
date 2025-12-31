@@ -13,6 +13,13 @@
     color: var(--color-black);
     margin: 0;
     user-select: none;
+}
+
+.T2074 {
+    font-size: var(--font-14);
+    color: var(--color-black);
+    margin: 0;
+    user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -366,79 +373,336 @@
     position: relative;
 }
 
+/* 타이틀 */
 .T2055 {
     font-size: var(--font-29);
     color: var(--color-red);
+    font-weight: bold;
 }
 
+/* 소타이틀 (고객상담, 시술상담, 개인정보수집 이용동의) */
 .T2056,
 .T2059,
-.T2068 {
-    padding-left: var(--size-85);
-    margin-top: var(--size-40);
+.T2069 {
+    position: relative;
     font-size: var(--font-14);
     color: var(--color-red);
+    height: var(--size-30);
+    line-height: var(--size-30);
+    padding: 0;
+    padding-top: var(--size-35);
+    padding-left: var(--size-85);
+    padding-bottom: var(--size-10);
+    margin-bottom: var(--size-20);
+    box-sizing: border-box;
 }
 
+/* 질문 텍스트 */
 .T2057 {
     font-size: var(--font-14);
     color: var(--color-black-50);
 }
 
-.T2071 {
-    color: var(--color-red);
-}
-
+/* 답변 텍스트 */
 .T2058 {
     font-size: var(--font-14);
     color: var(--color-black);
 }
 
+
+/* 시술상담 질문 */
 .T2060,
 .T2062 {
     font-size: var(--font-14);
     color: var(--color-black-50);
 }
 
+/* 시술상담 답변 */
 .T2061,
 .T2063 {
     color: var(--color-black);
 }
 
+/* 복수선택 안내 */
 .T2064 {
     color: var(--color-black-25);
 }
 
-.T2065 {
-    font-size: var(--font-14);
-    color: var(--color-black-50);
-    padding-left: var(--size-20);
-}
-
+/* 시술상담 답변 (부위, 종류) */
 .T2066 {
-    color: var(--color-black-50);
+    color: var(--color-black);
 }
 
-.T2067 {
+/* 안내문 */
+.T2068 {
     font-size: var(--font-14);
-    color: var(--color-green-25);
-    padding-left: var(--size-20);
+    color: var(--color-green);
 }
 
-.T2069 {
+/* 개인정보 동의 텍스트 */
+.T2072 {
     font-size: var(--font-14);
     color: var(--color-black-50);
     display: flex;
     align-items: center;
     gap: var(--size-10);
+    height: var(--size-30);
+    line-height: var(--size-30);
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.T2069 .isIMaskBlueMint.isCheck {
+/* 번호 및 * 표시 */
+.T2071 {
+    color: var(--color-red);
+}
+
+.T2072 .isIMaskBlueMint.isCheck {
     width: var(--size-20);
     height: var(--size-20);
     flex-shrink: 0;
 }
 
+/* 필수 표시 */
 .T2070 {
     color: var(--color-black-25);
+}
+
+.T2073 {
+    font-size: var(--font-19);
+    color: var(--color-white);
+}
+
+/* RoomCard 텍스트 스타일 */
+.T2081 {
+    font-size: var(--font-12);
+    color: var(--color-white);
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+}
+
+.T2082 {
+    font-size: var(--font-17);
+    color: var(--color-white);
+    font-weight: 600;
+    margin: 0;
+}
+
+.C2084.isCurrent .T2082 {
+    color: var(--color-black);
+}
+
+.T2083 {
+    font-size: var(--font-14);
+    color: var(--color-white-75);
+    margin: 0;
+}
+
+.T2083Prefix,
+.T2083Suffix {
+    opacity: 0.25;
+}
+
+.C2084.isCurrent .T2083 {
+    color: var(--color-black-75);
+}
+
+.C2084.isCurrent .T2083Prefix,
+.C2084.isCurrent .T2083Suffix {
+    opacity: 0.25;
+}
+
+.T2084 {
+    font-size: var(--font-14);
+    color: var(--color-white-25) !important;
+    margin: 0;
+    text-align: center;
+}
+
+.C2088 .T2084 {
+    color: var(--color-white-25) !important;
+}
+
+.T2085 {
+    font-size: var(--font-12);
+    color: var(--color-white);
+    font-weight: 600;
+    margin: 0;
+}
+
+.T2086 {
+    font-size: var(--font-12);
+    color: var(--color-white);
+    font-weight: 600;
+    margin: 0;
+}
+
+.T2087 {
+    font-size: var(--font-14);
+    color: var(--color-white);
+    margin: 0;
+    text-align: left;
+}
+
+/* 고객 이름 */
+.T2089 {
+    font-size: var(--font-17);
+    color: var(--color-white);
+    margin: 0;
+    padding-right: var(--size-10);
+}
+
+/* 여성 텍스트 */
+.T2090 {
+    font-size: var(--font-15);
+    color: var(--color-white);
+    margin: 0;
+}
+
+/* 숫자 (32, 1) */
+.T2091 {
+    font-size: var(--font-15);
+    color: var(--color-white);
+    margin: 0;
+}
+
+/* 한글 (세, 기) */
+.T2092 {
+    font-size: var(--font-15);
+    color: var(--color-white-50);
+    margin: 0;
+}
+
+/* 고객 ID */
+.T2093 {
+    font-size: var(--font-14);
+    color: var(--color-white-50);
+    margin: 0;
+    padding-left: var(--size-10);
+}
+
+/* 현재상태 카드 텍스트 색상 */
+.C2084.isCurrent .T2089 {
+    color: var(--color-black);
+}
+
+.C2084.isCurrent .T2090 {
+    color: var(--color-white);
+}
+
+.C2084.isCurrent .T2091 {
+    color: var(--color-white);
+}
+
+.C2084.isCurrent .T2092 {
+    color: var(--color-white-50);
+}
+
+.C2084.isCurrent .T2093 {
+    color: var(--color-black-50);
+}
+
+.C2084.isCurrent .C2094 {
+    background-color: var(--color-magenta);
+}
+
+.C2084.isCurrent .C2095 {
+    background-color: var(--color-black-25);
+}
+
+.T2088 {
+    font-size: var(--font-14);
+    color: var(--color-white-75);
+    margin: 0;
+    text-align: left;
+}
+
+/* T2088 내부 텍스트 스타일 */
+.T2094 {
+    font-size: var(--font-14);
+    color: var(--color-white-25);
+    margin: 0;
+}
+
+.T2095 {
+    font-size: var(--font-14);
+    color: var(--color-white);
+    margin: 0;
+}
+
+.T2096 {
+    font-size: var(--font-14);
+    color: var(--color-magenta);
+    margin: 0;
+}
+
+.T2097 {
+    font-size: var(--font-14);
+    color: var(--color-white-75);
+    margin: 0;
+}
+
+/* 현재상태 카드 텍스트 색상 */
+.C2084.isCurrent .T2087 {
+    color: var(--color-black);
+}
+
+.C2084.isCurrent .T2088 {
+    color: var(--color-black-75);
+}
+
+.C2084.isCurrent .T2094 {
+    color: var(--color-black-25);
+}
+
+.C2084.isCurrent .T2095 {
+    color: var(--color-black);
+}
+
+.C2084.isCurrent .T2096 {
+    color: var(--color-magenta);
+}
+
+.C2084.isCurrent .T2097 {
+    color: var(--color-black-75);
+}
+
+/* T2098: 상태 타이틀 (좌측 상단) */
+.T2098 {
+    position: absolute;
+    left: var(--size-25);
+    top: var(--size-15);
+    font-size: var(--font-17);
+    color: var(--color-white);
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+/* T2099: 선택 배지 텍스트 */
+.T2099 {
+    font-size: var(--font-14);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+/* T2100: 인원수 텍스트 */
+.T2100 {
+    font-size: var(--font-14);
+    color: var(--color-white-50);
+    margin: 0;
+    padding: 0;
+}
+
+/* T2101: 아바타 칩 텍스트 */
+.T2101 {
+    font-size: var(--font-12);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+/* T2102: 인원수 숫자 */
+.T2102 {
+    color: var(--color-white);
 }

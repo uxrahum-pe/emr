@@ -3941,6 +3941,7 @@ export default function CustomerStatusSection({
               label="고객이름"
               name="신수빈"
               title="원장님"
+              isLeftFitted={true}
               />
             <p className="T2050">신환 설문지 등록(빼톡스)</p>
             <div className="C2045">
@@ -3969,22 +3970,24 @@ export default function CustomerStatusSection({
             <div className="C2049">
             <div className="C2050">
               <img 
-                src="/images/surveyTop.png" 
+                src="/surveyTop.png" 
                 alt="survey top" 
                 className="C2051"
               />
               <img 
-                src="/images/surveyBottom.png" 
+                src="/surveyBottom.png" 
                 alt="survey bottom" 
                 className="C2052"
               />
               <div className="C2055">
+                {/* 1. 타이틀 섹션 */}
                 <div className="C2056">
                   <span className="T2055">신환설문지 (빼톡스)</span>
                 </div>
                 
+                {/* 2. 고객상담 섹션 */}
                 <div className="C2057">
-                  <div className="T2056">고객상담</div>
+                  <div className="T2056"> 고객상담</div>
                   <div className="C2058">
                     <div className="C2059">
                       <span className="T2057"><span className="T2071">1.</span> 이름:</span>
@@ -4014,6 +4017,7 @@ export default function CustomerStatusSection({
                       <span className="T2057"><span className="T2071">7.</span> 이메일:</span>
                       <span className="T2058">okexit@naver.com</span>
                     </div>
+                    <div className="C2059 C2068"></div>
                     <div className="C2059">
                       <span className="T2057"><span className="T2071">8.</span> 현재임신여부:</span>
                       <span className="T2058">아니오</span>
@@ -4022,53 +4026,61 @@ export default function CustomerStatusSection({
                       <span className="T2057"><span className="T2071">9.</span> 직업:</span>
                       <span className="T2058">사무직</span>
                     </div>
-                    <div className="C2059">
+                    <div className="C2059 C2069">
                       <span className="T2057"><span className="T2071">10.</span> 빠톡스를 어떻게 알고 오셨나요?:</span>
                       <span className="T2058">오렌지톡톡</span>
                     </div>
                   </div>
                 </div>
                 
+                {/* 3. 시술상담 섹션 */}
                 <div className="C2060">
-                  <div className="T2059">시술상담</div>
+                  <div className="T2059"> 시술상담</div>
                   <div className="C2061">
-                    <div className="T2060">
-                      보톡스 시술 경험이 있으신가요? <span className="T2061">*예</span>
+                    <div className="C2064">
+                      <span className="T2060"><span className="T2071">1.</span> 보톡스 시술 경험이 있으신가요? <span className="T2071">*</span><span className="T2061">예</span></span>
                     </div>
-                    <div className="T2062">
-                      1-1. 가장 최근에 보톡스 시술을 받은지 얼마나 되셨나요? <span className="T2063">1년 이상</span>
+                    <div className="C2065">
+                      <span className="T2062"><span className="T2071">1-1.</span> 가장 최근에 보톡스 시술을 받은지 얼마나 되셨나요? <span className="T2063">1년 이상</span></span>
                     </div>
-                    <div className="T2062">
-                      1-2. 시술 받으셨던 보톡스 부위는 어디인가요? <span className="T2064">(복수선택 가능)</span> <span className="T2063">종아리, 허벅지</span>
+                    <div className="C2065">
+                      <span className="T2062"><span className="T2071">1-2.</span> 시술 받으셨던 보톡스 부위는 어디인가요? <span className="T2064">(복수선택 가능)</span> <span className="T2063">종아리, 허벅지</span></span>
+                      
                     </div>
-                    <div className="T2062">
-                      금일 상담 희망하는 보톡스 관심 부위는 어디입니까? <span className="T2064">(복수선택 가능)</span>
+                    <div className="C2066"></div>
+                    <div className="C2064">
+                      <span className="T2060"><span className="T2071">2.</span> 금일 상담 희망하는 보톡스 관심 부위는 어디입니까? <span className="T2064">(복수선택 가능)</span></span>
                     </div>
-                    <div className="T2065">
-                      <span className="T2071">*</span><span className="T2066">턱(53,000원)</span>
+                    <div className="C2065">
+                      <span className="T2062"><span className="T2071">*</span><span className="T2066">턱(53,000원)</span></span>
                     </div>
-                    <div className="T2067">
-                      ※사각턱 50유닛, 그외 부위 100유닛 기준가/VAT 별도 금액
+                    <div className="C2067">
+                      <span className="T2068">※ 사각턱 50유닛, 그외 부위 100유닛 기준가/VAT 별도 금액</span>
                     </div>
-                    <div className="T2062">
-                      평소 관심 있었거나 궁금한 시술/수술 종류가 있으시다면 선택해주세요. <span className="T2064">(복수선택 가능)</span>
+                    <div className="C2066"></div>
+                    <div className="C2064">
+                      <span className="T2060"><span className="T2071">3.</span> 평소 관심 있었거나 궁금한 시술/수술 종류가 있으시다면 선택해주세요.</span>
                     </div>
-                    <div className="T2065">
-                      <span className="T2071">*</span><span className="T2066">지방흡입, HPL지방주사, 카복시테라피</span>
+                    <div className="C2065">
+                      <span className="T2064">(복수선택 가능)</span>
+                    </div>
+                    <div className="C2065">
+                      <span className="T2062"><span className="T2071">*</span><span className="T2066">지방흡입, HPL지방주사, 카복시테라피</span></span>
                     </div>
                   </div>
                 </div>
                 
+                {/* 4. 개인정보 수집 이용동의 섹션 */}
                 <div className="C2062">
-                  <div className="T2068">개인정보수집 이용동의</div>
+                  <div className="T2069">개인정보수집 이용동의</div>
                   <div className="C2063">
-                    <div className="T2069">
+                    <div className="T2072">
                       본인은 365mc의 개인정보보호방침을 확인하고 동의합니다. <span className="T2070">(필수)</span>
-                      <i className="isIMaskBlueMint isCheck"></i>
+                      <div className="isIMaskMagenta isIcon isCheckedBold isMini"></div>
                     </div>
-                    <div className="T2069">
+                    <div className="T2072">
                       본인은 개인정보의 수집이용 및 위탁관리에 동의합니다. <span className="T2070">(필수)</span>
-                      <i className="isIMaskBlueMint isCheck"></i>
+                      <div className="isIMaskMagenta isIcon isCheckedBold isMini"></div>
                     </div>
                   </div>
                 </div>

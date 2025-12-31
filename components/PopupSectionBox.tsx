@@ -16,6 +16,7 @@ export default function PopupSectionBox({
   height,
   className = "",
   borderBackgroundColor,
+  innerClassName = "C183",
 }: PopupSectionBoxProps) {
   const toSizeValue = (
     value: number | string | undefined
@@ -73,7 +74,7 @@ export default function PopupSectionBox({
       onClick={handleClick}
     >
       <div className="C179"></div>
-      <div className="C183" style={borderStyle}>
+      <div className={innerClassName} style={borderStyle}>
         {children}
       </div>
     </section>
