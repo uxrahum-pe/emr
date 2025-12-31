@@ -61,9 +61,9 @@ export default function RoomCard({
     >
       {/* 진행중 배지 (왼쪽) */}
       {status === "inProgress" && (
-        <div className="C2085">
+        <p className="C2085">
           <span className="T2081">진행중</span>
-        </div>
+        </p>
       )}
 
       {/* 카드 내용 */}
@@ -94,14 +94,14 @@ export default function RoomCard({
 
       {/* 우측 상단 배지 (선택하기/현재상태) */}
       {status === "selectable" && (
-        <div className="C2089">
+        <p className="C2089">
           <span className="T2085">선택하기</span>
-        </div>
+        </p>
       )}
       {status === "current" && (
-        <div className="C2090">
+        <p className="C2090">
           <span className="T2086">현재상태</span>
-        </div>
+        </p>
       )}
     </div>
   );

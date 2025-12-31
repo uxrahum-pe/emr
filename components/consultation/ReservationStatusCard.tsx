@@ -39,24 +39,26 @@ export default function ReservationStatusCard({
       <p className="T2098">{statusTitle}</p>
 
       {/* 선택 배지 (우측 상단) */}
-      <div className="C2101">
+      <p className="C2101">
         <span className="T2099">선택</span>
-      </div>
+      </p>
 
       {/* 인원수 및 아바타 칩 (좌측 하단) */}
       <div className="C2102">
-        <span className="T2100">
-          인원: <span className="T2102">{count}</span>명
-        </span>
+        <p>
+          <span className="T2100">
+            인원: <span className="T2102">{count}</span>명
+          </span>
+        </p>
         {names.length > 0 && (
           <div className="C2103">
             {names.map((nameItem, index) => {
               const name = typeof nameItem === "string" ? nameItem : nameItem.name;
               const color = typeof nameItem === "string" ? "magenta" : (nameItem.color || "magenta");
               return (
-                <div key={index} className={`C2104 ${color === "blue" ? "isBlue" : ""}`}>
+                <p key={index} className={`C2104 ${color === "blue" ? "isBlue" : ""}`}>
                   <span className="T2101">{name}</span>
-                </div>
+                </p>
               );
             })}
           </div>

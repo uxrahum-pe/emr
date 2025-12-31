@@ -40,7 +40,7 @@ export default function PrescriptionPopup({ onClose }: PrescriptionPopupProps) {
           </div>
           <div className="C2048">
             <div className="C179 isDepth1"></div>
-            <div className="C182 styleSheet isIcon isBig isPrint isWhite"></div>
+            <div className="C182 styleSheet isIcon isPrinter isBig isWhite"></div>
           </div>
         </div>
         
