@@ -457,7 +457,8 @@
     color: var(--color-red);
 }
 
-.T2072 .isIMaskBlueMint.isCheck {
+
+.T2072 .isIMaskMagenta.isIcon.isCheckedBold.isMini {
     width: var(--size-20);
     height: var(--size-20);
     flex-shrink: 0;

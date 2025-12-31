@@ -263,13 +263,12 @@
     overflow: hidden;
 }
 
-.C2023 {
+.C2070 {
     width: var(--size-30);
     background-color: var(--color-red);
     border-radius: var(--size-15) 0 0 var(--size-15);
     flex-shrink: 0;
 }
-
 
 .C2023 {
     width: var(--size-60);
@@ -428,6 +427,7 @@
 }
 .C2033.isLeftFitted {
     margin-left: 0;
+    width: var(--size-200);
 }
 
 .C2033:hover {
@@ -566,6 +566,10 @@
     position: relative;
     top: 0;
     left: 0;
+}
+
+/* CustomerInfo 컴포넌트만 400 width 지정 */
+.C2044 > .C2037 {
     width: var(--size-400);
 }
 
