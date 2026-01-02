@@ -2653,3 +2653,9 @@
     gap: var(--size-10);
     flex-shrink: 0;
 }
+.C255 {
+    height: calc(100% - var(--size-50));
+    background: linear-gradient(to bottom, var(--color-black-7), var(--color-black-0) 20%);
+    margin: 0 calc(-1 * var(--size-10));
+    padding: var(--size-5) 0;
+}
