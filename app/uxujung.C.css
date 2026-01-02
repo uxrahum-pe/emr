@@ -86,7 +86,7 @@
     color: var(--color-white);
     font-size: var(--font-19);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: .3s;
 }
 .C2008:hover {
     opacity: 0.9;
@@ -202,7 +202,7 @@
     height: var(--size-50);
     border-radius: var(--size-15);
     border: none;
-    background-color: var(--color-white-7);
+    background-color: var(--color-white-10);
     color: var(--color-white);
     font-size: var(--font-17);
     cursor: pointer;
@@ -237,7 +237,7 @@
 }
 
 .C2021:hover {
-    background-color: var(--color-white-7);
+    background-color: var(--color-white-10);
 }
 
 .C2021.isActive {
@@ -255,7 +255,7 @@
     padding: 0;
     box-shadow: 0 var(--size-4) var(--size-12) var(--color-black-25);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: .3s;
     display: flex;
     width: 100%;
     height: 100%;
@@ -380,7 +380,7 @@
     font-size: var(--font-19);
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: .3s;
 }
 
 .C2028:hover {
@@ -414,7 +414,7 @@
 .C2033 {
     width: var(--size-200);
     height: var(--size-60);
-    background-color: var(--color-white-7);
+    background-color: var(--color-white-10);
     border-radius: var(--size-15);
     display: flex;
     align-items: center;
@@ -522,7 +522,7 @@
     color: var(--color-white);
     font-size: var(--font-24);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: .3s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -649,19 +649,17 @@
 .C2051 {
     position: relative;
     align-self: flex-start;
-    width: 30%;
-    height: auto;
+    width: 210px;
+    height: 170px;
     object-fit: contain;
-    max-width: 30%;
 }
 
 .C2052 {
     position: relative;
     align-self: flex-end;
-    width: 30%;
-    height: auto;
+    width: 210px;
+    height: 170px;
     object-fit: contain;
-    max-width: 30%;
 }
 
 .C2053{
@@ -682,7 +680,7 @@
     color: var(--color-white);
     font-size: var(--font-24);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: .3s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -861,7 +859,7 @@
     background: linear-gradient(to right, var(--color-magenta), var(--color-red));
     color: var(--color-white);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: .3s;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -961,6 +959,26 @@
 }
 
 /* C231, C232, C233 재할당 스타일 */
+
+/* C178: PopupSectionBox - 수납 내역에서 상태 배지가 잘리지 않도록 */
+.C178:has(.C2116) {
+    overflow: visible !important;
+}
+
+/* C183: PopupSectionBox 내부 컨테이너 - 수납 내역에서 상태 배지가 잘리지 않도록 */
+.C183.C2117 {
+    overflow: visible !important;
+}
+
+/* C232: 수납 내역 스크롤 영역 - overflow-x visible로 상태 배지가 잘리지 않도록 */
+.C232 {
+    overflow-x: visible;
+}
+
+/* C233: 수납 내역 컨테이너 - overflow visible로 상태 배지가 잘리지 않도록 */
+.C233 {
+    overflow: visible;
+}
 .C2081 {
     height: var(--size-70);
     display: flex;
@@ -1001,7 +1019,7 @@
     box-shadow: 0 var(--size-20) var(--size-80) 0 var(--color-black-15);
     position: relative;
     margin: 0 auto;
-    transition: all 0.2s ease;
+    transition: .3s;
     overflow: visible;
 }
 
@@ -1274,6 +1292,11 @@
     z-index: 1;
 }
 
+.C2100:hover {
+    background: var(--color-white-15);
+    box-shadow: 0 var(--size-20) var(--size-80) 0 var(--color-black-25);
+}
+
 /* C2101: 선택 배지 (우측 상단) */
 .C2101 {
     position: absolute;
@@ -1337,5 +1360,408 @@
 
 .C2104.isBlue {
     background-color: var(--color-blue);
+}
+
+/* C2105: 상담내용 헤더 컨테이너 (C231과 동일한 스타일) */
+.C2105 {
+    height: var(--size-50);
+    display: flex;
+    align-items: center;
+}
+
+/* C2106: 상담내용 컨텐츠 영역 (C232와 동일한 스타일) */
+.C2106 {
+    height: calc(100% - var(--size-50));
+    width: var(--size-520);
+    margin: 0 auto;
+    border-top: var(--size-2) solid var(--color-white-7);
+    /* background: linear-gradient(to bottom, var(--color-black-7), var(--color-black-0) 20%);
+    margin: 0 calc(-1 * var(--size-10));
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none; */
+}
+.C2106::-webkit-scrollbar {
+    display: none;
+}
+
+/* C2107: AuthorInfo 왼쪽 여백 */
+.C2107 {
+    margin-left: var(--size-50);
+}
+
+/* C2108: 패키지 추가 버튼 컨테이너 */
+.C2108 {
+    margin-left: auto;
+}
+
+/* C2109: 패키지 추가 버튼 */
+.C2109 {
+    width: var(--size-185);
+    height: var(--size-60);
+    background: linear-gradient(to right, var(--color-yellow), var(--color-red));
+    border-radius: var(--size-15);
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: .3s;
+    margin-right: 0;
+}
+
+.C2109:hover {
+    opacity: 0.9;
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+
+/* C2110: 아이콘 원형 배경 */
+.C2110 {
+    position: absolute;
+    top: var(--size-10);
+    left: var(--size-15);
+    width: var(--size-40);
+    height: var(--size-40);
+    border-radius: 50%;
+    background-color: var(--color-white-25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.C2110 .isIcon {
+    width: var(--size-40);
+    height: var(--size-40);
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+}
+
+/* C2111: PaymentCard 기본 스타일 */
+.C2111 {
+    width: var(--size-140);
+    height: var(--size-150);
+    border-radius: var(--size-15);
+    background-color: var(--color-white-10);
+    position: relative;
+    cursor: pointer;
+    transition: .3s;
+    flex-shrink: 0;
+    box-shadow: 0 var(--size-10) var(--size-40) 0 var(--color-black-7);
+}
+
+.C2111.isSelected {
+    background-color: var(--color-white);
+}
+
+.C2111.isRefundinfo {
+    width: var(--size-120);
+    height: var(--size-120);
+    backdrop-filter: blur(var(--size-40));
+}
+
+.C2111.isRefunded {
+    background-color: var(--color-red-15);
+}
+
+/* C2112: 상태 배지 */
+.C2112 {
+    position: absolute;
+    left: calc(-1 * var(--size-30));
+    top: var(--size-30);
+    width: var(--size-50);
+    height: var(--size-30);
+    border-radius: var(--size-15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    box-shadow: 0 var(--size-4) var(--size-16) 0 var(--color-black-25);
+}
+
+.C2112.isToday {
+    background: linear-gradient(to right, var(--color-green), var(--color-blue));
+}
+
+.C2112.isRefunded {
+    background: linear-gradient(to right, var(--color-magenta), var(--color-red));
+}
+
+/* C2113: 구분선 */
+.C2113 {
+    position: absolute;
+    left: var(--size-120);
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--size-2);
+    height: var(--size-110);
+    background-color: var(--color-white-10);
+}
+
+.C2111.isSelected .C2113 {
+    background-color: var(--color-black-7);
+}
+
+.C2111.isRefundinfo .C2113 {
+    height: var(--size-80);
+}
+
+/* C2114: 컨텐츠 영역 */
+.C2114 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--size-20);
+    height: 100%;
+    box-sizing: border-box;
+    gap: var(--size-5);
+}
+
+/* C2115: 기수 배지 */
+.C2115 {
+    width: var(--size-50);
+    height: var(--size-28);
+    background-color: var(--color-green-25);
+    border-radius: var(--size-10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    box-shadow: 0 var(--size-4) var(--size-16) 0 var(--color-black-15) !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* 오늘 날짜 카드(isSelected + isToday) 안의 기수 배지에만 흰색 테두리 */
+.C2111.isSelected.isToday .C2115 {
+    border: var(--size-2) solid var(--color-white);
+}
+
+/* C2116: PaymentHistory 컨테이너 */
+.C2116 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-10);
+    padding: var(--size-20) 0 0 var(--size-20);
+    position: relative;
+    overflow: visible;
+}
+
+/* C2118: 대상 패키지 목록 컨테이너 */
+.C2118 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-10);
+    padding: var(--size-20);
+}
+
+/* C2119: 대상 패키지 카드 */
+.C2119 {
+    display: flex;
+    align-items: stretch;
+    width: var(--size-1050);
+    height: var(--size-150);
+    border-radius: var(--size-15);
+    background-color: var(--color-white-7);
+    padding: var(--size-20);
+    gap: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.C2119.isTarget {
+    background-color: var(--color-mint-7);
+}
+
+/* C2120: Section 1 - 선택 및 식별 (넓이 80px) */
+.C2120 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--size-10);
+    width: var(--size-80);
+    height: 100%;
+    flex-shrink: 0;
+    padding: 0 var(--size-10);
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* C2121: 체크박스 컨테이너 (Section 1 기준 top: 0, left: 0) */
+.C2121 {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* C2122: 체크박스 배경 */
+.C2122 {
+    width: var(--size-30);
+    height: var(--size-30);
+    border-radius: var(--size-10);
+    background-color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 var(--size-4) var(--size-8) var(--color-black-25);
+}
+
+/* C2122: unchecked 상태 - 화이트 7%, 배경흐림 20 */
+.C2119:not(.isChecked) .C2122 {
+    background-color: var(--color-white-7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* C2123: 체크박스 아이콘 */
+.C2123 {
+    width: var(--size-20);
+    height: var(--size-20);
+}
+
+/* C2124: 수술 부위 이미지 아이콘 */
+.C2124 {
+    width: var(--size-40);
+    height: var(--size-40);
+    filter: brightness(0) invert(1);
+}
+
+/* C2125: Section 2 - 패키지 정보 (넓이 340px, 오른쪽에 선으로 구분) */
+.C2125 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-5);
+    width: var(--size-340);
+    height: 100%;
+    padding: 0 var(--size-20) 0 0;
+    position: relative;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    justify-content: flex-start;
+}
+
+/* C2137: 첫번째줄 컨테이너 (수술 복부 + 코드 정보) */
+.C2137 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* C2138: 네번째줄 컨테이너 (적용상태, 시술횟수 - 한 줄에 나란히) */
+.C2138 {
+    display: flex;
+    align-items: center;
+    gap: var(--size-20);
+    width: 100%;
+}
+
+/* C2126: 구분선 */
+.C2126 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--size-2);
+    background-color: var(--color-white-7);
+}
+
+/* C2127: Section 3 - 수납 금액 정보 (넓이 340px) */
+.C2127 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--size-5) var(--size-20);
+    width: var(--size-340);
+    height: 100%;
+    padding: 0 var(--size-10);
+    flex-shrink: 0;
+    box-sizing: border-box;
+    align-content: flex-start;
+    position: relative;
+}
+
+/* C2127 오른쪽 구분선 */
+.C2127::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--size-2);
+    background-color: var(--color-white-7);
+}
+
+/* C2128: 수납 금액 정보 항목 */
+.C2128 {
+    display: flex;
+    align-items: center;
+    gap: var(--size-10);
+}
+
+/* C2129: Section 4 - 통계 및 상태 (넓이 290px, 수납대상일 경우 오른쪽 상단에 뱃지) */
+.C2129 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--size-10);
+    width: var(--size-290);
+    height: 100%;
+    padding: 0 var(--size-10);
+    position: relative;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* C2130: 수납대상 뱃지 (C2119 컨테이너 기준 top: 0, right: 0) */
+.C2130 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--color-green);
+    border-radius: 0 var(--size-15) 0 var(--size-10);
+    padding: var(--size-5) var(--size-12);
+    z-index: 1;
+    margin: 0;
+}
+
+/* C2132: 막대 그래프 컨테이너 */
+.C2132 {
+    display: flex;
+    width: 100%;
+    height: var(--size-20);
+    background-color: var(--color-white-7);
+    border-radius: var(--size-10);
+    overflow: hidden;
+    position: relative;
+}
+
+/* C2133: 결제완료 막대 (파란색) */
+.C2133 {
+    height: 100%;
+    background-color: var(--color-blue);
+    flex-shrink: 0;
+}
+
+/* C2134: 할인액 막대 (빨간색) */
+.C2134 {
+    height: 100%;
+    background-color: var(--color-red);
+    flex-shrink: 0;
+}
+
+/* C2135: 실천지수 막대 (주황색) */
+.C2135 {
+    height: 100%;
+    background-color: var(--color-orange);
+    flex-shrink: 0;
+}
+
+/* C2136: 잔액 막대 (회색) */
+.C2136 {
+    height: 100%;
+    background-color: var(--color-white-25);
+    flex-shrink: 0;
 }
 

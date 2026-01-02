@@ -3938,8 +3938,8 @@ export default function CustomerStatusSection({
             <AuthorInfo
               imageSrc="/images/male-64.jpg"
               imageAlt="작성자"
-              label="고객이름"
-              name="신수빈"
+              label="작성자"
+              name="홍성훈"
               title="원장님"
               isLeftFitted={true}
               />
@@ -3955,7 +3955,7 @@ export default function CustomerStatusSection({
               </div>
               <div className="C2048">
                 <div className="C179 isDepth1"></div>
-                <div className="C182 styleSheet isIcon isBig isPrint isWhite"></div>
+                <div className="C182 styleSheet isIcon isPrinter isBig isWhite"></div>
               </div>
             </div>
             
@@ -3989,47 +3989,47 @@ export default function CustomerStatusSection({
                 <div className="C2057">
                   <div className="T2056"> 고객상담</div>
                   <div className="C2058">
-                    <div className="C2059">
+                    <p className="C2059">
                       <span className="T2057"><span className="T2071">1.</span> 이름:</span>
                       <span className="T2058">신수빈</span>
-                    </div>
-                    <div className="C2059">
+                    </p>
+                    <p className="C2059">
                       <span className="T2057"><span className="T2071">2.</span> 영문이름:</span>
                       <span className="T2058">Hong</span>
-                    </div>
-                    <div className="C2059">
+                    </p>
+                    <p className="C2059">
                       <span className="T2057"><span className="T2071">3.</span> 주민번호:</span>
                       <span className="T2058">880219-1000000</span>
-                    </div>
-                    <div className="C2059">
+                    </p>
+                    <p className="C2059">
                       <span className="T2057"><span className="T2071">4.</span> 성별/연령:</span>
                       <span className="T2058">남 / 49세</span>
-                    </div>
-                    <div className="C2059">
+                    </p>
+                    <p className="C2059">
                       <span className="T2057"><span className="T2071">5.</span> 내/외국인:</span>
                       <span className="T2058">내국인</span>
-                    </div>
-                    <div className="C2059">
+                    </p>
+                    <p className="C2059">
                       <span className="T2057"><span className="T2071">6.</span> 연락처:</span>
                       <span className="T2058">010-8612-6022</span>
-                    </div>
-                    <div className="C2059">
+                    </p>
+                    <p className="C2059">
                       <span className="T2057"><span className="T2071">7.</span> 이메일:</span>
                       <span className="T2058">okexit@naver.com</span>
-                    </div>
+                    </p>
                     <div className="C2059 C2068"></div>
-                    <div className="C2059">
+                    <p className="C2059">
                       <span className="T2057"><span className="T2071">8.</span> 현재임신여부:</span>
                       <span className="T2058">아니오</span>
-                    </div>
-                    <div className="C2059">
+                    </p>
+                    <p className="C2059">
                       <span className="T2057"><span className="T2071">9.</span> 직업:</span>
                       <span className="T2058">사무직</span>
-                    </div>
-                    <div className="C2059 C2069">
+                    </p>
+                    <p className="C2059 C2069">
                       <span className="T2057"><span className="T2071">10.</span> 빠톡스를 어떻게 알고 오셨나요?:</span>
                       <span className="T2058">오렌지톡톡</span>
-                    </div>
+                    </p>
                   </div>
                 </div>
                 
