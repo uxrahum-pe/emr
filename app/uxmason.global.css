@@ -789,6 +789,9 @@ span.isLink {
 .isGreen {
   color: var(--color-green);
 }
+.C176 .isGreen {
+  color: var(--color-green);
+}
 .isBlue {
   color: var(--color-blue);
 }
@@ -869,9 +872,13 @@ span.isLink {
   background-position-x: calc(-1 * var(--size-200));
   background-position-y: calc(-1 * var(--size-240));
 }
-.isIcon.isProcedure {
+.isIcon.isSmile {
   background-position-x: calc(-1 * var(--size-200));
   background-position-y: calc(-1 * var(--size-280));
+}
+.isIcon.isDashboard {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-320));
 }
 .isIcon.isSetting {
   background-position-x: calc(-1 * var(--size-200));
@@ -880,6 +887,30 @@ span.isLink {
 .isIcon.isMicrophone {
   background-position-x: calc(-1 * var(--size-200));
   background-position-y: calc(-1 * var(--size-400));
+}
+.isIcon.isLens {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-440));
+}
+.isIcon.isDownload {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-480));
+}
+.isIcon.isPrinter {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-520));
+}
+.isIcon.isExpand {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-560));
+}
+.isIcon.isTrashCan {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-600));
+}
+.isIcon.isHouse {
+  background-position-x: calc(-1 * var(--size-200));
+  background-position-y: calc(-1 * var(--size-640));
 }
 .isIcon.isReport {
   background-position-x: calc(-1 * var(--size-240));
