@@ -48,6 +48,7 @@
   --color-white-0: #ffffff00;
   --color-white-3: #ffffff08;
   --color-white-7: #ffffff12;
+  --color-white-10: #ffffff1a;
   --color-white-15: #ffffff26;
   --color-white-25: #ffffff40;
   --color-white-50: #ffffff80;
@@ -77,6 +78,7 @@
   --color-green-7: #AAC55912;
   --color-green-15: #AAC55926;
   --color-green-25: #AAC55940;
+  --color-green-30: #AAC5594d;
   --color-green-50: #AAC55980;
   --color-green-75: #AAC559bf;
 
@@ -136,6 +138,7 @@
   --font-21: calc(100vw * 21 / var(--breakpoint));
   --font-24: calc(100vw * 24 / var(--breakpoint));
   --font-27: calc(100vw * 27 / var(--breakpoint));
+  --font-29: calc(100vw * 29 / var(--breakpoint));
   --font-32: calc(100vw * 32 / var(--breakpoint));
   --font-40: calc(100vw * 40 / var(--breakpoint));
 
@@ -151,6 +154,7 @@
   --size-15: calc(100vw * 15 / var(--breakpoint));
   --size-16: calc(100vw * 16 / var(--breakpoint));
   --size-20: calc(100vw * 20 / var(--breakpoint));
+  --size-24: calc(100vw * 24 / var(--breakpoint));
   --size-25: calc(100vw * 25 / var(--breakpoint));
   --size-26: calc(100vw * 26 / var(--breakpoint));
   --size-28: calc(100vw * 28 / var(--breakpoint));
@@ -391,8 +395,10 @@
   --size-1480: calc(100vw * 1480 / var(--breakpoint));
   --size-1490: calc(100vw * 1490 / var(--breakpoint));
   --size-1500: calc(100vw * 1500 / var(--breakpoint));
+  --size-1520: calc(100vw * 1520 / var(--breakpoint));
   --size-1780: calc(100vw * 1780 / var(--breakpoint));
   --size-1800: calc(100vw * 1800 / var(--breakpoint));
+  --size-1840: calc(100vw * 1840 / var(--breakpoint));
   /* Size Variables 끝 */
 
 }
@@ -407,6 +413,7 @@
     --font-21: 21px;
     --font-24: 24px;
     --font-27: 27px;
+    --font-29: 29px;
     --font-32: 32px;
     --font-40: 40px;
 
@@ -422,6 +429,7 @@
     --size-15: 15px;
     --size-16: 16px;
     --size-20: 20px;
+    --size-24: 24px;
     --size-25: 25px;
     --size-26: 26px;
     --size-28: 28px;
@@ -662,8 +670,10 @@
     --size-1480: 1480px;
     --size-1490: 1490px;
     --size-1500: 1500px;
+    --size-1520: 1520px;
     --size-1780: 1780px;
     --size-1800: 1800px;
+    --size-1840: 1840px;
     /* Size Variables 끝 */
   }
 }

@@ -823,7 +823,7 @@ export default function CustomerInfoPanel({
 
           <PopupSectionBox x={510} y={395} width={430} height={270}>
               <div className="C2022">
-                <div className="C2023"></div>
+                <div className="C2070"></div>
                 <div className="C2024">
                   <img 
                     src="/images/365mcLogo.png" 

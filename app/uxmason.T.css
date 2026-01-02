@@ -888,4 +888,20 @@ p.T087 {
 }
 .T098 {
     font-size: var(--font-17);
+    margin-left: var(--size-30);
+}
+.T099 {
+    margin-top: var(--size-5);
+}
+p.T100 {
+    color: var(--color-white-25);
+}
+.T101 {
+    font-size: var(--font-17);
+}
+.T101 .isUnit {
+    font-size: var(--font-14);
+}
+.T101 .isValue {
+    font-size: var(--font-14);
 }

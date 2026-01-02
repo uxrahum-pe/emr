@@ -955,6 +955,9 @@
     border-radius: var(--size-15);
     background: url(/images/female-128.jpg) no-repeat center center / cover;
 }
+.C082.isGap {
+    margin: var(--size-50) 0 0 var(--size-6);
+}
 .C083 {
     padding-right: var(--size-10);
 }
@@ -1992,6 +1995,7 @@
     min-height: var(--size-100);
     overflow: hidden;
     border-radius: var(--size-30);
+    height: 100%;
 }
 .C184 {
     width: var(--size-50);
@@ -2431,5 +2435,64 @@
     height: var(--size-50);
     display: flex;
     align-items: center;
-    padding: 0 var(--size-20);
+}
+.C232 {
+    height: calc(100% - var(--size-50));
+    background: linear-gradient(to bottom, var(--color-black-7), var(--color-black-0) 20%);
+    margin: 0 calc(-1 * var(--size-10));
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.C232::-webkit-scrollbar {
+    display: none;
+}
+.C233 {
+    padding: var(--size-10);
+    height: 100%;
+}
+.C234 {
+    width: var(--size-110);
+    height: calc(100% - var(--size-70));
+    border-right: var(--size-2) solid var(--color-white-7);
+    position: absolute;
+}
+.C235 {
+    margin-left: var(--size-20);
+    flex: 0 0 var(--size-80);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.C236 {
+    flex: 0 0 var(--size-40);
+    margin-top: var(--size-12);
+}
+.C237 {
+    width: fit-content;
+    margin-top: var(--size-5);
+}
+.C238 {
+    background-color: var(--color-white-7);
+    padding: var(--size-10) var(--size-20);
+    border-radius: var(--size-20);
+    width: var(--size-360);
+}
+.C239 {
+    display: flex;
+    gap: var(--size-20);
+}
+.C239:first-of-type {
+    border-bottom: var(--size-2) dashed var(--color-white-7);
+}
+.C240 {
+    padding: var(--size-10) 0;
+}
+.C241 {
+    width: var(--size-26);
+    height: var(--size-26);
+    box-shadow: 0 var(--size-4) var(--size-10) var(--color-black-7);
+    border-radius: var(--size-15);
+    border: var(--size-2) solid var(--color-white);
+    background: url(/images/female-64.jpg) center center / cover no-repeat;
 }
