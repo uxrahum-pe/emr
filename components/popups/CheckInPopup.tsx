@@ -483,7 +483,7 @@ export default function CheckInPopup({ onClose }: CheckInPopupProps) {
               <span className="isUnit">PM</span> 05:31
             </p>
           </div>
-          <div className="C232">
+          <div className="C255">
             <div className="C246">
               <div className="C247">
                 <p className="T110">키</p>
