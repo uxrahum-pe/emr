@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { useMemo } from "react";
 
 import type { PopupSectionBoxProps } from "@/types/ui";
 
@@ -16,6 +16,10 @@ export default function PopupSectionBox({
   height,
   className = "",
   borderBackgroundColor,
+  innerClassName = "C183",
+  name,
+  onMouseEnter,
+  onMouseLeave,
 }: PopupSectionBoxProps) {
   const toSizeValue = (
     value: number | string | undefined
@@ -66,14 +70,27 @@ export default function PopupSectionBox({
     e.stopPropagation();
   };
 
+  const sectionClassName = useMemo(() => {
+    const classes = [
+      "C178",
+      name && `is${name.charAt(0).toUpperCase() + name.slice(1)}`,
+      className,
+    ]
+      .filter(Boolean)
+      .join(" ");
+    return classes.trim();
+  }, [name, className]);
+
   return (
     <section
-      className={`C178 ${className}`.trim()}
+      className={sectionClassName}
       style={style}
       onClick={handleClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="C179"></div>
-      <div className="C183" style={borderStyle}>
+      <div className={innerClassName} style={borderStyle}>
         {children}
       </div>
     </section>

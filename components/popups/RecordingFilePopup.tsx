@@ -23,7 +23,7 @@ export default function RecordingFilePopup({
             <div className="C181 isCloseButton" onClick={onClose}>
               <div className="C179 isDepth1"></div>
               <div className="C182 styleSheet isIcon isBig isClose isWhite"></div>
-            </div>
+            </div> 
           </div>
         </PopupSectionBox>
         <PopupSectionBox x={260} y={140} width={1400} height={1040}>

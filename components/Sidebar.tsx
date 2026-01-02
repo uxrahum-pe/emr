@@ -25,7 +25,7 @@ export default function Sidebar() {
   }>({});
 
   const menuItems = [
-    { href: "/", icon: "isDashboard", label: "대시보드" },
+    { href: "/", icon: "isShine", label: "대시보드" },
     { href: "/reception", icon: "isReception", label: "원무" },
     { href: "/counseling", icon: "isCounseling", label: "상담" },
     { href: "/pre-care", icon: "isPreCare", label: "전처치" },

@@ -135,6 +135,12 @@ export interface PopupProps {
 
 // PopupSectionBox 컴포넌트 props
 export interface PopupSectionBoxProps {
+  /** 식별자 클래스 추가 (예: name="package" → "C178.isPackage") */
+  name?: string;
+  /** 마우스 진입 핸들러 */
+  onMouseEnter?: (e: React.MouseEvent<HTMLElement>) => void;
+  /** 마우스 이탈 핸들러 */
+  onMouseLeave?: (e: React.MouseEvent<HTMLElement>) => void;
   /** 컨테이너 내용 */
   children: ReactNode;
   /** X 좌표 (left) */
@@ -149,6 +155,8 @@ export interface PopupSectionBoxProps {
   className?: string;
   /** C183 영역의 배경색상 (CSS 변수명 예: "white-25", "magenta-7" 또는 직접 색상 값) */
   borderBackgroundColor?: string;
+  /** 내부 컨테이너 클래스명 (기본값: "C183") */
+  innerClassName?: string;
 }
 
 // TabSelector 컴포넌트 props
@@ -210,6 +218,8 @@ export interface AuthorInfoProps {
   className?: string;
   /** 길이 옵션: "short" | "shorter" | "veryShorter" */
   length?: "short" | "shorter" | "veryShorter";
+  /** 왼쪽 여백 제거 옵션 */
+  isLeftFitted?: boolean;
 }
 
 // CustomerInfo 컴포넌트 props

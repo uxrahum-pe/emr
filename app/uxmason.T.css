@@ -645,8 +645,8 @@
     justify-items: flex-end;
     font-style: italic;
 }
-@container (max-width: var(--size-400)) {
-    .C132 .T064:nth-of-type(3) {
+@container (max-width: calc((350 / 1920) * 100vw)) {
+    .T064.isGrcode {
         display: none;
     }
 }
@@ -668,8 +668,14 @@
     width: 50%;
     line-height: var(--size-30);
 }
+.C176 .T066, .C176 .T067 {
+    color: var(--color-white-50);
+}
 .T067 .isValue {
     color: var(--color-black);
+}
+.C176 .T067 .isValue {
+    color: var(--color-white);
 }
 .T067 .isValue.isRed {
     font-weight: 800;
@@ -904,4 +910,96 @@ p.T100 {
 }
 .T101 .isValue {
     font-size: var(--font-14);
+}
+.T102 {
+    width: var(--size-50);
+    text-align: right;
+}
+.T103 {
+    color: var(--color-white);
+    font-size: var(--font-17);
+    padding: 0 var(--size-20);
+    border-radius: var(--size-15);
+    border: var(--size-2) solid var(--color-white-25);
+    background-color: var(--color-white-7);
+    width: var(--size-120);
+    line-height: var(--size-46);
+    transition: .3s;
+}
+.T103:focus {
+    outline: none;
+    border: var(--size-2) solid var(--color-green);
+}
+p.T104 {
+    font-size: var(--font-14);
+    color: var(--color-white-25);
+}
+.T104 .isValue {
+    font-size: var(--font-17);
+    color: var(--color-white);
+}
+.T105 {
+    font-size: var(--font-17);
+    margin-left: var(--size-10);
+}
+p.T106 {
+    font-size: var(--font-14);
+    color: var(--color-white-50);
+    text-align: center;
+    width: var(--size-100);
+    height: var(--size-70);
+    background-color: var(--color-white-15);
+    border-radius: var(--size-20);
+    padding: var(--size-15);
+    margin-left: auto;
+    cursor: pointer;
+    transition: .3s;
+}
+p.T106:hover {
+    background-color: var(--color-white-25);
+    color: var(--color-white);
+    transform: scale(0.95);
+}
+.T107 {
+    font-size: var(--font-14);
+    margin-left: var(--size-10);
+}
+.T108 {
+    font-size: var(--font-19);
+    margin-left: var(--size-10);
+}
+.T109 {
+    font-size: var(--font-14);
+    margin-left: auto;
+    margin-right: var(--size-20);
+}
+p.T110 {
+    color: var(--color-white-50);
+}
+p.T111 {
+    color: var(--color-white-25);
+}
+.T111 .isValue {
+    font-size: var(--font-17);
+    color: var(--color-white);
+}
+.T111 .isValue.isYellow {
+    color: var(--color-yellow);
+}
+.T111 .isValue.isMint {
+    color: var(--color-mint);
+}
+.T112 {
+    font-size: var(--font-14);
+    color: var(--color-black-50);
+}
+.C176 .T112 {
+    color: var(--color-white-50);
+}
+.T115 {
+    font-size: var(--font-24);
+}
+p.T114 {
+    font-size: var(--font-14);
+    color: var(--color-white-75);
 }

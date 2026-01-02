@@ -484,49 +484,75 @@ function PackageContent({
   return (
     <>
       <div className="C130">
-        {packageItems.map((item, index) => (
-          <PackageItem
-            key={index}
-            defaultFolded={item.defaultFolded}
-            icon={<div className="C134 isIMaskMagenta isSyringe"></div>}
-            partIcon={
-              <div className="C119">
-                <div
-                  className={`C121 styleSheet isIcon isPart ${item.header.partClass}`}
-                ></div>
-              </div>
+        {packageItems.map((item, index) => {
+          // 각 패키지 아이템에 맞는 메모 데이터 생성 (일부는 메모 없음)
+          const getNotesForItem = (idx: number, part: string) => {
+            // 첫 번째 아이템: 메모 있음
+            if (idx === 0) {
+              return [
+                {
+                  date: "25.08.25",
+                  content: "1차 시술 완료. 통증 경미, 상태 양호",
+                  authorName: "이미영",
+                  authorTitle: "간호사",
+                  authorImageUrl: "/images/female-64.jpg",
+                },
+                {
+                  date: "25.08.10",
+                  content: "초진 상담 완료. 계약금 입금 확인",
+                  authorName: "김민수",
+                  authorTitle: "과장",
+                },
+              ];
             }
-            headerContent={
-              <>
-                <p className="T063">
-                  <span className="isBold isMagenta">수술</span>{" "}
-                  {item.header.part}
-                </p>
-                <p className="T064">
-                  <span className="isUnit">CODE:</span> {item.header.code}
-                </p>
-                <p className="T064">
-                  <span className="isUnit">/ GRCODE:</span> {item.header.grcode}
-                </p>
-                <div className="C112">
-                  <div className="C113 styleSheet isIcon isMini isChevron"></div>
+            // 두 번째 아이템: 메모 있음
+            if (idx === 1) {
+              return [
+                {
+                  date: "25.08.22",
+                  content: "2차 시술 완료. 부종 경미, 회복 양호",
+                  authorName: "이미영",
+                  authorTitle: "간호사",
+                  authorImageUrl: "/images/female-64.jpg",
+                },
+                {
+                  date: "25.08.08",
+                  content: "1차 시술 완료. 특수 수술방법 적용",
+                  authorName: "홍성훈",
+                  authorTitle: "원장님",
+                },
+                {
+                  date: "25.07.30",
+                  content: "예약금 입금 완료. 수술 일정 확정",
+                  authorName: "김민수",
+                  authorTitle: "과장",
+                },
+              ];
+            }
+            // 세 번째 아이템: 메모 없음 (undefined 반환)
+            return undefined;
+          };
+
+          return (
+            <PackageItem
+              key={index}
+              defaultFolded={item.defaultFolded}
+              icon={<div className="C134 isIMaskMagenta isSyringe"></div>}
+              partIcon={
+                <div className="C119">
+                  <div
+                    className={`C121 styleSheet isIcon isPart ${item.header.partClass}`}
+                  ></div>
                 </div>
-              </>
-            }
-            bodyContent={
-              <>
-                <p className="T065 isBold isEllipsis is2lines">
-                  {item.body.title}
-                </p>
-                <p className="T042">{item.body.spec}</p>
-                <p className="T042">{item.body.type}</p>
-                <p className="T042">{item.body.count}</p>
-              </>
-            }
-            stats={item.stats}
-            payment={item.payment}
-          />
-        ))}
+              }
+              header={item.header}
+              body={item.body}
+              stats={item.stats}
+              payment={item.payment}
+              notes={getNotesForItem(index, item.header.part)}
+            />
+          );
+        })}
       </div>
     </>
   );

@@ -43,3 +43,17 @@ export interface PackageItemData {
   stats: Required<PackageItemStats>;
   payment: Required<PackageItemPayment>;
 }
+
+/** 패키지 메모/이력 항목 */
+export interface PackageItemNote {
+  /** 날짜 (예: "25.08.23") */
+  date: string;
+  /** 내용 (예: "스킨 대체 후 차액 60,200원") */
+  content: string;
+  /** 입력자 이름 */
+  authorName: string;
+  /** 입력자 직책 (예: "간호사") */
+  authorTitle: string;
+  /** 입력자 프로필 이미지 URL (선택사항) */
+  authorImageUrl?: string;
+}
