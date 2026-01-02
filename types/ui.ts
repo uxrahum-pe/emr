@@ -135,6 +135,12 @@ export interface PopupProps {
 
 // PopupSectionBox 컴포넌트 props
 export interface PopupSectionBoxProps {
+  /** 식별자 클래스 추가 (예: name="package" → "C178.isPackage") */
+  name?: string;
+  /** 마우스 진입 핸들러 */
+  onMouseEnter?: (e: React.MouseEvent<HTMLElement>) => void;
+  /** 마우스 이탈 핸들러 */
+  onMouseLeave?: (e: React.MouseEvent<HTMLElement>) => void;
   /** 컨테이너 내용 */
   children: ReactNode;
   /** X 좌표 (left) */
